@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+  --font-bebas-neue: var(--font-bebas-neue);
+  --font-league-spartan: var(--font-league-spartan);
+  --font-cantarell: var(--font-cantarell);
+  --color-mineral-green: #3E595D; 
+  --color-green-white: #F7F8F4;
+  --color-ziggurat: #BED5DE;
+  --color-old-gold: #CBB037;
+  --color-apple: #65AB32;
+  --color-ecru-white: #FAF9F2;
+  --color-outer-space: #263638;
+  --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
+  --text-5xl: clamp(2.25rem, 4vw + 1.45rem, 4.5rem);
+  --text-4xl: clamp(2rem, 3.75vw + 1.4rem, 4rem);
+  --text-3xl: clamp(1.75rem, 3.5vw + 1.35rem, 3.5rem);
+  --text-2xl: clamp(1.5rem, 3vw + 1.3rem, 3rem);
+  --text-xl: clamp(1.35rem, 2.5vw + 1.25rem, 2.25rem);
+  --text-lg: clamp(1.125rem, 1.5vw + 1rem, 1.75rem);
+  --text-base: clamp(1rem, 1vw + 1rem, 1.25rem);
 }
