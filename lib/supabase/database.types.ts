@@ -209,8 +209,10 @@ export type Database = {
           latitude: number | null
           location: string
           longitude: number | null
+          post_type: string
           price: number | null
           slug: string
+          sold: boolean | null
           title: string
         }
         Insert: {
@@ -223,8 +225,10 @@ export type Database = {
           latitude?: number | null
           location: string
           longitude?: number | null
+          post_type: string
           price?: number | null
           slug: string
+          sold?: boolean | null
           title: string
         }
         Update: {
@@ -237,8 +241,10 @@ export type Database = {
           latitude?: number | null
           location?: string
           longitude?: number | null
+          post_type?: string
           price?: number | null
           slug?: string
+          sold?: boolean | null
           title?: string
         }
         Relationships: [
@@ -255,6 +261,7 @@ export type Database = {
         Row: {
           bio: string | null
           created_at: string
+          email: string
           id: string
           name: string
           surname: string
@@ -263,6 +270,7 @@ export type Database = {
         Insert: {
           bio?: string | null
           created_at?: string
+          email: string
           id?: string
           name: string
           surname: string
@@ -271,6 +279,7 @@ export type Database = {
         Update: {
           bio?: string | null
           created_at?: string
+          email?: string
           id?: string
           name?: string
           surname?: string
