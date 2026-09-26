@@ -45,6 +45,7 @@ export type Database = {
       }
       Comments: {
         Row: {
+          author: string
           content: string
           created_at: string
           id: string
@@ -52,6 +53,7 @@ export type Database = {
           post_id: string | null
         }
         Insert: {
+          author?: string
           content: string
           created_at?: string
           id?: string
@@ -59,6 +61,7 @@ export type Database = {
           post_id?: string | null
         }
         Update: {
+          author?: string
           content?: string
           created_at?: string
           id?: string
@@ -263,8 +266,8 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          name: string
-          surname: string
+          name: string | null
+          surname: string | null
           username: string
         }
         Insert: {
@@ -272,8 +275,8 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
-          name: string
-          surname: string
+          name?: string | null
+          surname?: string | null
           username: string
         }
         Update: {
@@ -281,8 +284,8 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
-          name?: string
-          surname?: string
+          name?: string | null
+          surname?: string | null
           username?: string
         }
         Relationships: []

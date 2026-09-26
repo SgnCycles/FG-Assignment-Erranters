@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, League_Spartan, Cantarell } from "next/font/google";
+import { QueryClientProvider } from "@/providers/queryProvider";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <QueryClientProvider>{children}</QueryClientProvider>
+      </body>
     </html>
   );
 }

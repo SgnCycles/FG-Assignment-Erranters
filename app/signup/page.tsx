@@ -1,14 +1,16 @@
 import HomepagePoster from "@/components/HomepagePoster";
-import LogInForm from "@/components/LogInForm";
+import SignUpForm from "@/components/SignUpForm";
 
-export default function Home() {
+const SignUpPage = () => {
   return (
     <div className="">
       <main className="">
-        <h1> This works</h1>
+        <h1> This is SignUp page</h1>
         <HomepagePoster />
-        <LogInForm />
+        <SignUpForm />
       </main>
     </div>
   );
 }
+
+export default SignUpPage;

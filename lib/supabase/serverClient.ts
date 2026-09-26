@@ -3,6 +3,7 @@ import { Database } from "./database.types";
 import { cookies } from "next/headers";
 
 export const createClient = async () => {
+  
   const cookieStore = await cookies();
 
   return createServerClient<Database>(
