@@ -5,16 +5,21 @@ import { useMutation } from "@tanstack/react-query";
 import { postSchema } from "@/schemas/schemas";
 import ErrorMessage from "@/components/ErrorMessage";
 import { CreatePost } from "@/actions/create-post-action";
+import { useRouter } from "next/navigation";
 
 const CreatePostPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(postSchema) });
 
-  const { mutate, error } = useMutation({
+  const { mutate, error, isPending } = useMutation({
     mutationFn: CreatePost,
+    onSuccess: (data) => {
+      router.push(`/${data.slug}`);
+    },
   });
 
   return (
@@ -26,7 +31,7 @@ const CreatePostPage = () => {
         {errors.title && <ErrorMessage error={errors.title.message!} />}
         <label htmlFor="content">Add content</label>
         <textarea {...register("content")}></textarea>
-        <button>Publish</button>
+        <button>{isPending ? "Publishing post..." : "Publish"}</button>
         {error && <ErrorMessage error={error.message} />}
       </form>
     </div>

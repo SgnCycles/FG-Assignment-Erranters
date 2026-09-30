@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, League_Spartan, Cantarell } from "next/font/google";
+import { Bebas_Neue, League_Spartan, Cantarell, Geist } from "next/font/google";
 import { QueryClientProvider } from "@/providers/queryProvider";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -35,9 +38,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", bebasNeue.variable, leagueSpartan.variable, gecantarellistMono.variable, "font-sans", geist.variable)}
     >
-      <body className="h-full flex flex-col">
+      <body className="h-full flex flex-col font-cantarell text-outer-space">
         <ToastContainer
           position="top-right"
           autoClose={2000}

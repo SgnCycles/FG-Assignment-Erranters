@@ -1,20 +1,24 @@
 import Link from "next/link";
-import AccountLinks from "./accountLinks";
 import SearchBox from "../SearchBox";
 import NavMenu from "../NavMenu";
 
 const Header = ({ username }: { username?: string }) => {
   return (
-    <header className="flex flex-col p-4 border-2 border-b-apple">
-      <div className="flex w-full justify-between">
-        <Link className="button" href="/feed">
-          Erranters
-        </Link>
-        <SearchBox />
-        <AccountLinks />
+    <header className="flex flex-col p-4">
+      <div className="w-full grid grid-cols-3 gap-2">
+        <div className="flex justify-start">
+          <Link className="button" href="/feed">
+            Erranters
+          </Link>
+        </div>
+        <div className="">
+          <SearchBox />
+        </div>
+        <div className="">
+          <NavMenu />
+        </div>
       </div>
       <div>Hi, {username}!</div>
-      <NavMenu />
     </header>
   );
 };

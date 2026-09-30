@@ -8,13 +8,14 @@
   --font-bebas-neue: var(--font-bebas-neue);
   --font-league-spartan: var(--font-league-spartan);
   --font-cantarell: var(--font-cantarell);
-  --color-mineral-green: #3E595D; 
-  --color-green-white: #F7F8F4;
-  --color-ziggurat: #BED5DE;
-  --color-old-gold: #CBB037;
-  --color-apple: #65AB32;
-  --color-ecru-white: #FAF9F2;
+  --color-mineral-green: #3e595d;
+  --color-green-white: #f7f8f4;
+  --color-ziggurat: #bed5de;
+  --color-old-gold: #cbb037;
+  --color-apple: #65ab32;
+  --color-ecru-white: #faf9f2;
   --color-outer-space: #263638;
+  --text-9xl: clamp(5.5rem, 7.2vw + 4.5rem, 9rem);
   --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
   --text-5xl: clamp(2.25rem, 4vw + 1.45rem, 4.5rem);
   --text-4xl: clamp(2rem, 3.75vw + 1.4rem, 4rem);
@@ -26,20 +27,41 @@
 }
 
 .button {
-  @apply inline-block p-4 rounded-2xl bg-apple text-ecru-white text-2xl font-bold hover:text-apple hover:bg-ecru-white hover:outline-1 hover:outline-apple cursor-pointer
+  @apply inline-block p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
 }
 
 .button-secondary {
-  @apply h-20 inline-block p-4 rounded-2xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer
+  @apply h-20 inline-block p-4 rounded-2xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer;
+}
+
+.main-heading {
+  @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
 }
 
 .heading {
-  @apply text-4xl text-center mb-4
+  @apply text-4xl text-center mb-4;
 }
 
 .input {
-  @apply border-apple border p-2 my-2 rounded-xl
+  @apply bg-ecru-white border-old-gold border p-2 my-2 rounded-xl;
 }
-.input {
-  @apply border-old-gold border p-2 my-2 rounded-xl
+
+.tooltip {
+  @apply relative inline-block cursor-pointer;
+}
+
+.tooltipText {
+  @apply invisible w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1;
+}
+
+.tooltip:hover .tooltipText {
+  @apply visible;
+}
+
+.footer {
+  @apply bg-mineral-green flex flex-col items-center font-bebas-neue text-ecru-white text-base;
+}
+
+.label {
+  @apply font-semibold 
 }

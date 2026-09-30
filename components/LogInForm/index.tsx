@@ -24,40 +24,42 @@ const LogInForm = () => {
   });
 
   return (
-    <div className="place-self-center">
-      <form
-        className="flex flex-col max-w-md m-auto text-left border-2 border-sushi rounded-2xl p-8"
-        onSubmit={handleSubmit((values) => mutate(values))}
-      >
-        <label htmlFor="email">Enter your Email</label>
-        <input
-          className="input"
-          {...register("email", {
-            required: true,
-          })}
-          placeholder="Email:"
-        />
-        {errors.email && <ErrorMessage error={errors.email.message!} />}
-        <label htmlFor="password">Enter your Password</label>
-        <input
-          className="input"
-          {...register("password", {
-            required: true,
-          })}
-          placeholder="Password:"
-          type="password"
-        />
-        {errors.password && <ErrorMessage error={errors.password.message!} />}
-        <button className="p-4 bg-old-gold text-china-ivory font-bold cursor-pointer">
-          {isPending ? "Logging in..." : "Log in"}
-        </button>
-        {error && <ErrorMessage error={error.message} />}
-      </form>
-      <div className="mt-4">
-        <Link href="/signup">
-          Don't have any account?{" "}
-          <span className="text-pacifika font-bold">Sign up here</span>
-        </Link>
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <div className="bg-white/15 backdrop-blur-2xl shadow-xl p-10 rounded-4xl">
+        <form
+          className="flex flex-col max-w-md m-auto text-left rounded-2xl p-8 bg-old-gold"
+          onSubmit={handleSubmit((values) => mutate(values))}
+        >
+          <label htmlFor="email" className="label">Enter your Email</label>
+          <input
+            className="input"
+            {...register("email", {
+              required: true,
+            })}
+            placeholder="Email:"
+          />
+          {errors.email && <ErrorMessage error={errors.email.message!} />}
+          <label htmlFor="password" className="label">Enter your Password</label>
+          <input
+            className="input"
+            {...register("password", {
+              required: true,
+            })}
+            placeholder="Password:"
+            type="password"
+          />
+          {errors.password && <ErrorMessage error={errors.password.message!} />}
+          <button className="button">
+            {isPending ? "Logging in..." : "Log in"}
+          </button>
+          {error && <ErrorMessage error={error.message} />}
+        </form>
+        <div className="mt-4">
+          <Link href="/signup">
+            Don't have any account?{" "}
+            <span className="text-ecru-white font-bold hover:text-old-gold">Sign up here</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

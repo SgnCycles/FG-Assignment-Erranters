@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/serverClient";
 import { postSchema } from "@/schemas/schemas";
 import * as z from "zod";
 import slugify from "@/lib/supabase/slugify";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
@@ -23,5 +22,5 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
 
   if (error) console.log(error);
   revalidatePath("/");
-  redirect(`${slug}`);
+  return {success: true, slug}
 };
