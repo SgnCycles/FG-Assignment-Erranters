@@ -53,3 +53,8 @@ export const signUpSchema = z
       });
     }
   });
+
+export const postSchema = z.object({
+  title: z.string().min(6, "Post title should be at least six characters long"),
+  content: z.string(),
+});

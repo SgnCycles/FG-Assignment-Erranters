@@ -25,6 +25,21 @@
   --text-base: clamp(1rem, 1vw + 1rem, 1.25rem);
 }
 
+.button {
+  @apply inline-block p-4 rounded-2xl bg-apple text-ecru-white text-2xl font-bold hover:text-apple hover:bg-ecru-white hover:outline-1 hover:outline-apple cursor-pointer
+}
+
+.button-secondary {
+  @apply h-20 inline-block p-4 rounded-2xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer
+}
+
+.heading {
+  @apply text-4xl text-center mb-4
+}
+
+.input {
+  @apply border-apple border p-2 my-2 rounded-xl
+}
 .input {
   @apply border-old-gold border p-2 my-2 rounded-xl
 }

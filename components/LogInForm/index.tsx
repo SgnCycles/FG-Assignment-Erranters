@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LogIn } from "@/actions/login-actions";
+import { LogIn } from "@/actions/login-action";
 import { logInSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -19,12 +19,12 @@ const LogInForm = () => {
   const { mutate, error, isPending } = useMutation({
     mutationFn: LogIn,
     onSuccess: () => {
-      router.push("/");
+      router.push("/feed");
     },
   });
 
   return (
-    <div className="mb-4">
+    <div className="place-self-center">
       <form
         className="flex flex-col max-w-md m-auto text-left border-2 border-sushi rounded-2xl p-8"
         onSubmit={handleSubmit((values) => mutate(values))}
@@ -53,10 +53,12 @@ const LogInForm = () => {
         </button>
         {error && <ErrorMessage error={error.message} />}
       </form>
-      <Link href="/signup">
-        Don't have any account?{" "}
-        <span className="text-pacifika font-bold">Sign up here</span>
-      </Link>
+      <div className="mt-4">
+        <Link href="/signup">
+          Don't have any account?{" "}
+          <span className="text-pacifika font-bold">Sign up here</span>
+        </Link>
+      </div>
     </div>
   );
 };

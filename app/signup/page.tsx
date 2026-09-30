@@ -3,10 +3,9 @@ import SignUpForm from "@/components/SignUpForm";
 
 const SignUpPage = () => {
   return (
-    <div className="">
+    <div className="grow flex flex-col justify-around">
       <main className="">
-        <h1> This is SignUp page</h1>
-        <HomepagePoster />
+        <h1 className="heading">Sign up to Erranters</h1>
         <SignUpForm />
       </main>
     </div>

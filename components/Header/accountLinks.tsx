@@ -1,13 +1,41 @@
+"use server";
+import { LogOut } from "@/actions/logout-action";
+import { createClient } from "@/lib/supabase/serverClient";
 import Link from "next/link";
 
-const AccountLinks = () => {
-  return (
+const AccountLinks = async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
+  return (
     <div className="flex gap-4">
-      <Link className="button-secondary" href="/auth/login">Log In</Link>
-      <Link className="button-secondary" href="/auth/signup">Sign Up</Link>
+      {user ? (
+        <>
+          <Link className="button-secondary" href="/create-post">
+            Create Post
+          </Link>
+          <button
+            className="button-secondary"
+            onClick={LogOut}
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link className="button-secondary" href="/feed">
+            Log In
+          </Link>
+          <Link className="button-secondary" href="/signup">
+            Sign Up
+          </Link>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default AccountLinks;

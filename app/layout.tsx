@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, League_Spartan, Cantarell } from "next/font/google";
 import { QueryClientProvider } from "@/providers/queryProvider";
+import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -35,8 +37,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <QueryClientProvider>{children}</QueryClientProvider>
+      <body className="h-full flex flex-col">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+        <QueryClientProvider>
+          {children}
+        </QueryClientProvider>
+        <Footer />
       </body>
     </html>
   );

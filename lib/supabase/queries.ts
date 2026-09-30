@@ -6,7 +6,7 @@ export const getHomePosts = async (
 ) => {
   return await supabase
     .from("Posts")
-    .select('id, title, slug, author("id, "username)')
+    .select('id, title, slug, author("id", "username")')
     .order("created_at", { ascending: false });
 };
 
@@ -14,14 +14,17 @@ export const getSinglePost = async (slug: string) => {
   const supabase = createClient();
   return await supabase
     .from("Posts")
-    .select('slug, title, content, author("id", "username")')
+    .select('id, slug, title, content, author("id", "username")')
     .eq("slug", slug)
     .single();
 };
 
 export const searchPost = async (searchTerm: string) => {
   const supabase = createClient();
-  return await supabase.from("Posts").select("title, slug").textSearch("title", searchTerm);
+  return await supabase
+    .from("Posts")
+    .select("title, slug")
+    .textSearch("title", searchTerm);
 };
 
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;

@@ -1,15 +1,15 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUp } from "@/actions/signup-actions";
+import { SignUp } from "@/actions/signup-action";
 import { signUpSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ErrorMessage from "../ErrorMessage";
 import Link from "next/link";
 
 const SignUpForm = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,14 +21,14 @@ const SignUpForm = () => {
     mutationFn: SignUp,
     onSuccess: () => {
       reset();
-      // router.push("/");
+      router.push("/");
     },
   });
 
   return (
-    <div className="mb-4">
+    <div className="h-full">
       <form
-        className="flex flex-col max-w-md m-auto text-left border-2 border-sushi rounded-2xl p-8"
+        className="flex flex-col max-w-md m-auto text-left border-2 border-apple rounded-2xl p-8"
         onSubmit={handleSubmit((values) => mutate(values))}
       >
         <label htmlFor="email">Enter a Username</label>
@@ -77,10 +77,12 @@ const SignUpForm = () => {
         {isSuccess && <p>Account Created. Please check your email.</p>}
         {error && <ErrorMessage error={error.message} />}
       </form>
-      <Link href="/">
-        Already have any account?{" "}
-        <span className="text-pacifika font-bold">Log in here</span>
-      </Link>
+      <div className="flex justify-center mt-4">
+        <Link href="/">
+          Already have any account?{" "}
+          <span className="text-pacifika font-bold">Log in here</span>
+        </Link>
+      </div>
     </div>
   );
 };

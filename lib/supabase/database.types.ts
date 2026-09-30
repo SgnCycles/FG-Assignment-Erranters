@@ -204,31 +204,31 @@ export type Database = {
       Posts: {
         Row: {
           author: string
-          category: string
+          category: string | null
           content: string
           created_at: string
           id: string
           images: string | null
           latitude: number | null
-          location: string
+          location: string | null
           longitude: number | null
-          post_type: string
+          post_type: string | null
           price: number | null
           slug: string
           sold: boolean | null
           title: string
         }
         Insert: {
-          author?: string
-          category: string
+          author: string
+          category?: string | null
           content: string
           created_at?: string
           id?: string
           images?: string | null
           latitude?: number | null
-          location: string
+          location?: string | null
           longitude?: number | null
-          post_type: string
+          post_type?: string | null
           price?: number | null
           slug: string
           sold?: boolean | null
@@ -236,15 +236,15 @@ export type Database = {
         }
         Update: {
           author?: string
-          category?: string
+          category?: string | null
           content?: string
           created_at?: string
           id?: string
           images?: string | null
           latitude?: number | null
-          location?: string
+          location?: string | null
           longitude?: number | null
-          post_type?: string
+          post_type?: string | null
           price?: number | null
           slug?: string
           sold?: boolean | null
@@ -295,7 +295,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      debug_auth: { Args: never; Returns: Json }
     }
     Enums: {
       [_ in never]: never
