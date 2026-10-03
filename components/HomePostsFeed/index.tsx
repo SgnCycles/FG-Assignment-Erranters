@@ -36,6 +36,7 @@ const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
           className="block border border-apple  bg-ecru-white rounded-2xl p-4 m-4"
           href={`/${post.slug}`}
         >
+          <span>{post.category}</span>
           <h3 className="font-bold text-lg">{post.title}</h3>
           <p className="text-right italic">posted by {post.author.username}</p>
           <p>

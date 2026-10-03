@@ -26,6 +26,8 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
               title: data.title,
               content: data.content,
               images: data.images,
+              category: data.category,
+              post_type: data.post_type
             }}
             postId={data.id}
           />
