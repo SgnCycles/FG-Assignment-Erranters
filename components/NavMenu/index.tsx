@@ -15,7 +15,7 @@ const NavMenu = async () => {
       {user && (
         <>
           <Link
-            className="bg-mineral-green text-ecru-white w-auto flex gap-4 py-2 px-4 rounded-2xl"
+            className="bg-ecru-white hover:bg-old-gold text-mineral-green w-auto flex gap-4 py-2 px-4 rounded-2xl border font-semibold"
             href="/create-post"
           >
             <svg
@@ -24,7 +24,7 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#3e595d"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -46,7 +46,7 @@ const NavMenu = async () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-house preview-icon"
+              className="lucide lucide-house preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
               <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -60,11 +60,11 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#faf9f2"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-sticky-note preview-icon"
+              className="lucide lucide-sticky-note preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" />
               <path d="M15 3v5a1 1 0 0 0 1 1h5" />
@@ -78,11 +78,11 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#faf9f2"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-bell preview-icon"
+              className="lucide lucide-bell preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="M10.268 21a2 2 0 0 0 3.464 0" />
               <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
@@ -96,11 +96,11 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#faf9f2"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-message-circle-more preview-icon"
+              className="lucide lucide-message-circle-more preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
               <path d="M8 12h.01" />
@@ -116,11 +116,11 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#faf9f2"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-circle-user-round preview-icon"
+              className="lucide lucide-circle-user-round preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
               <circle cx="12" cy="11" r="4" />
@@ -135,11 +135,11 @@ const NavMenu = async () => {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#faf9f2"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-log-out preview-icon"
+              className="lucide lucide-log-out preview-icon stroke-ecru-white hover:stroke-old-gold"
             >
               <path d="m16 17 5-5-5-5" />
               <path d="M21 12H9" />

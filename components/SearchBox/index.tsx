@@ -28,7 +28,7 @@ const SearchBox = () => {
           placeholder="Search..."
           onChange={handleChange}
           value={input}
-          className="p-1 w-full pl-3 border-0 outline-none focus:border-mineral-green focus:border focus:rounded-l-2xl"
+          className="p-1 w-full pl-3 border-0 outline-none focus:border-mineral-green focus:border focus:rounded-l-2xl text-outer-space placeholder:text-outer-space placeholder:bg-ecru-white bg-ecru-white"
         />
         <button
           onClick={handleClick}
@@ -40,7 +40,7 @@ const SearchBox = () => {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="#faf9f2"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"

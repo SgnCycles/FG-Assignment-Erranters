@@ -19,11 +19,21 @@ const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
   });
 
   return (
-    <div className="">
+    <div className="grow">
+      <div className="flex justify-end pr-6">
+        <select
+          className="text-ecru-white cursor-pointer font-bold hover:text-old-gold"
+          name=""
+          id=""
+        >
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
       {data.map((post) => (
         <Link
           key={post.id}
-          className="block border border-apple rounded-2xl p-4 m-4"
+          className="block border border-apple  bg-ecru-white rounded-2xl p-4 m-4"
           href={`/${post.slug}`}
         >
           <h3 className="font-bold text-lg">{post.title}</h3>

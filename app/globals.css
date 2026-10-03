@@ -27,7 +27,7 @@
 }
 
 .button {
-  @apply inline-block p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
+  @apply w-[140px] inline-block p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
 }
 
 .button-secondary {

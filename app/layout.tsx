@@ -4,7 +4,6 @@ import { QueryClientProvider } from "@/providers/queryProvider";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -38,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", bebasNeue.variable, leagueSpartan.variable, gecantarellistMono.variable, "font-sans", geist.variable)}
+      className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} h-full antialiased`}
     >
       <body className="h-full flex flex-col font-cantarell text-outer-space">
         <ToastContainer
