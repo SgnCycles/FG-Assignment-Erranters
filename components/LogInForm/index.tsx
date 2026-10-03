@@ -13,12 +13,14 @@ const LogInForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: zodResolver(logInSchema) });
 
   const { mutate, error, isPending } = useMutation({
     mutationFn: LogIn,
     onSuccess: () => {
+      reset();
       router.push("/feed");
     },
   });
@@ -55,9 +57,9 @@ const LogInForm = () => {
           {error && <ErrorMessage error={error.message} />}
         </form>
         <div className="mt-4">
-          <Link href="/signup">
+          <Link href="/signup" className="text-ecru-white">
             Don't have any account?{" "}
-            <span className="text-ecru-white font-bold hover:text-old-gold">Sign up here</span>
+            <span className="font-bold text-apple hover:text-old-gold">Sign up here</span>
           </Link>
         </div>
       </div>

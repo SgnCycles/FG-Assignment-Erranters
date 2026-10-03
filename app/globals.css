@@ -63,5 +63,5 @@
 }
 
 .label {
-  @apply font-semibold 
+  @apply font-bold 
 }
