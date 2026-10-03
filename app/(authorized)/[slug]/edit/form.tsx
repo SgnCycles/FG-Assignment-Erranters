@@ -12,7 +12,10 @@ const EditPageForm = ({
   initialValues,
   postId,
 }: {
-  initialValues: Pick<Tables<"Posts">, "title" | "content" | "images">;
+  initialValues: Pick<
+    Tables<"Posts">,
+    "title" | "content" | "images" | "category" | "post_type"
+  >;
   postId: string;
 }) => {
   // const postImageSchema = postSchema
@@ -37,6 +40,8 @@ const EditPageForm = ({
       title: initialValues.title,
       content: initialValues.content || undefined,
       images: initialValues.images || undefined,
+      category: initialValues.category,
+      post_type: initialValues.post_type,
     },
   });
 
@@ -50,7 +55,11 @@ const EditPageForm = ({
         className="w-lg mx-auto"
         onSubmit={handleSubmit((values) => {
           let imageForm = undefined;
-          if (values.images && typeof values.images !== "string" && values.images.length > 0) {
+          if (
+            values.images &&
+            typeof values.images !== "string" &&
+            values.images.length > 0
+          ) {
             imageForm = new FormData();
             imageForm.append("images", values.images[0]);
           }
@@ -59,6 +68,8 @@ const EditPageForm = ({
               title: values.title,
               content: values.content,
               images: imageForm,
+              category: values.category,
+              post_type: values.post_type,
             },
             postId,
           });

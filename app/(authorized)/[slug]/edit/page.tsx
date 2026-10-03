@@ -17,7 +17,7 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   }
 
   return (
-    <div className="grow">
+    <main className="grow">
       {data && (
         <div>
           <h1>{`Edit: ${data.title}`}</h1>
@@ -31,7 +31,7 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
           />
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

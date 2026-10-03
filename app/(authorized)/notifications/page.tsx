@@ -1,9 +1,9 @@
 const NotificationsPage = () => {
 
   return (
-    <div className="grow">
+    <main className="grow">
       <h1 className="heading">This is Notifications Page</h1>
-    </div>
+    </main>
   );
 };
 

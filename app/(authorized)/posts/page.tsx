@@ -1,9 +1,9 @@
 const PostsPage = () => {
 
   return (
-    <div className="grow">
+    <main className="grow">
       <h1 className="heading">This is All Posts Page</h1>
-    </div>
+    </main>
   );
 };
 

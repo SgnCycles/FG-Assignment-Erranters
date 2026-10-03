@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import uploadImage from "@/lib/supabase/uploadImage";
 
 export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
+  
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
   const {
@@ -14,7 +15,7 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized access!");
 
-  const imageFile = postdata.images?.get("images");
+  const imageFile = postdata.images?.get("image");
 
   if (!(imageFile instanceof File) && imageFile !== null && imageFile !== "undefined") {
     throw new Error("Image is not in a valid format");

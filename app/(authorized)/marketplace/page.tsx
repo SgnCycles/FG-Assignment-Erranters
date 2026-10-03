@@ -1,9 +1,9 @@
 const MarketplacePage = () => {
 
   return (
-    <div className="grow">
+    <main className="grow">
       <h1 className="heading">This is Marketplace Page</h1>
-    </div>
+    </main>
   );
 };
 

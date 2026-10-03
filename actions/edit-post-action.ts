@@ -16,7 +16,7 @@ const EditPost = async ({
 }) => {
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
-  const imageFile = postdata.images?.get("images");
+  const imageFile = postdata.images?.get("image");
 
   const { data: post, error } = await supabase
     .from("Posts")

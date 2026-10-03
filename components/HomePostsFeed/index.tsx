@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 
 const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
-
+  
   const supabase = createClient();
   const { data } = useQuery({
     queryKey: ["home-posts"],
@@ -38,6 +38,13 @@ const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
         >
           <h3 className="font-bold text-lg">{post.title}</h3>
           <p className="text-right italic">posted by {post.author.username}</p>
+          <p>
+            posted on{" "}
+            {new Date(post.created_at).toLocaleString("sv-Se", {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
+          </p>
         </Link>
       ))}
     </div>

@@ -204,7 +204,7 @@ export type Database = {
       Posts: {
         Row: {
           author: string
-          category: string | null
+          category: string
           content: string
           created_at: string
           id: string
@@ -212,7 +212,7 @@ export type Database = {
           latitude: number | null
           location: string | null
           longitude: number | null
-          post_type: string | null
+          post_type: string
           price: number | null
           slug: string
           sold: boolean | null
@@ -220,7 +220,7 @@ export type Database = {
         }
         Insert: {
           author: string
-          category?: string | null
+          category: string
           content: string
           created_at?: string
           id?: string
@@ -228,7 +228,7 @@ export type Database = {
           latitude?: number | null
           location?: string | null
           longitude?: number | null
-          post_type?: string | null
+          post_type: string
           price?: number | null
           slug: string
           sold?: boolean | null
@@ -236,7 +236,7 @@ export type Database = {
         }
         Update: {
           author?: string
-          category?: string | null
+          category?: string
           content?: string
           created_at?: string
           id?: string
@@ -244,7 +244,7 @@ export type Database = {
           latitude?: number | null
           location?: string | null
           longitude?: number | null
-          post_type?: string | null
+          post_type?: string
           price?: number | null
           slug?: string
           sold?: boolean | null

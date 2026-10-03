@@ -4,6 +4,7 @@ import { getSinglePost } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
+  
   const { slug } = await params;
   const supabase = await createClient();
   const {
@@ -20,22 +21,43 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
   if (!data) return <ErrorMessage error="Post Not Found" />;
 
   return (
-    <div className="grow grid place-items-center">
-      <div>
-        <button>Go back</button>
+    <main className="grow flex flex-col items-between bg-mineral-green">
+      <div className="w-full ml-4">
+        <button className="flex font-semibold text-ecru-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#faf9f2"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-arrow-left-to-line preview-icon"
+          >
+            <path d="M3 19V5" />
+            <path d="m13 6-6 6 6 6" />
+            <path d="M7 12h14" />
+          </svg>
+          Go back
+        </button>
       </div>
-      {data && (
-        <Post
-          slug={slug}
-          images={data.images}
-          title={data.title}
-          content={data.content}
-          id={data.id}
-          username={data.author.username}
-          isAuthor={isAuthor}
-        />
-      )}
-    </div>
+      <div className="grow flex justify-center items-center">
+        {data && (
+          <Post
+            slug={slug}
+            images={data.images}
+            title={data.title}
+            content={data.content}
+            id={data.id}
+            username={data.author.username}
+            isAuthor={isAuthor}
+            created_at={data.created_at}
+          />
+        )}
+      </div>
+    </main>
   );
 };
 

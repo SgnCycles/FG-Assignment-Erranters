@@ -58,4 +58,6 @@ export const postSchema = z.object({
   title: z.string().min(6, "Post title should be at least six characters long"),
   content: z.string(),
   images: z.instanceof(FormData).optional(),
+  category: z.string().min(1, "Choose a category"),
+  post_type: z.string().min(1, "Choose the type of the post")
 });
