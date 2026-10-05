@@ -267,6 +267,7 @@ export type Database = {
           email: string
           id: string
           name: string | null
+          profile_image: string | null
           surname: string | null
           username: string
         }
@@ -276,6 +277,7 @@ export type Database = {
           email: string
           id?: string
           name?: string | null
+          profile_image?: string | null
           surname?: string | null
           username: string
         }
@@ -285,6 +287,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string | null
+          profile_image?: string | null
           surname?: string | null
           username?: string
         }

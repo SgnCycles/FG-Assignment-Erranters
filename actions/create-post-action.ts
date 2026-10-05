@@ -4,10 +4,9 @@ import { postSchema } from "@/schemas/schemas";
 import * as z from "zod";
 import slugify from "@/lib/supabase/slugify";
 import { revalidatePath } from "next/cache";
-import uploadImage from "@/lib/supabase/uploadImage";
+import uploadImage from "@/lib/supabase/uploadPostImage";
 
 export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
-  
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
   const {
@@ -17,11 +16,18 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
 
   const imageFile = postdata.images?.get("image");
 
-  if (!(imageFile instanceof File) && imageFile !== null && imageFile !== "undefined") {
+  if (
+    !(imageFile instanceof File) &&
+    imageFile !== null &&
+    imageFile !== "undefined"
+  ) {
     throw new Error("Image is not in a valid format");
   }
 
-  const imageUrl = (imageFile && imageFile !== "undefined") ? await uploadImage(imageFile) : null;
+  const imageUrl =
+    imageFile && imageFile !== "undefined"
+      ? await uploadImage(imageFile)
+      : null;
 
   let slug_id = crypto.randomUUID().slice(0, 8);
   const slug = `${slugify(parsedData.title)}-${slug_id}`;
@@ -34,5 +40,5 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
 
   if (error) console.log(error);
   revalidatePath("/");
-  return {success: true, slug}
+  return { success: true, slug };
 };

@@ -1,10 +1,10 @@
 import ErrorMessage from "@/components/ErrorMessage";
-import Post from "@/components/Post";
+import Post from "@/components/posts/FullPost";
 import { getSinglePost } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
-  
+
   const { slug } = await params;
   const supabase = await createClient();
   const {
@@ -45,16 +45,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       </div>
       <div className="grow flex justify-center items-center">
         {data && (
-          <Post
-            slug={slug}
-            images={data.images}
-            title={data.title}
-            content={data.content}
-            id={data.id}
-            username={data.author.username}
-            isAuthor={isAuthor}
-            created_at={data.created_at}
-          />
+          <Post {...data} username={data.author.username} isAuthor={isAuthor} />
         )}
       </div>
     </main>

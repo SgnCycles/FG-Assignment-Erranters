@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import EditPageForm from "./form";
 
 const EditPostPage = async ({ params }: { params: { slug: string } }) => {
+  
   const { slug } = await params;
   const supabase = await createClient();
   const {
@@ -27,7 +28,7 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
               content: data.content,
               images: data.images,
               category: data.category,
-              post_type: data.post_type
+              post_type: data.post_type,
             }}
             postId={data.id}
           />

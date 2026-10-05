@@ -7,8 +7,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "../ErrorMessage";
 import Link from "next/link";
+import { useState } from "react";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const LogInForm = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const router = useRouter();
   const {
     register,
@@ -32,7 +36,9 @@ const LogInForm = () => {
           className="flex flex-col max-w-md m-auto text-left rounded-2xl p-8 bg-old-gold"
           onSubmit={handleSubmit((values) => mutate(values))}
         >
-          <label htmlFor="email" className="label">Enter your Email</label>
+          <label htmlFor="email" className="label">
+            Enter your Email
+          </label>
           <input
             className="input"
             {...register("email", {
@@ -41,25 +47,46 @@ const LogInForm = () => {
             placeholder="Email:"
           />
           {errors.email && <ErrorMessage error={errors.email.message!} />}
-          <label htmlFor="password" className="label">Enter your Password</label>
-          <input
-            className="input"
-            {...register("password", {
-              required: true,
-            })}
-            placeholder="Password:"
-            type="password"
-          />
-          {errors.password && <ErrorMessage error={errors.password.message!} />}
-          <button className="button">
-            {isPending ? "Logging in..." : "Log in"}
-          </button>
+          <label htmlFor="password" className="label">
+            Enter your Password
+          </label>
+          <div className="relative">
+            <input
+              className="input w-full"
+              {...register("password", {
+                required: true,
+              })}
+              placeholder="Password:"
+              type={showPassword ? "text" : "password"}
+            />
+            {showPassword ? (
+              <AiFillEye
+                className="eye-icon"
+                onClick={() => setShowPassword((prevState) => !prevState)}
+              />
+            ) : (
+              <AiFillEyeInvisible
+                className="eye-icon"
+                onClick={() => setShowPassword((prevState) => !prevState)}
+              />
+            )}
+            {errors.password && (
+              <ErrorMessage error={errors.password.message!} />
+            )}
+          </div>
+          <div className="flex justify-center">
+            <button className="button w-full">
+              {isPending ? "Logging in..." : "Log in"}
+            </button>
+          </div>
           {error && <ErrorMessage error={error.message} />}
         </form>
         <div className="mt-4">
           <Link href="/signup" className="text-ecru-white">
             Don't have any account?{" "}
-            <span className="font-bold text-apple hover:text-old-gold">Sign up here</span>
+            <span className="font-bold text-apple hover:text-old-gold">
+              Sign up here
+            </span>
           </Link>
         </div>
       </div>

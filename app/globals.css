@@ -27,7 +27,7 @@
 }
 
 .button {
-  @apply w-35 inline-block p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
+  @apply p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
 }
 
 .button-secondary {
@@ -43,7 +43,11 @@
 }
 
 .input {
-  @apply bg-ecru-white border-old-gold border p-2 my-2 rounded-xl;
+  @apply bg-ecru-white border-old-gold border p-2 my-2 rounded-xl text-outer-space;
+}
+
+.eye-icon {
+  @apply cursor-pointer absolute text-outer-space top-5 right-2 text-base;
 }
 
 .tooltip {
@@ -63,13 +67,13 @@
 }
 
 .label {
-  @apply font-bold 
+  @apply font-bold;
 }
 
 .select-button {
-  @apply text-mineral-green p-2 rounded-2xl bg-old-gold w-30
+  @apply text-mineral-green p-2 rounded-2xl bg-old-gold w-30;
 }
 
 .create-post-input {
-  @apply w-full rounded-2xl bg-ecru-white text-outer-space placeholder:text-outer-space
+  @apply w-full rounded-2xl bg-ecru-white text-outer-space placeholder:text-outer-space;
 }

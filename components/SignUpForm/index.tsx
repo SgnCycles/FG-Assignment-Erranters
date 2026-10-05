@@ -9,6 +9,7 @@ import ErrorMessage from "../ErrorMessage";
 import Link from "next/link";
 
 const SignUpForm = () => {
+  
   const router = useRouter();
   const {
     register,

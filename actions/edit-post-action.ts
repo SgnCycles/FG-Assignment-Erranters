@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/serverClient";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import slugify from "@/lib/supabase/slugify";
-import uploadImage from "@/lib/supabase/uploadImage";
+import uploadImage from "@/lib/supabase/uploadPostImage";
 
 const EditPost = async ({
   postdata,

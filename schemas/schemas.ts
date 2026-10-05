@@ -59,5 +59,13 @@ export const postSchema = z.object({
   content: z.string(),
   images: z.instanceof(FormData).optional(),
   category: z.string().min(1, "Choose a category"),
-  post_type: z.string().min(1, "Choose the type of the post")
+  post_type: z.string().min(1, "Choose the type of the post"),
+});
+
+export const userProfileSchema = z.object({
+  name: z.string().min(1, "Name must be longer than 1 character").optional(),
+  surname: z.string().min(1, "Surname must be longer than 1 character").optional(),
+  username: z.string().min(4, "Username must be longer than 4 characters"),
+  bio: z.string().optional(),
+  profile_image: z.instanceof(FormData).optional(),
 });

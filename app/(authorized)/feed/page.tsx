@@ -1,12 +1,11 @@
-import HomePostsFeed from "@/components/HomePostsFeed";
-import PostPageSidebar from "@/components/PostPageSidebar";
+import PostsSection from "@/components/PostsSection";
 import { getHomePosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const ProfileHomepage = async () => {
 
   const supabase = await createClient();
-  const { data, error } = await getHomePosts(supabase);
+  const { data, error } = await getHomePosts(supabase, false);
 
   return (
     <main className="grow flex flex-col bg-mineral-green">
@@ -15,8 +14,7 @@ const ProfileHomepage = async () => {
       </h1>
       {error && <p>Failed Loading Posts...</p>}
       <div className="flex grow">
-        <PostPageSidebar />
-        {data && <HomePostsFeed posts={data} />}
+        <PostsSection posts={data}/>
       </div>
     </main>
   );
