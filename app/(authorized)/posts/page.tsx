@@ -1,11 +1,11 @@
-import MyPostsSection from "@/components/MyPostsSection";
+import MyPostsSection from "@/components/posts/MyPostsSection";
 import { getMyPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
-const MyPostsPage = async() => {
-
+const MyPostsPage = async () => {
+  
   const supabase = await createClient();
-    const {
+  const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized access!");
@@ -16,7 +16,7 @@ const MyPostsPage = async() => {
       <h1 className="heading">My Posts</h1>
       {error && <p>Failed Loading Posts...</p>}
       <div className="flex grow">
-        <MyPostsSection posts={data} userId={user.id}/>
+        <MyPostsSection posts={data} userId={user.id} />
       </div>
     </main>
   );

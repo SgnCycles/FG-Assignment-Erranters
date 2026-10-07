@@ -1,35 +1,32 @@
 "use client";
-import { getMyPosts, MyPostsType } from "@/lib/supabase/queries";
+import { getHomePosts, HomePostsType } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
-import MyPost from "../posts/MyPost";
+import ShortPost from "../ShortPost";
 
-type MyPostsFeedProps = {
-  posts: MyPostsType;
-  userId: string;
+type HomePostsFeedPropsType = {
+  posts: HomePostsType;
   postCategory: string;
 };
 
-const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
-
+const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({
-    queryKey: ["my-posts", userId, sortingOrder],
+    queryKey: ["home-posts", sortingOrder],
     queryFn: async () => {
-      const { data, error } = await getMyPosts(supabase, userId, sortingOrder);
+      const { data, error } = await getHomePosts(supabase, sortingOrder);
       if (error) throw new Error();
       return data;
     },
     initialData: posts,
   });
 
-    const filteredPosts =
+  const filteredPosts =
     postCategory === "All"
       ? data
-      : data.filter((post) => post.category === postCategory);
-
+      : data?.filter((post) => post.category === postCategory);
   return (
     <div className="grow">
       <div className="flex justify-end pr-6">
@@ -42,11 +39,11 @@ const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
           <option value="Oldest">Oldest</option>
         </select>
       </div>
-      {filteredPosts.map((post, index) => (
-        <MyPost key={index} {...post} username={post.author.username} />
+      {filteredPosts?.map((post, index) => (
+        <ShortPost key={index} {...post} username={post.author.username} />
       ))}
     </div>
   );
 };
 
-export default MyPostsFeed;
+export default HomePostsFeed;

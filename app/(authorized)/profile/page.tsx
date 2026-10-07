@@ -3,6 +3,7 @@ import { getUserProfile } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const ProfilePage = async() => {
+
   const supabase = await createClient();
   const {
     data: {user}

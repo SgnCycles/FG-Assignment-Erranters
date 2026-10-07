@@ -1,22 +1,29 @@
 "use client";
 import { useState } from "react";
-import HomePostsFeed from "../HomePostsFeed";
 import PostPageSidebar from "../PostPageSidebar";
 import { HomePostsType } from "@/lib/supabase/queries";
+import MyPostsFeed from "../MyPostsFeed";
 
-type PostsSectionPropsType = {
+type MyPostsSectionPropsType = {
   posts: HomePostsType | null;
+  userId: string;
 };
 
-const PostsSection = ({ posts }: PostsSectionPropsType) => {
-  
+const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
   const [postCategory, setPostCategory] = useState<string>("All");
+
   return (
     <>
       <PostPageSidebar setPostCategory={setPostCategory} />
-      {posts && <HomePostsFeed posts={posts} postCategory={postCategory} />}
+      {posts && (
+        <MyPostsFeed
+          posts={posts}
+          userId={userId}
+          postCategory={postCategory}
+        />
+      )}
     </>
   );
 };
 
-export default PostsSection;
+export default MyPostsSection;

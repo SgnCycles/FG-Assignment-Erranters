@@ -2,7 +2,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { CreatePost } from "@/actions/create-post-action";
 import { useRouter } from "next/navigation";
-import CreatePostForm, { type FormValues } from "@/components/CreatePostForm";
+import CreatePostForm, { type FormValues } from "@/components/posts/CreatePostForm";
 
 const CreatePostPage = () => {
 

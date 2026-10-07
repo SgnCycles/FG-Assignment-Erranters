@@ -64,8 +64,15 @@ export const postSchema = z.object({
 
 export const userProfileSchema = z.object({
   name: z.string().min(1, "Name must be longer than 1 character").optional(),
-  surname: z.string().min(1, "Surname must be longer than 1 character").optional(),
+  surname: z
+    .string()
+    .min(1, "Surname must be longer than 1 character")
+    .optional(),
   username: z.string().min(4, "Username must be longer than 4 characters"),
   bio: z.string().optional(),
   profile_image: z.instanceof(FormData).optional(),
+});
+
+export const postCommentSchema = z.object({
+  content: z.string().min(1, "Comment must be at least 1 character long"),
 });

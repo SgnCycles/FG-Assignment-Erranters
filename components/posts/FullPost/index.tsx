@@ -1,5 +1,10 @@
+"use client";
+import { useRouter } from "next/navigation";
 import DeleteButton from "../../buttons/DeleteButton";
 import UpdateButton from "../../buttons/EditButton";
+import { DeletePostAction } from "@/actions/delete-post-action";
+import PostComments from "@/components/comments/PostComments";
+import AddCommentForm from "@/components/comments/AddCommentForm";
 
 type PostProps = {
   id: string;
@@ -10,9 +15,16 @@ type PostProps = {
   username: string;
   isAuthor: boolean;
   created_at: string;
+  userId: string | null
 };
 
-const Post = ({ ...data }: PostProps) => {
+const Post = ({ ...data}: PostProps) => {
+
+  const router = useRouter();
+  const onDeleteSuccess = () => {
+    router.push("/feed");
+  };
+  
   return (
     <div className="flex flex-col border-2 border-apple p-8 rounded-2xl grow bg-blue-400">
       {data.title && <h1 className="heading">{data.title}</h1>}
@@ -34,9 +46,16 @@ const Post = ({ ...data }: PostProps) => {
       {data.isAuthor && (
         <div className="mt-4 flex justify-end">
           <UpdateButton slug={data.slug} type="text" />
-          <DeleteButton id={data.id} type="text" />
+          <DeleteButton
+            id={data.id}
+            type="text"
+            deleteFunction={DeletePostAction}
+            onDeleteSuccess={onDeleteSuccess}
+          />
         </div>
       )}
+      <PostComments postId={data.id} isAuthor={data.isAuthor} userId={data.userId}/>
+      {data.userId && <AddCommentForm postId={data.id}/>}
     </div>
   );
 };

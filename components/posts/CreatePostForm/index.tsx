@@ -1,4 +1,4 @@
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
 import { postSchema } from "@/schemas/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

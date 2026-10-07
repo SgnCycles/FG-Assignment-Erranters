@@ -1,23 +1,23 @@
 "use client";
-import { getHomePosts, HomePostsType } from "@/lib/supabase/queries";
+import { getMyPosts, MyPostsType } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
-import ShortPost from "../posts/ShortPost";
+import MyPost from "../MyPost";
 
-type HomePostsFeedPropsType = {
-  posts: HomePostsType;
+type MyPostsFeedProps = {
+  posts: MyPostsType;
+  userId: string;
   postCategory: string;
 };
 
-const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
-
+const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({
-    queryKey: ["home-posts", sortingOrder],
+    queryKey: ["my-posts", userId, sortingOrder],
     queryFn: async () => {
-      const { data, error } = await getHomePosts(supabase, sortingOrder);
+      const { data, error } = await getMyPosts(supabase, userId, sortingOrder);
       if (error) throw new Error();
       return data;
     },
@@ -27,7 +27,8 @@ const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
   const filteredPosts =
     postCategory === "All"
       ? data
-      : data?.filter((post) => post.category === postCategory);
+      : data.filter((post) => post.category === postCategory);
+
   return (
     <div className="grow">
       <div className="flex justify-end pr-6">
@@ -40,11 +41,11 @@ const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
           <option value="Oldest">Oldest</option>
         </select>
       </div>
-      {filteredPosts?.map((post, index) => (
-        <ShortPost key={index} {...post} username={post.author.username} />
+      {filteredPosts.map((post, index) => (
+        <MyPost key={index} {...post} username={post.author.username} />
       ))}
     </div>
   );
 };
 
-export default HomePostsFeed;
+export default MyPostsFeed;

@@ -1,9 +1,9 @@
-import PostsSection from "@/components/PostsSection";
+import PostsSection from "@/components/posts/PostsSection";
 import { getHomePosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const ProfileHomepage = async () => {
-
+  
   const supabase = await createClient();
   const { data, error } = await getHomePosts(supabase, false);
 
@@ -14,7 +14,7 @@ const ProfileHomepage = async () => {
       </h1>
       {error && <p>Failed Loading Posts...</p>}
       <div className="flex grow">
-        <PostsSection posts={data}/>
+        <PostsSection posts={data} />
       </div>
     </main>
   );

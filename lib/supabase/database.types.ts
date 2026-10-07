@@ -70,6 +70,20 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "Comments_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "Profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "Comments_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "Comments"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "Comments_post_id_fkey"
             columns: ["post_id"]
             isOneToOne: false

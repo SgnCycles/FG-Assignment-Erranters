@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
   weight: "400",

@@ -55,8 +55,21 @@ export const getUserProfile =  async (id: string) => {
     .single();
 };
 
+export const getPostComments = async (postId: string) => {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("Comments")
+    .select('id, content, created_at, parent_id, author("id", "username")')
+    .eq("post_id", postId)
+    .order("created_at", { ascending: false });
+
+  if (error) console.log("getPostComments error:", error);
+  return data;
+};
+
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
 export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
 export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
+export type GetPostCommentsType = QueryData<ReturnType<typeof getPostComments>>;
