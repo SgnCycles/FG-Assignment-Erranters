@@ -5,7 +5,8 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { type Tables } from "@/lib/supabase/database.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import FileDropZone, { ImageFile } from "@/components/FileDropZone";
 import * as z from "zod";
 
 const EditPostForm = ({
@@ -20,20 +21,13 @@ const EditPostForm = ({
   };
   postId: string;
 }) => {
-  // const postImageSchema = postSchema
-  //   .omit({ images: true })
-  //   .extend({ images: z.instanceof(FileList).optional() });
   const postImageSchema = postSchema.omit({ images: true }).extend({
-    images: z
-      .unknown()
-      .transform((value) => {
-        return value as FileList;
-      })
-      .optional(),
+    image: z.array(z.custom<ImageFile>()).optional(),
   });
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -46,7 +40,7 @@ const EditPostForm = ({
     },
   });
 
-  const { mutate, error } = useMutation({
+  const { mutate, error, isPending } = useMutation({
     mutationFn: EditPost,
   });
 
@@ -56,13 +50,11 @@ const EditPostForm = ({
         className="w-lg mx-auto"
         onSubmit={handleSubmit((values) => {
           let imageForm: FormData | undefined = undefined;
-          if (
-            values.images &&
-            typeof values.images !== "string" &&
-            values.images.length > 0
-          ) {
+
+          if (values.image && values.image.length > 0) {
             imageForm = new FormData();
-            Array.from(values.images).forEach((image) => {
+
+            values.image.forEach((image) => {
               imageForm?.append("image", image);
             });
           }
@@ -95,10 +87,19 @@ const EditPostForm = ({
             ))}
           </div>
         )}
-        <label htmlFor="image">Update the image</label>
-        <input className="input" type="file" multiple {...register("images")} />
-        {errors.images && <ErrorMessage error={errors.images.message!} />}
-        <button className="button-secondary">Update</button>
+        <div className="p-4 flex flex-col">
+          <Controller
+            name="image"
+            control={control}
+            render={({ field }) => (
+              <FileDropZone value={field.value} onChange={field.onChange} />
+            )}
+          />
+          {errors.image && <ErrorMessage error={errors.image.message!} />}
+        </div>
+        <button className="button-secondary">
+          {isPending ? "Updating the post..." : "Update"}
+        </button>
         {error && <ErrorMessage error={error.message} />}
       </form>
     </div>

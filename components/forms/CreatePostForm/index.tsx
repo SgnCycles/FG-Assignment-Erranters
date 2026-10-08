@@ -1,17 +1,13 @@
 import ErrorMessage from "@/components/ErrorMessage";
+import FileDropZone, { ImageFile } from "@/components/FileDropZone";
 import { postSchema } from "@/schemas/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
-  image: z
-    .unknown()
-    .transform((value) => {
-      return value as FileList;
-    })
-    .optional(),
+  image: z.array(z.custom<ImageFile>()).optional(),
 });
 
 export type FormValues = z.infer<typeof postImageSchema>;
@@ -29,6 +25,7 @@ const CreatePostForm = ({
 }: CreatePostFormProps) => {
   const {
     register,
+    control,
     watch,
     setValue,
     handleSubmit,
@@ -73,6 +70,16 @@ const CreatePostForm = ({
           <option value="Buy">Buy</option>
         </select>
       </div>
+      <div className="p-4 flex flex-col">
+        <Controller
+          name="image"
+          control={control}
+          render={({ field }) => (
+            <FileDropZone value={field.value} onChange={field.onChange} />
+          )}
+        />
+        {errors.image && <ErrorMessage error={errors.image.message!} />}
+      </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="p-4">
           <label htmlFor="title">Add a title:</label>
@@ -107,16 +114,6 @@ const CreatePostForm = ({
             className="input text-outer-space cursor-pointer"
             type="text"
           ></input>
-        </div>
-        <div className="p-4 flex flex-col">
-          <label htmlFor="image">Add an image (optional)</label>
-          <input
-            className="input text-outer-space cursor-pointer"
-            type="file"
-            multiple
-            {...register("image")}
-          />
-          {errors.image && <ErrorMessage error={errors.image.message!} />}
         </div>
         <div className="flex justify-end pr-4">
           <button className="button mb-4">
