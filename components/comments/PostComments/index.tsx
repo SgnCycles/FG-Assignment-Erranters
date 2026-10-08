@@ -11,7 +11,6 @@ type PostCommentsPropsType = {
 };
 
 const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
-  
   const queryClient = useQueryClient();
   const { data: comments } = useQuery({
     queryKey: ["post-comments", postId],
@@ -27,10 +26,22 @@ const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
     <div>
       {comments && comments.length > 0 ? (
         comments.map((comment) => (
-          <div key={comment.id}>
-            <p>{comment.content}</p>
-            <p>by {comment.author.username}</p>
-            <p>{comment.created_at}</p>
+          <div key={comment.id} className="flex justify-between">
+            <div>
+              <div className="flex gap-4 text-[14px]">
+                <p>by {comment.author.username}</p>
+                <p>
+                  {new Date(comment.created_at).toLocaleString("sv-Se", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                  })}{" "}
+                </p>
+              </div>
+              <div className="text-base">
+                <p>{comment.content}</p>
+              </div>
+            </div>
+
             {(isAuthor || userId === comment.author.id) && (
               <DeleteButton
                 id={comment.id}
