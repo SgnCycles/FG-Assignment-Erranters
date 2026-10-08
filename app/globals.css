@@ -26,8 +26,16 @@
   --text-base: clamp(1rem, 1vw + 1rem, 1.25rem);
 }
 
+.logo-button {
+  @apply flex w-auto text-lg font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
+}
+
 .button {
-  @apply p-1 rounded-2xl bg-apple text-ecru-white text-base font-bold hover:text-apple hover:bg-ecru-white cursor-pointer tracking-widest;
+  @apply w-37 text-[16px] bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer grid place-items-center;
+}
+
+.button.active {
+  @apply bg-old-gold hover:text-outer-space;
 }
 
 .button-secondary {
@@ -39,7 +47,7 @@
 }
 
 .heading {
-  @apply text-4xl text-center mb-4 text-ecru-white;
+  @apply text-4xl text-center text-ecru-white;
 }
 
 .input {
@@ -62,6 +70,18 @@
   @apply visible;
 }
 
+.action-tooltip {
+  @apply relative inline-block cursor-pointer hover:text-old-gold;
+}
+
+.action-tooltipText {
+  @apply invisible w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1 right-0;
+}
+
+.action-tooltip:hover .action-tooltipText {
+  @apply visible;
+}
+
 .footer {
   @apply bg-mineral-green flex flex-col items-center font-bebas-neue text-ecru-white text-base;
 }
@@ -70,8 +90,16 @@
   @apply font-bold;
 }
 
-.select-button {
-  @apply text-mineral-green p-2 rounded-2xl bg-old-gold w-30;
+.select-button-category {
+  @apply w-[170px] text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+}
+
+.select-button-type {
+  @apply w-[100px] text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+}
+
+.category-dropdown {
+  @apply pointer-events-none absolute right-2 top-1/2 -translate-y-1/2;
 }
 
 .create-post-input {
@@ -79,5 +107,9 @@
 }
 
 .file-dropzone-area {
-  @apply p-8 text-outer-space flex flex-col justify-center items-center gap-4
+  @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4;
+}
+
+.postReactionButtons {
+  @apply flex p-2 bg-old-gold rounded-2xl gap-2 cursor-pointer;
 }

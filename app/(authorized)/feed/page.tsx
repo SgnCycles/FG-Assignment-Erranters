@@ -8,7 +8,7 @@ const ProfileHomepage = async () => {
   const { data, error } = await getHomePosts(supabase, false);
 
   return (
-    <main className="grow flex flex-col bg-mineral-green">
+    <main className="grow flex flex-col bg-mineral-green pr-5">
       <h1 className="heading text-ecru-white font-league-spartan">
         Posts from Erranters
       </h1>

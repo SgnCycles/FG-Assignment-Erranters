@@ -54,13 +54,13 @@ export const getUserProfile =  async (id: string) => {
     .single();
 };
 
-export const getPostComments = async (postId: string) => {
+export const getPostComments = async (postId: string, sortingOrder: boolean) => {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("Comments")
     .select('id, content, created_at, parent_id, author("id", "username")')
     .eq("post_id", postId)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: sortingOrder });
 
   if (error) console.log("getPostComments error:", error);
   return data;

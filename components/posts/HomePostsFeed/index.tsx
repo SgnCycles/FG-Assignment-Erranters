@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
 import ShortPost from "@/components/posts/ShortPost";
+import SortingButton from "@/components/buttons/SortingButton";
 
 type HomePostsFeedPropsType = {
   posts: HomePostsType;
@@ -29,16 +30,10 @@ const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
       : data?.filter((post) => post.category === postCategory);
   return (
     <div className="grow">
-      <div className="flex justify-end pr-6">
-        <select
-          className="text-ecru-white cursor-pointer font-bold hover:text-old-gold"
-          value={sortingOrder ? "Oldest" : "Newest"}
-          onChange={(e) => setSortingOrder(e.target.value === "Oldest")}
-        >
-          <option value="Newest">Newest</option>
-          <option value="Oldest">Oldest</option>
-        </select>
-      </div>
+      <SortingButton
+        sortingOrder={sortingOrder}
+        setSortingOrder={setSortingOrder}
+      />
       {filteredPosts?.map((post, index) => (
         <ShortPost key={index} {...post} username={post.author.username} />
       ))}

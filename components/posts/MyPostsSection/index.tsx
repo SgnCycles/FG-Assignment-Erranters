@@ -10,11 +10,15 @@ type MyPostsSectionPropsType = {
 };
 
 const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
+  
   const [postCategory, setPostCategory] = useState<string>("All");
 
   return (
     <>
-      <PostPageSidebar setPostCategory={setPostCategory} />
+      <PostPageSidebar
+        setPostCategory={setPostCategory}
+        postCategory={postCategory}
+      />
       {posts && (
         <MyPostsFeed
           posts={posts}

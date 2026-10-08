@@ -1,19 +1,32 @@
 type PostPageSidebarPropsType = {
+  postCategory: string;
   setPostCategory: (category: string) => void;
-}
+};
 
-const PostPageSidebar = ({setPostCategory} : PostPageSidebarPropsType) => {
+const PostPageSidebar = ({
+  postCategory,
+  setPostCategory,
+}: PostPageSidebarPropsType) => {
   return (
-    <div className="w-[10%]">
-      <ul className="flex flex-col gap-4 mt-10 items-center w-full">
+    <div className="w-[15%] flex justify-center">
+      <ul className="flex flex-col gap-4 mt-10 items-center">
         <li className="w-full">
-          <button className="button w-full" onClick={() => setPostCategory("All")}>All Posts</button>
+          <button className={`button ${postCategory === "All" ? "active" : ""}`} onClick={() => setPostCategory("All")}>
+            All Posts
+          </button>
         </li>
         <li className="w-full">
-          <button className="button w-full" onClick={() => setPostCategory("Hiking")}>Hiking</button>
+          <button
+            className={`button ${postCategory === "Hiking" ? "active" : ""}`}
+            onClick={() => setPostCategory("Hiking")}
+          >
+            Hiking
+          </button>
         </li>
         <li className="w-full">
-          <button className="button w-full" onClick={() => setPostCategory("Cycling")}>Cycling</button>
+          <button className={`button ${postCategory === "Cycling" ? "active" : ""}`} onClick={() => setPostCategory("Cycling")}>
+            Cycling
+          </button>
         </li>
       </ul>
     </div>

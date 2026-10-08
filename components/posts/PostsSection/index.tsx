@@ -12,7 +12,7 @@ const PostsSection = ({ posts }: PostsSectionPropsType) => {
   const [postCategory, setPostCategory] = useState<string>("All");
   return (
     <>
-      <PostPageSidebar setPostCategory={setPostCategory} />
+      <PostPageSidebar setPostCategory={setPostCategory} postCategory={postCategory}/>
       {posts && <HomePostsFeed posts={posts} postCategory={postCategory} />}
     </>
   );

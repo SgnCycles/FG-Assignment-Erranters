@@ -3,6 +3,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPostComments } from "@/lib/supabase/queries";
 import DeleteButton from "../../buttons/DeleteButton";
 import DeleteCommentAction from "@/actions/delete-comment-action";
+import SortingButton from "@/components/buttons/SortingButton";
+import { useState } from "react";
 
 type PostCommentsPropsType = {
   postId: string;
@@ -11,10 +13,12 @@ type PostCommentsPropsType = {
 };
 
 const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
+
+  const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { data: comments } = useQuery({
-    queryKey: ["post-comments", postId],
-    queryFn: () => getPostComments(postId),
+    queryKey: ["post-comments", postId, sortingOrder],
+    queryFn: () => getPostComments(postId, sortingOrder),
   });
   const onDeleteSuccess = () => {
     queryClient.invalidateQueries({
@@ -23,13 +27,17 @@ const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
   };
 
   return (
-    <div>
+    <div className="mt-4">
+      <SortingButton
+        sortingOrder={sortingOrder}
+        setSortingOrder={setSortingOrder}
+      />
       {comments && comments.length > 0 ? (
         comments.map((comment) => (
-          <div key={comment.id} className="flex justify-between">
+          <div key={comment.id} className="flex justify-between mt-4">
             <div>
               <div className="flex gap-4 text-[14px]">
-                <p>by {comment.author.username}</p>
+                <p className="font-semibold">by {comment.author.username}</p>
                 <p>
                   {new Date(comment.created_at).toLocaleString("sv-Se", {
                     dateStyle: "short",
@@ -41,11 +49,10 @@ const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
                 <p>{comment.content}</p>
               </div>
             </div>
-
             {(isAuthor || userId === comment.author.id) && (
               <DeleteButton
                 id={comment.id}
-                type="text"
+                type="icon"
                 deleteFunction={DeleteCommentAction}
                 onDeleteSuccess={onDeleteSuccess}
               />

@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AddCommentAction } from "@/actions/add-comment-action";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
-import AddCommentButton from "@/components/buttons/AddComment";
+import AddCommentButton from "@/components/buttons/AddCommentButton";
 
 const AddCommentForm = ({ postId }: { postId: string }) => {
   

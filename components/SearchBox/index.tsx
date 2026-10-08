@@ -23,7 +23,7 @@ const SearchBox = () => {
 
   return (
     <div className="relative h-full w-full flex justify-center items-center">
-      <div className="border-apple border flex justify-between rounded-2xl mx-4 w-full overflow-hidden">
+      <div className="border-apple hover:border-old-gold border flex justify-between rounded-2xl mx-4 w-full overflow-hidden">
         <input
           placeholder="Search..."
           onChange={handleChange}
@@ -32,7 +32,7 @@ const SearchBox = () => {
         />
         <button
           onClick={handleClick}
-          className="tooltip bg-apple border-0 px-4 cursor-pointer"
+          className="tooltip bg-apple hover:bg-old-gold border-0 px-4 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

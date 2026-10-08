@@ -1,10 +1,10 @@
+import GoBackButton from "@/components/buttons/GoBackButton";
 import ErrorMessage from "@/components/ErrorMessage";
 import Post from "@/components/posts/FullPost";
 import { getSinglePost } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
-
   const { slug } = await params;
   const supabase = await createClient();
   const {
@@ -22,30 +22,17 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <main className="grow flex flex-col items-between bg-mineral-green">
-      <div className="w-full ml-4">
-        <button className="flex font-semibold text-ecru-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#faf9f2"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-arrow-left-to-line preview-icon"
-          >
-            <path d="M3 19V5" />
-            <path d="m13 6-6 6 6 6" />
-            <path d="M7 12h14" />
-          </svg>
-          Go back
-        </button>
+      <div className="w-full pl-4">
+        <GoBackButton />
       </div>
       <div className="grow flex justify-center items-center">
         {data && (
-          <Post {...data} username={data.author.username} isAuthor={isAuthor} userId={user?.id || null}/>
+          <Post
+            {...data}
+            username={data.author.username}
+            isAuthor={isAuthor}
+            userId={user?.id || null}
+          />
         )}
       </div>
     </main>
