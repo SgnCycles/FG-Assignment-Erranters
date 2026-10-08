@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import uploadImage from "@/lib/supabase/uploadPostImage";
 
 export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
+
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
   const {
@@ -14,29 +15,41 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized access!");
 
-  const imageFile = postdata.images?.get("image");
+  const imageFiles = postdata.images?.getAll("image");
 
-  if (
-    !(imageFile instanceof File) &&
-    imageFile !== null &&
-    imageFile !== "undefined"
-  ) {
-    throw new Error("Image is not in a valid format");
-  }
-
-  const imageUrl =
-    imageFile && imageFile !== "undefined"
-      ? await uploadImage(imageFile)
-      : null;
+  const imageUrls = imageFiles?.filter(
+    (file): file is File => file instanceof File,
+  ).length
+    ? await Promise.all(
+        imageFiles
+          .filter((file): file is File => file instanceof File)
+          .map((file) => uploadImage(file)),
+      )
+    : [];
 
   let slug_id = crypto.randomUUID().slice(0, 8);
   const slug = `${slugify(parsedData.title)}-${slug_id}`;
-  const { data, error } = await supabase.from("Posts").insert({
-    ...parsedData,
-    slug: slug,
-    images: imageUrl,
-    author: user.id,
-  });
+  const { images, ...postData } = parsedData;
+  const { data, error } = await supabase
+    .from("Posts")
+    .insert({
+      ...postData,
+      slug: slug,
+      author: user.id,
+    })
+    .select("id")
+    .single()
+    .throwOnError();
+
+  if (imageUrls.length > 0) {
+    const postImages = imageUrls.map((imageUrl, index) => ({
+      post_id: data.id,
+      image_url: imageUrl,
+      position: index,
+    }));
+
+    await supabase.from("PostImages").insert(postImages).throwOnError();
+  }
 
   if (error) console.log(error);
   revalidatePath("/");

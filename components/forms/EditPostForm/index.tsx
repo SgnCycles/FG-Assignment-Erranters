@@ -8,14 +8,16 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-const EditPageForm = ({
+const EditPostForm = ({
   initialValues,
   postId,
 }: {
   initialValues: Pick<
     Tables<"Posts">,
-    "title" | "content" | "images" | "category" | "post_type"
-  >;
+    "title" | "content" | "category" | "post_type" | "price"
+  > & {
+    PostImages: Pick<Tables<"PostImages">, "id" | "image_url" | "position">[];
+  };
   postId: string;
 }) => {
   // const postImageSchema = postSchema
@@ -39,7 +41,6 @@ const EditPageForm = ({
     defaultValues: {
       title: initialValues.title,
       content: initialValues.content || undefined,
-      images: initialValues.images || undefined,
       category: initialValues.category,
       post_type: initialValues.post_type,
     },
@@ -54,14 +55,16 @@ const EditPageForm = ({
       <form
         className="w-lg mx-auto"
         onSubmit={handleSubmit((values) => {
-          let imageForm = undefined;
+          let imageForm: FormData | undefined = undefined;
           if (
             values.images &&
             typeof values.images !== "string" &&
             values.images.length > 0
           ) {
             imageForm = new FormData();
-            imageForm.append("images", values.images[0]);
+            Array.from(values.images).forEach((image) => {
+              imageForm?.append("image", image);
+            });
           }
           mutate({
             postdata: {
@@ -70,6 +73,7 @@ const EditPageForm = ({
               images: imageForm,
               category: values.category,
               post_type: values.post_type,
+              price: values.price,
             },
             postId,
           });
@@ -80,13 +84,19 @@ const EditPageForm = ({
         {errors.title && <ErrorMessage error={errors.title.message!} />}
         <label htmlFor="content">Add content (optional)</label>
         <textarea className="input" {...register("content")}></textarea>
-        {initialValues.images && (
+        {initialValues.PostImages?.length > 0 && (
           <div>
-            <img src={initialValues.images} alt={initialValues.title} />
+            {initialValues.PostImages.map((image) => (
+              <img
+                key={image.id}
+                src={image.image_url}
+                alt={initialValues.title}
+              />
+            ))}
           </div>
         )}
         <label htmlFor="image">Update the image</label>
-        <input className="input" type="file" {...register("images")} />
+        <input className="input" type="file" multiple {...register("images")} />
         {errors.images && <ErrorMessage error={errors.images.message!} />}
         <button className="button-secondary">Update</button>
         {error && <ErrorMessage error={error.message} />}
@@ -95,4 +105,4 @@ const EditPageForm = ({
   );
 };
 
-export default EditPageForm;
+export default EditPostForm;

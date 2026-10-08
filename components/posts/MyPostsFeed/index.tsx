@@ -3,7 +3,7 @@ import { getMyPosts, MyPostsType } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
-import MyPost from "../MyPost";
+import MyPost from "@/components/posts/MyPost";
 
 type MyPostsFeedProps = {
   posts: MyPostsType;

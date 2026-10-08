@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useMutation } from "@tanstack/react-query";
 import EditUserProfile from "@/actions/edit-user-profile-action";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
 
 const UserProfileForm = ({
   initialValues,

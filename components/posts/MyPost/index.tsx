@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import EditButton from "../../buttons/EditButton";
-import DeleteButton from "../../buttons/DeleteButton";
+import EditButton from "@/components/buttons/EditButton";
+import DeleteButton from "@/components/buttons/DeleteButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -10,9 +10,13 @@ type MyPostPropsType = {
   slug: string;
   title: string;
   category: string;
-  images: string | null;
   username: string;
   created_at: string;
+  PostImages: {
+    id: string;
+    image_url: string;
+    position: number;
+  }[];
 };
 
 const MyPost = ({ ...post }: MyPostPropsType) => {

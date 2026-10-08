@@ -16,7 +16,7 @@ const EditPost = async ({
 }) => {
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
-  const imageFile = postdata.images?.get("image");
+  const imageFiles = postdata.images?.getAll("image");
 
   const { data: post, error } = await supabase
     .from("Posts")
@@ -26,23 +26,31 @@ const EditPost = async ({
 
   if (!post) throw new Error("The post does not exist!");
 
-  let imageUrl;
+  if (typeof imageFiles !== "undefined") {
+    const files = imageFiles.filter(
+      (file): file is File => file instanceof File,
+    );
 
-  if (typeof imageFile !== "undefined") {
-    if (!(imageFile instanceof File) && imageFile !== null) {
-      throw Error("Image is not in a valid format!");
+    if (files.length > 0) {
+      const imageUrls = await Promise.all(
+        files.map((file) => uploadImage(file)),
+      );
+      const postImages = imageUrls.map((imageUrl, index) => ({
+        post_id: postId,
+        image_url: imageUrl,
+        position: index,
+      }));
+      await supabase.from("PostImages").insert(postImages).throwOnError();
     }
-    imageUrl = imageFile ? await uploadImage(imageFile) : null;
-  } else {
-    imageUrl = post.images;
   }
+
+  const { images, ...postData } = parsedData;
 
   const { data: updatedPost } = await supabase
     .from("Posts")
     .update({
-      ...parsedData,
+      ...postData,
       slug: slugify(parsedData.title),
-      images: imageUrl,
     })
     .eq("id", postId)
     .select("slug")

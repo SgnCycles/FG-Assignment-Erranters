@@ -1,6 +1,6 @@
 import Link from "next/link";
-import SearchBox from "../SearchBox";
-import NavMenu from "../NavMenu";
+import SearchBox from "@/components/SearchBox";
+import NavMenu from "@/components/NavMenu";
 
 const Header = ({ username }: { username?: string }) => {
   return (

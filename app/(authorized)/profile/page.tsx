@@ -1,4 +1,4 @@
-import UserProfileForm from "@/components/UserProfileForm";
+import UserProfileForm from "@/components/forms/UserProfileForm";
 import { getUserProfile } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 

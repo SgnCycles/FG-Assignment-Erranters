@@ -1,7 +1,7 @@
 import { getSinglePost } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 import { redirect } from "next/navigation";
-import EditPageForm from "./form";
+import EditPostForm from "@/components/forms/EditPostForm";
 
 const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   
@@ -22,11 +22,12 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
       {data && (
         <div>
           <h1>{`Edit: ${data.title}`}</h1>
-          <EditPageForm
+          <EditPostForm
             initialValues={{
               title: data.title,
               content: data.content,
-              images: data.images,
+              price: data.price,
+              PostImages: data.PostImages,
               category: data.category,
               post_type: data.post_type,
             }}

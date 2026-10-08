@@ -1,5 +1,5 @@
 import HomepagePoster from "@/components/HomepagePoster";
-import LogInForm from "@/components/LogInForm";
+import LogInForm from "@/components/forms/LogInForm";
 
 export default function Home() {
   return (

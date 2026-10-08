@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import HomePostsFeed from "../HomePostsFeed";
-import PostPageSidebar from "../PostPageSidebar";
+import HomePostsFeed from "@/components/posts/HomePostsFeed";
+import PostPageSidebar from "@/components/posts/PostPageSidebar";
 import { HomePostsType } from "@/lib/supabase/queries";
 
 type PostsSectionPropsType = {

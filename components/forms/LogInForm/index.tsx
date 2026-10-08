@@ -5,7 +5,7 @@ import { LogIn } from "@/actions/login-action";
 import { logInSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
 import Link from "next/link";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";

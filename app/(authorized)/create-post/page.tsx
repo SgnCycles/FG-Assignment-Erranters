@@ -2,10 +2,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { CreatePost } from "@/actions/create-post-action";
 import { useRouter } from "next/navigation";
-import CreatePostForm, { type FormValues } from "@/components/posts/CreatePostForm";
+import CreatePostForm, {
+  type FormValues,
+} from "@/components/forms/CreatePostForm";
 
 const CreatePostPage = () => {
-
   const router = useRouter();
   const { mutate, error, isPending } = useMutation({
     mutationFn: CreatePost,
@@ -16,7 +17,9 @@ const CreatePostPage = () => {
   const handleCreatePost = (values: FormValues) => {
     const imageForm = new FormData();
     if (values.image) {
-      imageForm.append("image", values.image[0]);
+      Array.from(values.image).forEach((image) => {
+        imageForm.append("image", image);
+      });
     }
     mutate({
       title: values.title,
@@ -24,6 +27,7 @@ const CreatePostPage = () => {
       images: imageForm,
       category: values.category,
       post_type: values.post_type,
+      price: values.price,
     });
   };
 

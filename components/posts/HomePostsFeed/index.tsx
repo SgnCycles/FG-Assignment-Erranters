@@ -3,7 +3,7 @@ import { getHomePosts, HomePostsType } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
-import ShortPost from "../ShortPost";
+import ShortPost from "@/components/posts/ShortPost";
 
 type HomePostsFeedPropsType = {
   posts: HomePostsType;

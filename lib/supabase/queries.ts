@@ -7,7 +7,7 @@ export const getHomePosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, images, created_at, category, post_type, author("id", "username")',
+      'id, title, slug, created_at, category, post_type, author("id", "username"), PostImages("id", "image_url", "position")',
     )
     .order("created_at", { ascending: sortingOrder });
 };
@@ -19,7 +19,7 @@ export const getMyPosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, images, created_at, category, post_type, author("id", "username")',
+      'id, title, slug, created_at, category, post_type, author("id", "username"), PostImages("id", "image_url", "position")',
     )
     .eq("author", userId)
     .order("created_at", { ascending: sortingOrder });
@@ -30,8 +30,7 @@ export const getSinglePost = async (slug: string) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, slug, title, images, content, created_at, category, post_type, author("id", "username")',
-    )
+      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username"), PostImages("id", "image_url", "position")')
     .eq("slug", slug)
     .single();
 };

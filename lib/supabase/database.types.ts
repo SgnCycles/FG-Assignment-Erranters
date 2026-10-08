@@ -215,6 +215,38 @@ export type Database = {
           },
         ]
       }
+      PostImages: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          position: number
+          post_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          position?: number
+          post_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          position?: number
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "PostImages_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "Posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       Posts: {
         Row: {
           author: string
@@ -222,7 +254,6 @@ export type Database = {
           content: string
           created_at: string
           id: string
-          images: string | null
           latitude: number | null
           location: string | null
           longitude: number | null
@@ -238,7 +269,6 @@ export type Database = {
           content: string
           created_at?: string
           id?: string
-          images?: string | null
           latitude?: number | null
           location?: string | null
           longitude?: number | null
@@ -254,7 +284,6 @@ export type Database = {
           content?: string
           created_at?: string
           id?: string
-          images?: string | null
           latitude?: number | null
           location?: string | null
           longitude?: number | null

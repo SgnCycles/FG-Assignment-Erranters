@@ -5,7 +5,7 @@ import { SignUp } from "@/actions/signup-action";
 import { signUpSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
 import Link from "next/link";
 
 const SignUpForm = () => {
@@ -32,7 +32,9 @@ const SignUpForm = () => {
         className="flex flex-col max-w-md m-auto text-left bg-old-gold rounded-2xl p-8"
         onSubmit={handleSubmit((values) => mutate(values))}
       >
-        <label className="label" htmlFor="email">Enter a Username:</label>
+        <label className="label" htmlFor="email">
+          Enter a Username:
+        </label>
         <input
           className="input"
           {...register("username", {
@@ -41,7 +43,9 @@ const SignUpForm = () => {
           placeholder="Username:"
         />
         {errors.username && <ErrorMessage error={errors.username.message!} />}
-        <label className="label" htmlFor="email">Enter your Email:</label>
+        <label className="label" htmlFor="email">
+          Enter your Email:
+        </label>
         <input
           className="input"
           {...register("email", {
@@ -50,7 +54,9 @@ const SignUpForm = () => {
           placeholder="Email:"
         />
         {errors.email && <ErrorMessage error={errors.email.message!} />}
-        <label className="label" htmlFor="password">Enter your Password:</label>
+        <label className="label" htmlFor="password">
+          Enter your Password:
+        </label>
         <input
           className="input"
           {...register("password", {
@@ -60,7 +66,9 @@ const SignUpForm = () => {
           type="password"
         />
         {errors.password && <ErrorMessage error={errors.password.message!} />}
-        <label className="label" htmlFor="confirmPassword">Confirm Your Password:</label>
+        <label className="label" htmlFor="confirmPassword">
+          Confirm Your Password:
+        </label>
         <input
           className="input"
           {...register("confirmPassword", {
@@ -81,7 +89,9 @@ const SignUpForm = () => {
       <div className="flex justify-center mt-4 text-ecru-white">
         <Link href="/">
           Already have any account?{" "}
-          <span className="text-apple hover:text-old-gold font-bold">Log in here</span>
+          <span className="text-apple hover:text-old-gold font-bold">
+            Log in here
+          </span>
         </Link>
       </div>
     </div>

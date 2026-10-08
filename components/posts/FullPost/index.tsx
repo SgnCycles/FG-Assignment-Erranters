@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import DeleteButton from "../../buttons/DeleteButton";
-import UpdateButton from "../../buttons/EditButton";
+import DeleteButton from "@/components/buttons/DeleteButton";
+import UpdateButton from "@/components/buttons/EditButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/comments/AddCommentForm";
@@ -11,27 +11,37 @@ type PostProps = {
   slug: string;
   title: string;
   content: string;
-  images: string | null;
   username: string;
   isAuthor: boolean;
   created_at: string;
-  userId: string | null
+  userId: string | null;
+  PostImages: {
+    id: string;
+    image_url: string;
+    position: number;
+  }[];
 };
 
-const Post = ({ ...data}: PostProps) => {
-
+const Post = ({ ...data }: PostProps) => {
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
-  
+
   return (
-    <div className="flex flex-col border-2 border-apple p-8 rounded-2xl grow bg-blue-400">
+    <div className="flex flex-col h-full justify-between p-8 rounded-2xl grow bg-mineral-green text-ecru-white">
       {data.title && <h1 className="heading">{data.title}</h1>}
-      {!data.images && <p>No Images for this post</p>}
-      {data.images && (
-        <div>
-          <img src={data.images} alt="" />
+      {data.PostImages.length === 0 && null}
+      {data.PostImages.length > 0 && (
+        <div className="bg-yellow-300 flex justify-around">
+          {data.PostImages.map((image) => (
+            <img
+              key={image.id}
+              src={image.image_url}
+              alt={data.title}
+              className="h-50 w-auto"
+            />
+          ))}
         </div>
       )}
       {data.content && <p>{data.content}</p>}
@@ -54,8 +64,12 @@ const Post = ({ ...data}: PostProps) => {
           />
         </div>
       )}
-      <PostComments postId={data.id} isAuthor={data.isAuthor} userId={data.userId}/>
-      {data.userId && <AddCommentForm postId={data.id}/>}
+      <PostComments
+        postId={data.id}
+        isAuthor={data.isAuthor}
+        userId={data.userId}
+      />
+      {data.userId && <AddCommentForm postId={data.id} />}
     </div>
   );
 };

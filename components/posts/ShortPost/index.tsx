@@ -5,9 +5,13 @@ type ShortPostPropsType = {
   slug: string;
   title: string;
   category: string;
-  images: string | null;
   username: string;
   created_at: string;
+  PostImages: {
+    id: string;
+    image_url: string;
+    position: number;
+  }[];
 };
 
 const ShortPost = ({ ...post }: ShortPostPropsType) => {

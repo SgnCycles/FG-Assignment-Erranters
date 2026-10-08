@@ -59,7 +59,12 @@ export const postSchema = z.object({
   content: z.string(),
   images: z.instanceof(FormData).optional(),
   category: z.string().min(1, "Choose a category"),
+  price: z.number().optional(),
+  location: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
   post_type: z.string().min(1, "Choose the type of the post"),
+  sold: z.boolean().optional(),
 });
 
 export const userProfileSchema = z.object({

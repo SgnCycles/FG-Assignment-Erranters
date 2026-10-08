@@ -1,6 +1,7 @@
 import ErrorMessage from "@/components/ErrorMessage";
 import { postSchema } from "@/schemas/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -28,9 +29,22 @@ const CreatePostForm = ({
 }: CreatePostFormProps) => {
   const {
     register,
+    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(postImageSchema) });
+
+  const postCategory = watch("category");
+  const postType = watch("post_type");
+
+  useEffect(() => {
+    if (postCategory === "Hiking" || postCategory === "Cycling") {
+      setValue("post_type", "Post");
+    } else if (postCategory === "Marketplace") {
+      setValue("post_type", "Sell");
+    }
+  }, [postCategory, setValue]);
 
   return (
     <form
@@ -54,14 +68,14 @@ const CreatePostForm = ({
           <option value="" disabled>
             Type
           </option>
-          <option value="posts">Post</option>
-          <option value="sell">Sell</option>
-          <option value="sell">Buy</option>
+          <option value="Post">Post</option>
+          <option value="Sell">Sell</option>
+          <option value="Buy">Buy</option>
         </select>
       </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="p-4">
-          <label htmlFor="title">Add a title</label>
+          <label htmlFor="title">Add a title:</label>
           <input
             {...register("title")}
             className="create-post-input p-4"
@@ -69,22 +83,41 @@ const CreatePostForm = ({
           {errors.title && <ErrorMessage error={errors.title.message!} />}
         </div>
         <div className="p-4">
-          <label htmlFor="content">Add content</label>
+          <label htmlFor="content">Add content:</label>
           <textarea
             {...register("content")}
             className="create-post-input min-h-75 p-4"
           ></textarea>
+        </div>
+        {postCategory === "Marketplace" &&
+        (postType === "Sell" || postType === "Buy") ? (
+          <div className="p-4">
+            <label htmlFor="price">Add price:</label>
+            <input
+              className="input text-outer-space cursor-pointer"
+              type="number"
+              {...register("price")}
+            />
+          </div>
+        ) : null}
+        <div className="p-4">
+          <label htmlFor="location">Add location:</label>
+          <input
+            {...register("location")}
+            className="input text-outer-space cursor-pointer"
+            type="text"
+          ></input>
         </div>
         <div className="p-4 flex flex-col">
           <label htmlFor="image">Add an image (optional)</label>
           <input
             className="input text-outer-space cursor-pointer"
             type="file"
+            multiple
             {...register("image")}
           />
           {errors.image && <ErrorMessage error={errors.image.message!} />}
         </div>
-
         <div className="flex justify-end pr-4">
           <button className="button mb-4">
             {isPending ? "Publishing post..." : "Publish"}
