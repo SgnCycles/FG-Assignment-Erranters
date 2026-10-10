@@ -7,6 +7,11 @@ import { useMutation } from "@tanstack/react-query";
 import EditUserProfile from "@/actions/edit-user-profile-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "@/components/ErrorMessage";
+import { FaXmark } from "react-icons/fa6";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import DeleteProfileImageAction from "@/actions/delete-profile-image-action";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const UserProfileForm = ({
   initialValues,
@@ -18,6 +23,10 @@ const UserProfileForm = ({
   >;
   userId: string;
 }) => {
+  const [profileImagePreview, setProfileImagePreview] = useState<string | null>(
+    initialValues.profile_image,
+  );
+
   const userProfileImageSchema = userProfileSchema
     .omit({ profile_image: true })
     .extend({
@@ -45,8 +54,19 @@ const UserProfileForm = ({
     },
   });
 
+  const imageUrl = initialValues.profile_image
+    ? initialValues.profile_image.split("/Profile-Images/")[1]
+    : null;
+
   const { mutate, error } = useMutation({
     mutationFn: EditUserProfile,
+    onSuccess: () => {
+      toast.success("Profile updated");
+    },
+  });
+
+  const { mutate: deleteProfilImage, error: deleteError } = useMutation({
+    mutationFn: DeleteProfileImageAction,
   });
 
   return (
@@ -78,16 +98,63 @@ const UserProfileForm = ({
           });
         })}
       >
-        {initialValues.profile_image && (
-          <div>
+        {profileImagePreview ? (
+          <div className="h-40 w-40 relative">
             <img
-              src={initialValues.profile_image}
+              src={profileImagePreview}
               alt={initialValues.username}
+              className="h-full w-full object-cover rounded-full"
             />
+            <button
+              type="button"
+              className="w-5 h-5 bg-red-400 absolute right-0"
+              onClick={() => {
+                setProfileImagePreview(null);
+                if (imageUrl) {
+                  deleteProfilImage({ image: imageUrl, userId });
+                }
+              }}
+            >
+              <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
+            </button>
+          </div>
+        ) : (
+          <div className="h-40 w-40 relative rounded-full">
+            <img
+              src="/images/profileImage_placeholder.png"
+              alt={initialValues.username}
+              className="h-full w-full object-cover rounded-full"
+            />
+            <button
+              type="button"
+              className="w-7 h-7 absolute bottom-0 right-5"
+              // onClick={() => {
+              //   setProfileImagePreview(null);
+              //   if (imageUrl) {
+              //     deleteProfilImage({ image: imageUrl, userId });
+              //   }
+              // }}
+            >
+              <IoMdAddCircleOutline className="w-full h-full cursor-pointer fill-old-gold bg-apple rounded-full" />
+            </button>
           </div>
         )}
-        <label htmlFor="image">Update the image</label>
-        <input className="input" type="file" {...register("profile_image")} />
+        <label htmlFor="image" className="invisible">
+          Update the image
+        </label>
+        <input
+          className="input"
+          type="file"
+          {...register("profile_image", {
+            onChange: (e) => {
+              const imageFile = e.target.files?.[0];
+
+              if (imageFile) {
+                setProfileImagePreview(URL.createObjectURL(imageFile));
+              }
+            },
+          })}
+        />
         {errors.profile_image && (
           <ErrorMessage error={errors.profile_image.message!} />
         )}
