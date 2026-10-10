@@ -9,6 +9,10 @@ import { useForm, Controller } from "react-hook-form";
 import FileDropZone from "@/components/FileDropZone";
 import type { ImageFile } from "@/components/FileDropZone/types";
 import * as z from "zod";
+import { FaXmark } from "react-icons/fa6";
+import DeletePostImagesAction from "@/actions/delete-post-images-action";
+import { useState } from "react";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 const EditPostForm = ({
   initialValues,
@@ -22,6 +26,9 @@ const EditPostForm = ({
   };
   postId: string;
 }) => {
+
+    // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
+
   const postImageSchema = postSchema.omit({ images: true }).extend({
     image: z.array(z.custom<ImageFile>()).optional(),
   });
@@ -45,10 +52,14 @@ const EditPostForm = ({
     mutationFn: EditPost,
   });
 
+  const { mutate: deletePostImage, error: deletePostImageError } = useMutation({
+    mutationFn: DeletePostImagesAction,
+  });
+
   return (
-    <div>
+    <div className="flex flex-col">
       <form
-        className="w-lg mx-auto"
+        className="w-full p-4"
         onSubmit={handleSubmit((values) => {
           let imageForm: FormData | undefined = undefined;
 
@@ -72,22 +83,17 @@ const EditPostForm = ({
           });
         })}
       >
-        <label htmlFor="title">Add a title</label>
-        <input className="input" {...register("title")}></input>
-        {errors.title && <ErrorMessage error={errors.title.message!} />}
-        <label htmlFor="content">Add content (optional)</label>
-        <textarea className="input" {...register("content")}></textarea>
-        {initialValues.PostImages?.length > 0 && (
-          <div>
-            {initialValues.PostImages.map((image) => (
-              <img
-                key={image.id}
-                src={image.image_url}
-                alt={initialValues.title}
-              />
-            ))}
-          </div>
-        )}
+        <div className="flex flex-col">
+          <label htmlFor="title" className="label">
+            Add a title
+          </label>
+          <input className="input" {...register("title")}></input>
+          {errors.title && <ErrorMessage error={errors.title.message!} />}
+        </div>
+        <div className="flex flex-col h-full">
+          <label htmlFor="content">Add content (optional)</label>
+          <textarea className="input" {...register("content")}></textarea>
+        </div>
         <div className="p-4 flex flex-col">
           <Controller
             name="image"
@@ -98,10 +104,37 @@ const EditPostForm = ({
           />
           {errors.image && <ErrorMessage error={errors.image.message!} />}
         </div>
-        <button className="button-secondary">
-          {isPending ? "Updating the post..." : "Update"}
-        </button>
-        {error && <ErrorMessage error={error.message} />}
+        <ul className="flex flex-wrap gap-2">
+          {initialValues.PostImages &&
+            initialValues.PostImages.map((image, index) => (
+              <li className="flex h-30 w-30 relative rounded-md" key={index}>
+                <div className="h-full w-full">
+                  <img
+                    className="h-full w-full object-cover rounded-md"
+                    key={image.id}
+                    src={image.image_url}
+                    alt={initialValues.title}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="w-5 h-5 bg-red-400 absolute right-0"
+                  onClick={() => deletePostImage({
+                    image: image.image_url!,
+                    postId: image.id,
+                  })}
+                >
+                  <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
+                </button>
+              </li>
+            ))}
+        </ul>
+        <div className="w-full flex justify-end">
+          <button className="button">
+            {isPending ? "Updating the post..." : "Update"}
+          </button>
+          {error && <ErrorMessage error={error.message} />}
+        </div>
       </form>
     </div>
   );

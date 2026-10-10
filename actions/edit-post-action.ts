@@ -58,7 +58,7 @@ const EditPost = async ({
     .throwOnError();
 
   revalidatePath("/");
-  redirect(`/${updatedPost.slug}`);
+  redirect(`/post/${updatedPost.slug}`);
 };
 
 export default EditPost;

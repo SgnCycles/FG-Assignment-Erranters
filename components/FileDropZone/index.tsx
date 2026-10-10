@@ -12,7 +12,12 @@ const focusedStyle = { borderColor: "#2196f3" };
 const acceptStyle = { borderColor: "#65ab32" };
 const rejectStyle = { borderColor: "#ff1744" };
 
-const FileDropZone = ({ value = [], onChange }: FileDropZonePropsType) => {
+const FileDropZone = ({
+  value = [],
+  onChange,
+  // initialImages,
+  // removePostImage,
+}: FileDropZonePropsType) => {
   const onDrop = useCallback(
     (acceptedImageFiles: File[]) => {
       if (acceptedImageFiles.length) {
@@ -72,9 +77,27 @@ const FileDropZone = ({ value = [], onChange }: FileDropZonePropsType) => {
         )}
       </div>
       <ul className="flex flex-wrap gap-2">
+        {/* {initialImages && initialImages.map((image, index) => (
+          <li key={index} className="flex h-30 w-30 relative rounded-md">
+            <div className="h-full w-full">
+              <img
+                className="h-full w-full object-cover rounded-md"
+                src={image.image_url ?? ""}
+                alt=""
+              />
+            </div>
+            <button
+              type="button"
+              className="w-5 h-5 bg-red-400 absolute right-0"
+              onClick={() => removePostImage?.(image.id)}
+            >
+              <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
+            </button>
+          </li>
+        ))} */}
         {value &&
           value.map((file, index) => (
-            <li key={index} className=" flex h-30 w-30 relative rounded-md bg-apple">
+            <li key={index} className="flex h-30 w-30 relative rounded-md">
               <div className="h-full w-full">
                 <img
                   className="h-full w-full object-cover rounded-md"

@@ -95,7 +95,7 @@
 }
 
 .label {
-  @apply font-bold;
+  @apply font-bold font-cantarell;
 }
 
 .select-button-category {
