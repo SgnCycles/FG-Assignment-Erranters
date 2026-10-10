@@ -1,18 +1,13 @@
 "use client";
-import { getMyPosts, MyPostsType } from "@/lib/supabase/queries";
+import { getMyPosts } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
 import MyPost from "@/components/posts/MyPost";
 import SortingButton from "@/components/buttons/SortingButton";
+import { MyPostsFeedPropsType } from "./types";
 
-type MyPostsFeedProps = {
-  posts: MyPostsType;
-  userId: string;
-  postCategory?: string;
-};
-
-const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
+const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedPropsType) => {
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({

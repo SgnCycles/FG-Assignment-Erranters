@@ -2,11 +2,7 @@
 import { useState } from "react";
 import HomePostsFeed from "@/components/posts/HomePostsFeed";
 import PostPageSidebar from "@/components/posts/PostPageSidebar";
-import { HomePostsType } from "@/lib/supabase/queries";
-
-type PostsSectionPropsType = {
-  posts: HomePostsType | null;
-};
+import { PostsSectionPropsType } from "./types";
 
 const PostsSection = ({ posts }: PostsSectionPropsType) => {
   const [postCategory, setPostCategory] = useState<string>("All");

@@ -1,5 +1,6 @@
 import ErrorMessage from "@/components/ErrorMessage";
-import FileDropZone, { ImageFile } from "@/components/FileDropZone";
+import FileDropZone from "@/components/FileDropZone";
+import type { ImageFile } from "@/components/FileDropZone/types";
 import { postSchema } from "@/schemas/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
@@ -12,7 +13,7 @@ const postImageSchema = postSchema.omit({ images: true }).extend({
 
 export type FormValues = z.infer<typeof postImageSchema>;
 
-type CreatePostFormProps = {
+type CreatePostFormPropsType = {
   handleCreatePost: (values: FormValues) => void;
   error: Error | null;
   isPending: boolean;
@@ -22,7 +23,7 @@ const CreatePostForm = ({
   handleCreatePost,
   error,
   isPending,
-}: CreatePostFormProps) => {
+}: CreatePostFormPropsType) => {
   const {
     register,
     control,

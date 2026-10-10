@@ -1,13 +1,8 @@
 "use client";
 import { useState } from "react";
 import PostPageSidebar from "@/components/posts/PostPageSidebar";
-import { HomePostsType } from "@/lib/supabase/queries";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
-
-type MyPostsSectionPropsType = {
-  posts: HomePostsType | null;
-  userId: string;
-};
+import { MyPostsSectionPropsType } from "./types";
 
 const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
   

@@ -1,7 +1,4 @@
-type SortingButtonPropsType = {
-  sortingOrder: boolean;
-  setSortingOrder: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { SortingButtonPropsType } from "./types";
 
 const SortingButton = ({
   sortingOrder,

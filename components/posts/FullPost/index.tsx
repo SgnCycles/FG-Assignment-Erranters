@@ -6,24 +6,7 @@ import { DeletePostAction } from "@/actions/delete-post-action";
 import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/forms/AddCommentForm";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
-
-type PostPropsType = {
-  id: string;
-  slug: string;
-  title: string;
-  content: string;
-  username: string;
-  userImage: string | null;
-  isAuthor: boolean;
-  created_at: string;
-  userId: string | null;
-  category: string;
-  PostImages: {
-    id: string;
-    image_url: string;
-    position: number;
-  }[];
-};
+import { PostPropsType } from "./types";
 
 const Post = ({ ...data }: PostPropsType) => {
   const router = useRouter();
@@ -39,13 +22,19 @@ const Post = ({ ...data }: PostPropsType) => {
       <div className="w-full flex justify-between">
         <div className="flex">
           {data.userImage ? (
-          <img
-            src={data.userImage}
-            alt="profile user"
-            className="w-10 h-10 rounded-full"
-          />
+            <img
+              src={data.userImage}
+              alt="profile user"
+              className="w-10 h-10 rounded-full"
+            />
           ) : (
-            <div className="h-full w-full bg-gray-600"></div>
+            <div className="h-10 w-10 relative rounded-full">
+              <img
+                src="/images/profileImage_placeholder.png"
+                alt="user placeholder"
+                className="h-full w-full object-cover rounded-full"
+              />
+            </div>
           )}
           <div className="flex gap-2 text-right italic place-self-center ml-2">
             <span>{data.username}</span>

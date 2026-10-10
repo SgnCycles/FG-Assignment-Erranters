@@ -1,21 +1,7 @@
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
 import Link from "next/link";
-
-type ShortPostPropsType = {
-  id: string;
-  slug: string;
-  title: string;
-  category: string;
-  username: string;
-  userImage: string | null;
-  created_at: string;
-  PostImages: {
-    id: string;
-    image_url: string;
-    position: number;
-  }[];
-};
+import { ShortPostPropsType } from "./types";
 
 const ShortPost = ({ ...post }: ShortPostPropsType) => {
   return (
@@ -33,7 +19,13 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
                 className="w-10 h-10 rounded-full"
               />
             ) : (
-              <div className="h-full w-full bg-gray-600"></div>
+              <div className="h-10 w-10 relative rounded-full">
+                <img
+                  src="/images/profileImage_placeholder.png"
+                  alt="user placeholder"
+                  className="h-full w-full object-cover rounded-full"
+                />
+              </div>
             )}
           </div>
           <div className="flex gap-2 text-right italic place-self-center ml-2">
@@ -68,14 +60,14 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-lg">{post.title}</h3>
-        <div className="mb-4">
-          <div className="flex justify-start">
+        <div className="mb-4 flex flex-wrap ">
+          <div className="flex justify-start h-40 w-auto">
             {post.PostImages.map((image) => (
               <img
                 key={image.id}
                 src={image.image_url}
                 alt={post.title}
-                className="h-50 w-auto"
+                className="h-full w-full object-contain bg-no-repeat"
               />
             ))}
           </div>

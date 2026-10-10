@@ -1,7 +1,4 @@
-type PostPageSidebarPropsType = {
-  postCategory: string;
-  setPostCategory: (category: string) => void;
-};
+import { PostPageSidebarPropsType } from "./types";
 
 const PostPageSidebar = ({
   postCategory,

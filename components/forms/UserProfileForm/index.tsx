@@ -69,10 +69,14 @@ const UserProfileForm = ({
     mutationFn: DeleteProfileImageAction,
   });
 
+  if (deleteError) {
+    toast.error("Deleting image failed");
+  }
+
   return (
     <div>
       <form
-        className="flex flex-col"
+        className="h-full text-ecru-white"
         onSubmit={handleSubmit((values) => {
           let imageForm = undefined;
 
@@ -98,80 +102,102 @@ const UserProfileForm = ({
           });
         })}
       >
-        {profileImagePreview ? (
-          <div className="h-40 w-40 relative">
-            <img
-              src={profileImagePreview}
-              alt={initialValues.username}
-              className="h-full w-full object-cover rounded-full"
-            />
-            <button
-              type="button"
-              className="w-5 h-5 bg-red-400 absolute right-0"
-              onClick={() => {
-                setProfileImagePreview(null);
-                if (imageUrl) {
-                  deleteProfilImage({ image: imageUrl, userId });
-                }
-              }}
-            >
-              <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
-            </button>
-          </div>
-        ) : (
-          <div className="h-40 w-40 relative rounded-full">
-            <img
-              src="/images/profileImage_placeholder.png"
-              alt={initialValues.username}
-              className="h-full w-full object-cover rounded-full"
-            />
-            <button
-              type="button"
-              className="w-7 h-7 absolute bottom-0 right-5"
-              // onClick={() => {
-              //   setProfileImagePreview(null);
-              //   if (imageUrl) {
-              //     deleteProfilImage({ image: imageUrl, userId });
-              //   }
-              // }}
-            >
-              <IoMdAddCircleOutline className="w-full h-full cursor-pointer fill-old-gold bg-apple rounded-full" />
-            </button>
-          </div>
-        )}
-        <label htmlFor="image" className="invisible">
-          Update the image
-        </label>
-        <input
-          className="input"
-          type="file"
-          {...register("profile_image", {
-            onChange: (e) => {
-              const imageFile = e.target.files?.[0];
+        <div className="flex">
+          <div className="flex flex-col w-[30%] items-center">
+            <div className="flex flex-col">
+              {profileImagePreview ? (
+                <div className="w-full flex items-center justify-center">
+                  <div className="h-40 w-40 relative place-items-center">
+                    <img
+                      src={profileImagePreview}
+                      alt={initialValues.username}
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                    <button
+                      type="button"
+                      className="w-7 h-7 absolute bottom-0 right-5"
+                      onClick={() => {
+                        setProfileImagePreview(null);
+                        if (imageUrl) {
+                          deleteProfilImage({ image: imageUrl, userId });
+                        }
+                      }}
+                    >
+                      <FaXmark className="w-full h-full cursor-pointer fill-red-400 bg-ecru-white hover:bg-red-400 hover:fill-ecru-white rounded-full" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="h-40 w-40 relative rounded-full">
+                  <img
+                    src="/images/profileImage_placeholder.png"
+                    alt={initialValues.username}
+                    className="h-full w-full object-cover rounded-full"
+                  />
+                  <button
+                    type="button"
+                    className="w-7 h-7 absolute bottom-0 right-5"
+                    onClick={() => {
+                      document.getElementById("add-image")!.click();
+                    }}
+                  >
+                    <IoMdAddCircleOutline className="w-full h-full cursor-pointer fill-old-gold bg-apple hover:bg-old-gold hover:fill-apple rounded-full" />
+                  </button>
+                  <label htmlFor="image" className="hidden">
+                    Update the image
+                  </label>
+                  <input
+                    className="hidden"
+                    id="add-image"
+                    type="file"
+                    {...register("profile_image", {
+                      onChange: (e) => {
+                        const imageFile = e.target.files?.[0];
 
-              if (imageFile) {
-                setProfileImagePreview(URL.createObjectURL(imageFile));
-              }
-            },
-          })}
-        />
-        {errors.profile_image && (
-          <ErrorMessage error={errors.profile_image.message!} />
-        )}
-        <label htmlFor="name">Name</label>
-        <input className="input" {...register("name")}></input>
-        {errors.name && <ErrorMessage error={errors.name.message!} />}
-        <label htmlFor="surname">Surname</label>
-        <input className="input" {...register("surname")}></input>
-        {errors.surname && <ErrorMessage error={errors.surname.message!} />}
-        <label htmlFor="username">Username</label>
-        <input className="input" {...register("username")}></input>
-        {errors.username && <ErrorMessage error={errors.username.message!} />}
-        <label htmlFor="bio">Bio</label>
-        <input className="input" {...register("bio")}></input>
-        <label htmlFor="interests">Interests</label>
-        <input className="input" {...register("interests")}></input>
-        {errors.bio && <ErrorMessage error={errors.bio.message!} />}
+                        if (imageFile) {
+                          setProfileImagePreview(
+                            URL.createObjectURL(imageFile),
+                          );
+                        }
+                      },
+                    })}
+                  />
+                </div>
+              )}
+              {errors.profile_image && (
+                <ErrorMessage error={errors.profile_image.message!} />
+              )}
+            </div>
+            <div className="flex flex-col justify-center w-[80%]">
+              <div className="flex flex-col">
+                <label htmlFor="name">Name</label>
+                <input className="input" {...register("name")}></input>
+                {errors.name && <ErrorMessage error={errors.name.message!} />}
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="surname">Surname</label>
+                <input className="input" {...register("surname")}></input>
+                {errors.surname && (
+                  <ErrorMessage error={errors.surname.message!} />
+                )}
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="username">Username</label>
+                <input className="input" {...register("username")}></input>
+                {errors.username && (
+                  <ErrorMessage error={errors.username.message!} />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col grow ml-10">
+            <label htmlFor="bio">Bio</label>
+            <textarea className="input" {...register("bio")}></textarea>
+            <label htmlFor="interests">Interests</label>
+            <textarea className="input" {...register("interests")}></textarea>
+            {errors.bio && <ErrorMessage error={errors.bio.message!} />}
+          </div>
+        </div>
         <div className="flex justify-end">
           <button className="button">Update Profile</button>
         </div>

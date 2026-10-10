@@ -5,21 +5,7 @@ import DeleteButton from "@/components/buttons/DeleteButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 import { useQueryClient } from "@tanstack/react-query";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
-
-type MyPostPropsType = {
-  id: string;
-  slug: string;
-  title: string;
-  category: string;
-  username: string;
-  userImage: string | null;
-  created_at: string;
-  PostImages: {
-    id: string;
-    image_url: string;
-    position: number;
-  }[];
-};
+import { MyPostPropsType } from "./types";
 
 const MyPost = ({ ...post }: MyPostPropsType) => {
   const queryClient = useQueryClient();
@@ -41,7 +27,13 @@ const MyPost = ({ ...post }: MyPostPropsType) => {
                 className="w-10 h-10 rounded-full"
               />
             ) : (
-              <div className="h-full w-full bg-gray-600"></div>
+              <div className="h-10 w-10 relative rounded-full">
+                <img
+                  src="/images/profileImage_placeholder.png"
+                  alt="user placeholder"
+                  className="h-full w-full object-cover rounded-full"
+                />
+              </div>
             )}
             <div className="flex gap-2 text-right italic place-self-center ml-2">
               <span>{post.username}</span>

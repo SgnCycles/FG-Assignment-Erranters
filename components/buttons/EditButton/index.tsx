@@ -1,12 +1,8 @@
 import Link from "next/dist/client/link";
 import { FaRegEdit } from "react-icons/fa";
+import { EditButtonPropsType } from "./types";
 
-type EditButtonProps = {
-  slug: string;
-  type: "text" | "icon";
-};
-
-const EditButton = ({ slug, type = "text" }: EditButtonProps) => {
+const EditButton = ({ slug, type = "text" }: EditButtonPropsType) => {
   return (
     <button className={type === "icon" ? "action-tooltip" : "button-secondary"}>
       <Link href={`/post/${slug}/edit`}>

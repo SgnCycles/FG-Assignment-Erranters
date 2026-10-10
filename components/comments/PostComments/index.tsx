@@ -5,12 +5,7 @@ import DeleteButton from "../../buttons/DeleteButton";
 import DeleteCommentAction from "@/actions/delete-comment-action";
 import SortingButton from "@/components/buttons/SortingButton";
 import { useState } from "react";
-
-type PostCommentsPropsType = {
-  postId: string;
-  isAuthor: boolean;
-  userId: string | null;
-};
+import { PostCommentsPropsType } from "./types";
 
 const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
 

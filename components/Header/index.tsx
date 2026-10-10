@@ -8,7 +8,7 @@ const Header = ({ username }: { username?: string }) => {
       <div className="w-full grid grid-cols-3 gap-2">
         <div className="flex justify-start">
           <Link className="logo-button group" href="/feed">
-            <span className="group-hover:text-apple">Errant</span>
+            <span className="group-hover:text-apple grid items-center">Errant</span>
             <span className="grid items-center text-apple">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const Header = ({ username }: { username?: string }) => {
                 <circle cx="6" cy="12" r="3" />
               </svg>
             </span>
-            <span className="text-apple group-hover:text-ecru-white">ers</span>
+            <span className="text-apple group-hover:text-ecru-white grid items-center">ers</span>
           </Link>
         </div>
         <div className="">

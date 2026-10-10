@@ -2,20 +2,14 @@
 import { FaTrashCan } from "react-icons/fa6";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-
-type DeleteButtonProps = {
-  id: string;
-  type: "text" | "icon";
-  deleteFunction: (id: string) => Promise<unknown>;
-  onDeleteSuccess?: () => void;
-};
+import { DeleteButtonPropsType } from "./types";
 
 const DeleteButton = ({
   id,
   type = "text",
   deleteFunction,
   onDeleteSuccess,
-}: DeleteButtonProps) => {
+}: DeleteButtonPropsType) => {
   const { mutate } = useMutation({
     mutationFn: deleteFunction,
     onSuccess: () => {
