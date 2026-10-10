@@ -32,6 +32,8 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
             username={data.author.username}
             isAuthor={isAuthor}
             userId={user?.id || null}
+            userImage={data.author.profile_image || null}
+
           />
         )}
       </div>

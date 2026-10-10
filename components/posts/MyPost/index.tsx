@@ -12,6 +12,7 @@ type MyPostPropsType = {
   title: string;
   category: string;
   username: string;
+  userImage: string | null;
   created_at: string;
   PostImages: {
     id: string;
@@ -29,15 +30,19 @@ const MyPost = ({ ...post }: MyPostPropsType) => {
   };
 
   return (
-    <div className="block border border-apple  bg-ecru-white rounded-2xl p-4 m-4">
-      <Link href={`/${post.slug}`}>
+    <div className="block border border-apple bg-ecru-white rounded-2xl p-4 m-4 text-outer-space">
+      <Link href={`/post/${post.slug}`}>
         <div className="w-full flex justify-between">
           <div className="flex">
-            <img
-              src="/images/profile_test.jpg"
-              alt="profile user"
-              className="w-10 h-10 rounded-full"
-            />
+            {post.userImage ? (
+              <img
+                src={post.userImage}
+                alt="profile user"
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <div className="h-full w-full bg-gray-600"></div>
+            )}
             <div className="flex gap-2 text-right italic place-self-center ml-2">
               <span>{post.username}</span>
               <span className="place-self-center">

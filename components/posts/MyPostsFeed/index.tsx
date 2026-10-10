@@ -9,7 +9,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 type MyPostsFeedProps = {
   posts: MyPostsType;
   userId: string;
-  postCategory: string;
+  postCategory?: string;
 };
 
 const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
@@ -37,7 +37,7 @@ const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedProps) => {
         setSortingOrder={setSortingOrder}
       />
       {filteredPosts.map((post, index) => (
-        <MyPost key={index} {...post} username={post.author.username} />
+        <MyPost key={index} {...post} username={post.author.username} userImage={post.author.profile_image}/>
       ))}
     </div>
   );

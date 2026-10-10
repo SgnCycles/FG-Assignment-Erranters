@@ -7,12 +7,13 @@ import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/forms/AddCommentForm";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
 
-type PostProps = {
+type PostPropsType = {
   id: string;
   slug: string;
   title: string;
   content: string;
   username: string;
+  userImage: string | null;
   isAuthor: boolean;
   created_at: string;
   userId: string | null;
@@ -24,7 +25,7 @@ type PostProps = {
   }[];
 };
 
-const Post = ({ ...data }: PostProps) => {
+const Post = ({ ...data }: PostPropsType) => {
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -37,11 +38,15 @@ const Post = ({ ...data }: PostProps) => {
       </div>
       <div className="w-full flex justify-between">
         <div className="flex">
+          {data.userImage ? (
           <img
-            src="/images/profile_test.jpg"
+            src={data.userImage}
             alt="profile user"
             className="w-10 h-10 rounded-full"
           />
+          ) : (
+            <div className="h-full w-full bg-gray-600"></div>
+          )}
           <div className="flex gap-2 text-right italic place-self-center ml-2">
             <span>{data.username}</span>
             <span className="place-self-center">

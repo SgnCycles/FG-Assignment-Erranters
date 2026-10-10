@@ -14,7 +14,7 @@ type FileDropZonePropsType = {
 
 const baseStyle = {
   border: "2px dashed #d4d4d4",
-  borderColor: "#EEEEEE"
+  borderColor: "#EEEEEE",
 };
 const focusedStyle = { borderColor: "#2196f3" };
 const acceptStyle = { borderColor: "#65ab32" };
@@ -33,7 +33,14 @@ const FileDropZone = ({ value = [], onChange }: FileDropZonePropsType) => {
     [value, onChange],
   );
 
-  const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept, isDragReject } = useDropzone({
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isFocused,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
   });
@@ -54,10 +61,7 @@ const FileDropZone = ({ value = [], onChange }: FileDropZonePropsType) => {
 
   return (
     <div className="p-10 rounded-2xl bg-ecru-white">
-      <div
-        className="file-dropzone-area"
-        {...getRootProps({style})}
-      >
+      <div className="file-dropzone-area" {...getRootProps({ style })}>
         <label htmlFor="image">Add an image (optional)</label>
         <AiFillFileImage
           size={70}
@@ -75,21 +79,23 @@ const FileDropZone = ({ value = [], onChange }: FileDropZonePropsType) => {
           <p>Drag and drop images here or click to select files</p>
         )}
       </div>
-      <ul>
+      <ul className="flex flex-wrap gap-2">
         {value &&
           value.map((file, index) => (
-            <li key={index} className="relative h-32 rounded-md">
-              <img
-                className="h-25 w-25 object-cover rounded-md"
-                src={file.preview}
-                alt=""
-              />
+            <li key={index} className=" flex h-30 w-30 relative rounded-md bg-apple">
+              <div className="h-full w-full">
+                <img
+                  className="h-full w-full object-cover rounded-md"
+                  src={file.preview}
+                  alt=""
+                />
+              </div>
               <button
                 type="button"
-                className="w-7 h-7 border-red-500 bg-red-400 absolute"
+                className="w-5 h-5 bg-red-400 absolute right-0"
                 onClick={() => removeImageFile(file.name)}
               >
-                <FaXmark className="w-5 h-5 fill-white hover:fill-blue-500" />
+                <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
               </button>
             </li>
           ))}

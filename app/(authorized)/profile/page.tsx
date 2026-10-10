@@ -18,13 +18,14 @@ const ProfilePage = async() => {
 
   return (
     <main className="grow bg-mineral-green">
-      <h1 className="heading">This is Profile Page</h1>
+      <h1 className="heading">Edit Profile</h1>
       <UserProfileForm
         initialValues={{
           name: data.name,
           surname: data.surname,
           username: data.username,
           bio: data.bio,
+          interests: data.interests,
           profile_image: data.profile_image,
         }}
         userId={data.id}

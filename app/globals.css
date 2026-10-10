@@ -31,7 +31,7 @@
 }
 
 .button {
-  @apply w-37 text-[16px] bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer grid place-items-center;
+  @apply flex w-37 text-[16px] bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer justify-center;
 }
 
 .button.active {
@@ -47,7 +47,15 @@
 }
 
 .heading {
-  @apply text-4xl text-center text-ecru-white;
+  @apply font-bebas-neue text-4xl text-center text-ecru-white;
+}
+
+.profile-heading {
+  @apply font-bebas-neue text-4xl text-center text-ecru-white;
+}
+
+.heading-h2 {
+  @apply font-league-spartan text-xl text-left text-ecru-white;
 }
 
 .input {
@@ -91,11 +99,11 @@
 }
 
 .select-button-category {
-  @apply w-[170px] text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+  @apply text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
 
 .select-button-type {
-  @apply w-[100px] text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+  @apply text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
 
 .category-dropdown {

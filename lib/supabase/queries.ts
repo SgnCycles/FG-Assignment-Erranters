@@ -2,24 +2,26 @@ import { createClient } from "./browserClient";
 import { type QueryData } from "@supabase/supabase-js";
 
 export const getHomePosts = async (
-  supabase: ReturnType<typeof createClient>, sortingOrder: boolean
+  supabase: ReturnType<typeof createClient>,
+  sortingOrder: boolean,
 ) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username"), PostImages("id", "image_url", "position")',
+      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .order("created_at", { ascending: sortingOrder });
 };
 
 export const getMyPosts = async (
   supabase: ReturnType<typeof createClient>,
-  userId: string, sortingOrder: boolean
+  userId: string,
+  sortingOrder: boolean,
 ) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username"), PostImages("id", "image_url", "position")',
+      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .eq("author", userId)
     .order("created_at", { ascending: sortingOrder });
@@ -30,7 +32,8 @@ export const getSinglePost = async (slug: string) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username"), PostImages("id", "image_url", "position")')
+      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+    )
     .eq("slug", slug)
     .single();
 };
@@ -43,22 +46,46 @@ export const searchPost = async (searchTerm: string) => {
     .textSearch("title", searchTerm);
 };
 
-export const getUserProfile =  async (id: string) => {
+export const getUserProfile = async (id: string) => {
   const supabase = createClient();
   return await supabase
     .from("Profiles")
-    .select(
-      'id, name, surname, username, bio, profile_image',
-    )
+    .select("id, name, surname, username, bio, interests, profile_image")
     .eq("id", id)
     .single();
 };
 
-export const getPostComments = async (postId: string, sortingOrder: boolean) => {
+export const getUserPosts = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  // sortingOrder: boolean,
+) => {
+  return await supabase
+    .from("Posts")
+    .select(
+      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+    )
+    .eq("author", userId)
+    .order("created_at", { ascending: false });
+};
+
+export const getMemberProfile = async (username: string) => {
+  const supabase = createClient();
+  return await supabase
+    .from("Profiles")
+    .select("id, name, surname, username, bio, interests, profile_image")
+    .eq("username", username)
+    .single();
+};
+
+export const getPostComments = async (
+  postId: string,
+  sortingOrder: boolean,
+) => {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("Comments")
-    .select('id, content, created_at, parent_id, author("id", "username")')
+    .select('id, content, created_at, parent_id, author("id", "username", "profile_image")')
     .eq("post_id", postId)
     .order("created_at", { ascending: sortingOrder });
 

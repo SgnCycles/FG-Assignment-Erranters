@@ -75,6 +75,7 @@ export const userProfileSchema = z.object({
     .optional(),
   username: z.string().min(4, "Username must be longer than 4 characters"),
   bio: z.string().optional(),
+  interests: z.string().optional(),
   profile_image: z.instanceof(FormData).optional(),
 });
 

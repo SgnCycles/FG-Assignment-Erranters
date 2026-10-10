@@ -14,7 +14,7 @@ const UserProfileForm = ({
 }: {
   initialValues: Pick<
     Tables<"Profiles">,
-    "name" | "surname" | "username" | "bio" | "profile_image"
+    "name" | "surname" | "username" | "bio" | "profile_image" | "interests"
   >;
   userId: string;
 }) => {
@@ -40,6 +40,7 @@ const UserProfileForm = ({
       surname: initialValues.surname || undefined,
       username: initialValues.username,
       bio: initialValues.bio || undefined,
+      interests: initialValues.interests || undefined,
       profile_image: initialValues.profile_image || undefined,
     },
   });
@@ -70,6 +71,7 @@ const UserProfileForm = ({
               surname: values.surname,
               username: values.username,
               bio: values.bio,
+              interests: values.interests,
               profile_image: imageForm,
             },
             userId,
@@ -86,7 +88,9 @@ const UserProfileForm = ({
         )}
         <label htmlFor="image">Update the image</label>
         <input className="input" type="file" {...register("profile_image")} />
-        {errors.profile_image && <ErrorMessage error={errors.profile_image.message!} />}
+        {errors.profile_image && (
+          <ErrorMessage error={errors.profile_image.message!} />
+        )}
         <label htmlFor="name">Name</label>
         <input className="input" {...register("name")}></input>
         {errors.name && <ErrorMessage error={errors.name.message!} />}
@@ -98,8 +102,12 @@ const UserProfileForm = ({
         {errors.username && <ErrorMessage error={errors.username.message!} />}
         <label htmlFor="bio">Bio</label>
         <input className="input" {...register("bio")}></input>
+        <label htmlFor="interests">Interests</label>
+        <input className="input" {...register("interests")}></input>
         {errors.bio && <ErrorMessage error={errors.bio.message!} />}
-        <button className="button">Update Profile</button>
+        <div className="flex justify-end">
+          <button className="button">Update Profile</button>
+        </div>
       </form>
     </div>
   );
