@@ -9,23 +9,24 @@ import PostCategoryIcons from "@/components/PostCategoryIcon";
 import { PostPropsType } from "./types";
 
 const Post = ({ ...data }: PostPropsType) => {
+  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
 
   return (
-    <div className="flex flex-col h-full justify-between p-8 rounded-2xl grow bg-mineral-green text-ecru-white">
+    <div className="flex flex-col h-full justify-between p-8 rounded-2xl grow bg-mineral-green text-ecru-white font-cantarell">
       <div className="flex flex-col mb-4">
         {data.title && <h1 className="heading">{data.title}</h1>}
       </div>
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between mb-4">
         <div className="flex">
           {data.userImage ? (
             <img
               src={data.userImage}
               alt="profile user"
-              className="w-10 h-10 rounded-full"
+              className="w-15 h-15 rounded-full"
             />
           ) : (
             <div className="h-10 w-10 relative rounded-full">
@@ -95,7 +96,11 @@ const Post = ({ ...data }: PostPropsType) => {
         )}
       </div>
 
-      {data.content && <p>{data.content}</p>}
+      {data.content && (
+        <div className="text-base">
+          <p>{data.content}</p>
+        </div>
+      )}
       <div className="my-4">
         {data.userId && <AddCommentForm postId={data.id} />}
         <PostComments

@@ -35,7 +35,7 @@ export const updateSession = async (request: NextRequest) => {
   } = await supabase.auth.getUser();
   const protectedRoutes: string[] = ["/create-post", "/feed", "/messages", "/favourites", "/marketplace", "/notifications", "/posts", "/profile"];
   if (!user && protectedRoutes.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/auth/signup", request.url));
+    return NextResponse.redirect(new URL("/signup", request.url));
   }
   return supabaseResponse;
 };

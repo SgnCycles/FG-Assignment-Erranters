@@ -31,9 +31,9 @@ const LogInForm = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <div className="bg-white/15 backdrop-blur-2xl shadow-xl p-10 rounded-4xl">
+      <div className="p-10 font-cantarell">
         <form
-          className="flex flex-col max-w-md m-auto text-left rounded-2xl p-8 bg-old-gold"
+          className="flex flex-col w-lg m-auto text-left p-8 bg-old-gold"
           onSubmit={handleSubmit((values) => mutate(values))}
         >
           <label htmlFor="email" className="label">
@@ -74,14 +74,14 @@ const LogInForm = () => {
               <ErrorMessage error={errors.password.message!} />
             )}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
             <button className="button w-full">
               {isPending ? "Logging in..." : "Log in"}
             </button>
           </div>
           {error && <ErrorMessage error={error.message} />}
         </form>
-        <div className="mt-4">
+        <div className="mt-4 text-base text-center">
           <Link href="/signup" className="text-ecru-white">
             Don't have any account?{" "}
             <span className="font-bold text-apple hover:text-old-gold">

@@ -6,9 +6,9 @@ const EditButton = ({ slug, type = "text" }: EditButtonPropsType) => {
   return (
     <button className={type === "icon" ? "action-tooltip" : "button-secondary"}>
       <Link href={`/post/${slug}/edit`}>
-        {type === "icon" ? <FaRegEdit size={25}/> : "Edit"}
+        {type === "icon" ? <FaRegEdit size={23}/> : "Edit"}
       </Link>
-      <span className="action-tooltipText">Edit Post</span>
+      <span className="action-tooltipText">Edit</span>
     </button>
   );
 };

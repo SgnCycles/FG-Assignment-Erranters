@@ -15,23 +15,34 @@
   --color-apple: #65ab32;
   --color-ecru-white: #faf9f2;
   --color-outer-space: #263638;
-  --text-9xl: clamp(5.5rem, 7.2vw + 4.5rem, 9rem);
-  --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
+  --text-9xl: clamp(6.5rem, 8.2vw + 4.5rem, 10rem);
+  /* --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
   --text-5xl: clamp(2.25rem, 4vw + 1.45rem, 4.5rem);
   --text-4xl: clamp(2rem, 3.75vw + 1.4rem, 4rem);
   --text-3xl: clamp(1.75rem, 3.5vw + 1.35rem, 3.5rem);
   --text-2xl: clamp(1.5rem, 3vw + 1.3rem, 3rem);
   --text-xl: clamp(1.35rem, 2.5vw + 1.25rem, 2.25rem);
   --text-lg: clamp(1.125rem, 1.5vw + 1rem, 1.75rem);
-  --text-base: clamp(1rem, 1vw + 1rem, 1.25rem);
+  --text-base: clamp(1rem, 1vw + 1rem, 1.25rem); */
+
+  /* --text-9xl: clamp(4rem, 5.5vw + 2rem, 7rem); */
+  --text-6xl: clamp(3rem, 4vw + 1rem, 5rem);
+  --text-5xl: clamp(2.5rem, 3vw + 1rem, 4rem);
+  --text-4xl: clamp(2.125rem, 2.5vw + 1rem, 3.25rem);
+  --text-3xl: clamp(1.875rem, 2vw + 1rem, 2.75rem);
+  --text-2xl: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
+  --text-xl: clamp(1.25rem, 1vw + 1rem, 1.75rem);
+  --text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  --text-base: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
 }
 
+/* buttons */
 .logo-button {
-  @apply flex w-auto text-lg font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
+  @apply flex w-auto text-2xl font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
 }
 
 .button {
-  @apply flex w-37 text-[16px] bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer justify-center;
+  @apply flex min-w-37 text-base bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer justify-center;
 }
 
 .button.active {
@@ -42,12 +53,28 @@
   @apply h-20 inline-block p-4 rounded-2xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer;
 }
 
+.select-button-category {
+  @apply w-43 pl-4 text-outer-space p-2 rounded-2xl bg-old-gold cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+}
+
+.select-button-type {
+  @apply pl-4 text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+}
+
+.postReactionButtons {
+  @apply flex rounded-2xl gap-2 cursor-pointer;
+}
+
+/*  */
+
+/* headings */
+
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
 }
 
 .heading {
-  @apply font-bebas-neue text-4xl text-center text-ecru-white;
+  @apply font-bebas-neue text-6xl text-center text-ecru-white;
 }
 
 .profile-heading {
@@ -55,16 +82,20 @@
 }
 
 .heading-h2 {
-  @apply font-league-spartan text-xl text-left text-ecru-white;
+  @apply font-league-spartan text-lg text-left text-ecru-white font-bold;
 }
 
-.input {
-  @apply bg-ecru-white border-old-gold border p-2 my-2 rounded-xl text-outer-space;
-}
+/*  */
 
 .eye-icon {
-  @apply cursor-pointer absolute text-outer-space top-5 right-2 text-base;
+  @apply cursor-pointer absolute text-outer-space top-5 right-2 text-lg;
 }
+
+.eye-icon:hover {
+  @apply cursor-pointer absolute text-apple top-5 right-2 text-lg;
+}
+
+/* tooltips */
 
 .tooltip {
   @apply relative inline-block cursor-pointer;
@@ -90,20 +121,24 @@
   @apply visible;
 }
 
+/*  */
+
+/* footer */
+
 .footer {
-  @apply bg-mineral-green flex flex-col items-center font-bebas-neue text-ecru-white text-base;
+  @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2;
+}
+
+/*  */
+
+/* inputs */
+
+.input {
+  @apply bg-ecru-white text-base border-old-gold border p-2 my-2 rounded-xl text-outer-space;
 }
 
 .label {
-  @apply font-bold font-cantarell;
-}
-
-.select-button-category {
-  @apply text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
-}
-
-.select-button-type {
-  @apply text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+  @apply font-bold font-cantarell text-base;
 }
 
 .category-dropdown {
@@ -114,10 +149,8 @@
   @apply w-full rounded-2xl bg-ecru-white text-outer-space placeholder:text-outer-space;
 }
 
+/*  */
+
 .file-dropzone-area {
   @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4;
-}
-
-.postReactionButtons {
-  @apply flex p-2 bg-old-gold rounded-2xl gap-2 cursor-pointer;
 }

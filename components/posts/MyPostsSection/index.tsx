@@ -3,6 +3,7 @@ import { useState } from "react";
 import PostPageSidebar from "@/components/posts/PostPageSidebar";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
 import { MyPostsSectionPropsType } from "./types";
+import UserSidebar from "@/components/UserSidebar";
 
 const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
   
@@ -21,6 +22,7 @@ const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
           postCategory={postCategory}
         />
       )}
+       <UserSidebar />
     </>
   );
 };

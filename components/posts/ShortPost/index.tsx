@@ -16,7 +16,7 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
               <img
                 src={post.userImage}
                 alt="profile user"
-                className="w-10 h-10 rounded-full"
+                className="w-15 h-15 rounded-full"
               />
             ) : (
               <div className="h-10 w-10 relative rounded-full">
@@ -60,8 +60,7 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-lg">{post.title}</h3>
-        <div className="mb-4 flex flex-wrap ">
-          <div className="flex justify-start h-40 w-auto">
+        {/* <div className="flex justify-start h-40 w-auto">
             {post.PostImages.map((image) => (
               <img
                 key={image.id}
@@ -70,8 +69,21 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
                 className="h-full w-full object-contain bg-no-repeat"
               />
             ))}
+          </div> */}
+        {post.PostImages.length > 0 && (
+          <div className="mb-4 flex flex-wrap ">
+            <div className="flex justify-start h-40 w-auto">
+              {post.PostImages.map((image) => (
+                <img
+                  key={image.id}
+                  src={image.image_url}
+                  alt={post.title}
+                  className="h-full w-full object-contain bg-no-repeat"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </Link>
       <div>
         <PostReactionButtons />

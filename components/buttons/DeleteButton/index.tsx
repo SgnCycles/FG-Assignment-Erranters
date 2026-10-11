@@ -24,8 +24,8 @@ const DeleteButton = ({
       className={type === "icon" ? "action-tooltip" : "button-secondary"}
       onClick={() => mutate(id)}
     >
-      {type === "icon" ? <FaTrashCan size={25} /> : "Delete"}
-      <span className="action-tooltipText">Delete Post</span>
+      {type === "icon" ? <FaTrashCan size={20} /> : "Delete"}
+      <span className="action-tooltipText">Delete</span>
     </button>
   );
 };

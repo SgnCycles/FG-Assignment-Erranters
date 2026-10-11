@@ -32,12 +32,12 @@ const AddCommentForm = ({ postId }: { postId: string }) => {
 
   return (
     <form
-      className="w-full flex flex-col"
+      className="w-full flex flex-col font-cantarell"
       onSubmit={handleSubmit((values) =>
         mutate({ commentData: { content: values.content }, postId }),
       )}
     >
-      <label htmlFor="content" className="font-bold mb-2">
+      <label htmlFor="content" className="heading-h2">
         Add Comment:
       </label>
       <textarea

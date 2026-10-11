@@ -121,7 +121,7 @@ const CreatePostForm = ({
       </div>
       <div className="flex flex-col justify-between flex-1">
         <div className="p-4">
-          <label htmlFor="title">Add a title:</label>
+          <label htmlFor="title" className="heading-h2">Add a title:</label>
           <input
             {...register("title")}
             className="create-post-input p-4"
@@ -129,7 +129,7 @@ const CreatePostForm = ({
           {errors.title && <ErrorMessage error={errors.title.message!} />}
         </div>
         <div className="p-4">
-          <label htmlFor="content">Add content:</label>
+          <label htmlFor="content" className="heading-h2">Add content:</label>
           <textarea
             {...register("content")}
             className="create-post-input min-h-35 p-4"
@@ -139,7 +139,7 @@ const CreatePostForm = ({
           {postCategory === "Marketplace" &&
           (postType === "Sell" || postType === "Buy") ? (
             <div className="p-4">
-              <label htmlFor="price">Add price:</label>
+              <label htmlFor="price" className="heading-h2">Add price:</label>
               <input
                 className="input text-outer-space cursor-pointer ml-4"
                 type="number"
@@ -148,7 +148,7 @@ const CreatePostForm = ({
             </div>
           ) : null}
           <div className="p-4">
-            <label htmlFor="location">Add location:</label>
+            <label htmlFor="location" className="heading-h2">Add location:</label>
             <input
               {...register("location")}
               className="input text-outer-space cursor-pointer ml-4"

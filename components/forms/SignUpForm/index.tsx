@@ -9,7 +9,6 @@ import ErrorMessage from "@/components/ErrorMessage";
 import Link from "next/link";
 
 const SignUpForm = () => {
-  
   const router = useRouter();
   const {
     register,
@@ -27,9 +26,9 @@ const SignUpForm = () => {
   });
 
   return (
-    <div className="bg-mineral-green">
+    <div className="bg-mineral-green font-cantarell">
       <form
-        className="flex flex-col max-w-md m-auto text-left bg-old-gold rounded-2xl p-8"
+        className="flex flex-col max-w-md m-auto text-left bg-old-gold p-8"
         onSubmit={handleSubmit((values) => mutate(values))}
       >
         <label className="label" htmlFor="email">
@@ -80,13 +79,15 @@ const SignUpForm = () => {
         {errors.confirmPassword && (
           <ErrorMessage error={errors.confirmPassword.message!} />
         )}
-        <button className="button">
-          {isPending ? "Signing Up..." : "Sign Up"}
-        </button>
+        <div className="flex justify-end mt-6">
+          <button className="button">
+            {isPending ? "Signing Up..." : "Sign Up"}
+          </button>
+        </div>
         {isSuccess && <p>Account Created. Please check your email.</p>}
         {error && <ErrorMessage error={error.message} />}
       </form>
-      <div className="flex justify-center mt-4 text-ecru-white">
+      <div className="flex justify-center mt-4 text-ecru-white text-base">
         <Link href="/">
           Already have any account?{" "}
           <span className="text-apple hover:text-old-gold font-bold">

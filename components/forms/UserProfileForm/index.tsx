@@ -74,7 +74,7 @@ const UserProfileForm = ({
   }
 
   return (
-    <div>
+    <div className="mr-6">
       <form
         className="h-full text-ecru-white"
         onSubmit={handleSubmit((values) => {
@@ -170,19 +170,19 @@ const UserProfileForm = ({
             </div>
             <div className="flex flex-col justify-center w-[80%]">
               <div className="flex flex-col">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name" className="heading-h2">Name</label>
                 <input className="input" {...register("name")}></input>
                 {errors.name && <ErrorMessage error={errors.name.message!} />}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="surname">Surname</label>
+                <label htmlFor="surname" className="heading-h2">Surname</label>
                 <input className="input" {...register("surname")}></input>
                 {errors.surname && (
                   <ErrorMessage error={errors.surname.message!} />
                 )}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username" className="heading-h2">Username</label>
                 <input className="input" {...register("username")}></input>
                 {errors.username && (
                   <ErrorMessage error={errors.username.message!} />
@@ -190,15 +190,20 @@ const UserProfileForm = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col grow ml-10">
-            <label htmlFor="bio">Bio</label>
-            <textarea className="input" {...register("bio")}></textarea>
-            <label htmlFor="interests">Interests</label>
-            <textarea className="input" {...register("interests")}></textarea>
-            {errors.bio && <ErrorMessage error={errors.bio.message!} />}
+          {/* <div className="flex flex-col grow ml-10"> */}
+          <div className="grid grid-rows-2 w-full">
+            <div className="flex flex-col">
+              <label htmlFor="bio" className="heading-h2">Bio</label>
+              <textarea className="input grow w-full" {...register("bio")}></textarea>
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="interests" className="heading-h2">Interests</label>
+              <textarea className="input grow w-full" {...register("interests")}></textarea>
+              {errors.bio && <ErrorMessage error={errors.bio.message!} />}
+            </div>
           </div>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-4">
           <button className="button">Update Profile</button>
         </div>
       </form>
