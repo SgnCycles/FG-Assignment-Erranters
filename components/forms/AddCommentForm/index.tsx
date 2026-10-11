@@ -8,9 +8,11 @@ import { AddCommentAction } from "@/actions/add-comment-action";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
 import AddCommentButton from "@/components/buttons/AddCommentButton";
+import { useRouter } from "next/navigation";
 
-const AddCommentForm = ({ postId }: { postId: string }) => {
+const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
   
+  const router = useRouter();
   const queryClient = useQueryClient();
   const {
     register,
@@ -26,6 +28,10 @@ const AddCommentForm = ({ postId }: { postId: string }) => {
       queryClient.invalidateQueries({
         queryKey: ["post-comments", postId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["post-comments-count", postId],
+      });
+      router.refresh();
     },
     onSettled: () => toast.success("Comment Added"),
   });
@@ -34,7 +40,7 @@ const AddCommentForm = ({ postId }: { postId: string }) => {
     <form
       className="w-full flex flex-col font-cantarell"
       onSubmit={handleSubmit((values) =>
-        mutate({ commentData: { content: values.content }, postId }),
+        mutate({ commentData: { content: values.content }, postId, slug }),
       )}
     >
       <label htmlFor="content" className="heading-h2">

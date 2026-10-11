@@ -14,4 +14,8 @@ export type PostPropsType = {
     image_url: string;
     position: number;
   }[];
+  Comments: {
+    id: string;
+    post_id: string | null;
+  }[];
 };

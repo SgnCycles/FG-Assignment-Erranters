@@ -7,9 +7,11 @@ import * as z from "zod";
 export const AddCommentAction = async ({
   commentData,
   postId,
+  slug,
 }: {
   commentData: z.infer<typeof postCommentSchema>;
   postId: string;
+  slug: string;
 }) => {
   const supabase = await createClient();
   const parsedData = postCommentSchema.parse(commentData);
@@ -30,5 +32,5 @@ export const AddCommentAction = async ({
     .throwOnError();
 
   if (error) console.log(error);
-  revalidatePath("/");
+  revalidatePath(`/post/${slug}`);
 };

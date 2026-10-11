@@ -32,11 +32,39 @@ export const getSinglePost = async (slug: string) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
     )
     .eq("slug", slug)
     .single();
 };
+
+export const getCommentNumber = async (postId: string) => {
+  const supabase = createClient();
+  return await supabase
+    .from("Comments")
+    .select("*", { count: "exact", head: true })
+    .eq("post_id", postId);
+};
+
+export const getPostLikesNumber = async (postId: string) => {
+  const supabase = createClient();
+  return await supabase
+    .from("PostLikes")
+    .select("*", { count: "exact", head: true })
+    .eq("post_id", postId);
+};
+
+//getif user has liked the post:
+export const getUserLikeStatus = async (postId: string, userId: string) => {
+  const supabase = createClient();
+  return await supabase
+    .from("PostLikes")
+    .select("post_id")
+    .eq("post_id", postId)
+    .eq("user_id", userId)
+    .maybeSingle()
+};
+// 
 
 export const searchPost = async (searchTerm: string) => {
   const supabase = createClient();
@@ -85,7 +113,9 @@ export const getPostComments = async (
   const supabase = createClient();
   const { data, error } = await supabase
     .from("Comments")
-    .select('id, content, created_at, parent_id, author("id", "username", "profile_image")')
+    .select(
+      'id, content, created_at, parent_id, author("id", "username", "profile_image")',
+    )
     .eq("post_id", postId)
     .order("created_at", { ascending: sortingOrder });
 

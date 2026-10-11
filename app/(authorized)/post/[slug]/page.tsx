@@ -5,6 +5,7 @@ import { getSinglePost } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
+  
   const { slug } = await params;
   const supabase = await createClient();
   const {
@@ -33,7 +34,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
             isAuthor={isAuthor}
             userId={user?.id || null}
             userImage={data.author.profile_image || null}
-
+            slug={slug}
           />
         )}
       </div>

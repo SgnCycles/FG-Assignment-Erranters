@@ -60,16 +60,6 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-lg">{post.title}</h3>
-        {/* <div className="flex justify-start h-40 w-auto">
-            {post.PostImages.map((image) => (
-              <img
-                key={image.id}
-                src={image.image_url}
-                alt={post.title}
-                className="h-full w-full object-contain bg-no-repeat"
-              />
-            ))}
-          </div> */}
         {post.PostImages.length > 0 && (
           <div className="mb-4 flex flex-wrap ">
             <div className="flex justify-start h-40 w-auto">
@@ -86,7 +76,7 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
         )}
       </Link>
       <div>
-        <PostReactionButtons />
+        <PostReactionButtons postId={post.id} />
       </div>
     </div>
   );

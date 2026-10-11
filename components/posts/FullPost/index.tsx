@@ -7,6 +7,7 @@ import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/forms/AddCommentForm";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
 import { PostPropsType } from "./types";
+import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 
 const Post = ({ ...data }: PostPropsType) => {
   
@@ -95,14 +96,14 @@ const Post = ({ ...data }: PostPropsType) => {
           </div>
         )}
       </div>
-
       {data.content && (
         <div className="text-base">
           <p>{data.content}</p>
         </div>
       )}
+      <PostReactionButtons postId={data.id} />
       <div className="my-4">
-        {data.userId && <AddCommentForm postId={data.id} />}
+        {data.userId && <AddCommentForm postId={data.id} slug={data.slug} />}
         <PostComments
           postId={data.id}
           isAuthor={data.isAuthor}
