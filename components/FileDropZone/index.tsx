@@ -89,7 +89,7 @@ const FileDropZone = ({
             <button
               type="button"
               className="w-5 h-5 bg-red-400 absolute right-0"
-              onClick={() => removePostImage?.(image.id)}
+              // onClick={() => removePostImage?.(image.id)}
             >
               <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
             </button>

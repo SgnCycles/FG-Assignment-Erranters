@@ -11,8 +11,7 @@ import type { ImageFile } from "@/components/FileDropZone/types";
 import * as z from "zod";
 import { FaXmark } from "react-icons/fa6";
 import DeletePostImagesAction from "@/actions/delete-post-images-action";
-import { useState } from "react";
-import { init } from "next/dist/compiled/webpack/webpack";
+// import { useState } from "react";
 
 const EditPostForm = ({
   initialValues,
@@ -100,6 +99,7 @@ const EditPostForm = ({
             control={control}
             render={({ field }) => (
               <FileDropZone value={field.value} onChange={field.onChange} />
+              // <FileDropZone value={field.value} onChange={field.onChange} initialImages={initialValues.PostImages}/>
             )}
           />
           {errors.image && <ErrorMessage error={errors.image.message!} />}
