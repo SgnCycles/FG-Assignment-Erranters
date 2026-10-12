@@ -54,17 +54,26 @@ export const getPostLikesNumber = async (postId: string) => {
     .eq("post_id", postId);
 };
 
-//getif user has liked the post:
-export const getUserLikeStatus = async (postId: string, userId: string) => {
+export const getUserLikeStatus = async (postId: string) => {
   const supabase = createClient();
-  return await supabase
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized access");
+
+  const { data, error } = await supabase
     .from("PostLikes")
     .select("post_id")
     .eq("post_id", postId)
-    .eq("user_id", userId)
-    .maybeSingle()
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) throw new Error(`getUserLikeStatus error: ${error}`);
+  const postIsLiked = data !== null;
+  return postIsLiked;
 };
-// 
 
 export const searchPost = async (searchTerm: string) => {
   const supabase = createClient();

@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/serverClient";
 import Link from "next/link";
 
 const NavMenu = async () => {
+  
   const supabase = await createClient();
   const {
     data: { user },

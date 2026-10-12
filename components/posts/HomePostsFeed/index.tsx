@@ -8,6 +8,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 import { HomePostsFeedPropsType } from "./types";
 
 const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
+  
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({

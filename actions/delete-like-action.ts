@@ -1,6 +1,5 @@
 "use server";
 import { createClient } from "@/lib/supabase/serverClient";
-import { revalidatePath } from "next/cache";
 
 export const DeleteLikeAction = async ({ postId }: { postId: string }) => {
   const supabase = await createClient();
@@ -16,7 +15,6 @@ export const DeleteLikeAction = async ({ postId }: { postId: string }) => {
     .delete()
     .eq("post_id", postId)
     .eq("user_id", user.id);
-  // .throwOnError();
 
   if (error) console.log(error);
 };
