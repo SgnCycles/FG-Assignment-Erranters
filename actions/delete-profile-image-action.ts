@@ -15,7 +15,7 @@ const DeleteProfileImageAction = async ({image, userId}: {image: string; userId:
     .update({ profile_image: null })
     .eq("id", userId);
 
-  if (profileError) throw new Error("Failed to update the user profile");
+  if (profileError) throw new Error(profileError.message);
 
   revalidatePath("/");
 };

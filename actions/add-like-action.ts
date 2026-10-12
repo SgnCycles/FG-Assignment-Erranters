@@ -16,5 +16,5 @@ export const AddLikeAction = async ({ postId }: { postId: string }) => {
     user_id: user.id,
   });
 
-  if (error) console.log(error);
+  if (error) throw new Error(error.message)
 };

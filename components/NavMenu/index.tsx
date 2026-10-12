@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/serverClient";
 import Link from "next/link";
 
 const NavMenu = async () => {
-  
   const supabase = await createClient();
   const {
     data: { user },
@@ -90,8 +89,24 @@ const NavMenu = async () => {
             </svg>
             <span className="tooltipText">Notifications</span>
           </Link>
-          <Link href="/messages" className="tooltip">
+          <Link href="/favourites" className="tooltip">
+            {/* <Link href="/messages" className="tooltip"> */}
+            {/* favourites */}
             <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#faf9f2"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-message-circle-more preview-icon stroke-ecru-white hover:stroke-old-gold"
+            >
+              <path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z" />
+            </svg>
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -107,8 +122,9 @@ const NavMenu = async () => {
               <path d="M8 12h.01" />
               <path d="M12 12h.01" />
               <path d="M16 12h.01" />
-            </svg>
-            <span className="tooltipText">Messages</span>
+            </svg>*/}
+            {/* <span className="tooltipText">Messages</span>  */}
+            <span className="tooltipText">Favourites</span> 
           </Link>
           <Link href="/profile" className="tooltip">
             <svg

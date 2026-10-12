@@ -15,6 +15,6 @@ export const SignUp = async (userdata: z.infer<typeof signUpSchema>) => {
     },
   });
 
-  if (error) throw error;
+  if (error) throw new Error(error.message);
   return { success: true };
 };

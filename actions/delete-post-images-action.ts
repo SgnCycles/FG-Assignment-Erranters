@@ -15,7 +15,7 @@ const DeletePostImagesAction = async ({image, postId}: {image: string; postId: s
     .delete()
     .eq("id", postId);
 
-  if (postError) throw new Error("Failed to update the post");
+  if (postError) throw new Error(postError.message);
 
   revalidatePath("/");
 };

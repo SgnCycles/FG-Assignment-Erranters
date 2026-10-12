@@ -16,5 +16,5 @@ export const DeleteLikeAction = async ({ postId }: { postId: string }) => {
     .eq("post_id", postId)
     .eq("user_id", user.id);
 
-  if (error) console.log(error);
+  if (error) throw new Error(error.message)
 };

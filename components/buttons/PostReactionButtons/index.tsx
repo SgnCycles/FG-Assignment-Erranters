@@ -7,10 +7,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getCommentNumber,
   getPostLikesNumber,
+  getUserFavouriteStatus,
   getUserLikeStatus,
 } from "@/lib/supabase/queries";
 import { AddLikeAction } from "@/actions/add-like-action";
 import { DeleteLikeAction } from "@/actions/delete-like-action";
+import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
+import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 
 const PostReactionButtons = ({ postId }: { postId: string }) => {
   const queryClient = useQueryClient();
@@ -44,6 +47,19 @@ const PostReactionButtons = ({ postId }: { postId: string }) => {
     console.log(postLikedError);
   }
 
+  const {
+    data: postIsFavourite,
+    error: postIsFavouriteError,
+    isLoading: postIsFavouriteLoading,
+  } = useQuery({
+    queryKey: ["post-is-favourite", postId],
+    queryFn: () => getUserFavouriteStatus(postId),
+  });
+
+  if (postIsFavouriteError) {
+    console.log(postIsFavouriteError);
+  }
+
   const { mutate, error: mutateError } = useMutation({
     mutationFn: ({ postIsLiked }: { postIsLiked: boolean }) => {
       if (postIsLiked) {
@@ -61,6 +77,22 @@ const PostReactionButtons = ({ postId }: { postId: string }) => {
       });
     },
   });
+
+  const { mutate: mutatePostFavourite, error: postFavouriteError, isPending } =
+    useMutation({
+      mutationFn: ({ postIsFavourite }: { postIsFavourite: boolean }) => {
+        if (postIsFavourite) {
+          return DeleteFavouritePostAction({ postId });
+        } else {
+          return AddFavouritePostAction({ postId });
+        }
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["post-is-favourite", postId],
+        });
+      },
+    });
 
   const commentCount = data?.count ?? 0;
   const likeCount = likesCount?.count ?? 0;
@@ -83,7 +115,13 @@ const PostReactionButtons = ({ postId }: { postId: string }) => {
           <ShareButton />
         </li>
         <li>
-          <FavouriteButton />
+          <FavouriteButton
+            postIsFavourite={postIsFavourite}
+            handleClick={() =>
+              mutatePostFavourite({ postIsFavourite: !!postIsFavourite })
+            }
+            disabled={postIsFavouriteLoading || isPending}
+          />
         </li>
       </ul>
     </div>
