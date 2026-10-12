@@ -134,7 +134,7 @@ const MyPost = ({ ...post }: MyPostPropsType) => {
         </div>
       </Link>
       <div className="flex justify-between">
-        <PostReactionButtons />
+        <PostReactionButtons postId={post.id}/>
         <div className="flex justify-end">
           <EditButton slug={post.slug} type="icon" />
           <DeleteButton
