@@ -14,14 +14,12 @@ import { AddLikeAction } from "@/actions/add-like-action";
 import { DeleteLikeAction } from "@/actions/delete-like-action";
 import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
 import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
+import { PostReactionButtonPropsType } from "./types";
 
 const PostReactionButtons = ({
   postId,
   onFavouriteDeleteSuccess,
-}: {
-  postId: string;
-  onFavouriteDeleteSuccess: () => void;
-}) => {
+}: PostReactionButtonPropsType) => {
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
     queryKey: ["post-comments-count", postId],
@@ -98,7 +96,7 @@ const PostReactionButtons = ({
     },
     onSuccess: () => {
       if (postIsFavourite) {
-        onFavouriteDeleteSuccess();
+        onFavouriteDeleteSuccess?.();
       }
       queryClient.invalidateQueries({
         queryKey: ["post-is-favourite", postId],

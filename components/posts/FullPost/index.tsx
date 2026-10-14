@@ -10,7 +10,7 @@ import { PostPropsType } from "./types";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 
 const Post = ({ ...data }: PostPropsType) => {
-  
+
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -101,7 +101,9 @@ const Post = ({ ...data }: PostPropsType) => {
           <p>{data.content}</p>
         </div>
       )}
-      <PostReactionButtons postId={data.id} />
+      <PostReactionButtons
+        postId={data.id}
+      />
       <div className="my-4">
         {data.userId && <AddCommentForm postId={data.id} slug={data.slug} />}
         <PostComments

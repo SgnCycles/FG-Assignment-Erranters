@@ -11,5 +11,5 @@ export type ShortPostPropsType = {
     image_url: string;
     position: number;
   }[];
-  onFavouriteDeleteSuccess: () => void; 
+  onFavouriteDeleteSuccess?: () => void; 
 };
