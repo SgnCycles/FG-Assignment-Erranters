@@ -1,4 +1,4 @@
 export type PostPageSidebarPropsType = {
   postCategory: string;
-  setPostCategory: (category: string) => void;
+  setPostCategory: React.Dispatch<React.SetStateAction<string>>
 };

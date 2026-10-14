@@ -3,7 +3,7 @@ import { getMyPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyPostsPage = async () => {
-  
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -12,7 +12,7 @@ const MyPostsPage = async () => {
   const { data, error } = await getMyPosts(supabase, user.id, false);
 
   return (
-    <main className="grow bg-mineral-green">
+    <main className="grow bg-mineral-green text-ecru-white">
       <h1 className="heading">My Posts</h1>
       {error && <p>Failed Loading Posts...</p>}
       <div className="flex grow">

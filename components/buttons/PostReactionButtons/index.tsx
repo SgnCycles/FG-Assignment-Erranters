@@ -15,7 +15,13 @@ import { DeleteLikeAction } from "@/actions/delete-like-action";
 import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
 import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 
-const PostReactionButtons = ({ postId }: { postId: string }) => {
+const PostReactionButtons = ({
+  postId,
+  onFavouriteDeleteSuccess,
+}: {
+  postId: string;
+  onFavouriteDeleteSuccess: () => void;
+}) => {
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
     queryKey: ["post-comments-count", postId],
@@ -78,21 +84,27 @@ const PostReactionButtons = ({ postId }: { postId: string }) => {
     },
   });
 
-  const { mutate: mutatePostFavourite, error: postFavouriteError, isPending } =
-    useMutation({
-      mutationFn: ({ postIsFavourite }: { postIsFavourite: boolean }) => {
-        if (postIsFavourite) {
-          return DeleteFavouritePostAction({ postId });
-        } else {
-          return AddFavouritePostAction({ postId });
-        }
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["post-is-favourite", postId],
-        });
-      },
-    });
+  const {
+    mutate: mutatePostFavourite,
+    error: postFavouriteError,
+    isPending,
+  } = useMutation({
+    mutationFn: ({ postIsFavourite }: { postIsFavourite: boolean }) => {
+      if (postIsFavourite) {
+        return DeleteFavouritePostAction({ postId });
+      } else {
+        return AddFavouritePostAction({ postId });
+      }
+    },
+    onSuccess: () => {
+      if (postIsFavourite) {
+        onFavouriteDeleteSuccess();
+      }
+      queryClient.invalidateQueries({
+        queryKey: ["post-is-favourite", postId],
+      });
+    },
+  });
 
   const commentCount = data?.count ?? 0;
   const likeCount = likesCount?.count ?? 0;

@@ -164,7 +164,7 @@ export const getUserFavourites = async (
       'post_id, Posts("id", "title", "slug", "created_at", "category", "post_type", author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
     )
     .eq("user_id", userId)
-    .order("created_at", { ascending: sortingOrder });
+    .order("created_at", { ascending: sortingOrder, referencedTable: "Posts" });
 };
 
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
@@ -175,4 +175,4 @@ export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type GetPostCommentsType = QueryData<ReturnType<typeof getPostComments>>;
 export type GetUserLikeStatusType = QueryData<ReturnType<typeof getUserLikeStatus>>;
 export type GetPostLikesNumberType = QueryData<ReturnType<typeof getPostLikesNumber>>;
-export type getUserFavouritesrType = QueryData<ReturnType<typeof getUserFavourites>>;
+export type UserFavouritesType = QueryData<ReturnType<typeof getUserFavourites>>;

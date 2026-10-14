@@ -3,7 +3,7 @@ import PostCategoryIcons from "@/components/PostCategoryIcon";
 import Link from "next/link";
 import { ShortPostPropsType } from "./types";
 
-const ShortPost = ({ ...post }: ShortPostPropsType) => {
+const ShortPost = ({ onFavouriteDeleteSuccess, ...post}: ShortPostPropsType) => {
   return (
     <div className="flex flex-col justify-around gap-4 border border-apple bg-ecru-white rounded-2xl p-4 m-4 text-outer-space">
       <div className="w-full flex justify-between">
@@ -76,7 +76,7 @@ const ShortPost = ({ ...post }: ShortPostPropsType) => {
         )}
       </Link>
       <div>
-        <PostReactionButtons postId={post.id} />
+        <PostReactionButtons postId={post.id} onFavouriteDeleteSuccess={onFavouriteDeleteSuccess}/>
       </div>
     </div>
   );
