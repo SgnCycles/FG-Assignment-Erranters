@@ -1,17 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PostPageSidebarPropsType } from "./types";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
+import type { PostCategoryContextType } from "@/types/types";
 
-const PostPageSidebar = ({
-  postCategory,
-  setPostCategory,
-}: PostPageSidebarPropsType) => {
-
+const PostPageSidebar = () => {
   const pathname = usePathname();
+  const { postCategory, setPostCategory } = usePostCategoryContext() as PostCategoryContextType;
 
   return (
-    <aside className="w-[15%] flex flex-col items-center">
+    <aside className="w-[15%] flex flex-col items-center bg-mineral-green">
       <h2 className="sidebar-heading-h2">Discover</h2>
       <nav
         aria-label="Sidebar navigation"

@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@/providers/queryProvider";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
+import { UserProvider } from "@/context/userContext";
+import { PostCategoryProvider } from "@/context/postCategoryContext";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -50,9 +52,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           pauseOnHover
           theme="colored"
         />
-        <QueryClientProvider>
-          {children}
-        </QueryClientProvider>
+        <UserProvider>
+          <QueryClientProvider>
+            <PostCategoryProvider>{children}</PostCategoryProvider>
+          </QueryClientProvider>
+        </UserProvider>
         <Footer />
       </body>
     </html>

@@ -6,12 +6,14 @@ import { useState } from "react";
 import SortingButton from "@/components/buttons/SortingButton";
 import { MyFavouritePostSectionPropsType } from "./types";
 import ShortPost from "../ShortPost";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
+import type { PostCategoryContextType } from "@/types/types";
 
 const MyFavouritePostsFeed = ({
   posts,
   userId,
-  postCategory,
 }: MyFavouritePostSectionPropsType) => {
+  const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const queryClient = useQueryClient();

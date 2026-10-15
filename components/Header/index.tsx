@@ -2,7 +2,7 @@ import Link from "next/link";
 import SearchBox from "@/components/SearchBox";
 import NavMenu from "@/components/NavMenu";
 
-const Header = ({ username }: { username?: string }) => {
+const Header = () => {
   return (
     <header className="flex flex-col p-4 bg-mineral-green">
       <div className="w-full grid grid-cols-3 gap-2">
@@ -35,9 +35,6 @@ const Header = ({ username }: { username?: string }) => {
         <div className="">
           <NavMenu />
         </div>
-      </div>
-      <div className="text-ecru-white font-semibold p-2 flex justify-end">
-        Hi, {username}!
       </div>
     </header>
   );

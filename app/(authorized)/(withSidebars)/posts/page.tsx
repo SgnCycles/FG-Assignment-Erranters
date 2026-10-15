@@ -1,9 +1,9 @@
-import MyPostsSection from "@/components/posts/MyPostsSection";
+import MyPostsFeed from "@/components/posts/MyPostsFeed";
 import { getMyPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyPostsPage = async () => {
-
+  
   const supabase = await createClient();
   const {
     data: { user },
@@ -16,7 +16,7 @@ const MyPostsPage = async () => {
       <h1 className="heading">My Posts</h1>
       {error && <p>Failed Loading Posts...</p>}
       <div className="flex grow">
-        <MyPostsSection posts={data} userId={user.id} />
+        {data && <MyPostsFeed posts={data} userId={user.id} />}
       </div>
     </main>
   );

@@ -1,14 +1,15 @@
 "use client";
-import { getHomePosts } from "@/lib/supabase/queries";
+import { getHomePosts, HomePostsType } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
 import ShortPost from "@/components/posts/ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
-import { HomePostsFeedPropsType } from "./types";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
+import type { PostCategoryContextType } from "@/types/types";
 
-const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
-  
+const HomePostsFeed = ({ posts }: {posts: HomePostsType}) => {
+  const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({
@@ -32,7 +33,12 @@ const HomePostsFeed = ({ posts, postCategory }: HomePostsFeedPropsType) => {
         setSortingOrder={setSortingOrder}
       />
       {filteredPosts?.map((post, index) => (
-        <ShortPost key={index} {...post} username={post.author.username} userImage={post.author.profile_image}/>
+        <ShortPost
+          key={index}
+          {...post}
+          username={post.author.username}
+          userImage={post.author.profile_image}
+        />
       ))}
     </div>
   );
