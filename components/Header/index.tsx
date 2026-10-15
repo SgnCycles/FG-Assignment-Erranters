@@ -4,7 +4,7 @@ import NavMenu from "@/components/NavMenu";
 
 const Header = () => {
   return (
-    <header className="flex flex-col p-4 bg-mineral-green">
+    <header className="flex flex-col p-6 bg-mineral-green">
       <div className="w-full grid grid-cols-3 gap-2">
         <div className="flex justify-start">
           <Link className="logo-button group" href="/feed">

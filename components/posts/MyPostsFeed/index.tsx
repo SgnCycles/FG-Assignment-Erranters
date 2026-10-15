@@ -6,8 +6,11 @@ import { useState } from "react";
 import MyPost from "@/components/posts/MyPost";
 import SortingButton from "@/components/buttons/SortingButton";
 import { MyPostsFeedPropsType } from "./types";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
+import { PostCategoryContextType } from "@/types/types";
 
-const MyPostsFeed = ({ posts, userId, postCategory }: MyPostsFeedPropsType) => {
+const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
+  const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
   const { data } = useQuery({

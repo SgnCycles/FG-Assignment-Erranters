@@ -74,7 +74,7 @@
 }
 
 .heading {
-  @apply font-bebas-neue text-6xl text-center text-ecru-white;
+  @apply font-bebas-neue text-4xl text-start text-ecru-white;
 }
 
 .profile-heading {
@@ -110,7 +110,11 @@
 /* tooltips */
 
 .tooltip {
-  @apply relative inline-block cursor-pointer;
+  @apply relative inline-block cursor-pointer p-2 rounded-full hover:bg-ecru-white/20;
+}
+
+.tooltip.active {
+  @apply bg-old-gold;
 }
 
 .tooltipText {
@@ -122,7 +126,7 @@
 }
 
 .action-tooltip {
-  @apply relative inline-block cursor-pointer hover:text-old-gold;
+  @apply relative inline-block cursor-pointer group-hover:text-old-gold;
 }
 
 .action-tooltipText {
