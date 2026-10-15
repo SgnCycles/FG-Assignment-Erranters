@@ -42,7 +42,7 @@
 }
 
 .button {
-  @apply flex min-w-37 text-base bg-apple text-ecru-white hover:bg-ecru-white hover:text-apple rounded-2xl font-bold px-2 py-3 cursor-pointer justify-center;
+  @apply flex min-w-37 font-cantarell text-base text-ecru-white/50 hover:bg-ecru-white hover:text-apple rounded-2xl cursor-pointer justify-center tracking-widest;
 }
 
 .button.active {
@@ -82,9 +82,21 @@
 }
 
 .heading-h2 {
-  @apply font-league-spartan text-lg text-left text-ecru-white font-bold;
+  @apply font-league-spartan text-lg text-left text-ecru-white font-bold w-full;
 }
 
+.sidebar-heading-h2 {
+  @apply font-league-spartan gap-4 text-lg text-left text-ecru-white/50 w-full pl-10;
+}
+
+/* sidebar items */
+.sidebar-item {
+  @apply w-full flex font-league-spartan text-base text-left text-ecru-white/50 hover:text-ecru-white cursor-pointer;
+}
+
+.sidebar-item.active {
+  @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-2xl w-[160px];
+}
 /*  */
 
 .eye-icon {

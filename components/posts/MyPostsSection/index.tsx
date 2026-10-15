@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
-import PostPageSidebar from "@/components/posts/PostPageSidebar";
+import PostPageSidebar from "@/components/sidebar/PostPageSidebar";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
 import { MyPostsSectionPropsType } from "./types";
-import UserSidebar from "@/components/UserSidebar";
+import UserSidebar from "@/components/sidebar/UserSidebar";
 
 const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
-  
   const [postCategory, setPostCategory] = useState<string>("All");
 
   return (
@@ -22,7 +21,7 @@ const MyPostsSection = ({ posts, userId }: MyPostsSectionPropsType) => {
           postCategory={postCategory}
         />
       )}
-       <UserSidebar />
+      <UserSidebar />
     </>
   );
 };

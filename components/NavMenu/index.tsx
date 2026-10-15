@@ -11,7 +11,7 @@ const NavMenu = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <div className="flex items-center h-full w-full justify-evenly">
+    <nav className="flex items-center h-full w-full justify-evenly" aria-label="Main navigation">
       {user && (
         <>
           <Link
@@ -53,24 +53,6 @@ const NavMenu = async () => {
             </svg>
             <span className="tooltipText">Home</span>
           </Link>
-          <Link href="/posts" className="tooltip">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#faf9f2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-sticky-note preview-icon stroke-ecru-white hover:stroke-old-gold"
-            >
-              <path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" />
-              <path d="M15 3v5a1 1 0 0 0 1 1h5" />
-            </svg>
-            <span className="tooltipText">My Posts</span>
-          </Link>
           <Link href="/notifications" className="tooltip">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -88,43 +70,6 @@ const NavMenu = async () => {
               <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
             </svg>
             <span className="tooltipText">Notifications</span>
-          </Link>
-          <Link href="/favourites" className="tooltip">
-            {/* <Link href="/messages" className="tooltip"> */}
-            {/* favourites */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#faf9f2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-message-circle-more preview-icon stroke-ecru-white hover:stroke-old-gold"
-            >
-              <path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z" />
-            </svg>
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#faf9f2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-message-circle-more preview-icon stroke-ecru-white hover:stroke-old-gold"
-            >
-              <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-              <path d="M8 12h.01" />
-              <path d="M12 12h.01" />
-              <path d="M16 12h.01" />
-            </svg>*/}
-            {/* <span className="tooltipText">Messages</span>  */}
-            <span className="tooltipText">Favourites</span> 
           </Link>
           <Link href="/profile" className="tooltip">
             <svg
@@ -166,7 +111,7 @@ const NavMenu = async () => {
           </button>
         </>
       )}
-    </div>
+    </nav>
   );
 };
 
