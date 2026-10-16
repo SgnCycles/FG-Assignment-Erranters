@@ -95,7 +95,7 @@
 }
 
 .sidebar-item.active {
-  @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-2xl w-[160px];
+  @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-4xl w-40;
 }
 /*  */
 
@@ -170,3 +170,18 @@
 .file-dropzone-area {
   @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4;
 }
+
+/* profile card */
+.profile-statistics {
+  @apply flex flex-col items-center;
+}
+
+.profile-statistics-number {
+  @apply font-bold text-base font-bebas-neue tracking-widest text-outer-space/70;
+}
+
+.profile-statistics-item {
+  @apply text-outer-space/50;
+}
+
+/*  */

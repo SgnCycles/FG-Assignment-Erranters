@@ -19,7 +19,13 @@ const UserProfileForm = ({
 }: {
   initialValues: Pick<
     Tables<"Profiles">,
-    "name" | "surname" | "username" | "bio" | "profile_image" | "interests"
+    | "name"
+    | "surname"
+    | "username"
+    | "bio"
+    | "profile_image"
+    | "interests"
+    | "headline"
   >;
   userId: string;
 }) => {
@@ -51,6 +57,7 @@ const UserProfileForm = ({
       bio: initialValues.bio || undefined,
       interests: initialValues.interests || undefined,
       profile_image: initialValues.profile_image || undefined,
+      headline: initialValues.headline || undefined,
     },
   });
 
@@ -97,6 +104,7 @@ const UserProfileForm = ({
               bio: values.bio,
               interests: values.interests,
               profile_image: imageForm,
+              headline: values.headline,
             },
             userId,
           });
@@ -170,19 +178,25 @@ const UserProfileForm = ({
             </div>
             <div className="flex flex-col justify-center w-[80%]">
               <div className="flex flex-col">
-                <label htmlFor="name" className="heading-h2">Name</label>
+                <label htmlFor="name" className="heading-h2">
+                  Name
+                </label>
                 <input className="input" {...register("name")}></input>
                 {errors.name && <ErrorMessage error={errors.name.message!} />}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="surname" className="heading-h2">Surname</label>
+                <label htmlFor="surname" className="heading-h2">
+                  Surname
+                </label>
                 <input className="input" {...register("surname")}></input>
                 {errors.surname && (
                   <ErrorMessage error={errors.surname.message!} />
                 )}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="username" className="heading-h2">Username</label>
+                <label htmlFor="username" className="heading-h2">
+                  Username
+                </label>
                 <input className="input" {...register("username")}></input>
                 {errors.username && (
                   <ErrorMessage error={errors.username.message!} />
@@ -193,12 +207,31 @@ const UserProfileForm = ({
           {/* <div className="flex flex-col grow ml-10"> */}
           <div className="grid grid-rows-2 w-full">
             <div className="flex flex-col">
-              <label htmlFor="bio" className="heading-h2">Bio</label>
-              <textarea className="input grow w-full" {...register("bio")}></textarea>
+              <label htmlFor="headline" className="heading-h2">
+                Headline
+              </label>
+              <textarea
+                className="input grow w-full"
+                {...register("headline")}
+              ></textarea>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="interests" className="heading-h2">Interests</label>
-              <textarea className="input grow w-full" {...register("interests")}></textarea>
+              <label htmlFor="bio" className="heading-h2">
+                Bio
+              </label>
+              <textarea
+                className="input grow w-full"
+                {...register("bio")}
+              ></textarea>
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="interests" className="heading-h2">
+                Interests
+              </label>
+              <textarea
+                className="input grow w-full"
+                {...register("interests")}
+              ></textarea>
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>

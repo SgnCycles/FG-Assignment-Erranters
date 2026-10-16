@@ -1,34 +1,27 @@
+"use client";
 import UserProfileForm from "@/components/forms/UserProfileForm";
-import { getUserProfile } from "@/lib/supabase/queries";
-import { createClient } from "@/lib/supabase/serverClient";
+import { useUserContext } from "@/context/userContext";
+import type { userContextType } from "@/types/types";
 
-const ProfilePage = async() => {
+const ProfilePage = () => {
 
-  const supabase = await createClient();
-  const {
-    data: {user}
-  } = await supabase.auth.getUser();
-
-  const {data, error} = await getUserProfile(user!.id);
-  if (error) {
-    throw new Error("Could not fetch profile");
-  }
-
-  if (!data) return;
+  const { user, userProfile } = useUserContext() as userContextType;
+  if (!user || !userProfile) return null;
 
   return (
     <main className="grow bg-mineral-green">
       <h1 className="heading">Edit Profile</h1>
       <UserProfileForm
         initialValues={{
-          name: data.name,
-          surname: data.surname,
-          username: data.username,
-          bio: data.bio,
-          interests: data.interests,
-          profile_image: data.profile_image,
+          name: userProfile.name,
+          surname: userProfile.surname,
+          username: userProfile.username,
+          bio: userProfile.bio,
+          interests: userProfile.interests,
+          profile_image: userProfile.profile_image,
+          headline: userProfile.headline,
         }}
-        userId={data.id}
+        userId={user.id}
       />
     </main>
   );

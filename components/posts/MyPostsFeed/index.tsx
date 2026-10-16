@@ -10,6 +10,7 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import { PostCategoryContextType } from "@/types/types";
 
 const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
+  
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();

@@ -77,6 +77,7 @@ export const userProfileSchema = z.object({
   bio: z.string().optional(),
   interests: z.string().optional(),
   profile_image: z.instanceof(FormData).optional(),
+  headline: z.string().max(140, "Maximum 140 characters").optional()
 });
 
 export const postCommentSchema = z.object({
