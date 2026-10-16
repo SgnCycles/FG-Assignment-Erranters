@@ -30,6 +30,7 @@ const ProfilePage = () => {
               profile_image: userProfile.profile_image,
               headline: userProfile.headline,
               location: userProfile.location,
+              cover_image: userProfile.cover_image,
             }}
             userId={user.id}
           />

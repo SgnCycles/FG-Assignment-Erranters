@@ -14,6 +14,7 @@ export type MemberProfilePropsType = {
       id: string;
       username: string;
       profile_image: string | null;
+      cover_image: string | null;
     };
     PostImages: {
       id: string;

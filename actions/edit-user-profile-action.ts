@@ -4,6 +4,7 @@ import { userProfileSchema } from "@/schemas/schemas";
 import { createClient } from "@/lib/supabase/serverClient";
 import { revalidatePath } from "next/cache";
 import uploadProfileImage from "@/lib/supabase/uploadProfileImage";
+import uploadCoverImage from "@/lib/supabase/uploadCoverImage";
 
 const EditUserProfile = async ({
   userData,
@@ -15,12 +16,13 @@ const EditUserProfile = async ({
   const parsedData = userProfileSchema.parse(userData);
   const supabase = await createClient();
   const profileImageFile = userData.profile_image?.get("image");
+  const coverImageFile = userData.cover_image?.get("image");
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) throw new Error("User not authorized");
+  if (!user || user.id !== userId) throw new Error("User not authorized");
 
   const { data: profile, error } = await supabase
     .from("Profiles")
@@ -31,14 +33,28 @@ const EditUserProfile = async ({
   if (error) throw new Error("Error fetching User Profile");
 
   let profileImageUrl;
+  let coverImageUrl;
 
   if (typeof profileImageFile !== "undefined") {
     if (!(profileImageFile instanceof File) && profileImageFile !== null) {
-      throw Error("Image is not in a valid format!");
+      throw Error("Profile image is not in a valid format!");
     }
-    profileImageUrl = profileImageFile ? await uploadProfileImage(profileImageFile) : null;
+    profileImageUrl = profileImageFile
+      ? await uploadProfileImage(profileImageFile)
+      : null;
   } else {
     profileImageUrl = profile.profile_image;
+  }
+
+  if (typeof coverImageFile !== "undefined") {
+    if (!(coverImageFile instanceof File) && coverImageFile !== null) {
+      throw Error("Cover image is not in a valid format!");
+    }
+    coverImageUrl = coverImageFile
+      ? await uploadCoverImage(coverImageFile)
+      : null;
+  } else {
+    coverImageUrl = profile.cover_image;
   }
 
   const { data: updatedProfile } = await supabase
@@ -46,6 +62,7 @@ const EditUserProfile = async ({
     .update({
       ...parsedData,
       profile_image: profileImageUrl,
+      cover_image: coverImageUrl,
     })
     .eq("id", userId)
     .select()
