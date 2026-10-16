@@ -347,6 +347,7 @@ export type Database = {
           headline: string | null
           id: string
           interests: string | null
+          location: string | null
           name: string | null
           profile_image: string | null
           surname: string | null
@@ -359,6 +360,7 @@ export type Database = {
           headline?: string | null
           id?: string
           interests?: string | null
+          location?: string | null
           name?: string | null
           profile_image?: string | null
           surname?: string | null
@@ -371,6 +373,7 @@ export type Database = {
           headline?: string | null
           id?: string
           interests?: string | null
+          location?: string | null
           name?: string | null
           profile_image?: string | null
           surname?: string | null

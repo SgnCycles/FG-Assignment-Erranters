@@ -4,25 +4,37 @@ import { useUserContext } from "@/context/userContext";
 import type { userContextType } from "@/types/types";
 
 const ProfilePage = () => {
-
   const { user, userProfile } = useUserContext() as userContextType;
   if (!user || !userProfile) return null;
 
   return (
-    <main className="grow bg-mineral-green">
-      <h1 className="heading">Edit Profile</h1>
-      <UserProfileForm
-        initialValues={{
-          name: userProfile.name,
-          surname: userProfile.surname,
-          username: userProfile.username,
-          bio: userProfile.bio,
-          interests: userProfile.interests,
-          profile_image: userProfile.profile_image,
-          headline: userProfile.headline,
-        }}
-        userId={user.id}
-      />
+    <main className="grow bg-mineral-green flex justify-center">
+      <div className="w-[90%]">
+        <div className="flex flex-col mb-10">
+          <h1 className="font-bebas-neue text-old-gold text-lg">
+            Profile Settings
+          </h1>
+          <h2 className="heading">Be Yourself</h2>
+          <p className="text-ecru-white font-cantarell">
+            Show who you are to the other <span>Erranters</span>
+          </p>
+        </div>
+        <div>
+          <UserProfileForm
+            initialValues={{
+              name: userProfile.name,
+              surname: userProfile.surname,
+              username: userProfile.username,
+              bio: userProfile.bio,
+              interests: userProfile.interests,
+              profile_image: userProfile.profile_image,
+              headline: userProfile.headline,
+              location: userProfile.location,
+            }}
+            userId={user.id}
+          />
+        </div>
+      </div>
     </main>
   );
 };

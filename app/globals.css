@@ -15,6 +15,7 @@
   --color-apple: #65ab32;
   --color-ecru-white: #faf9f2;
   --color-outer-space: #263638;
+  --color-paper-blue: #BFD5DE;
   --text-9xl: clamp(6.5rem, 8.2vw + 4.5rem, 10rem);
   /* --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
   --text-5xl: clamp(2.25rem, 4vw + 1.45rem, 4.5rem);
@@ -42,7 +43,7 @@
 }
 
 .button {
-  @apply flex min-w-37 font-cantarell text-base text-ecru-white/50 hover:bg-ecru-white hover:text-apple rounded-2xl cursor-pointer justify-center tracking-widest;
+  @apply flex min-w-37 font-cantarell text-base text-outer-space font-bold hover:bg-ecru-white hover:text-apple rounded-2xl cursor-pointer justify-center tracking-widest;
 }
 
 .button.active {
@@ -65,6 +66,14 @@
   @apply flex rounded-2xl gap-2 cursor-pointer;
 }
 
+.button-profile {
+  @apply grid min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-mineral-green rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+}
+
+.button-profile-cancel {
+  @apply grid min-w-37 font-cantarell text-base text-outer-space hover:text-apple cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+}
+
 /*  */
 
 /* headings */
@@ -82,7 +91,11 @@
 }
 
 .heading-h2 {
-  @apply font-league-spartan text-lg text-left text-ecru-white font-bold w-full;
+  @apply font-league-spartan text-lg text-left text-outer-space font-bold w-full;
+}
+
+.profile-form-heading-h2 {
+  @apply font-league-spartan text-lg text-left text-outer-space/70 font-semibold w-full;
 }
 
 .sidebar-heading-h2 {
@@ -150,7 +163,7 @@
 /* inputs */
 
 .input {
-  @apply bg-ecru-white text-base border-old-gold border p-2 my-2 rounded-xl text-outer-space;
+  @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space;
 }
 
 .label {
@@ -183,5 +196,21 @@
 .profile-statistics-item {
   @apply text-outer-space/50;
 }
+
+/*  */
+
+/* profile form */
+
+.profile-row {
+  @apply w-full grid grid-cols-2 gap-4 place-items-center;
+}
+.profile-item-short {
+  @apply flex flex-col w-[80%];
+}
+
+.profile-item-long {
+  @apply flex flex-col w-[90%];
+}
+
 
 /*  */

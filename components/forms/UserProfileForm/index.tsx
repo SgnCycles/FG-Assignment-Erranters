@@ -26,6 +26,7 @@ const UserProfileForm = ({
     | "profile_image"
     | "interests"
     | "headline"
+    | "location"
   >;
   userId: string;
 }) => {
@@ -58,6 +59,7 @@ const UserProfileForm = ({
       interests: initialValues.interests || undefined,
       profile_image: initialValues.profile_image || undefined,
       headline: initialValues.headline || undefined,
+      location: initialValues.location || undefined,
     },
   });
 
@@ -83,7 +85,7 @@ const UserProfileForm = ({
   return (
     <div className="mr-6">
       <form
-        className="h-full text-ecru-white"
+        className="h-full text-outer-space bg-ecru-white rounded-4xl"
         onSubmit={handleSubmit((values) => {
           let imageForm = undefined;
 
@@ -105,17 +107,43 @@ const UserProfileForm = ({
               interests: values.interests,
               profile_image: imageForm,
               headline: values.headline,
+              location: values.location,
             },
             userId,
           });
         })}
       >
-        <div className="flex">
-          <div className="flex flex-col w-[30%] items-center">
-            <div className="flex flex-col">
+        <div className="flex flex-col border border-ecru-white rounded-4xl">
+          <div className="flex flex-col">
+            <div className="h-50 relative">
+              <img
+                className="rounded-tl-4xl rounded-tr-4xl h-full w-full object-cover"
+                src="/images/erranters_cycling.png"
+                alt=""
+              />
+              <button className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-camera preview-icon"
+                >
+                  <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+                  <circle cx="12" cy="13" r="3" />
+                </svg>
+                Change cover
+              </button>
+            </div>
+            <div className="flex flex-col h-20">
               {profileImagePreview ? (
-                <div className="w-full flex items-center justify-center">
-                  <div className="h-40 w-40 relative place-items-center">
+                <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
+                  <div className="h-full w-full relative place-items-center">
                     <img
                       src={profileImagePreview}
                       alt={initialValues.username}
@@ -176,16 +204,16 @@ const UserProfileForm = ({
                 <ErrorMessage error={errors.profile_image.message!} />
               )}
             </div>
-            <div className="flex flex-col justify-center w-[80%]">
-              <div className="flex flex-col">
-                <label htmlFor="name" className="heading-h2">
+            <div className="profile-row">
+              <div className="profile-item-short">
+                <label htmlFor="name" className="profile-form-heading-h2">
                   Name
                 </label>
                 <input className="input" {...register("name")}></input>
                 {errors.name && <ErrorMessage error={errors.name.message!} />}
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="surname" className="heading-h2">
+              <div className="profile-item-short">
+                <label htmlFor="surname" className="profile-form-heading-h2">
                   Surname
                 </label>
                 <input className="input" {...register("surname")}></input>
@@ -193,8 +221,10 @@ const UserProfileForm = ({
                   <ErrorMessage error={errors.surname.message!} />
                 )}
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="username" className="heading-h2">
+            </div>
+            <div className="profile-row">
+              <div className="profile-item-short">
+                <label htmlFor="username" className="profile-form-heading-h2">
                   Username
                 </label>
                 <input className="input" {...register("username")}></input>
@@ -202,12 +232,21 @@ const UserProfileForm = ({
                   <ErrorMessage error={errors.username.message!} />
                 )}
               </div>
+              <div className="profile-item-short">
+                <label htmlFor="location" className="profile-form-heading-h2">
+                  Location
+                </label>
+                <input className="input" {...register("location")}></input>
+                {errors.location && (
+                  <ErrorMessage error={errors.location.message!} />
+                )}
+              </div>
             </div>
           </div>
           {/* <div className="flex flex-col grow ml-10"> */}
-          <div className="grid grid-rows-2 w-full">
-            <div className="flex flex-col">
-              <label htmlFor="headline" className="heading-h2">
+          <div className="flex flex-col w-full items-center">
+            <div className="profile-item-long">
+              <label htmlFor="headline" className="profile-form-heading-h2">
                 Headline
               </label>
               <textarea
@@ -215,8 +254,8 @@ const UserProfileForm = ({
                 {...register("headline")}
               ></textarea>
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="bio" className="heading-h2">
+            <div className="profile-item-long">
+              <label htmlFor="bio" className="profile-form-heading-h2">
                 Bio
               </label>
               <textarea
@@ -224,8 +263,8 @@ const UserProfileForm = ({
                 {...register("bio")}
               ></textarea>
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="interests" className="heading-h2">
+            <div className="profile-item-long">
+              <label htmlFor="interests" className="profile-form-heading-h2">
                 Interests
               </label>
               <textarea
@@ -235,9 +274,10 @@ const UserProfileForm = ({
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>
-        </div>
-        <div className="flex justify-end mt-4">
-          <button className="button">Update Profile</button>
+          <div className="flex justify-end mt-4 m-10">
+            <button className="button-profile-cancel">Cancel</button>
+            <button className="button-profile">Update Profile</button>
+          </div>
         </div>
       </form>
     </div>
