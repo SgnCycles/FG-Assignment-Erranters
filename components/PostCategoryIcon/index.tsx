@@ -5,11 +5,11 @@ const PostCategoryIcons = ({ category }: { category: string }) => {
         {category === "Hiking" && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="#919795"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -21,11 +21,11 @@ const PostCategoryIcons = ({ category }: { category: string }) => {
         {category === "Cycling" && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="#919795"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -40,11 +40,11 @@ const PostCategoryIcons = ({ category }: { category: string }) => {
         {category === "Marketplace" && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="#919795"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"

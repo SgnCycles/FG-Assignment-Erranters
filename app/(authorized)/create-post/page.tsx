@@ -11,7 +11,7 @@ const CreatePostPage = () => {
   const { mutate, error, isPending } = useMutation({
     mutationFn: CreatePost,
     onSuccess: (data) => {
-      router.push(`/${data.slug}`);
+      router.push(`/post/${data.slug}`);
     },
   });
   const handleCreatePost = (values: FormValues) => {

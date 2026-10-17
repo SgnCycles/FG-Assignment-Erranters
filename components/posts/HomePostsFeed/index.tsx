@@ -8,7 +8,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
-const HomePostsFeed = ({ posts }: {posts: HomePostsType}) => {
+const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
   
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
@@ -27,6 +27,7 @@ const HomePostsFeed = ({ posts }: {posts: HomePostsType}) => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
+
   return (
     <div className="grow">
       <SortingButton
@@ -34,12 +35,7 @@ const HomePostsFeed = ({ posts }: {posts: HomePostsType}) => {
         setSortingOrder={setSortingOrder}
       />
       {filteredPosts?.map((post, index) => (
-        <ShortPost
-          key={index}
-          {...post}
-          username={post.author.username}
-          userImage={post.author.profile_image}
-        />
+        <ShortPost key={index} post={post} />
       ))}
     </div>
   );

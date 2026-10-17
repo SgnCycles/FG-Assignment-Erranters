@@ -75,11 +75,10 @@ const MemberProfile = ({
         <div className="flex flex-col">
           <h2 className="heading-h2 mx-4">Posts:</h2>
           {postData &&
-            postData.map((post) => (
+            postData.map((post, index) => (
               <ShortPost
-                {...post}
-                username={post.author.username}
-                userImage={post.author.profile_image}
+              key={index}
+                post={post}
               />
             ))}
         </div>

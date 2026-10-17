@@ -1,9 +1,10 @@
+import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyFavouritePostsFeed from "@/components/posts/MyFavouritePostFeed";
 import { getUserFavourites } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyFavouritesPage = async () => {
-
+  
   const supabase = await createClient();
   const {
     data: { user },
@@ -12,11 +13,16 @@ const MyFavouritesPage = async () => {
   const { data, error } = await getUserFavourites(supabase, user.id, false);
 
   return (
-    <div className="grow bg-mineral-green text-ecru-white">
-      <h1 className="heading">Favourite Posts</h1>
-      {error && <p>Failed Loading Favourite Posts...</p>}
-      <div className="flex grow">
-        <MyFavouritePostsFeed posts={data} userId={user.id} />
+    <div className="grow flex flex-col items-center justify-center bg-mineral-green">
+      <div className="flex justify-between items-center p-4 w-[90%]">
+        <h1 className="heading text-ecru-white font-league-spartan">
+          Favourite <span className="text-old-gold">Posts</span>
+        </h1>
+        <CreatePostButton />
+      </div>
+      {error && <p>Failed Loading Posts...</p>}
+      <div className="flex grow w-[90%]">
+        {data && <MyFavouritePostsFeed posts={data} userId={user.id} />}
       </div>
     </div>
   );

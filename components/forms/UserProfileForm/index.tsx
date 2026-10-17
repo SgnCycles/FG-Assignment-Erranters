@@ -151,6 +151,7 @@ const UserProfileForm = ({
         <div className="flex flex-col border border-ecru-white rounded-4xl">
           <div className="flex flex-col">
             <div className="h-50 relative rounded-tl-4xl rounded-tr-4xl">
+              {/* TO DO: add in the UI the max size of the images */}
               {coverImagePreview ? (
                 <div className="h-full w-full relative place-items-center rounded-tl-4xl rounded-tr-4xl">
                   <img
@@ -223,6 +224,7 @@ const UserProfileForm = ({
               )}
             </div>
             <div className="flex flex-col h-20">
+              {/* TO DO: add in the UI the max size of the images */}
               {profileImagePreview ? (
                 <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
                   <div className="h-full w-full relative place-items-center">

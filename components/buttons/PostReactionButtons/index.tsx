@@ -109,7 +109,7 @@ const PostReactionButtons = ({
 
   return (
     <div>
-      <ul className="flex gap-4">
+      <ul className="flex gap-4 text-outer-space/50">
         <li>
           <LikeButton
             likeCount={likeCount}
@@ -124,7 +124,7 @@ const PostReactionButtons = ({
         <li>
           <ShareButton />
         </li>
-        <li>
+        <li className="ml-auto">
           <FavouriteButton
             postIsFavourite={postIsFavourite}
             handleClick={() =>

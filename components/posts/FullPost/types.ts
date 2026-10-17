@@ -1,21 +1,7 @@
+import { PostType } from "@/lib/supabase/queries";
+
 export type PostPropsType = {
-  id: string;
-  slug: string;
-  title: string;
-  content: string;
-  username: string;
-  userImage: string | null;
+  post: PostType;
   isAuthor: boolean;
-  created_at: string;
   userId: string | null;
-  category: string;
-  PostImages: {
-    id: string;
-    image_url: string;
-    position: number;
-  }[];
-  Comments: {
-    id: string;
-    post_id: string | null;
-  }[];
 };

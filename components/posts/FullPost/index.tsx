@@ -6,10 +6,10 @@ import { DeletePostAction } from "@/actions/delete-post-action";
 import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/forms/AddCommentForm";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
-import { PostPropsType } from "./types";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
+import { PostPropsType } from "./types";
 
-const Post = ({ ...data }: PostPropsType) => {
+const Post = ({ post, isAuthor, userId }: PostPropsType) => {
 
   const router = useRouter();
   const onDeleteSuccess = () => {
@@ -19,13 +19,13 @@ const Post = ({ ...data }: PostPropsType) => {
   return (
     <div className="flex flex-col h-full justify-between p-8 rounded-2xl grow bg-mineral-green text-ecru-white font-cantarell">
       <div className="flex flex-col mb-4">
-        {data.title && <h1 className="heading">{data.title}</h1>}
+        {post.title && <h1 className="heading">{post.title}</h1>}
       </div>
       <div className="w-full flex justify-between mb-4">
         <div className="flex">
-          {data.userImage ? (
+          {post.author.profile_image ? (
             <img
-              src={data.userImage}
+              src={post.author.profile_image}
               alt="profile user"
               className="w-15 h-15 rounded-full"
             />
@@ -39,7 +39,7 @@ const Post = ({ ...data }: PostPropsType) => {
             </div>
           )}
           <div className="flex gap-2 text-right italic place-self-center ml-2">
-            <span>{data.username}</span>
+            <span>{post.author.username}</span>
             <span className="place-self-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,20 +59,20 @@ const Post = ({ ...data }: PostPropsType) => {
               </svg>
             </span>
             <span>
-              {new Date(data.created_at).toLocaleString("sv-Se", {
+              {new Date(post.created_at).toLocaleString("sv-Se", {
                 dateStyle: "short",
                 timeStyle: "short",
               })}
             </span>
-            <PostCategoryIcons category={data.category} />
+            <PostCategoryIcons category={post.category} />
           </div>
         </div>
         <div className="flex">
-          {data.isAuthor && (
+          {isAuthor && (
             <div className="flex justify-end gap-2">
-              <UpdateButton slug={data.slug} type="icon" />
+              <UpdateButton slug={post.slug} type="icon" />
               <DeleteButton
-                id={data.id}
+                id={post.id}
                 type="icon"
                 deleteFunction={DeletePostAction}
                 onDeleteSuccess={onDeleteSuccess}
@@ -82,35 +82,29 @@ const Post = ({ ...data }: PostPropsType) => {
         </div>
       </div>
       <div className="mb-4">
-        {data.PostImages.length === 0 && null}
-        {data.PostImages.length > 0 && (
+        {post.PostImages.length === 0 && null}
+        {post.PostImages.length > 0 && (
           <div className="flex justify-start">
-            {data.PostImages.map((image) => (
+            {post.PostImages.map((image) => (
               <img
                 key={image.id}
                 src={image.image_url}
-                alt={data.title}
+                alt={post.title}
                 className="h-50 w-auto"
               />
             ))}
           </div>
         )}
       </div>
-      {data.content && (
+      {post.content && (
         <div className="text-base">
-          <p>{data.content}</p>
+          <p>{post.content}</p>
         </div>
       )}
-      <PostReactionButtons
-        postId={data.id}
-      />
+      <PostReactionButtons postId={post.id} />
       <div className="my-4">
-        {data.userId && <AddCommentForm postId={data.id} slug={data.slug} />}
-        <PostComments
-          postId={data.id}
-          isAuthor={data.isAuthor}
-          userId={data.userId}
-        />
+        {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
+        <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} />
       </div>
     </div>
   );

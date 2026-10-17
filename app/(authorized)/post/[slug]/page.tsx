@@ -29,12 +29,9 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       <div className="grow flex justify-center items-center">
         {data && (
           <Post
-            {...data}
-            username={data.author.username}
+            post={data}
             isAuthor={isAuthor}
             userId={user?.id || null}
-            userImage={data.author.profile_image || null}
-            slug={slug}
           />
         )}
       </div>

@@ -3,14 +3,14 @@ import { getMyPosts } from "@/lib/supabase/queries";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useState } from "react";
-import MyPost from "@/components/posts/MyPost";
 import SortingButton from "@/components/buttons/SortingButton";
 import { MyPostsFeedPropsType } from "./types";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
 import { PostCategoryContextType } from "@/types/types";
+import ShortPost from "../ShortPost";
 
 const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
-  
+
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
@@ -36,7 +36,7 @@ const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
         setSortingOrder={setSortingOrder}
       />
       {filteredPosts.map((post, index) => (
-        <MyPost key={index} {...post} username={post.author.username} userImage={post.author.profile_image}/>
+        <ShortPost key={index} post={post} />
       ))}
     </div>
   );

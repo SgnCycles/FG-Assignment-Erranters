@@ -13,6 +13,7 @@ const MyFavouritePostsFeed = ({
   posts,
   userId,
 }: MyFavouritePostSectionPropsType) => {
+  
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
@@ -52,10 +53,8 @@ const MyFavouritePostsFeed = ({
         filteredPosts.length > 0 &&
         filteredPosts.map((post, index) => (
           <ShortPost
+            post={post.Posts}
             key={index}
-            {...post.Posts}
-            username={post.Posts.author.username}
-            userImage={post.Posts.author.profile_image}
             onFavouriteDeleteSuccess={onFavouriteDeleteSuccess}
           />
         ))}

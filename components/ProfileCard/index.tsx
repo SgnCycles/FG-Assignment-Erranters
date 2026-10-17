@@ -6,7 +6,7 @@ const ProfileCard = () => {
   const { userProfile } = useUserContext() as userContextType;
 
   return (
-    <div className="bg-ecru-white border-2 border-ecru-white h-100 w-full mr-6 mt-6 rounded-4xl">
+    <div className="bg-casual-white border-2 border-ecru-white h-100 w-full mr-6 mt-6 rounded-4xl">
       <div className="flex flex-col items-between h-full">
         {userProfile?.cover_image ? (
           <div className="h-25 relative rounded-tl-4xl rounded-tr-4xl">

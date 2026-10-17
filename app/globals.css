@@ -14,6 +14,8 @@
   --color-old-gold: #cbb037;
   --color-apple: #65ab32;
   --color-ecru-white: #faf9f2;
+  --color-casual-white: #FAF9F2;
+  --color-cauliflower: #F3EFDA;
   --color-outer-space: #263638;
   --color-paper-blue: #BFD5DE;
   --text-9xl: clamp(6.5rem, 8.2vw + 4.5rem, 10rem);
@@ -63,7 +65,15 @@
 }
 
 .postReactionButtons {
-  @apply flex rounded-2xl gap-2 cursor-pointer;
+  @apply flex rounded-2xl gap-1 cursor-pointer p-2;
+}
+
+.postReactionButtons:hover {
+  @apply bg-cauliflower rounded-4xl;
+}
+
+.postReactionButtons:active {
+  @apply bg-cauliflower rounded-4xl text-apple;
 }
 
 .button-profile {
