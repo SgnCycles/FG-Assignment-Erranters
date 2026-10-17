@@ -10,101 +10,86 @@ import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import { PostPropsType } from "./types";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
-
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
 
   return (
-    <div className="flex flex-col h-full justify-between p-8 rounded-2xl grow bg-mineral-green text-ecru-white font-cantarell">
-      <div className="flex flex-col mb-4">
-        {post.title && <h1 className="heading">{post.title}</h1>}
-      </div>
-      <div className="w-full flex justify-between mb-4">
-        <div className="flex">
-          {post.author.profile_image ? (
-            <img
-              src={post.author.profile_image}
-              alt="profile user"
-              className="w-15 h-15 rounded-full"
-            />
-          ) : (
-            <div className="h-10 w-10 relative rounded-full">
-              <img
-                src="/images/profileImage_placeholder.png"
-                alt="user placeholder"
-                className="h-full w-full object-cover rounded-full"
-              />
-            </div>
+    <div className="flex flex-col h-full items-center p-8 rounded-2xl grow bg-mineral-green text-ecru-white font-cantarell">
+      <div className="bg-casual-white text-outer-space rounded-4xl w-2/3 p-10">
+        <div className="flex justify-between mb-4">
+          {post.title && (
+            <h1 className="post-heading text-outer-space">{post.title}</h1>
           )}
-          <div className="flex gap-2 text-right italic place-self-center ml-2">
-            <span>{post.author.username}</span>
-            <span className="place-self-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-asterisk preview-icon"
-              >
-                <path d="M12 5v14" />
-                <path d="m18.065 8.496-12.125 7" />
-                <path d="m5.94 8.504 12.125 7" />
-              </svg>
-            </span>
-            <span>
-              {new Date(post.created_at).toLocaleString("sv-Se", {
-                dateStyle: "short",
-                timeStyle: "short",
-              })}
-            </span>
-            <PostCategoryIcons category={post.category} />
+          <div className="flex">
+            {isAuthor && (
+              <div className="flex justify-end gap-2">
+                <UpdateButton slug={post.slug} type="icon" />
+                <DeleteButton
+                  id={post.id}
+                  type="icon"
+                  deleteFunction={DeletePostAction}
+                  onDeleteSuccess={onDeleteSuccess}
+                />
+              </div>
+            )}
           </div>
         </div>
-        <div className="flex">
-          {isAuthor && (
-            <div className="flex justify-end gap-2">
-              <UpdateButton slug={post.slug} type="icon" />
-              <DeleteButton
-                id={post.id}
-                type="icon"
-                deleteFunction={DeletePostAction}
-                onDeleteSuccess={onDeleteSuccess}
+        <div className="w-full flex justify-between mb-4">
+          <div className="flex">
+            {post.author.profile_image ? (
+              <img
+                src={post.author.profile_image}
+                alt="profile user"
+                className="w-15 h-15 rounded-full"
               />
+            ) : (
+              <div className="h-10 w-10 relative rounded-full">
+                <img
+                  src="/images/profileImage_placeholder.png"
+                  alt="user placeholder"
+                  className="h-full w-full object-cover rounded-full"
+                />
+              </div>
+            )}
+            <div className="flex gap-2 text-right italic place-self-center ml-2">
+              <span>{post.author.username}</span>
+              <span>
+                {new Date(post.created_at).toLocaleString("sv-Se", {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                })}
+              </span>
+              <PostCategoryIcons category={post.category} />
+            </div>
+          </div>
+        </div>
+        <div className="mb-4">
+          {post.PostImages.length === 0 && null}
+          {post.PostImages.length > 0 && (
+            <div className="flex justify-start">
+              {post.PostImages.map((image) => (
+                <img
+                  key={image.id}
+                  src={image.image_url}
+                  alt={post.title}
+                  className="h-50 w-auto"
+                />
+              ))}
             </div>
           )}
         </div>
-      </div>
-      <div className="mb-4">
-        {post.PostImages.length === 0 && null}
-        {post.PostImages.length > 0 && (
-          <div className="flex justify-start">
-            {post.PostImages.map((image) => (
-              <img
-                key={image.id}
-                src={image.image_url}
-                alt={post.title}
-                className="h-50 w-auto"
-              />
-            ))}
+        {post.content && (
+          <div className="text-base">
+            <p>{post.content}</p>
           </div>
         )}
-      </div>
-      {post.content && (
-        <div className="text-base">
-          <p>{post.content}</p>
+        <PostReactionButtons postId={post.id} />
+        <div className="my-4">
+          {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
+          <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} />
         </div>
-      )}
-      <PostReactionButtons postId={post.id} />
-      <div className="my-4">
-        {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
-        <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} />
       </div>
     </div>
   );

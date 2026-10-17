@@ -99,9 +99,7 @@ export const getUserPosts = async (
 ) => {
   return await supabase
     .from("Posts")
-    .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
-    )
+    .select('*,  PostImages(*), author:Profiles(*), Comments(*)')
     .eq("author", userId)
     .order("created_at", { ascending: false });
 };
@@ -110,7 +108,7 @@ export const getMemberProfile = async (username: string) => {
   const supabase = createClient();
   return await supabase
     .from("Profiles")
-    .select("id, name, surname, username, bio, interests, profile_image, cover_image")
+    .select('*, Posts(*, PostImages(*))')
     .eq("username", username)
     .single();
 };
@@ -172,6 +170,7 @@ export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
 export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
+export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;
 export type GetPostCommentsType = QueryData<ReturnType<typeof getPostComments>>;
 export type GetUserLikeStatusType = QueryData<ReturnType<typeof getUserLikeStatus>>;
 export type GetPostLikesNumberType = QueryData<ReturnType<typeof getPostLikesNumber>>;

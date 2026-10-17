@@ -1,13 +1,7 @@
 import ShortPost from "@/components/posts/ShortPost";
-import { MemberProfilePropsType } from "./types";
+import { MemberProfileType, PostType } from "@/lib/supabase/queries";
 
-const MemberProfile = ({
-  username,
-  userImage,
-  bio,
-  interests,
-  postData,
-}: MemberProfilePropsType) => {
+const MemberProfile = ({ profile, postData }: { profile: MemberProfileType, postData: PostType[] }) => {
   return (
     <div className="min-h-screen flex">
       <div className="flex mx-4">
@@ -15,12 +9,12 @@ const MemberProfile = ({
           <div className="place-items-center m-4">
             <div className="h-40 w-40">
               <img
-                src={userImage ?? undefined}
+                src={profile.profile_image ?? undefined}
                 className="h-full w-full object-cover rounded-full"
               />
             </div>
           </div>
-          <h1 className="profile-heading">{username}</h1>
+          <h1 className="profile-heading">{profile.username}</h1>
           <div className="flex justify-start items-start gap-4">
             <button className="flex button">
               <svg
@@ -65,21 +59,22 @@ const MemberProfile = ({
       </div>
       <div className="flex flex-col grow">
         <div className="flex flex-col m-4">
+          <h2 className="heading-h2">Headline:</h2>
+          <p>{profile.headline}</p>
+        </div>
+        <div className="flex flex-col m-4">
           <h2 className="heading-h2">Bio:</h2>
-          <p>{bio}</p>
+          <p>{profile.bio}</p>
         </div>
         <div className="flex flex-col m-4">
           <h2 className="heading-h2">Interests:</h2>
-          <p>{interests}</p>
+          <p>{profile.interests}</p>
         </div>
         <div className="flex flex-col">
           <h2 className="heading-h2 mx-4">Posts:</h2>
           {postData &&
             postData.map((post, index) => (
-              <ShortPost
-              key={index}
-                post={post}
-              />
+              <ShortPost key={index} post={post} />
             ))}
         </div>
       </div>

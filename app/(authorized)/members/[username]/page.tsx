@@ -35,13 +35,7 @@ const MemberProfilePage = async ({
       <div className="w-full pl-4">
         <GoBackButton />
       </div>
-      <MemberProfile
-        userImage={data.profile_image}
-        username={data.username}
-        bio={data.bio}
-        interests={data.interests}
-        postData={postData}
-      />
+      <MemberProfile profile={data} postData={postData} />
     </main>
   );
 };

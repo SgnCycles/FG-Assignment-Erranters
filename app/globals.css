@@ -120,6 +120,10 @@
 .sidebar-item.active {
   @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-4xl w-40;
 }
+
+.post-heading {
+  @apply font-bebas-neue text-4xl text-start text-outer-space;
+}
 /*  */
 
 .eye-icon {
