@@ -23,16 +23,16 @@ const SearchBox = () => {
 
   return (
     <div className="relative h-full w-full flex justify-center items-center">
-      <div className="border-apple hover:border-old-gold border flex justify-between rounded-2xl mx-4 w-full overflow-hidden">
+      <div className="border-apple hover:border-3 hover:border-old-gold focus-within:border-3 focus-within:border-old-gold flex justify-between rounded-4xl mx-4 w-full overflow-hidden">
         <input
           placeholder="Search..."
           onChange={handleChange}
           value={input}
-          className="p-1 w-full pl-3 border-0 outline-none focus:border-mineral-green focus:border focus:rounded-l-2xl text-outer-space placeholder:text-outer-space placeholder:bg-ecru-white bg-ecru-white"
+          className="p-1 w-full pl-3 border-none outline-none focus:border-mineral-green text-outer-space placeholder:text-outer-space/50 focus:placeholder:text-outer-space placeholder:bg-ecru-white bg-ecru-white "
         />
         <button
           onClick={handleClick}
-          className="tooltip bg-apple hover:bg-old-gold border-0 px-4 cursor-pointer"
+          className="bg-ecru-white hover:bg-old-gold border-0 px-4 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,11 +40,11 @@ const SearchBox = () => {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#faf9f2"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-search preview-icon"
+            className="lucide lucide-search preview-icon stroke-outer-space/50"
           >
             <path d="m21 21-4.34-4.34" />
             <circle cx="11" cy="11" r="8" />

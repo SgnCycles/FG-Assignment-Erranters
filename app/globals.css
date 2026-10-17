@@ -67,7 +67,7 @@
 }
 
 .button-profile {
-  @apply grid min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-mineral-green rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+  @apply grid min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-old-gold hover:text-outer-space rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
 }
 
 .button-profile-cancel {

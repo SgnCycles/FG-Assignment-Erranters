@@ -9,7 +9,7 @@ const PostPageSidebar = () => {
   const { postCategory, setPostCategory } = usePostCategoryContext() as PostCategoryContextType;
 
   return (
-    <aside className="w-[15%] flex flex-col items-center bg-mineral-green">
+    <aside className="w-[15%] flex flex-col items-center bg-mineral-green pl-6">
       <h2 className="sidebar-heading-h2">Discover</h2>
       <nav
         aria-label="Sidebar navigation"

@@ -7,14 +7,19 @@ const ProfileCard = () => {
 
   return (
     <div className="bg-ecru-white border-2 border-ecru-white h-100 w-full mr-6 mt-6 rounded-4xl">
-      <div className="h-full flex flex-col">
-        <div className="h-1/4">
-          <img
-            className="rounded-tl-4xl rounded-tr-4xl h-full w-full object-cover"
-            src="/images/erranters_cycling.png"
-            alt=""
-          />
-        </div>
+      <div className="flex flex-col items-between h-full">
+        {userProfile?.cover_image ? (
+          <div className="h-25 relative rounded-tl-4xl rounded-tr-4xl">
+            <img
+              src={userProfile.cover_image}
+              alt="profile user"
+              className="h-full w-full object-cover rounded-tl-4xl rounded-tr-4xl"
+            />
+          </div>
+        ) : (
+          <div className="h-25 relative rounded-tl-4xl rounded-tr-4xl bg-gray-600">
+          </div>
+        )}
         <div className="flex justify-between h-15">
           {userProfile?.profile_image ? (
             <div className="h-25 w-25 rounded-full z-10 -translate-y-10 translate-x-5 border-4 border-ecru-white">

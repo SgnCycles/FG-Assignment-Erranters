@@ -150,33 +150,6 @@ const UserProfileForm = ({
       >
         <div className="flex flex-col border border-ecru-white rounded-4xl">
           <div className="flex flex-col">
-            {/* <div className="h-50 relative">
-              <img
-                className="rounded-tl-4xl rounded-tr-4xl h-full w-full object-cover"
-                src="/images/erranters_cycling.png"
-                alt=""
-              />
-              <button className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-camera preview-icon"
-                >
-                  <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
-                  <circle cx="12" cy="13" r="3" />
-                </svg>
-                Change cover
-              </button>
-            </div> */}
-
-            {/* testing cover image */}
             <div className="h-50 relative rounded-tl-4xl rounded-tr-4xl">
               {coverImagePreview ? (
                 <div className="h-full w-full relative place-items-center rounded-tl-4xl rounded-tr-4xl">
@@ -187,7 +160,7 @@ const UserProfileForm = ({
                   />
                   <button
                     type="button"
-                    className="w-7 h-7 absolute bottom-0 right-5"
+                    className="w-7 h-7 absolute bottom-2 right-5"
                     onClick={() => {
                       setCoverImagePreview(null);
                       if (coverImageUrl) {
@@ -195,12 +168,13 @@ const UserProfileForm = ({
                       }
                     }}
                   >
-                    <FaXmark className="w-full h-full cursor-pointer fill-red-400 bg-ecru-white hover:bg-red-400 hover:fill-ecru-white rounded-full" />
+                    <FaXmark className="w-full h-full cursor-pointer fill-outer-space bg-old-gold hover:bg-red-400 hover:fill-ecru-white rounded-full" />
                   </button>
                 </div>
               ) : (
                 <div className="h-50 relative bg-gray-600 rounded-tl-4xl rounded-tr-4xl">
                   <button
+                    type="button"
                     className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold"
                     onClick={() => {
                       document.getElementById("add-cover-image")!.click();
@@ -248,8 +222,6 @@ const UserProfileForm = ({
                 <ErrorMessage error={errors.cover_image.message!} />
               )}
             </div>
-            {/* testing */}
-
             <div className="flex flex-col h-20">
               {profileImagePreview ? (
                 <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
@@ -269,7 +241,7 @@ const UserProfileForm = ({
                         }
                       }}
                     >
-                      <FaXmark className="w-full h-full cursor-pointer fill-red-400 bg-ecru-white hover:bg-red-400 hover:fill-ecru-white rounded-full" />
+                      <FaXmark className="w-full h-full cursor-pointer fill-outer-space bg-old-gold hover:bg-red-400 hover:fill-ecru-white rounded-full" />
                     </button>
                   </div>
                 </div>
@@ -385,6 +357,7 @@ const UserProfileForm = ({
             </div>
           </div>
           <div className="flex justify-end mt-4 m-10">
+            {/* TO DO: add function to the cancel button */}
             <button className="button-profile-cancel">Cancel</button>
             <button className="button-profile">Update Profile</button>
           </div>
