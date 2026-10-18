@@ -53,7 +53,7 @@
 }
 
 .button-secondary {
-  @apply h-20 inline-block p-4 rounded-2xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer;
+  @apply h-20 inline-block p-4 rounded-4xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer;
 }
 
 .select-button-category {
@@ -65,7 +65,7 @@
 }
 
 .postReactionButtons {
-  @apply flex rounded-2xl gap-1 cursor-pointer p-2;
+  @apply flex justify-center items-center rounded-2xl gap-1 cursor-pointer p-2;
 }
 
 .postReactionButtons:hover {
@@ -82,6 +82,10 @@
 
 .button-profile-cancel {
   @apply grid min-w-37 font-cantarell text-base text-outer-space hover:text-apple cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+}
+
+.add-comment-button {
+  @apply text-outer-space p-2 rounded-4xl bg-old-gold/70 w-40 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
 
 /*  */
@@ -110,6 +114,10 @@
 
 .sidebar-heading-h2 {
   @apply font-league-spartan gap-4 text-lg text-left text-ecru-white/50 w-full pl-10;
+}
+
+.comment-form-heading-h2 {
+  @apply font-league-spartan text-base text-left text-outer-space/70 font-semibold w-full;
 }
 
 /* sidebar items */
@@ -178,6 +186,10 @@
 
 .input {
   @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space;
+}
+
+.comment-input {
+  @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space focus:outline-none focus:border-old-gold;
 }
 
 .label {

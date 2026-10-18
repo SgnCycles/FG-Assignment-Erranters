@@ -1,6 +1,6 @@
 const AddCommentButton = () => {
   return (
-    <button className="button">
+    <button className="add-comment-button">
       Add Comment
     </button>
   );

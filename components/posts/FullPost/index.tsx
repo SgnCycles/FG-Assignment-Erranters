@@ -8,6 +8,7 @@ import AddCommentForm from "@/components/forms/AddCommentForm";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import { PostPropsType } from "./types";
+import Link from "next/link";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
   const router = useRouter();
@@ -36,7 +37,10 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
             )}
           </div>
         </div>
-        <div className="w-full flex justify-between mb-4">
+        <Link
+          className="w-full flex justify-between mb-4"
+          href={`/members/${post.author.username}`}
+        >
           <div className="flex">
             {post.author.profile_image ? (
               <img
@@ -64,7 +68,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
               <PostCategoryIcons category={post.category} />
             </div>
           </div>
-        </div>
+        </Link>
         <div className="mb-4">
           {post.PostImages.length === 0 && null}
           {post.PostImages.length > 0 && (
@@ -88,6 +92,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         <PostReactionButtons postId={post.id} />
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
+          <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
           <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} />
         </div>
       </div>

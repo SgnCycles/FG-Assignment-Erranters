@@ -43,13 +43,13 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
         mutate({ commentData: { content: values.content }, postId, slug }),
       )}
     >
-      <label htmlFor="content" className="heading-h2">
-        Add Comment:
+      <label htmlFor="content" className="comment-form-heading-h2">
+        Join the conversation:
       </label>
       <textarea
         {...register("content")}
         placeholder="Comment..."
-        className="bg-ecru-white text-outer-space rounded-2xl placeholder:text-outer-space p-2"
+        className="comment-input"
       ></textarea>
       {errors.content && <ErrorMessage error={errors.content.message!} />}
       <div className="flex justify-end mt-4">
