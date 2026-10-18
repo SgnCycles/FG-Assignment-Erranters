@@ -15,10 +15,16 @@ import { DeleteLikeAction } from "@/actions/delete-like-action";
 import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
 import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 import { PostReactionButtonPropsType } from "./types";
+import DeleteButton from "../DeleteButton";
+import EditButton from "../EditButton";
 
 const PostReactionButtons = ({
   postId,
   onFavouriteDeleteSuccess,
+  slug,
+  deleteFunction,
+  onDeleteSuccess,
+  isAuthor,
 }: PostReactionButtonPropsType) => {
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
@@ -124,6 +130,21 @@ const PostReactionButtons = ({
         <li>
           <ShareButton />
         </li>
+        {isAuthor && (
+          <li className="grid place-items-center">
+            <EditButton slug={slug} type="icon" />
+          </li>
+        )}
+        {isAuthor && (
+          <li className="grid place-items-center">
+            <DeleteButton
+              id={postId}
+              type="icon"
+              deleteFunction={deleteFunction}
+              onDeleteSuccess={onDeleteSuccess}
+            />
+          </li>
+        )}
         <li className="ml-auto">
           <FavouriteButton
             postIsFavourite={postIsFavourite}

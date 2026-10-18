@@ -1,7 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import DeleteButton from "@/components/buttons/DeleteButton";
-import UpdateButton from "@/components/buttons/EditButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 import PostComments from "@/components/comments/PostComments";
 import AddCommentForm from "@/components/forms/AddCommentForm";
@@ -11,31 +9,19 @@ import { PostPropsType } from "./types";
 import Link from "next/link";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
+  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
 
   return (
-    <div className="flex flex-col h-full items-center p-8 rounded-2xl grow bg-mineral-green text-ecru-white font-cantarell">
+    <div className="flex flex-col h-full items-center p-8 text-ecru-white font-cantarell">
       <div className="bg-casual-white text-outer-space rounded-4xl w-2/3 p-10">
         <div className="flex justify-between mb-4">
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
           )}
-          <div className="flex">
-            {isAuthor && (
-              <div className="flex justify-end gap-2">
-                <UpdateButton slug={post.slug} type="icon" />
-                <DeleteButton
-                  id={post.id}
-                  type="icon"
-                  deleteFunction={DeletePostAction}
-                  onDeleteSuccess={onDeleteSuccess}
-                />
-              </div>
-            )}
-          </div>
         </div>
         <Link
           className="w-full flex justify-between mb-4"
@@ -89,7 +75,13 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
             <p>{post.content}</p>
           </div>
         )}
-        <PostReactionButtons postId={post.id} />
+        <PostReactionButtons
+          postId={post.id}
+          slug={post.slug}
+          deleteFunction={DeletePostAction}
+          onDeleteSuccess={onDeleteSuccess}
+          isAuthor={isAuthor}
+        />
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
           <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>

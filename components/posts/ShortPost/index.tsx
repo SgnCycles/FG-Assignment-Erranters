@@ -6,8 +6,6 @@ import { ShortPostPropsType } from "./types";
 import { useUserContext } from "@/context/userContext";
 import type { userContextType } from "@/types/types";
 import { useQueryClient } from "@tanstack/react-query";
-import EditButton from "@/components/buttons/EditButton";
-import DeleteButton from "@/components/buttons/DeleteButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 
 const ShortPost = ({
@@ -78,17 +76,6 @@ const ShortPost = ({
             <PostCategoryIcons category={post.category} />
           </div>
         )}
-        {isAuthor && (
-          <div className="flex justify-end items-center gap-2">
-            <EditButton slug={post.slug} type="icon" />
-            <DeleteButton
-              id={post.id}
-              type="icon"
-              deleteFunction={DeletePostAction}
-              onDeleteSuccess={onDeleteSuccess}
-            />
-          </div>
-        )}
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-xl hover:text-apple">{post.title}</h3>
@@ -111,6 +98,10 @@ const ShortPost = ({
         <PostReactionButtons
           postId={post.id}
           onFavouriteDeleteSuccess={onFavouriteDeleteSuccess}
+          slug={post.slug}
+          deleteFunction={DeletePostAction}
+          onDeleteSuccess={onDeleteSuccess}
+          isAuthor={isAuthor}
         />
       </div>
     </div>

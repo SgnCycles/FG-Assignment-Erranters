@@ -1,16 +1,15 @@
 import Link from "next/dist/client/link";
-import { FaRegEdit } from "react-icons/fa";
 import { EditButtonPropsType } from "./types";
 
 const EditButton = ({ slug, type = "text" }: EditButtonPropsType) => {
   return (
-    <button className={type === "icon" ? "action-tooltip" : "button-secondary"}>
+    <button className={type === "icon" ? "postReactionButtons" : "button-secondary"}>
       <Link href={`/post/${slug}/edit`}>
         {type === "icon" ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

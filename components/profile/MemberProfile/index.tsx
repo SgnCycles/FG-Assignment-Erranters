@@ -2,7 +2,7 @@ import { MemberProfilePropsType } from "./types";
 
 const MemberProfile = ({ profile }: MemberProfilePropsType) => {
   return (
-    <div className="h-full flex flex-col items-center">
+    <div className="h-full flex flex-col items-center mt-10">
       <div className="flex flex-col w-[80%] bg-casual-white rounded-4xl border-2">
         <div className="rounded-tl-4xl rounded-tr-4xl">
           {profile.cover_image ? (
@@ -80,7 +80,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
           <div className="w-full px-10">
             <div className="flex flex-col mt-4">
               <h1 className="member-heading">
-                <span>{profile.name}</span><span>{profile.surname}</span>
+                <span>{profile.name}</span> <span>{profile.surname}</span>
               </h1>
             </div>
             <div className="flex text-outer-space/50">

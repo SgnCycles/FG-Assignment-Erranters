@@ -56,9 +56,9 @@ const EditPostForm = ({
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center bg-mineral-green font-cantarell">
       <form
-        className="w-full p-4"
+        className="bg-casual-white text-outer-space rounded-4xl p-10 w-full"
         onSubmit={handleSubmit((values) => {
           let imageForm: FormData | undefined = undefined;
 
@@ -89,11 +89,11 @@ const EditPostForm = ({
           <input className="input" {...register("title")}></input>
           {errors.title && <ErrorMessage error={errors.title.message!} />}
         </div>
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col">
           <label htmlFor="content">Add content (optional)</label>
           <textarea className="input" {...register("content")}></textarea>
         </div>
-        <div className="p-4 flex flex-col">
+        <div className="flex flex-col">
           <Controller
             name="image"
             control={control}
