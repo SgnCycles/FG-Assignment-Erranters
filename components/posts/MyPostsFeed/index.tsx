@@ -10,7 +10,6 @@ import { PostCategoryContextType } from "@/types/types";
 import ShortPost from "../ShortPost";
 
 const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
-
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
@@ -32,6 +31,7 @@ const MyPostsFeed = ({ posts, userId }: MyPostsFeedPropsType) => {
   return (
     <div className="grow">
       <SortingButton
+        type="light"
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />

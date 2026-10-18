@@ -9,7 +9,6 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
-  
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
@@ -31,6 +30,7 @@ const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
   return (
     <div className="grow">
       <SortingButton
+        type="light"
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />

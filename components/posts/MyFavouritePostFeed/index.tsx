@@ -13,7 +13,6 @@ const MyFavouritePostsFeed = ({
   posts,
   userId,
 }: MyFavouritePostSectionPropsType) => {
-  
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();
@@ -46,6 +45,7 @@ const MyFavouritePostsFeed = ({
   return (
     <div className="grow">
       <SortingButton
+        type="light"
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />
