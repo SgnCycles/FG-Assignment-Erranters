@@ -56,6 +56,7 @@ const MyFavouritePostsFeed = ({
             post={post.Posts}
             key={index}
             onFavouriteDeleteSuccess={onFavouriteDeleteSuccess}
+            showUser={true}
           />
         ))}
     </div>

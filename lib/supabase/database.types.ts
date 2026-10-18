@@ -342,6 +342,7 @@ export type Database = {
       Profiles: {
         Row: {
           bio: string | null
+          country: string | null
           cover_image: string | null
           created_at: string
           email: string
@@ -356,6 +357,7 @@ export type Database = {
         }
         Insert: {
           bio?: string | null
+          country?: string | null
           cover_image?: string | null
           created_at?: string
           email: string
@@ -370,6 +372,7 @@ export type Database = {
         }
         Update: {
           bio?: string | null
+          country?: string | null
           cover_image?: string | null
           created_at?: string
           email?: string

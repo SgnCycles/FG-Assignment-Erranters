@@ -87,7 +87,7 @@ export const getUserProfile = async (id: string) => {
   const supabase = createClient();
   return await supabase
     .from("Profiles")
-    .select("id, name, surname, username, bio, interests, profile_image, headline, location, cover_image")
+    .select("id, name, surname, username, bio, interests, profile_image, headline, location, country, cover_image")
     .eq("id", id)
     .single();
 };

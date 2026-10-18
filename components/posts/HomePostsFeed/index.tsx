@@ -35,7 +35,7 @@ const HomePostsFeed = ({ posts }: { posts: HomePostsType }) => {
         setSortingOrder={setSortingOrder}
       />
       {filteredPosts?.map((post, index) => (
-        <ShortPost key={index} post={post} />
+        <ShortPost key={index} post={post} showUser={true}/>
       ))}
     </div>
   );

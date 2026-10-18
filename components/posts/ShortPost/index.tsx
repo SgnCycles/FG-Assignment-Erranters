@@ -10,8 +10,11 @@ import EditButton from "@/components/buttons/EditButton";
 import DeleteButton from "@/components/buttons/DeleteButton";
 import { DeletePostAction } from "@/actions/delete-post-action";
 
-const ShortPost = ({ onFavouriteDeleteSuccess, post }: ShortPostPropsType) => {
-
+const ShortPost = ({
+  onFavouriteDeleteSuccess,
+  post,
+  showUser,
+}: ShortPostPropsType) => {
   const { user } = useUserContext() as userContextType;
   const isAuthor = user?.id === post.author?.id;
   const queryClient = useQueryClient();
@@ -30,28 +33,41 @@ const ShortPost = ({ onFavouriteDeleteSuccess, post }: ShortPostPropsType) => {
   return (
     <div className="flex flex-col justify-around gap-4 border-2 border-casual-white bg-casual-white rounded-2xl p-4 m-4 text-outer-space">
       <div className="w-full flex justify-between">
-        <Link
-          href={`/members/${post.author.username}`}
-          className="flex cursor-pointer"
-        >
-          <div>
-            {post.author.profile_image ? (
-              <img
-                src={post.author.profile_image}
-                alt="profile user"
-                className="w-15 h-15 rounded-full"
-              />
-            ) : (
-              <div className="h-10 w-10 relative rounded-full">
+        {showUser ? (
+          <Link
+            href={`/members/${post.author.username}`}
+            className="flex cursor-pointer"
+          >
+            <div>
+              {post.author.profile_image ? (
                 <img
-                  src="/images/profileImage_placeholder.png"
-                  alt="user placeholder"
-                  className="h-full w-full object-cover rounded-full"
+                  src={post.author.profile_image}
+                  alt="profile user"
+                  className="w-15 h-15 rounded-full"
                 />
-              </div>
-            )}
-          </div>
-          <div className="flex gap-2 text-right place-self-center ml-2">
+              ) : (
+                <div className="h-10 w-10 relative rounded-full">
+                  <img
+                    src="/images/profileImage_placeholder.png"
+                    alt="user placeholder"
+                    className="h-full w-full object-cover rounded-full"
+                  />
+                </div>
+              )}
+            </div>
+            <div className="flex gap-2 text-right place-self-center ml-2">
+              <span className="font-semibold">{post.author.username}</span>
+              <span className="text-[10px] place-self-center">
+                {new Date(post.created_at).toLocaleString("sv-Se", {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                })}
+              </span>
+              <PostCategoryIcons category={post.category} />
+            </div>
+          </Link>
+        ) : (
+          <div className="flex gap-2 text-right place-self-center">
             <span className="font-semibold">{post.author.username}</span>
             <span className="text-[10px] place-self-center">
               {new Date(post.created_at).toLocaleString("sv-Se", {
@@ -61,7 +77,7 @@ const ShortPost = ({ onFavouriteDeleteSuccess, post }: ShortPostPropsType) => {
             </span>
             <PostCategoryIcons category={post.category} />
           </div>
-        </Link>
+        )}
         {isAuthor && (
           <div className="flex justify-end items-center gap-2">
             <EditButton slug={post.slug} type="icon" />
