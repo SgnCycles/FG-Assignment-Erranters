@@ -22,7 +22,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
   if (!data) return <ErrorMessage error="Post Not Found" />;
 
   return (
-    <main className="grow flex flex-col items-between bg-mineral-green">
+    <main className="main-layout">
       <div className="w-full pl-4">
         <GoBackButton />
       </div>

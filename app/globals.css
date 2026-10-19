@@ -19,16 +19,6 @@
   --color-outer-space: #263638;
   --color-paper-blue: #bfd5de;
   --text-9xl: clamp(6.5rem, 8.2vw + 4.5rem, 10rem);
-  /* --text-6xl: clamp(2.5rem, 4.2vw + 1.5rem, 5rem);
-  --text-5xl: clamp(2.25rem, 4vw + 1.45rem, 4.5rem);
-  --text-4xl: clamp(2rem, 3.75vw + 1.4rem, 4rem);
-  --text-3xl: clamp(1.75rem, 3.5vw + 1.35rem, 3.5rem);
-  --text-2xl: clamp(1.5rem, 3vw + 1.3rem, 3rem);
-  --text-xl: clamp(1.35rem, 2.5vw + 1.25rem, 2.25rem);
-  --text-lg: clamp(1.125rem, 1.5vw + 1rem, 1.75rem);
-  --text-base: clamp(1rem, 1vw + 1rem, 1.25rem); */
-
-  /* --text-9xl: clamp(4rem, 5.5vw + 2rem, 7rem); */
   --text-6xl: clamp(3rem, 4vw + 1rem, 5rem);
   --text-5xl: clamp(2.5rem, 3vw + 1rem, 4rem);
   --text-4xl: clamp(2.125rem, 2.5vw + 1rem, 3.25rem);
@@ -43,28 +33,24 @@
 .logo-button {
   @apply flex w-auto text-2xl font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
 }
-/* 
-.button {
-  @apply flex min-w-37 font-cantarell text-base text-outer-space font-bold hover:bg-ecru-white hover:text-apple rounded-2xl cursor-pointer justify-center tracking-widest;
-} */
 
 .button.active {
   @apply bg-old-gold hover:text-outer-space;
 }
 
-.button-secondary {
-  @apply h-20 inline-block p-4 rounded-4xl bg-mineral-green text-ecru-white text-lg font-bold cursor-pointer;
+.select-button {
+  @apply pl-4 text-outer-space p-2 rounded-4xl bg-old-gold cursor-pointer hover:bg-apple hover:text-ecru-white  hover:tracking-widest appearance-none focus:outline-none focus:ring-0;
 }
 
 .select-button-category {
-  @apply w-43 pl-4 text-outer-space p-2 rounded-2xl bg-old-gold cursor-pointer hover:bg-apple hover:text-ecru-white  hover:tracking-widest appearance-none;
+  @apply w-43;
 }
 
 .select-button-type {
-  @apply pl-4 text-outer-space p-2 rounded-2xl bg-old-gold w-30 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+  @apply w-25;
 }
 
-.postReactionButtons {
+.postReactionButton {
   @apply flex justify-center items-center rounded-2xl gap-1 cursor-pointer p-2;
 }
 
@@ -76,49 +62,38 @@
   @apply bg-cauliflower rounded-4xl text-apple;
 }
 
-.button-profile {
-  @apply grid min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-old-gold hover:text-outer-space rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+.button-dark-primary {
+  @apply flex justify-center items-center min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-old-gold hover:text-outer-space rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
 }
 
-.button-profile-cancel {
+.button-dark-secondary {
+  @apply w-35 flex justify-center items-center px-4 py-2 border rounded-4xl bg-outer-space text-ecru-white hover:bg-outer-space/70 cursor-pointer text-base font-cantarell font-semibold tracking-widest;
+}
+
+.button-light-primary {
   @apply grid min-w-37 font-cantarell text-base text-outer-space hover:text-apple cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
 }
 
-.button-profile-message {
+.button-light-secondary {
   @apply w-35 flex justify-center items-center px-4 py-2 border border-outer-space/40 rounded-4xl bg-casual-white text-outer-space/80 hover:bg-outer-space/20 cursor-pointer text-base font-cantarell;
 }
 
-.button-profile-follow {
-  @apply w-35 flex justify-center items-center px-4 py-2 border rounded-4xl bg-outer-space text-ecru-white hover:bg-outer-space/70 cursor-pointer text-base font-cantarell;
+.create-post-button {
+  @apply bg-old-gold hover:bg-apple text-outer-space hover:text-ecru-white w-45 h-10 flex gap-4 py-2 px-4 rounded-4xl font-semibold;
 }
 
 .add-comment-button {
   @apply text-outer-space p-2 rounded-4xl bg-old-gold/70 w-40 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
-
-.button-save-post {
-  @apply w-35 flex justify-center items-center px-4 py-2 border rounded-4xl bg-outer-space text-ecru-white hover:bg-outer-space/70 cursor-pointer text-base font-cantarell font-semibold tracking-widest;
-}
-
-.button-edit-cancel {
-  @apply flex justify-center items-center text-outer-space cursor-pointer text-base font-cantarell font-semibold tracking-widest mr-6 hover:text-apple;
-}
-
-
 /*  */
 
 /* headings */
-
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
 }
 
 .heading {
   @apply font-bebas-neue text-4xl text-start text-ecru-white;
-}
-
-.profile-heading {
-  @apply font-bebas-neue text-4xl text-center text-ecru-white;
 }
 
 .member-heading {
@@ -133,16 +108,26 @@
   @apply font-league-spartan text-lg text-left text-outer-space font-bold w-full;
 }
 
-.profile-form-heading-h2 {
-  @apply font-league-spartan text-lg text-left text-outer-space/70 font-semibold w-full;
-}
-
 .sidebar-heading-h2 {
   @apply font-league-spartan gap-4 text-lg text-left text-ecru-white/50 w-full pl-10;
 }
 
 .comment-form-heading-h2 {
   @apply font-league-spartan text-base text-left text-outer-space/70 font-semibold w-full;
+}
+
+.post-heading {
+  @apply font-bebas-neue text-4xl text-start text-outer-space;
+}
+
+/* subtitles */
+
+.subtitle {
+  @apply text-old-gold uppercase font-semibold;
+}
+
+.subtitle-secondary {
+  @apply text-ecru-white font-cantarell;
 }
 
 /* sidebar items */
@@ -152,10 +137,6 @@
 
 .sidebar-item.active {
   @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-4xl w-40;
-}
-
-.post-heading {
-  @apply font-bebas-neue text-4xl text-start text-outer-space;
 }
 /*  */
 
@@ -168,7 +149,6 @@
 }
 
 /* tooltips */
-
 .tooltip {
   @apply relative inline-block cursor-pointer p-2 rounded-full hover:bg-ecru-white/20;
 }
@@ -196,24 +176,16 @@
 .action-tooltip:hover .action-tooltipText {
   @apply visible;
 }
-
 /*  */
 
 /* footer */
-
 .footer {
   @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2 mt-10;
 }
-
 /*  */
 
 /* inputs */
-
 .input {
-  @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space;
-}
-
-.comment-input {
   @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space focus:outline-none focus:border-old-gold;
 }
 
@@ -225,10 +197,9 @@
   @apply pointer-events-none absolute right-2 top-1/2 -translate-y-1/2;
 }
 
-.create-post-input {
-  @apply w-full rounded-2xl bg-ecru-white text-outer-space placeholder:text-outer-space;
+.label-input {
+  @apply flex flex-col mt-10
 }
-
 /*  */
 
 .file-dropzone-area {
@@ -247,20 +218,69 @@
 .profile-statistics-item {
   @apply text-outer-space/50;
 }
-
 /*  */
 
 /* profile form */
-
 .profile-row {
   @apply w-full grid grid-cols-2 gap-4 place-items-center;
 }
+
 .profile-item-short {
   @apply flex flex-col w-[80%];
 }
 
 .profile-item-long {
   @apply flex flex-col w-[90%];
+}
+
+.profile-item-full {
+  @apply flex flex-col w-full px-8;
+}
+
+/*  */
+
+/* layouts*/
+.main-layout {
+  @apply grow flex flex-col justify-center items-center bg-mineral-green;
+}
+
+.main-layout-heading {
+  @apply flex justify-between items-center p-4 w-[90%];
+}
+
+.main-layout-posts-feed {
+  @apply flex grow w-[90%];
+}
+
+.sidebar-layout {
+  @apply flex grow grid-cols-3 mt-10;
+}
+
+.create-post-layout {
+  @apply bg-mineral-green text-ecru-white w-full flex flex-1 justify-center;
+}
+
+.create-edit-post-layout {
+  @apply w-2/3 h-full;
+}
+
+.form-button-layout {
+  @apply flex justify-end mt-10;
+}
+
+/*  */
+
+/* forms */
+.form-background {
+  @apply flex flex-col items-center bg-mineral-green font-cantarell;
+}
+
+.form {
+  @apply bg-casual-white text-outer-space rounded-4xl p-10 w-full;
+}
+
+.comment-form {
+  @apply w-full flex flex-col font-cantarell
 }
 
 /*  */

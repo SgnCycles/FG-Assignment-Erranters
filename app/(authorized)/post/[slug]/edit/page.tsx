@@ -20,8 +20,8 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <main className="bg-mineral-green text-ecru-white w-full flex flex-1 justify-center">
       {data && (
-        <div className="w-2/3 h-full">
-          <p className="text-old-gold uppercase font-semibold">Edit Your Post</p>
+        <div className="create-edit-post-layout">
+          <p className="subtitle">Edit Your Post</p>
           <h1 className="heading font-bebas-neu">{data.title}</h1>
           <EditPostForm
             initialValues={{

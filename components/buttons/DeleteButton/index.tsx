@@ -20,7 +20,7 @@ const DeleteButton = ({
 
   return (
     <button
-      className={type === "icon" ? "postReactionButtons" : "button-secondary"}
+      className="postReactionButton"
       onClick={() => mutate(id)}
     >
       {type === "icon" ? (

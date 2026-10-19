@@ -9,7 +9,7 @@ const FavouriteButton = ({
 }) => {
   return (
     <button
-      className="postReactionButtons"
+      className="postReactionButton"
       onClick={handleClick}
       disabled={disabled}
     >

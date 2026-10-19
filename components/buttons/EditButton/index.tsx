@@ -3,7 +3,7 @@ import { EditButtonPropsType } from "./types";
 
 const EditButton = ({ slug, type = "text" }: EditButtonPropsType) => {
   return (
-    <button className={type === "icon" ? "postReactionButtons" : "button-secondary"}>
+    <button className="postReactionButton">
       <Link href={`/post/${slug}/edit`}>
         {type === "icon" ? (
           <svg

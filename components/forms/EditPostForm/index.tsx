@@ -59,9 +59,9 @@ const EditPostForm = ({
   console.log("Location from database:", initialValues.location);
 
   return (
-    <div className="flex flex-col items-center bg-mineral-green font-cantarell">
+    <div className="form-background">
       <form
-        className="bg-casual-white text-outer-space rounded-4xl p-10 w-full"
+        className="form"
         onSubmit={handleSubmit((values) => {
           let imageForm: FormData | undefined = undefined;
 
@@ -131,7 +131,7 @@ const EditPostForm = ({
               </li>
             ))}
         </ul>
-        <div className="flex flex-col mt-10">
+        <div className="label-input">
           <label htmlFor="content" className="label">
             Add content (optional)
           </label>
@@ -139,8 +139,8 @@ const EditPostForm = ({
         </div>
         {/* add price and location */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col mt-10">
-            <label htmlFor="price" className="heading-h2">
+          <div className="label-input">
+            <label htmlFor="price" className="label">
               Add price:
             </label>
             <input
@@ -149,8 +149,8 @@ const EditPostForm = ({
               {...register("price", { valueAsNumber: true })}
             />
           </div>
-          <div className="flex flex-col mt-10">
-            <label htmlFor="location" className="heading-h2">
+          <div className="label-input">
+            <label htmlFor="location" className="label">
               Add location:
             </label>
             <input
@@ -185,9 +185,9 @@ const EditPostForm = ({
               Delete Post
             </button>
           </div>
-          <div className="flex">
-            <button className="button-edit-cancel">Cancel</button>
-            <button className="button-save-post">
+          <div className="form-button-layout">
+            <button className="button-light-primary">Cancel</button>
+            <button className="button-dark-secondary">
               {isPending ? "Updating the post..." : "Save"}
             </button>
           </div>

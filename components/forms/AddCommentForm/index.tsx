@@ -38,7 +38,7 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
 
   return (
     <form
-      className="w-full flex flex-col font-cantarell"
+      className="comment-form"
       onSubmit={handleSubmit((values) =>
         mutate({ commentData: { content: values.content }, postId, slug }),
       )}
@@ -49,7 +49,7 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
       <textarea
         {...register("content")}
         placeholder="Comment..."
-        className="comment-input"
+        className="input"
       ></textarea>
       {errors.content && <ErrorMessage error={errors.content.message!} />}
       <div className="flex justify-end mt-4">

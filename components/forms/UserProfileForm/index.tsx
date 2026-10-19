@@ -110,7 +110,7 @@ const UserProfileForm = ({
   return (
     <div className="mr-6">
       <form
-        className="h-full text-outer-space bg-ecru-white rounded-4xl"
+        className="form"
         onSubmit={handleSubmit((values) => {
           let imageForm = undefined;
           let coverImageForm = undefined;
@@ -290,15 +290,15 @@ const UserProfileForm = ({
               )}
             </div>
             <div className="profile-row">
-              <div className="profile-item-short">
-                <label htmlFor="name" className="profile-form-heading-h2">
+              <div className="profile-item-long">
+                <label htmlFor="name" className="label">
                   Name
                 </label>
                 <input className="input" {...register("name")}></input>
                 {errors.name && <ErrorMessage error={errors.name.message!} />}
               </div>
-              <div className="profile-item-short">
-                <label htmlFor="surname" className="profile-form-heading-h2">
+              <div className="profile-item-long">
+                <label htmlFor="surname" className="label">
                   Surname
                 </label>
                 <input className="input" {...register("surname")}></input>
@@ -308,8 +308,8 @@ const UserProfileForm = ({
               </div>
             </div>
             <div className="profile-row">
-              <div className="profile-item-short">
-                <label htmlFor="username" className="profile-form-heading-h2">
+              <div className="profile-item-long">
+                <label htmlFor="username" className="label">
                   Username
                 </label>
                 <input className="input" {...register("username")}></input>
@@ -317,8 +317,8 @@ const UserProfileForm = ({
                   <ErrorMessage error={errors.username.message!} />
                 )}
               </div>
-              <div className="profile-item-short">
-                <label htmlFor="location" className="profile-form-heading-h2">
+              <div className="profile-item-long">
+                <label htmlFor="location" className="label">
                   Location
                 </label>
                 <input className="input" {...register("location")}></input>
@@ -330,8 +330,8 @@ const UserProfileForm = ({
           </div>
           {/* <div className="flex flex-col grow ml-10"> */}
           <div className="flex flex-col w-full items-center">
-            <div className="profile-item-long">
-              <label htmlFor="headline" className="profile-form-heading-h2">
+            <div className="profile-item-full">
+              <label htmlFor="headline" className="label">
                 Headline
               </label>
               <TextareaAutosize
@@ -339,16 +339,16 @@ const UserProfileForm = ({
                 {...register("headline")}
               />
             </div>
-            <div className="profile-item-long">
-              <label htmlFor="bio" className="profile-form-heading-h2">
+            <div className="profile-item-full">
+              <label htmlFor="bio" className="label">
                 Bio
               </label>
               <TextareaAutosize
                 className="input grow w-full"
                 {...register("bio")}/>
             </div>
-            <div className="profile-item-long">
-              <label htmlFor="interests" className="profile-form-heading-h2">
+            <div className="profile-item-full">
+              <label htmlFor="interests" className="label">
                 Interests
               </label>
               <TextareaAutosize
@@ -357,10 +357,10 @@ const UserProfileForm = ({
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>
-          <div className="flex justify-end mt-4 m-10">
+          <div className="form-button-layout pr-8">
             {/* TO DO: add function to the cancel button */}
-            <button className="button-profile-cancel">Cancel</button>
-            <button className="button-profile">Update Profile</button>
+            <button className="button-light-primary">Cancel</button>
+            <button className="button-dark-primary">Update Profile</button>
           </div>
         </div>
       </form>

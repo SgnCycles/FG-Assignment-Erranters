@@ -19,7 +19,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
       <div className="bg-casual-white text-outer-space rounded-4xl w-2/3 p-10">
         <div className="flex justify-between mb-4">
           {post.title && (
-            <h1 className="post-heading text-outer-space">{post.title}</h1>
+            <h1 className="post-heading">{post.title}</h1>
           )}
         </div>
         <Link

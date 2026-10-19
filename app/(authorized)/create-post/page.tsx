@@ -33,10 +33,10 @@ const CreatePostPage = () => {
   };
 
   return (
-    <main className="bg-mineral-green text-ecru-white w-full flex flex-1 justify-center">
-      <div className="w-2/3 h-full">
+    <main className="create-post-layout">
+      <div className="create-edit-post-layout">
         <div className="mb-10">
-          <p className="text-old-gold uppercase font-semibold">Create a Post</p>
+          <p className="subtitle">Create a Post</p>
           <h1 className="heading">Share your Adventure</h1>
           <p className="">or find a new home to your item</p>
         </div>

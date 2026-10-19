@@ -47,9 +47,9 @@ const CreatePostForm = ({
   }, [postCategory, setValue]);
 
   return (
-    <div className="flex flex-col items-center bg-mineral-green font-cantarell">
+    <div className="form-background">
       <form
-        className="bg-casual-white text-outer-space rounded-4xl p-10 w-full"
+        className="form"
         onSubmit={handleSubmit(handleCreatePost)}
       >
         <CategoryButtons register={register} />
@@ -102,10 +102,9 @@ const CreatePostForm = ({
               ></input>
             </div>
           </div>
-
-          <div className="flex justify-end pr-4">
-            <button className="button-edit-cancel">Cancel</button>
-            <button className="button-save-post">
+          <div className="form-button-layout">
+            <button className="button-light-primary">Cancel</button>
+            <button className="button-dark-secondary">
               {isPending ? "Publishing post..." : "Publish"}
             </button>
           </div>

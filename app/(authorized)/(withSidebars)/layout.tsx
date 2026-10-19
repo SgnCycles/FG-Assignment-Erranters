@@ -3,7 +3,7 @@ import UserSidebar from "@/components/sidebars/UserSidebar";
 
 const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-      <main className="flex grow grid-cols-3 mt-10">
+      <main className="sidebar-layout">
         <PostPageSidebar />
         {children}
         <UserSidebar />

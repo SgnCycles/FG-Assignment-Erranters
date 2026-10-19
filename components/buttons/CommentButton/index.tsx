@@ -1,6 +1,6 @@
 const CommentButton = ({commentCount}: {commentCount: number}) => {
   return (
-    <button className="postReactionButtons">
+    <button className="postReactionButton">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="22"

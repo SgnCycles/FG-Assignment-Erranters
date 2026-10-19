@@ -12,7 +12,7 @@ const CategoryButtons = ({
         <select
           id="category"
           {...register("category")}
-          className="select-button-category"
+          className="select-button select-button-category"
         >
           <option value="" disabled>
             Category
@@ -40,7 +40,7 @@ const CategoryButtons = ({
         </span>
       </div>
       <div className="relative group">
-        <select {...register("post_type")} className="select-button-type">
+        <select {...register("post_type")} className="select-button select-button-type">
           <option value="" disabled>
             Type
           </option>

@@ -9,15 +9,15 @@ const ProfileHomepage = async () => {
   const { data, error } = await getHomePosts(supabase, false);
 
   return (
-    <div className="grow flex flex-col items-center justify-center bg-mineral-green">
-      <div className="flex justify-between items-center p-4 w-[90%]">
-        <h1 className="heading text-ecru-white font-league-spartan">
+    <div className="main-layout">
+      <div className="main-layout-heading">
+        <h1 className="heading">
           Posts from <span className="text-old-gold">Erranters</span>
         </h1>
         <CreatePostButton />
       </div>
       {error && <p>Failed Loading Posts...</p>}
-      <div className="flex grow w-[90%]">
+      <div className="main-layout-posts-feed ">
         {data && <HomePostsFeed posts={data} />}
       </div>
     </div>

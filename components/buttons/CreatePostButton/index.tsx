@@ -3,7 +3,7 @@ import Link from "next/link";
 const CreatePostButton = () => {
   return (
     <Link
-      className="bg-old-gold hover:bg-apple text-outer-space hover:text-ecru-white w-45 h-10 flex gap-4 py-2 px-4 rounded-4xl font-semibold group"
+      className="create-post-button group"
       href="/create-post"
     >
       <svg

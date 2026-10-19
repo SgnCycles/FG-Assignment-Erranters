@@ -36,7 +36,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
             </div>
           )}
           <div className="flex mt-4 gap-4 mr-4">
-            <button className="button-profile-message">
+            <button className="button-light-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -54,7 +54,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
               </svg>
               <span className="ml-2">Message</span>
             </button>
-            <button className="button-profile-follow">
+            <button className="button-dark-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
