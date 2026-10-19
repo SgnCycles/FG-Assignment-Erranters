@@ -43,10 +43,10 @@
 .logo-button {
   @apply flex w-auto text-2xl font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
 }
-
+/* 
 .button {
   @apply flex min-w-37 font-cantarell text-base text-outer-space font-bold hover:bg-ecru-white hover:text-apple rounded-2xl cursor-pointer justify-center tracking-widest;
-}
+} */
 
 .button.active {
   @apply bg-old-gold hover:text-outer-space;
@@ -57,7 +57,7 @@
 }
 
 .select-button-category {
-  @apply w-43 pl-4 text-outer-space p-2 rounded-2xl bg-old-gold cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
+  @apply w-43 pl-4 text-outer-space p-2 rounded-2xl bg-old-gold cursor-pointer hover:bg-apple hover:text-ecru-white  hover:tracking-widest appearance-none;
 }
 
 .select-button-type {
@@ -128,7 +128,6 @@
 .member-heading-secondary {
   @apply font-bebas-neue text-2xl text-left text-ecru-white;
 }
-
 
 .heading-h2 {
   @apply font-league-spartan text-lg text-left text-outer-space font-bold w-full;
@@ -203,7 +202,7 @@
 /* footer */
 
 .footer {
-  @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2;
+  @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2 mt-10;
 }
 
 /*  */

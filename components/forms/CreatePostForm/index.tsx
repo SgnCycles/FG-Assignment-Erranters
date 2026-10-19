@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
+import CategoryButtons from "@/components/buttons/CategoryButtons";
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
@@ -46,125 +47,72 @@ const CreatePostForm = ({
   }, [postCategory, setValue]);
 
   return (
-    <form
-      className="flex flex-col my-auto"
-      onSubmit={handleSubmit(handleCreatePost)}
-    >
-      <div className="flex gap-4 p-4 text-outer-space">
-        <div className="relative group">
-          <select
-            id="category"
-            {...register("category")}
-            className="select-button-category"
-          >
-            <option value="" disabled>
-              Category
-            </option>
-            <option value="Hiking">Hiking</option>
-            <option value="Cycling">Cycling</option>
-            <option value="Marketplace">Marketplace</option>
-          </select>
-          <span className="category-dropdown">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-arrow-down preview-icon transition-transform group-hover:rotate-90 group-hover:text-ecru-white"
-            >
-              <path d="M12 5v14" />
-              <path d="m19 12-7 7-7-7" />
-            </svg>
-          </span>
+    <div className="flex flex-col items-center bg-mineral-green font-cantarell">
+      <form
+        className="bg-casual-white text-outer-space rounded-4xl p-10 w-full"
+        onSubmit={handleSubmit(handleCreatePost)}
+      >
+        <CategoryButtons register={register} />
+        <div className="p-4 flex flex-col">
+          <Controller
+            name="image"
+            control={control}
+            render={({ field }) => (
+              <FileDropZone value={field.value} onChange={field.onChange} />
+            )}
+          />
+          {errors.image && <ErrorMessage error={errors.image.message!} />}
         </div>
-        <div className="relative group">
-          <select {...register("post_type")} className="select-button-type">
-            <option value="" disabled>
-              Type
-            </option>
-            <option value="Post">Post</option>
-            <option value="Sell">Sell</option>
-            <option value="Buy">Buy</option>
-          </select>
-          <span className="category-dropdown">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-arrow-down preview-icon transition-transform group-hover:rotate-90 group-hover:stroke-ecru-white"
-            >
-              <path d="M12 5v14" />
-              <path d="m19 12-7 7-7-7" />
-            </svg>
-          </span>
-        </div>
-      </div>
-      <div className="p-4 flex flex-col">
-        <Controller
-          name="image"
-          control={control}
-          render={({ field }) => (
-            <FileDropZone value={field.value} onChange={field.onChange} />
-          )}
-        />
-        {errors.image && <ErrorMessage error={errors.image.message!} />}
-      </div>
-      <div className="flex flex-col justify-between flex-1">
-        <div className="p-4">
-          <label htmlFor="title" className="heading-h2">Add a title:</label>
-          <input
-            {...register("title")}
-            className="create-post-input p-4"
-          ></input>
-          {errors.title && <ErrorMessage error={errors.title.message!} />}
-        </div>
-        <div className="p-4">
-          <label htmlFor="content" className="heading-h2">Add content:</label>
-          <TextareaAutosize
-            {...register("content")}
-            className="create-post-input min-h-35 p-4"/>
-        </div>
-        <div className="flex">
-          {postCategory === "Marketplace" &&
-          (postType === "Sell" || postType === "Buy") ? (
-            <div className="p-4">
-              <label htmlFor="price" className="heading-h2">Add price:</label>
-              <input
-                className="input text-outer-space cursor-pointer ml-4"
-                type="number"
-                {...register("price", {valueAsNumber: true})}
-              />
-            </div>
-          ) : null}
-          <div className="p-4">
-            <label htmlFor="location" className="heading-h2">Add location:</label>
-            <input
-              {...register("location")}
-              className="input text-outer-space cursor-pointer ml-4"
-              type="text"
-            ></input>
+        <div className="flex flex-col justify-between flex-1">
+          <div className="flex flex-col">
+            <label htmlFor="title" className="label">
+              Add a title:
+            </label>
+            <input {...register("title")} className="input"></input>
+            {errors.title && <ErrorMessage error={errors.title.message!} />}
           </div>
-        </div>
+          <div className="flex flex-col">
+            <label htmlFor="content" className="label">
+              Add content:
+            </label>
+            <TextareaAutosize {...register("content")} className="input" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {postCategory === "Marketplace" &&
+            (postType === "Sell" || postType === "Buy") ? (
+              <div className="flex flex-col">
+                <label htmlFor="price" className="label">
+                  Add price:
+                </label>
+                <input
+                  className="input"
+                  type="number"
+                  {...register("price", { valueAsNumber: true })}
+                />
+              </div>
+            ) : null}
+            <div className="flex flex-col">
+              <label htmlFor="location" className="label">
+                Add location:
+              </label>
+              <input
+                {...register("location")}
+                className="input"
+                type="text"
+              ></input>
+            </div>
+          </div>
 
-        <div className="flex justify-end pr-4">
-          <button className="button mb-4">
-            {isPending ? "Publishing post..." : "Publish"}
-          </button>
+          <div className="flex justify-end pr-4">
+            <button className="button-edit-cancel">Cancel</button>
+            <button className="button-save-post">
+              {isPending ? "Publishing post..." : "Publish"}
+            </button>
+          </div>
+          {error && <ErrorMessage error={error.message} />}
         </div>
-        {error && <ErrorMessage error={error.message} />}
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

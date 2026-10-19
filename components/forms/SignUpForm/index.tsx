@@ -80,6 +80,7 @@ const SignUpForm = () => {
           <ErrorMessage error={errors.confirmPassword.message!} />
         )}
         <div className="flex justify-end mt-6">
+          {/* TO DO: add proper button styling here */}
           <button className="button">
             {isPending ? "Signing Up..." : "Sign Up"}
           </button>

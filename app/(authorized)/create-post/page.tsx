@@ -33,13 +33,19 @@ const CreatePostPage = () => {
   };
 
   return (
-    <main className="grow bg-mineral-green flex flex-col justify-between text-ecru-white font-semibold font-base tracking-widest">
-      <h1 className="heading">Create a New Post</h1>
-      <CreatePostForm
-        error={error}
-        isPending={isPending}
-        handleCreatePost={handleCreatePost}
-      />
+    <main className="bg-mineral-green text-ecru-white w-full flex flex-1 justify-center">
+      <div className="w-2/3 h-full">
+        <div className="mb-10">
+          <p className="text-old-gold uppercase font-semibold">Create a Post</p>
+          <h1 className="heading">Share your Adventure</h1>
+          <p className="">or find a new home to your item</p>
+        </div>
+        <CreatePostForm
+          error={error}
+          isPending={isPending}
+          handleCreatePost={handleCreatePost}
+        />
+      </div>
     </main>
   );
 };
