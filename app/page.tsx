@@ -3,13 +3,11 @@ import LogInForm from "@/components/forms/LogInForm";
 
 export default function Home() {
   return (
-    <div className="h-full flex flex-col bg-mineral-green">
-      <main className="h-full flex flex-col justify-center">
-        <div className="grow grid grid-cols-2">
+      <main className="h-full flex justify-center">
+        <div className="flex justify-center items-center">
           <HomepagePoster />
           <LogInForm />
         </div>
       </main>
-    </div>
   );
 }

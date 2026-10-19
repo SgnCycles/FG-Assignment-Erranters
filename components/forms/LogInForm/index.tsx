@@ -11,7 +11,6 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const LogInForm = () => {
-
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const {
@@ -30,63 +29,78 @@ const LogInForm = () => {
   });
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
-      <div className="p-10 font-cantarell">
+    <div className="login-signup-element">
+      <div className="login-signup-layout">
+        <h2 className="login-signup-heading">member access</h2>
         <form
-          className="flex flex-col w-lg m-auto text-left p-8 bg-old-gold"
+          className="login-signup-form"
           onSubmit={handleSubmit((values) => mutate(values))}
         >
-          <label htmlFor="email" className="label">
-            Enter your Email
-          </label>
-          <input
-            className="input"
-            {...register("email", {
-              required: true,
-            })}
-            placeholder="Email:"
-          />
-          {errors.email && <ErrorMessage error={errors.email.message!} />}
-          <label htmlFor="password" className="label">
-            Enter your Password
-          </label>
-          <div className="relative">
+          <div className="flex flex-col">
+            <label htmlFor="email" className="label">
+              Enter your Email
+            </label>
             <input
-              className="input w-full"
-              {...register("password", {
+              className="login-input"
+              {...register("email", {
                 required: true,
               })}
-              placeholder="Password:"
-              type={showPassword ? "text" : "password"}
+              placeholder="Email:"
             />
-            {showPassword ? (
-              <AiFillEye
-                className="eye-icon"
-                onClick={() => setShowPassword((prevState) => !prevState)}
+            {errors.email && <ErrorMessage error={errors.email.message!} />}
+          </div>
+          <div>
+            <label htmlFor="password" className="label">
+              Enter your Password
+            </label>
+            <div className="relative">
+              <input
+                className="login-input"
+                {...register("password", {
+                  required: true,
+                })}
+                placeholder="Password:"
+                type={showPassword ? "text" : "password"}
               />
-            ) : (
-              <AiFillEyeInvisible
-                className="eye-icon"
-                onClick={() => setShowPassword((prevState) => !prevState)}
-              />
-            )}
-            {errors.password && (
-              <ErrorMessage error={errors.password.message!} />
-            )}
+              {showPassword ? (
+                <AiFillEye
+                  className="eye-icon"
+                  onClick={() => setShowPassword((prevState) => !prevState)}
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  className="eye-icon"
+                  onClick={() => setShowPassword((prevState) => !prevState)}
+                />
+              )}
+              {errors.password && (
+                <ErrorMessage error={errors.password.message!} />
+              )}
+              <div className="flex justify-between">
+                <div className="flex justify-center items-center">
+                  <input className="input cursor-pointer accent-apple" type="checkbox" />
+                  <label htmlFor="rememberMe" className="text-sm ml-1">
+                    Remember Me
+                  </label>
+                </div>
+                <button className="text-xs font-semibold cursor-pointer hover:text-red-500">Forgot Password?</button>
+              </div>
+            </div>
           </div>
           <div className="flex justify-center mt-6">
-            <button className="button w-full">
+            <button className="login-button tracking-widest">
               {isPending ? "Logging in..." : "Log in"}
             </button>
           </div>
           {error && <ErrorMessage error={error.message} />}
         </form>
-        <div className="mt-4 text-base text-center">
-          <Link href="/signup" className="text-ecru-white">
-            Don't have any account?{" "}
-            <span className="font-bold text-apple hover:text-old-gold">
-              Sign up here
-            </span>
+        <div className="p-8 text-base text-center flex flex-col justify-center">
+          <h2 className="mb-2">Don't have any account?</h2>
+          <Link
+            href="/signup"
+            className="signup-button"
+          >
+            Sign up
           </Link>
         </div>
       </div>

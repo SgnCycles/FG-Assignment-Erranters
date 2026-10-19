@@ -30,6 +30,14 @@
 }
 
 /* buttons */
+.login-button {
+@apply w-full bg-outer-space text-ecru-white py-4 font-semibold font-cantarell hover:bg-apple cursor-pointer text-base
+}
+
+.signup-button {
+  @apply w-full bg-apple text-outer-space py-4 font-semibold font-cantarell hover:bg-casual-white cursor-pointer text-base
+}
+
 .logo-button {
   @apply flex w-auto text-2xl font-bebas-neue text-ecru-white font-bold tracking-widest cursor-pointer;
 }
@@ -85,7 +93,6 @@
 .add-comment-button {
   @apply text-outer-space p-2 rounded-4xl bg-old-gold/70 w-40 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
-/*  */
 
 /* headings */
 .main-heading {
@@ -121,7 +128,6 @@
 }
 
 /* subtitles */
-
 .subtitle {
   @apply text-old-gold uppercase font-semibold;
 }
@@ -138,7 +144,6 @@
 .sidebar-item.active {
   @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-4xl w-40;
 }
-/*  */
 
 .eye-icon {
   @apply cursor-pointer absolute text-outer-space top-5 right-2 text-lg;
@@ -176,17 +181,19 @@
 .action-tooltip:hover .action-tooltipText {
   @apply visible;
 }
-/*  */
 
 /* footer */
 .footer {
   @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2 mt-10;
 }
-/*  */
 
 /* inputs */
 .input {
-  @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 rounded-xl text-outer-space focus:outline-none focus:border-old-gold;
+  @apply bg-ecru-white text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold;
+}
+
+.login-input {
+  @apply w-full bg-ecru-white text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold;
 }
 
 .label {
@@ -200,7 +207,6 @@
 .label-input {
   @apply flex flex-col mt-10
 }
-/*  */
 
 .file-dropzone-area {
   @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4;
@@ -218,7 +224,6 @@
 .profile-statistics-item {
   @apply text-outer-space/50;
 }
-/*  */
 
 /* profile form */
 .profile-row {
@@ -237,7 +242,18 @@
   @apply flex flex-col w-full px-8;
 }
 
-/*  */
+/* login / signup form */
+.login-signup-element {
+  @apply h-150 max-h-150 shrink font-cantarell;
+}
+
+.login-signup-layout {
+  @apply h-full flex flex-col text-left bg-old-gold;
+}
+
+.login-signup-heading {
+  @apply font-bebas-neue text-4xl text-start text-ecru-white ml-8 mt-4;
+}
 
 /* layouts*/
 .main-layout {
@@ -268,9 +284,11 @@
   @apply flex justify-end mt-10;
 }
 
-/*  */
-
 /* forms */
+.login-signup-form {
+  @apply h-full flex flex-col justify-evenly w-lg px-8;
+}
+
 .form-background {
   @apply flex flex-col items-center bg-mineral-green font-cantarell;
 }
@@ -282,5 +300,3 @@
 .comment-form {
   @apply w-full flex flex-col font-cantarell
 }
-
-/*  */
