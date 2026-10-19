@@ -21,7 +21,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const supabase = createClient();
-
     const fetchUserProfile = async (id: string) => {
       const { data: userProfileData } = await getUserProfile(id);
       setUserProfile(userProfileData);

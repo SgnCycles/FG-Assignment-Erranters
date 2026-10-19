@@ -8,6 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 import TextareaAutosize from "react-textarea-autosize";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
+import TextEditor from "@/components/TextEditor";
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
@@ -77,6 +78,9 @@ const CreatePostForm = ({
             </label>
             <TextareaAutosize {...register("content")} className="input" />
           </div>
+          {/* Testing */}
+          <TextEditor />
+          {/* Testing */}
           <div className="grid grid-cols-2 gap-4">
             {postCategory === "Marketplace" &&
             (postType === "Sell" || postType === "Buy") ? (

@@ -87,7 +87,9 @@ export const getUserProfile = async (id: string) => {
   const supabase = createClient();
   return await supabase
     .from("Profiles")
-    .select("id, name, surname, username, bio, interests, profile_image, headline, location, country, cover_image")
+    .select(
+      "id, name, surname, username, bio, interests, profile_image, headline, location, country, cover_image",
+    )
     .eq("id", id)
     .single();
 };
@@ -99,7 +101,7 @@ export const getUserPosts = async (
 ) => {
   return await supabase
     .from("Posts")
-    .select('*,  PostImages(*), author:Profiles(*), Comments(*)')
+    .select("*,  PostImages(*), author:Profiles(*), Comments(*)")
     .eq("author", userId)
     .order("created_at", { ascending: false });
 };
@@ -108,7 +110,7 @@ export const getMemberProfile = async (username: string) => {
   const supabase = createClient();
   return await supabase
     .from("Profiles")
-    .select('*, Posts(*, PostImages(*))')
+    .select("*, Posts(*, PostImages(*))")
     .eq("username", username)
     .single();
 };
@@ -165,13 +167,44 @@ export const getUserFavourites = async (
     .order("created_at", { ascending: sortingOrder, referencedTable: "Posts" });
 };
 
+export const getUserPostNumber = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+) => {
+  return await supabase
+    .from("Posts")
+    .select("*", { count: "exact", head: true })
+    .eq("author", userId)
+};
+
+export const getUserFavouritesNumber = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+) => {
+  return await supabase
+    .from("Favourites")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
+};
+
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
 export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
 export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;
-export type PostCommentsType = NonNullable<Awaited<ReturnType<typeof getPostComments>>>[number];
-export type GetUserLikeStatusType = QueryData<ReturnType<typeof getUserLikeStatus>>;
-export type GetPostLikesNumberType = QueryData<ReturnType<typeof getPostLikesNumber>>;
-export type UserFavouritesType = QueryData<ReturnType<typeof getUserFavourites>>;
+export type PostCommentsType = NonNullable<
+  Awaited<ReturnType<typeof getPostComments>>
+>[number];
+export type PostCommentsCountType = NonNullable<
+  Awaited<ReturnType<typeof getCommentNumber>>
+>;
+export type GetUserLikeStatusType = QueryData<
+  ReturnType<typeof getUserLikeStatus>
+>;
+export type GetPostLikesNumberType = QueryData<
+  ReturnType<typeof getPostLikesNumber>
+>;
+export type UserFavouritesType = QueryData<
+  ReturnType<typeof getUserFavourites>
+>;

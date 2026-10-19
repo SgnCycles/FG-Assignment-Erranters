@@ -1,6 +1,6 @@
 "use client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getPostComments } from "@/lib/supabase/queries";
+import { getCommentNumber, getPostComments, getPostLikesNumber } from "@/lib/supabase/queries";
 import SortingButton from "@/components/buttons/SortingButton";
 import { useState } from "react";
 import { PostCommentsPropsType } from "./types";
@@ -14,14 +14,26 @@ const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
     queryKey: ["post-comments", postId, sortingOrder],
     queryFn: () => getPostComments(postId, sortingOrder),
   });
+
+    const { data: commentAmount, error } = useQuery({
+      queryKey: ["post-comments-count", postId],
+      queryFn: () => getCommentNumber(postId),
+    });
+    if (error) {
+      console.log(error);
+    }
+    
   const onDeleteSuccess = () => {
     queryClient.invalidateQueries({
       queryKey: ["post-comments", postId],
     });
   };
 
+  const commentCount = commentAmount?.count ?? 0;
+
   return (
     <div className="mt-4">
+      <p className="font-semibold text-sm">{commentCount} comments</p>
       <SortingButton
         type="dark"
         sortingOrder={sortingOrder}

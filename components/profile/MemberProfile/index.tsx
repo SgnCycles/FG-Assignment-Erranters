@@ -1,6 +1,34 @@
+"use client";
+import { useQuery } from "@tanstack/react-query";
 import { MemberProfilePropsType } from "./types";
+import {
+  getUserFavouritesNumber,
+  getUserPostNumber,
+} from "@/lib/supabase/queries";
+import { createClient } from "@/lib/supabase/browserClient";
 
 const MemberProfile = ({ profile }: MemberProfilePropsType) => {
+
+  const supabase = createClient();
+  const { data: postAmount, error } = useQuery({
+    queryKey: ["user-post-count", profile.id],
+    queryFn: () => getUserPostNumber(supabase, profile.id),
+  });
+  if (error) {
+    console.log(error);
+  }
+
+  const { data: favouriteAmount, error: favouriteError } = useQuery({
+    queryKey: ["user-favourite-count", profile.id],
+    queryFn: () => getUserFavouritesNumber(supabase, profile.id),
+  });
+  if (favouriteError) {
+    console.log(favouriteError);
+  }
+
+  const postCount = postAmount?.count ?? 0;
+  const favouriteCount = favouriteAmount?.count ?? 0;
+
   return (
     <div className="h-full flex flex-col items-center mt-10">
       <div className="flex flex-col w-[80%] bg-casual-white rounded-4xl border-2">
@@ -99,12 +127,11 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
             </div>
             <div className="flex justify-between text-outer-space/50">
               <div className="flex items-center gap-4">
-                {profile.location &&
-                  (profile.country && (
-                    <p>
-                      {profile.location}, {profile.country}
-                    </p>
-                  ))}
+                {profile.location && profile.country && (
+                  <p>
+                    {profile.location}, {profile.country}
+                  </p>
+                )}
                 <p className="">
                   Joined{" "}
                   <span className="ml-1">
@@ -117,8 +144,12 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
               </div>
               <div className="flex gap-4 h-1/3 my-4 mx-2">
                 <div className="profile-statistics">
-                  <p className="profile-statistics-number">123</p>
+                  <p className="profile-statistics-number">{postCount}</p>
                   <p className="profile-statistics-item">Posts</p>
+                </div>
+                <div className="profile-statistics">
+                  <p className="profile-statistics-number">{favouriteCount}</p>
+                  <p className="profile-statistics-item">Favourites</p>
                 </div>
                 <div className="profile-statistics">
                   <p className="profile-statistics-number">123</p>
