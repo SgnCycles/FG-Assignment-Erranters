@@ -96,6 +96,15 @@
   @apply text-outer-space p-2 rounded-4xl bg-old-gold/70 w-40 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
 
+.button-save-post {
+  @apply w-35 flex justify-center items-center px-4 py-2 border rounded-4xl bg-outer-space text-ecru-white hover:bg-outer-space/70 cursor-pointer text-base font-cantarell font-semibold tracking-widest;
+}
+
+.button-edit-cancel {
+  @apply flex justify-center items-center text-outer-space cursor-pointer text-base font-cantarell font-semibold tracking-widest mr-6 hover:text-apple;
+}
+
+
 /*  */
 
 /* headings */

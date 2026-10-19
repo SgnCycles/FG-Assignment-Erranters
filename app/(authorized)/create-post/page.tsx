@@ -28,6 +28,7 @@ const CreatePostPage = () => {
       category: values.category,
       post_type: values.post_type,
       price: values.price,
+      location: values.location,
     });
   };
 

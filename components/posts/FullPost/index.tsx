@@ -9,14 +9,13 @@ import { PostPropsType } from "./types";
 import Link from "next/link";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
-  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
 
   return (
-    <div className="flex flex-col h-full items-center p-8 text-ecru-white font-cantarell">
+    <div className="w-full flex flex-col h-full items-center p-8 text-ecru-white font-cantarell">
       <div className="bg-casual-white text-outer-space rounded-4xl w-2/3 p-10">
         <div className="flex justify-between mb-4">
           {post.title && (
@@ -75,6 +74,18 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
             <p>{post.content}</p>
           </div>
         )}
+        <div className="mt-10">
+          {post.price && (
+            <div className="text-base">
+              <p>Price: {post.price}</p>
+            </div>
+          )}
+          {post.location && (
+            <div className="text-base">
+              <p>Location: {post.location}</p>
+            </div>
+          )}
+        </div>
         <PostReactionButtons
           postId={post.id}
           slug={post.slug}

@@ -13,6 +13,7 @@ import DeleteProfileImageAction from "@/actions/delete-profile-image-action";
 import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import TextareaAutosize from 'react-textarea-autosize';
 
 const UserProfileForm = ({
   initialValues,
@@ -333,28 +334,26 @@ const UserProfileForm = ({
               <label htmlFor="headline" className="profile-form-heading-h2">
                 Headline
               </label>
-              <textarea
+              <TextareaAutosize
                 className="input grow w-full"
                 {...register("headline")}
-              ></textarea>
+              />
             </div>
             <div className="profile-item-long">
               <label htmlFor="bio" className="profile-form-heading-h2">
                 Bio
               </label>
-              <textarea
+              <TextareaAutosize
                 className="input grow w-full"
-                {...register("bio")}
-              ></textarea>
+                {...register("bio")}/>
             </div>
             <div className="profile-item-long">
               <label htmlFor="interests" className="profile-form-heading-h2">
                 Interests
               </label>
-              <textarea
+              <TextareaAutosize
                 className="input grow w-full"
-                {...register("interests")}
-              ></textarea>
+                {...register("interests")}/>
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>

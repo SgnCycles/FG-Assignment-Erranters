@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
+import TextareaAutosize from 'react-textarea-autosize';
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
@@ -130,10 +131,9 @@ const CreatePostForm = ({
         </div>
         <div className="p-4">
           <label htmlFor="content" className="heading-h2">Add content:</label>
-          <textarea
+          <TextareaAutosize
             {...register("content")}
-            className="create-post-input min-h-35 p-4"
-          ></textarea>
+            className="create-post-input min-h-35 p-4"/>
         </div>
         <div className="flex">
           {postCategory === "Marketplace" &&
@@ -143,7 +143,7 @@ const CreatePostForm = ({
               <input
                 className="input text-outer-space cursor-pointer ml-4"
                 type="number"
-                {...register("price")}
+                {...register("price", {valueAsNumber: true})}
               />
             </div>
           ) : null}
