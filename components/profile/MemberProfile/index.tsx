@@ -1,15 +1,17 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { MemberProfilePropsType } from "./types";
 import {
   getUserFavouritesNumber,
+  getMemberFollowerNumber,
   getUserPostNumber,
 } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
+import FollowButton from "@/components/buttons/FollowButton";
 
 const MemberProfile = ({ profile }: MemberProfilePropsType) => {
-
   const supabase = createClient();
+  const queryClient = useQueryClient();
   const { data: postAmount, error } = useQuery({
     queryKey: ["user-post-count", profile.id],
     queryFn: () => getUserPostNumber(supabase, profile.id),
@@ -26,8 +28,26 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
     console.log(favouriteError);
   }
 
+  const { data: followerAmount, error: followerError } = useQuery({
+    queryKey: ["user-follower-count", profile.id],
+    queryFn: () => getMemberFollowerNumber(supabase, profile.id),
+  });
+  if (followerError) {
+    console.log(followerError);
+  }
+
+  const onFollowSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["user-is-followed", profile.id],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["user-follower-count", profile.id],
+    });
+  };
+
   const postCount = postAmount?.count ?? 0;
   const favouriteCount = favouriteAmount?.count ?? 0;
+  const followerCount = followerAmount?.count ?? 0;
 
   return (
     <div className="h-full flex flex-col items-center mt-10">
@@ -82,26 +102,10 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
               </svg>
               <span className="ml-2">Message</span>
             </button>
-            <button className="button-dark-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-user-round-plus preview-icon"
-              >
-                <path d="M2 21a8 8 0 0 1 13.292-6" />
-                <circle cx="10" cy="8" r="5" />
-                <path d="M19 16v6" />
-                <path d="M22 19h-6" />
-              </svg>
-              <span className="ml-2">Follow</span>
-            </button>
+            <FollowButton
+              onFollowSuccess={onFollowSuccess}
+              memberId={profile.id}
+            />
           </div>
         </div>
         <div className="flex flex-col grow items-center mt-6">
@@ -152,7 +156,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
                   <p className="profile-statistics-item">Favourites</p>
                 </div>
                 <div className="profile-statistics">
-                  <p className="profile-statistics-number">123</p>
+                  <p className="profile-statistics-number">{followerCount}</p>
                   <p className="profile-statistics-item">Followers</p>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+"use client";
 import ErrorMessage from "@/components/ErrorMessage";
 import FileDropZone from "@/components/FileDropZone";
 import type { ImageFile } from "@/components/FileDropZone/types";
@@ -8,7 +9,6 @@ import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 import TextareaAutosize from "react-textarea-autosize";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
-import TextEditor from "@/components/TextEditor";
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
@@ -34,7 +34,12 @@ const CreatePostForm = ({
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(postImageSchema) });
+  } = useForm({
+    resolver: zodResolver(postImageSchema),
+    defaultValues: {
+      content: "",
+    },
+  });
 
   const postCategory = watch("category");
   const postType = watch("post_type");
@@ -49,10 +54,7 @@ const CreatePostForm = ({
 
   return (
     <div className="form-background">
-      <form
-        className="form"
-        onSubmit={handleSubmit(handleCreatePost)}
-      >
+      <form className="form" onSubmit={handleSubmit(handleCreatePost)}>
         <CategoryButtons register={register} />
         <div className="p-4 flex flex-col">
           <Controller
@@ -78,9 +80,6 @@ const CreatePostForm = ({
             </label>
             <TextareaAutosize {...register("content")} className="input" />
           </div>
-          {/* Testing */}
-          <TextEditor />
-          {/* Testing */}
           <div className="grid grid-cols-2 gap-4">
             {postCategory === "Marketplace" &&
             (postType === "Sell" || postType === "Buy") ? (

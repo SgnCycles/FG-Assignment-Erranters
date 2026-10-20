@@ -128,6 +128,35 @@ export type Database = {
           },
         ]
       }
+      Followers: {
+        Row: {
+          created_at: string
+          id: number
+          member_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          member_id?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          member_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Followers_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "Profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       Messages: {
         Row: {
           content: string

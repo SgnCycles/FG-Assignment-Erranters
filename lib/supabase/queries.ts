@@ -187,6 +187,48 @@ export const getUserFavouritesNumber = async (
     .eq("user_id", userId)
 };
 
+// add user follower status
+export const getUserFollowStatus = async (memberId: string) => {
+  const supabase = createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized access");
+
+  const { data, error } = await supabase
+    .from("Followers")
+    .select("member_id")
+    .eq("member_id", memberId)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  const memberIsFollowed = data !== null;
+  return memberIsFollowed;
+};
+
+export const getMemberFollowerNumber = async (
+  supabase: ReturnType<typeof createClient>,
+  memberId: string,
+) => {
+  return await supabase
+    .from("Followers")
+    .select("*", { count: "exact", head: true })
+    .eq("member_id", memberId)
+};
+
+export const getUserFollowerNumber = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+) => {
+  return await supabase
+    .from("Followers")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
+};
+
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
 export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
 export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
