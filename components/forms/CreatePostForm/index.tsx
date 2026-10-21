@@ -1,25 +1,20 @@
 "use client";
 import ErrorMessage from "@/components/ErrorMessage";
 import FileDropZone from "@/components/FileDropZone";
-import type { ImageFile } from "@/components/FileDropZone/types";
-import { postSchema } from "@/schemas/schemas";
+import { postImageSchema } from "@/schemas/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import * as z from "zod";
 import TextareaAutosize from "react-textarea-autosize";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
 import { CreatePostFormPropsType } from "./types";
-
-const postImageSchema = postSchema.omit({ images: true }).extend({
-  image: z.array(z.custom<ImageFile>()).optional(),
-});
 
 const CreatePostForm = ({
   handleCreatePost,
   error,
   isPending,
 }: CreatePostFormPropsType) => {
+  
   const {
     register,
     control,

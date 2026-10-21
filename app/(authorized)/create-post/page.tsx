@@ -2,9 +2,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { CreatePost } from "@/actions/create-post-action";
 import { useRouter } from "next/navigation";
-import CreatePostForm, {
-  type FormValues,
-} from "@/components/forms/CreatePostForm";
+import CreatePostForm from "@/components/forms/CreatePostForm";
+import type { FormValues } from "@/types/types";
 
 const CreatePostPage = () => {
   const router = useRouter();

@@ -1,14 +1,12 @@
 "use client";
 import EditPost from "@/actions/edit-post-action";
-import { postSchema } from "@/schemas/schemas";
+import { postImageSchema, postSchema } from "@/schemas/schemas";
 import ErrorMessage from "@/components/ErrorMessage";
 import { type Tables } from "@/lib/supabase/database.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm, Controller } from "react-hook-form";
 import FileDropZone from "@/components/FileDropZone";
-import type { ImageFile } from "@/components/FileDropZone/types";
-import * as z from "zod";
 import { FaXmark } from "react-icons/fa6";
 import DeletePostImagesAction from "@/actions/delete-post-images-action";
 // import { useState } from "react";
@@ -27,10 +25,6 @@ const EditPostForm = ({
   postId: string;
 }) => {
   // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
-
-  const postImageSchema = postSchema.omit({ images: true }).extend({
-    image: z.array(z.custom<ImageFile>()).optional(),
-  });
 
   const {
     register,

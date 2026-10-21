@@ -1,3 +1,4 @@
+import { ImageFile } from "@/components/FileDropZone/types";
 import * as z from "zod";
 
 export const logInSchema = z.object({
@@ -84,4 +85,8 @@ export const userProfileSchema = z.object({
 
 export const postCommentSchema = z.object({
   content: z.string().min(1, "Comment must be at least 1 character long"),
+});
+
+export const postImageSchema = postSchema.omit({ images: true }).extend({
+  image: z.array(z.custom<ImageFile>()).optional(),
 });

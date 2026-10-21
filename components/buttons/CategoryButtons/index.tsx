@@ -1,5 +1,5 @@
 import { type UseFormRegister } from "react-hook-form";
-import { type FormValues } from "@/components/forms/CreatePostForm/index";
+import type { FormValues } from "@/types/types";
 
 const CategoryButtons = ({
   register,
