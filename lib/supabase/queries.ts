@@ -1,19 +1,6 @@
 import { createClient } from "./browserClient";
 import { type QueryData } from "@supabase/supabase-js";
 
-// export const getHomePosts = async (
-//   supabase: ReturnType<typeof createClient>,
-//   sortingOrder: boolean,
-// ) => {
-//   return await supabase
-//     .from("Posts")
-//     .select(
-//       'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
-//     )
-//     .order("created_at", { ascending: sortingOrder });
-// };
-
-// testing pagination
 export const getHomePosts = async (
   supabase: ReturnType<typeof createClient>,
   sortingOrder: boolean,
@@ -29,19 +16,20 @@ export const getHomePosts = async (
     .order("created_at", { ascending: sortingOrder });
 };
 
-// all posts count
 export const getAllPostsCount = async (
   supabase: ReturnType<typeof createClient>,
 ) => {
   return await supabase
     .from("Posts")
-    .select("*", { count: "exact", head: true })
+    .select("*", { count: "exact", head: true });
 };
 
 export const getMyPosts = async (
   supabase: ReturnType<typeof createClient>,
   userId: string,
   sortingOrder: boolean,
+  pagesVisited: number,
+  postsPerPage: number,
 ) => {
   return await supabase
     .from("Posts")
@@ -49,7 +37,18 @@ export const getMyPosts = async (
       'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .eq("author", userId)
+    .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder });
+};
+
+export const getMyPostsCount = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+) => {
+  return await supabase
+    .from("Posts")
+    .select("*", { count: "exact", head: true })
+    .eq("author", userId)
 };
 
 export const getSinglePost = async (slug: string) => {
@@ -182,6 +181,8 @@ export const getUserFavourites = async (
   supabase: ReturnType<typeof createClient>,
   userId: string,
   sortingOrder: boolean,
+  pagesVisited: number,
+  postsPerPage: number,
 ) => {
   return await supabase
     .from("Favourites")
@@ -189,7 +190,16 @@ export const getUserFavourites = async (
       'post_id, Posts("id", "title", "slug", "created_at", "category", "post_type", author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
     )
     .eq("user_id", userId)
+    .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder, referencedTable: "Posts" });
+};
+
+export const getAllUserFavouritePostsCount = async (
+  supabase: ReturnType<typeof createClient>,
+) => {
+  return await supabase
+    .from("Favourites")
+    .select("*", { count: "exact", head: true });
 };
 
 export const getUserPostNumber = async (
@@ -212,7 +222,6 @@ export const getUserFavouritesNumber = async (
     .eq("user_id", userId);
 };
 
-// add user follower status
 export const getUserFollowStatus = async (memberId: string) => {
   const supabase = createClient();
   const {

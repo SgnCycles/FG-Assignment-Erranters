@@ -3,9 +3,11 @@ import ReactPaginate from "react-paginate";
 const Pagination = ({
   pageCount,
   changePage,
+  currentPage
 }: {
   pageCount: number;
   changePage: ({ selected }: { selected: number }) => void;
+  currentPage: number;
 }) => {
   return (
     <ReactPaginate
@@ -20,6 +22,7 @@ const Pagination = ({
       renderOnZeroPageCount={null}
       pageLinkClassName={"paginationLink"}
       activeLinkClassName={"paginationLinkActive"}
+      forcePage={currentPage}
     />
   );
 };

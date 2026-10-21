@@ -26,7 +26,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       <div className="w-full pl-4">
         <GoBackButton />
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center w-full">
         {data && (
           <Post
             post={data}

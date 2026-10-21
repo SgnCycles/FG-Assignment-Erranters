@@ -15,8 +15,8 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
   };
 
   return (
-    <div className="w-full flex flex-col h-full items-center p-8 text-ecru-white font-cantarell">
-      <div className="bg-casual-white text-outer-space rounded-4xl w-2/3 p-10">
+    <div className="w-full flex h-full justify-center items-center p-8 text-ecru-white font-cantarell">
+      <div className="bg-casual-white text-outer-space rounded-4xl p-10 w-[80%]">
         <div className="flex justify-between mb-4">
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
