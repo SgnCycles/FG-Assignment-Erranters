@@ -38,7 +38,6 @@ const ProfileCardContent = ({
     queryFn: () => getUserFollowerNumber(supabase, user!.id),
   });
 
-  console.log("My follower number: ", followerAmount)
   if (followerError) {
     console.log(followerError);
   }

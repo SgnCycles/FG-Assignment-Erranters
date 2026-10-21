@@ -5,8 +5,10 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const PostPageSidebar = () => {
+  
   const pathname = usePathname();
-  const { postCategory, setPostCategory } = usePostCategoryContext() as PostCategoryContextType;
+  const { postCategory, setPostCategory } =
+    usePostCategoryContext() as PostCategoryContextType;
 
   return (
     <aside className="w-[15%] flex flex-col items-center bg-mineral-green pl-6">
@@ -17,8 +19,33 @@ const PostPageSidebar = () => {
       >
         <ul className="flex flex-col gap-4 mt-4 items-center text-ecru-white/50">
           <li className="w-full">
-            {/* TO DO: update link and function */}
-            <Link href="/latest" className={`sidebar-item ${pathname === "/latest" ? "active" : ""}`}>
+            <Link
+              href="/feed"
+              className={`sidebar-item ${pathname === "/feed" ? "active" : ""}`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-clock preview-icon mr-2"
+              >
+                <path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" />
+                <path d="M15 3v5a1 1 0 0 0 1 1h5" />
+              </svg>
+              All Posts
+            </Link>
+          </li>
+          <li className="w-full">
+            <Link
+              href="/latest"
+              className={`sidebar-item ${pathname === "/latest" ? "active" : ""}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -38,8 +65,10 @@ const PostPageSidebar = () => {
             </Link>
           </li>
           <li className="w-full">
-            {/* TO DO: update link and function */}
-            <Link href="/for-you" className={`sidebar-item ${pathname === "/for-you" ? "active" : ""}`}>
+            <Link
+              href="/for-you"
+              className={`sidebar-item ${pathname === "/for-you" ? "active" : ""}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -61,7 +90,10 @@ const PostPageSidebar = () => {
             </Link>
           </li>
           <li className="w-full">
-            <Link href="/my-posts" className={`sidebar-item ${pathname === "/my-posts" ? "active" : ""}`}>
+            <Link
+              href="/my-posts"
+              className={`sidebar-item ${pathname === "/my-posts" ? "active" : ""}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -81,7 +113,10 @@ const PostPageSidebar = () => {
             </Link>
           </li>
           <li className="w-full">
-            <Link href="/favourites" className={`sidebar-item ${pathname === "/favourites" ? "active" : ""}`}>
+            <Link
+              href="/favourites"
+              className={`sidebar-item ${pathname === "/favourites" ? "active" : ""}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
