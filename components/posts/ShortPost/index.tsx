@@ -7,12 +7,14 @@ import { useUserContext } from "@/context/userContext";
 import type { userContextType } from "@/types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { DeletePostAction } from "@/actions/delete-post-action";
+import ImageGallery from "@/components/ImageGallery";
 
 const ShortPost = ({
   onFavouriteDeleteSuccess,
   post,
   showUser,
 }: ShortPostPropsType) => {
+  
   const { user } = useUserContext() as userContextType;
   const isAuthor = user?.id === post.author?.id;
   const queryClient = useQueryClient();
@@ -31,7 +33,7 @@ const ShortPost = ({
       queryKey: ["user-post-count"],
     });
   };
-  
+
   return (
     <div className="flex flex-col justify-around gap-4 border-2 border-casual-white bg-casual-white rounded-2xl p-4 m-4 text-outer-space">
       <div className="w-full flex justify-between">
@@ -83,21 +85,10 @@ const ShortPost = ({
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-xl hover:text-apple">{post.title}</h3>
-        {post.PostImages.length > 0 && (
-          <div className="mb-4 flex flex-wrap ">
-            <div className="flex justify-start h-40 w-auto">
-              {post.PostImages.map((image) => (
-                <img
-                  key={image.id}
-                  src={image.image_url}
-                  alt={post.title}
-                  className="h-full w-full object-contain bg-no-repeat"
-                />
-              ))}
-            </div>
-          </div>
-        )}
       </Link>
+      {post.PostImages && post.PostImages.length > 0 && (
+        <ImageGallery postImages={post.PostImages} />
+      )}
       <div>
         <PostReactionButtons
           postId={post.id}

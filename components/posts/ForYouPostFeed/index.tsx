@@ -13,6 +13,7 @@ const ForYouPostsFeed = ({
   posts,
   userId,
 }: ForYouPostsPropsType) => {
+
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();

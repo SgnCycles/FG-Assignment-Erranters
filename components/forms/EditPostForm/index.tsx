@@ -133,16 +133,22 @@ const EditPostForm = ({
         </div>
         {/* add price and location */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="label-input">
-            <label htmlFor="price" className="label">
-              Add price:
-            </label>
-            <input
-              className="input text-outer-space cursor-pointer"
-              type="number"
-              {...register("price", { valueAsNumber: true })}
-            />
-          </div>
+          {initialValues.post_type === "Marketplace" && (
+            <div className="label-input">
+              <label htmlFor="price" className="label">
+                Add price:
+              </label>
+              <input
+                className="input text-outer-space cursor-pointer"
+                type="number"
+                {...register("price", {
+                  setValueAs: (value) =>
+                    value === "" ? undefined : Number(value),
+                })}
+              />
+            </div>
+          )}
+
           <div className="label-input">
             <label htmlFor="location" className="label">
               Add location:

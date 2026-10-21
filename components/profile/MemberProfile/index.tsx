@@ -11,6 +11,7 @@ import { createClient } from "@/lib/supabase/browserClient";
 import FollowButton from "@/components/buttons/FollowButton";
 
 const MemberProfile = ({ profile }: MemberProfilePropsType) => {
+  
   const supabase = createClient();
   const queryClient = useQueryClient();
   const { data: postAmount, error } = useQuery({

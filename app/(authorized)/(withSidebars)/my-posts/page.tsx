@@ -3,6 +3,7 @@ import MyPostsFeed from "@/components/posts/MyPostsFeed";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyPostsPage = async () => {
+  
   const supabase = await createClient();
   const {
     data: { user },

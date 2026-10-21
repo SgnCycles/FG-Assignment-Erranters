@@ -6,6 +6,7 @@ import CreatePostForm from "@/components/forms/CreatePostForm";
 import type { FormValues } from "@/types/types";
 
 const CreatePostPage = () => {
+  
   const router = useRouter();
   const { mutate, error, isPending } = useMutation({
     mutationFn: CreatePost,

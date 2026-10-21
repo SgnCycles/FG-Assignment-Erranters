@@ -9,6 +9,7 @@ const DeleteButton = ({
   deleteFunction,
   onDeleteSuccess,
 }: DeleteButtonPropsType) => {
+  
   const { mutate } = useMutation({
     mutationFn: deleteFunction,
     onSuccess: () => {

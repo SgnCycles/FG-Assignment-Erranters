@@ -1,7 +1,8 @@
 @import "tailwindcss";
-@import 'lightgallery/css/lightgallery.css';
-@import 'lightgallery/css/lg-thumbnail.css';
-@import 'lightgallery/css/lg-zoom.css';
+@import "lightgallery/css/lightgallery.css";
+@import "lightgallery/css/lg-thumbnail.css";
+@import "lightgallery/css/lg-zoom.css";
+@import "lightgallery/css/lg-justified.css";
 
 * {
   box-sizing: border-box;
@@ -318,7 +319,7 @@
 }
 
 .paginationLink {
-  @apply w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:text-outer-space hover:bg-apple text-ecru-white ;
+  @apply w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:text-outer-space hover:bg-apple text-ecru-white;
 }
 
 .paginationLinkActive {

@@ -9,6 +9,7 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const LatestPostsFeed = ({ posts }: { posts: HomePostsType }) => {
+  
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const supabase = createClient();

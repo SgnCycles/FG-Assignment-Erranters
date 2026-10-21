@@ -5,7 +5,6 @@ import ProfileCard from "@/components/profile/ProfileCard";
 const UserSidebar = () => {
   
   return (
-    // <div className="w-[20%] bg-mineral-green flex justify-center">
     <div className="w-1/4 flex justify-center">
       <ProfileCard />
     </div>

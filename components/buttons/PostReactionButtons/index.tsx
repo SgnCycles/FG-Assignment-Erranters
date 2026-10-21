@@ -26,6 +26,7 @@ const PostReactionButtons = ({
   onDeleteSuccess,
   isAuthor,
 }: PostReactionButtonPropsType) => {
+  
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
     queryKey: ["post-comments-count", postId],

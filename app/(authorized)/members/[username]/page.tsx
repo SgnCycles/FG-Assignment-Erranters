@@ -10,6 +10,7 @@ const MemberProfilePage = async ({
 }: {
   params: { username: string };
 }) => {
+  
   const { username } = await params;
   const supabase = await createClient();
   const { data, error } = await getMemberProfile(username);

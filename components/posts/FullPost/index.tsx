@@ -7,8 +7,10 @@ import PostCategoryIcons from "@/components/PostCategoryIcon";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import { PostPropsType } from "./types";
 import Link from "next/link";
+import ImageGallery from "@/components/ImageGallery";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
+  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -56,17 +58,8 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         </Link>
         <div className="mb-4">
           {post.PostImages.length === 0 && null}
-          {post.PostImages.length > 0 && (
-            <div className="flex justify-start">
-              {post.PostImages.map((image) => (
-                <img
-                  key={image.id}
-                  src={image.image_url}
-                  alt={post.title}
-                  className="h-50 w-auto"
-                />
-              ))}
-            </div>
+          {post.PostImages && post.PostImages.length > 0 && (
+            <ImageGallery postImages={post.PostImages} />
           )}
         </div>
         {post.content && (

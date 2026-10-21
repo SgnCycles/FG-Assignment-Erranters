@@ -1,7 +1,6 @@
 "use client";
 import { createClient } from "@/lib/supabase/browserClient";
 import {
-  getMemberFollowerNumber,
   getUserFavouritesNumber,
   getUserFollowerNumber,
   getUserPostNumber,

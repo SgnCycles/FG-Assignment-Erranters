@@ -5,6 +5,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 const PostCategoryContext = createContext<PostCategoryContextType | null>(null);
 
 export const PostCategoryProvider = ({ children }: { children: ReactNode }) => {
+  
   const [postCategory, setPostCategory] = useState<string>("All");
   return (
     <PostCategoryContext.Provider value={{ postCategory, setPostCategory }}>
