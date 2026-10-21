@@ -1,6 +1,5 @@
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
-import { getMyPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyPostsPage = async () => {
@@ -9,7 +8,6 @@ const MyPostsPage = async () => {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized access!");
-  const { data, error } = await getMyPosts(supabase, user.id, false);
 
   return (
     <div className="main-layout">
@@ -19,9 +17,8 @@ const MyPostsPage = async () => {
         </h1>
         <CreatePostButton />
       </div>
-      {error && <p>Failed Loading Posts...</p>}
       <div className="main-layout-posts-feed ">
-        {data && <MyPostsFeed posts={data} userId={user.id} />}
+       <MyPostsFeed userId={user.id} />
       </div>
     </div>
   );

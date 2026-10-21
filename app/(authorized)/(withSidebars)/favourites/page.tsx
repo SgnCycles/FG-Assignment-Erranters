@@ -1,6 +1,5 @@
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyFavouritePostsFeed from "@/components/posts/MyFavouritePostFeed";
-import { getUserFavourites } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const MyFavouritesPage = async () => {
@@ -10,7 +9,6 @@ const MyFavouritesPage = async () => {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized access!");
-  const { data, error } = await getUserFavourites(supabase, user.id, false);
 
   return (
     <div className="main-layout">
@@ -20,9 +18,8 @@ const MyFavouritesPage = async () => {
         </h1>
         <CreatePostButton />
       </div>
-      {error && <p>Failed Loading Posts...</p>}
       <div className="main-layout-posts-feed ">
-        {data && <MyFavouritePostsFeed posts={data} userId={user.id} />}
+      <MyFavouritePostsFeed userId={user.id} />
       </div>
     </div>
   );

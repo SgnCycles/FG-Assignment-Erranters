@@ -196,10 +196,12 @@ export const getUserFavourites = async (
 
 export const getAllUserFavouritePostsCount = async (
   supabase: ReturnType<typeof createClient>,
+  userId: string
 ) => {
   return await supabase
     .from("Favourites")
-    .select("*", { count: "exact", head: true });
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
 };
 
 export const getUserPostNumber = async (
