@@ -31,11 +31,11 @@
 
 /* buttons */
 .login-button {
-@apply w-full bg-outer-space text-ecru-white py-4 font-semibold font-cantarell hover:bg-apple cursor-pointer text-base
+  @apply w-full bg-outer-space text-ecru-white py-4 font-semibold font-cantarell hover:bg-apple cursor-pointer text-base;
 }
 
 .signup-button {
-  @apply w-full bg-apple text-outer-space py-4 font-semibold font-cantarell hover:bg-casual-white cursor-pointer text-base
+  @apply w-full bg-apple text-outer-space py-4 font-semibold font-cantarell hover:bg-casual-white cursor-pointer text-base;
 }
 
 .logo-button {
@@ -99,7 +99,7 @@
 }
 
 .go-to-start-button {
-  @apply font-semibold text-old-gold cursor-pointer hover:text-apple
+  @apply font-semibold text-old-gold cursor-pointer hover:text-apple;
 }
 
 /* headings */
@@ -213,7 +213,7 @@
 }
 
 .label-input {
-  @apply flex flex-col mt-10
+  @apply flex flex-col mt-10;
 }
 
 .file-dropzone-area {
@@ -306,5 +306,23 @@
 }
 
 .comment-form {
-  @apply w-full flex flex-col font-cantarell
+  @apply w-full flex flex-col font-cantarell;
+}
+
+/* pagination */
+.paginationButtons {
+  @apply w-full h-15 list-none flex gap-2 justify-center items-center text-sm;
+}
+
+.paginationLink {
+  @apply w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:text-outer-space hover:bg-apple text-ecru-white ;
+}
+
+.paginationLinkActive {
+  @apply text-outer-space bg-old-gold border-none;
+}
+
+.previousButton,
+.nextLink {
+  @apply w-12 border border-ecru-white/70 text-ecru-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-old-gold/50;
 }

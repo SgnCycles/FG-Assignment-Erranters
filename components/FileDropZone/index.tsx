@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { FaXmark } from "react-icons/fa6";
 import { AiFillFileImage } from "react-icons/ai";

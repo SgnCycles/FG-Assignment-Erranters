@@ -1,16 +1,41 @@
 import { createClient } from "./browserClient";
 import { type QueryData } from "@supabase/supabase-js";
 
+// export const getHomePosts = async (
+//   supabase: ReturnType<typeof createClient>,
+//   sortingOrder: boolean,
+// ) => {
+//   return await supabase
+//     .from("Posts")
+//     .select(
+//       'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+//     )
+//     .order("created_at", { ascending: sortingOrder });
+// };
+
+// testing pagination
 export const getHomePosts = async (
   supabase: ReturnType<typeof createClient>,
   sortingOrder: boolean,
+  pagesVisited: number,
+  postsPerPage: number,
 ) => {
   return await supabase
     .from("Posts")
     .select(
       'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
+    .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder });
+};
+
+// all posts count
+export const getAllPostsCount = async (
+  supabase: ReturnType<typeof createClient>,
+) => {
+  return await supabase
+    .from("Posts")
+    .select("*", { count: "exact", head: true })
 };
 
 export const getMyPosts = async (
@@ -174,7 +199,7 @@ export const getUserPostNumber = async (
   return await supabase
     .from("Posts")
     .select("*", { count: "exact", head: true })
-    .eq("author", userId)
+    .eq("author", userId);
 };
 
 export const getUserFavouritesNumber = async (
@@ -184,7 +209,7 @@ export const getUserFavouritesNumber = async (
   return await supabase
     .from("Favourites")
     .select("*", { count: "exact", head: true })
-    .eq("user_id", userId)
+    .eq("user_id", userId);
 };
 
 // add user follower status
@@ -216,7 +241,7 @@ export const getMemberFollowerNumber = async (
   return await supabase
     .from("Followers")
     .select("*", { count: "exact", head: true })
-    .eq("member_id", memberId)
+    .eq("member_id", memberId);
 };
 
 export const getUserFollowerNumber = async (
@@ -226,7 +251,7 @@ export const getUserFollowerNumber = async (
   return await supabase
     .from("Followers")
     .select("*", { count: "exact", head: true })
-    .eq("user_id", userId)
+    .eq("user_id", userId);
 };
 
 export const getForYouPosts = async (
@@ -245,7 +270,8 @@ export const getForYouPosts = async (
 
   return supabase
     .from("Posts")
-    .select(`
+    .select(
+      `
       id,
       title,
       slug,
@@ -254,7 +280,8 @@ export const getForYouPosts = async (
       post_type,
       author(id, username, profile_image),
       PostImages(id, image_url, position)
-    `)
+    `,
+    )
     .in("author", followingIds)
     .order("created_at", { ascending: sortingOrder });
 };
