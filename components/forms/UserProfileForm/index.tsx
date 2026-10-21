@@ -13,7 +13,7 @@ import DeleteProfileImageAction from "@/actions/delete-profile-image-action";
 import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 
 const UserProfileForm = ({
   initialValues,
@@ -39,6 +39,18 @@ const UserProfileForm = ({
   const [coverImagePreview, setCoverImagePreview] = useState<string | null>(
     initialValues.cover_image,
   );
+
+  const headlineLength = 140;
+  const [headlineText, setHeadlineText] = useState<string>(initialValues.headline ?? "");
+
+  const handleHeadlineTextLenght = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const value = e.target.value;
+    if (value.length <= headlineLength) {
+      setHeadlineText(value);
+    }
+  };
 
   const userProfileImageSchema = userProfileSchema
     .omit({ profile_image: true })
@@ -334,10 +346,16 @@ const UserProfileForm = ({
               <label htmlFor="headline" className="label">
                 Headline
               </label>
-              <TextareaAutosize
-                className="input grow w-full"
-                {...register("headline")}
-              />
+              <div className="relative">
+                <TextareaAutosize
+                  className="input grow w-full "
+                  {...register("headline")}
+                  onChange={(e) => {
+                    handleHeadlineTextLenght(e);
+                  }}
+                />
+                <span className="absolute top-1/4 right-2 text-outer-space/50">{headlineText.length}/{headlineLength}</span>
+              </div>
             </div>
             <div className="profile-item-full">
               <label htmlFor="bio" className="label">
@@ -345,7 +363,8 @@ const UserProfileForm = ({
               </label>
               <TextareaAutosize
                 className="input grow w-full"
-                {...register("bio")}/>
+                {...register("bio")}
+              />
             </div>
             <div className="profile-item-full">
               <label htmlFor="interests" className="label">
@@ -353,7 +372,8 @@ const UserProfileForm = ({
               </label>
               <TextareaAutosize
                 className="input grow w-full"
-                {...register("interests")}/>
+                {...register("interests")}
+              />
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>

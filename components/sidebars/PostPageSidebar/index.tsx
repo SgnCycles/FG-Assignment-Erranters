@@ -18,7 +18,7 @@ const PostPageSidebar = () => {
         <ul className="flex flex-col gap-4 mt-4 items-center text-ecru-white/50">
           <li className="w-full">
             {/* TO DO: update link and function */}
-            <Link href="/" className={`sidebar-item ${pathname === "/" ? "active" : ""}`}>
+            <Link href="/latest" className={`sidebar-item ${pathname === "/latest" ? "active" : ""}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -39,7 +39,7 @@ const PostPageSidebar = () => {
           </li>
           <li className="w-full">
             {/* TO DO: update link and function */}
-            <Link href="/feed" className={`sidebar-item ${pathname === "/feed" ? "active" : ""}`}>
+            <Link href="/for-you" className={`sidebar-item ${pathname === "/for-you" ? "active" : ""}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -61,7 +61,7 @@ const PostPageSidebar = () => {
             </Link>
           </li>
           <li className="w-full">
-            <Link href="/posts" className={`sidebar-item ${pathname === "/posts" ? "active" : ""}`}>
+            <Link href="/my-posts" className={`sidebar-item ${pathname === "/my-posts" ? "active" : ""}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

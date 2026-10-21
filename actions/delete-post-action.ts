@@ -6,5 +6,5 @@ export const DeletePostAction = async (postId: string) => {
   const supabase = await createClient();
   await supabase.from("Posts").delete().eq("id", postId).throwOnError();
   revalidatePath("/feed");
-  revalidatePath("/posts");
+  revalidatePath("/my-posts");
 };

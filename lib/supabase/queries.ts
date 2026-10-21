@@ -229,9 +229,53 @@ export const getUserFollowerNumber = async (
     .eq("user_id", userId)
 };
 
+export const getForYouPosts = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  sortingOrder: boolean,
+) => {
+  const { data: following, error } = await supabase
+    .from("Followers")
+    .select("member_id")
+    .eq("user_id", userId);
+
+  if (error) throw error;
+
+  const followingIds = following.map((item) => item.member_id);
+
+  return supabase
+    .from("Posts")
+    .select(`
+      id,
+      title,
+      slug,
+      created_at,
+      category,
+      post_type,
+      author(id, username, profile_image),
+      PostImages(id, image_url, position)
+    `)
+    .in("author", followingIds)
+    .order("created_at", { ascending: sortingOrder });
+};
+
+export const getLatestPosts = async (
+  supabase: ReturnType<typeof createClient>,
+  sortingOrder: boolean,
+) => {
+  return await supabase
+    .from("Posts")
+    .select(
+      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+    )
+    .order("created_at", { ascending: sortingOrder })
+    .limit(10);
+};
+
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
 export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
 export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
+export type ForYouPostsType = QueryData<ReturnType<typeof getForYouPosts>>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;

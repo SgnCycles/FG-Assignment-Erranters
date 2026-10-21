@@ -94,6 +94,14 @@
   @apply text-outer-space p-2 rounded-4xl bg-old-gold/70 w-40 cursor-pointer hover:bg-apple hover:text-ecru-white appearance-none;
 }
 
+.go-back-button {
+  @apply flex font-semibold text-ecru-white cursor-pointer hover:text-old-gold;
+}
+
+.go-to-start-button {
+  @apply font-semibold text-old-gold cursor-pointer hover:text-apple
+}
+
 /* headings */
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;

@@ -5,6 +5,7 @@ import {
   getUserFavouritesNumber,
   getMemberFollowerNumber,
   getUserPostNumber,
+  getUserFollowStatus,
 } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
 import FollowButton from "@/components/buttons/FollowButton";
@@ -36,12 +37,28 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
     console.log(followerError);
   }
 
+  const {
+    data: memberIsFollowed,
+    error: memberIsFollowedError,
+    isLoading: memberIsFollowedLoading,
+  } = useQuery({
+    queryKey: ["member-is-followed", profile.id],
+    queryFn: () => getUserFollowStatus(profile.id),
+  });
+
+  if (memberIsFollowedError) {
+    console.log(memberIsFollowedError);
+  }
+
   const onFollowSuccess = () => {
     queryClient.invalidateQueries({
       queryKey: ["user-is-followed", profile.id],
     });
     queryClient.invalidateQueries({
       queryKey: ["user-follower-count", profile.id],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["member-is-followed", profile.id],
     });
   };
 
@@ -105,6 +122,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
             <FollowButton
               onFollowSuccess={onFollowSuccess}
               memberId={profile.id}
+              memberIsFollowed={memberIsFollowed ?? false}
             />
           </div>
         </div>

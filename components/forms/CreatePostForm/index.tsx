@@ -9,18 +9,11 @@ import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 import TextareaAutosize from "react-textarea-autosize";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
+import { CreatePostFormPropsType } from "./types";
 
 const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
 });
-
-export type FormValues = z.infer<typeof postImageSchema>;
-
-type CreatePostFormPropsType = {
-  handleCreatePost: (values: FormValues) => void;
-  error: Error | null;
-  isPending: boolean;
-};
 
 const CreatePostForm = ({
   handleCreatePost,
