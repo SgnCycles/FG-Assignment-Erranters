@@ -1,6 +1,7 @@
 "use client";
 import { createClient } from "@/lib/supabase/browserClient";
 import {
+  getMemberFollowerNumber,
   getUserFavouritesNumber,
   getUserFollowerNumber,
   getUserPostNumber,
@@ -16,6 +17,7 @@ const ProfileCardContent = ({
   user: userContextType["user"];
   userProfile: userContextType["userProfile"];
 }) => {
+
   const supabase = createClient();
   const { data: postAmount, error } = useQuery({
     queryKey: ["user-post-count", user!.id],
@@ -37,6 +39,7 @@ const ProfileCardContent = ({
     queryKey: ["user-follower-count", user!.id],
     queryFn: () => getUserFollowerNumber(supabase, user!.id),
   });
+  
 
   if (followerError) {
     console.log(followerError);

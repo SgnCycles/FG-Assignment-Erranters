@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import 'lightgallery/css/lightgallery.css';
+@import 'lightgallery/css/lg-thumbnail.css';
+@import 'lightgallery/css/lg-zoom.css';
 
 * {
   box-sizing: border-box;

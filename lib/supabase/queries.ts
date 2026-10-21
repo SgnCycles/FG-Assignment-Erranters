@@ -262,7 +262,7 @@ export const getUserFollowerNumber = async (
   return await supabase
     .from("Followers")
     .select("*", { count: "exact", head: true })
-    .eq("user_id", userId);
+    .eq("member_id", userId);
 };
 
 export const getForYouPosts = async (

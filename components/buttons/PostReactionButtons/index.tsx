@@ -107,6 +107,9 @@ const PostReactionButtons = ({
       queryClient.invalidateQueries({
         queryKey: ["post-is-favourite", postId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["user-favourite-count"],
+      });
     },
   });
 
