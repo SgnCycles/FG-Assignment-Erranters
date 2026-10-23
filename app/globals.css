@@ -106,6 +106,10 @@
   @apply font-semibold text-old-gold cursor-pointer hover:text-apple;
 }
 
+.delete-account-button {
+  @apply bg-red-500 hover:bg-ecru-white text-ecru-white hover:text-red-500 h-10 flex gap-4 py-2 px-4 rounded-4xl font-semibold cursor-pointer justify-center;
+}
+
 /* headings */
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;

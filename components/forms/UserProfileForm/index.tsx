@@ -14,7 +14,7 @@ import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
-import DeleteAccountModal from "@/components/DeleteAccountModal";
+import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
 
 const UserProfileForm = ({
   initialValues,
@@ -393,7 +393,7 @@ const UserProfileForm = ({
           </div>
         </div>
       </form>
-      <DeleteAccountModal userId={userId}/>
+      <DeleteAccountDialogue userId={userId}/>
     </div>
   );
 };

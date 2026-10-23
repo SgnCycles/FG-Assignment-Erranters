@@ -28,11 +28,11 @@ const DeleteAccountButton = ({ userId }: { userId: string }) => {
   return (
     <button
       type="button"
-      className="text-red-500 font-bold cursor-pointer hover:text-blue-700"
+      className="delete-account-button w-40"
       onClick={handleDeleteAccountButtonClick}
       disabled={isPending}
     >
-      {isPending ? "Deleting Account" : "Delete Account"}
+      {isPending ? "Deleting..." : "Delete"}
     </button>
   );
 };
