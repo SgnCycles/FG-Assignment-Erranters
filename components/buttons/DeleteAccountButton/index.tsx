@@ -13,7 +13,7 @@ const DeleteAccountButton = ({ userId }: { userId: string }) => {
         await DeleteUserAccountAction(userId);
       } catch (error) {
         if (
-          errror instanceof Error &&
+          error instanceof Error &&
           error.message.includes("NEXT_REDIRECT")
         ) {
           throw error;

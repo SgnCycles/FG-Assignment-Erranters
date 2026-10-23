@@ -36,7 +36,7 @@ const DeleteAccountDialogue = ({ userId }: { userId: string }) => {
           <p>Are you sure you want to delete your account?</p>
           <div className="flex justify-around">
             <DeleteAccountButton userId={userId} />
-            <button className="add-comment-button" onClick={() => setIsModalOpen(false)}>
+            <button className="add-comment-button" onClick={() => setDialogueBoxOpen(false)}>
               Cancel
             </button>
           </div>
