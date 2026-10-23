@@ -13,6 +13,7 @@ const ImageGallery = ({ postImages }: { postImages: ImageGalleryType[] }) => {
   }));
 
   return (
+    
     <LightGallery plugins={[Thumbnail, Zoom]} zoom={{ scale: 1.5 }} thumbnail={{ animateThumb: false }} className="lg-custom-thumbnails" allowMediaOverlap>
       <JustifiedGrid rowHeight={120} gap={10} lastRow="justify">
         {imageItems.map((image, index) => (

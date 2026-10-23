@@ -15,7 +15,6 @@ import {
 const UserContext = createContext<userContextType | null>(null);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -30,17 +29,21 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const getUser = async () => {
       const {
         data: { user },
+        error,
       } = await supabase.auth.getUser();
-      setUser(user);
-      setIsLoggedIn(!!user);
 
-      if (!user) {
+      if (error || !user) {
+        setUser(null);
         setUserProfile(null);
+        setIsLoggedIn(false);
+
+        await supabase.auth.signOut({ scope: "local" });
+        return;
       }
 
-      if (user) {
-        fetchUserProfile(user.id);
-      }
+      setUser(user);
+      setIsLoggedIn(true);
+      fetchUserProfile(user.id);
     };
 
     getUser();
@@ -73,7 +76,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn, userProfile, setUserProfile }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        isLoggedIn,
+        setIsLoggedIn,
+        userProfile,
+        setUserProfile,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

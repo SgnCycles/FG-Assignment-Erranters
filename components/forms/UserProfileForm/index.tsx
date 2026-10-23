@@ -14,6 +14,7 @@ import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
+import DeleteAccountModal from "@/components/DeleteAccountModal";
 
 const UserProfileForm = ({
   initialValues,
@@ -33,7 +34,6 @@ const UserProfileForm = ({
   >;
   userId: string;
 }) => {
-
   const [profileImagePreview, setProfileImagePreview] = useState<string | null>(
     initialValues.profile_image,
   );
@@ -42,7 +42,9 @@ const UserProfileForm = ({
   );
 
   const headlineLength = 140;
-  const [headlineText, setHeadlineText] = useState<string>(initialValues.headline ?? "");
+  const [headlineText, setHeadlineText] = useState<string>(
+    initialValues.headline ?? "",
+  );
 
   const handleHeadlineTextLenght = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -121,7 +123,7 @@ const UserProfileForm = ({
   }
 
   return (
-    <div className="mr-6">
+    <div className="flex flex-col border border-ecru-white bg-casual-white rounded-4xl">
       <form
         className="form"
         onSubmit={handleSubmit((values) => {
@@ -162,7 +164,8 @@ const UserProfileForm = ({
           });
         })}
       >
-        <div className="flex flex-col border border-ecru-white rounded-4xl">
+        {/* <div className="flex flex-col border border-ecru-white rounded-4xl"> */}
+        <div>
           <div className="flex flex-col">
             <div className="h-50 relative rounded-tl-4xl rounded-tr-4xl">
               {/* TO DO: add in the UI the max size of the images */}
@@ -262,7 +265,7 @@ const UserProfileForm = ({
                   </div>
                 </div>
               ) : (
-                <div className="h-40 w-40 relative rounded-full">
+                <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
                   <img
                     src="/images/profileImage_placeholder.png"
                     alt={initialValues.username}
@@ -341,7 +344,6 @@ const UserProfileForm = ({
               </div>
             </div>
           </div>
-          {/* <div className="flex flex-col grow ml-10"> */}
           <div className="flex flex-col w-full items-center">
             <div className="profile-item-full">
               <label htmlFor="headline" className="label">
@@ -355,7 +357,9 @@ const UserProfileForm = ({
                     handleHeadlineTextLenght(e);
                   }}
                 />
-                <span className="absolute top-1/4 right-2 text-outer-space/50">{headlineText.length}/{headlineLength}</span>
+                <span className="absolute top-1/4 right-2 text-outer-space/50">
+                  {headlineText.length}/{headlineLength}
+                </span>
               </div>
             </div>
             <div className="profile-item-full">
@@ -380,11 +384,16 @@ const UserProfileForm = ({
           </div>
           <div className="form-button-layout pr-8">
             {/* TO DO: add function to the cancel button */}
-            <button className="button-light-primary">Cancel</button>
-            <button className="button-dark-primary">Update Profile</button>
+            <button type="button" className="button-light-primary">
+              Cancel
+            </button>
+            <button type="button" className="button-dark-primary">
+              Update Profile
+            </button>
           </div>
         </div>
       </form>
+      <DeleteAccountModal userId={userId}/>
     </div>
   );
 };

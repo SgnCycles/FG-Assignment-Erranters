@@ -115,7 +115,7 @@ export const getUserProfile = async (id: string) => {
       "id, name, surname, username, bio, interests, profile_image, headline, location, country, cover_image",
     )
     .eq("id", id)
-    .single();
+    .maybeSingle();
 };
 
 export const getUserPosts = async (

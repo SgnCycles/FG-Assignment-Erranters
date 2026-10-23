@@ -16,7 +16,6 @@ const ProfileCardContent = ({
   user: userContextType["user"];
   userProfile: userContextType["userProfile"];
 }) => {
-
   const supabase = createClient();
   const { data: postAmount, error } = useQuery({
     queryKey: ["user-post-count", user!.id],
@@ -38,7 +37,6 @@ const ProfileCardContent = ({
     queryKey: ["user-follower-count", user!.id],
     queryFn: () => getUserFollowerNumber(supabase, user!.id),
   });
-  
 
   if (followerError) {
     console.log(followerError);
@@ -72,7 +70,7 @@ const ProfileCardContent = ({
               />
             </div>
           ) : (
-            <div className="h-25 w-25 rounded-full">
+            <div className="h-25 w-25 rounded-full z-10 -translate-y-10 translate-x-5 border-4 border-ecru-white">
               <img
                 src="/images/profileImage_placeholder.png"
                 alt="user placeholder"

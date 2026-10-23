@@ -37,9 +37,10 @@
     "@types/node": "^20",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "deno": "^2.9.6",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.0",
-    "supabase": "^2.117.0",
+    "supabase": "^2.121.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
