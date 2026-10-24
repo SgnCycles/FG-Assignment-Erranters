@@ -1,5 +1,7 @@
+"use client";
 import DeleteCommentAction from "@/actions/delete-comment-action";
 import DeleteButton from "@/components/buttons/DeleteButton";
+import AddSubCommentForm from "@/components/forms/SubCommentForm"
 import { CommentsPropsType } from "./types";
 import Link from "next/link";
 
@@ -9,6 +11,9 @@ const Comment = ({
   userId,
   onDeleteSuccess,
 }: CommentsPropsType) => {
+
+  const [replyOpen, setReplyOpen] = useState<boolean>(false)
+
   return (
     <div key={comment.id} className="flex justify-between mt-4">
       <div className="flex">
@@ -49,6 +54,8 @@ const Comment = ({
           <div className="text-base">
             <p>{comment.content}</p>
           </div>
+          {comment.parent_id === null && <button className="cursor-pointer hover:text-red-400" onClick={setReplyOpen(!replyOpen)}>reply</button>}
+          {replyOpen && <AddSubCommentForm postId={}/>}
         </div>
       </div>
       {(isAuthor || userId === comment.author.id) && (

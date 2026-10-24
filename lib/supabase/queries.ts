@@ -332,3 +332,5 @@ export type GetPostLikesNumberType = QueryData<
 export type UserFavouritesType = QueryData<
   ReturnType<typeof getUserFavourites>
 >;
+
+console.log(typeof PostCommentsType)
