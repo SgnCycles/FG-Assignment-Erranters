@@ -6,23 +6,28 @@ import { useState } from "react";
 import { PostCommentsPropsType } from "./types";
 import Comment from "../Comment";
 
-const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
+const PostComments = ({
+  postId,
+  isAuthor,
+  userId,
+  slug,
+}: PostCommentsPropsType) => {
 
-  const [sortingOrder, setSortingOrder] = useState<boolean>(false);
+  const [sortingOrder, setSortingOrder] = useState<boolean>(true);
   const queryClient = useQueryClient();
   const { data: comments } = useQuery({
     queryKey: ["post-comments", postId, sortingOrder],
     queryFn: () => getPostComments(postId, sortingOrder),
   });
 
-    const { data: commentAmount, error } = useQuery({
-      queryKey: ["post-comments-count", postId],
-      queryFn: () => getCommentNumber(postId),
-    });
-    if (error) {
-      console.log(error);
-    }
-    
+  const { data: commentAmount, error } = useQuery({
+    queryKey: ["post-comments-count", postId],
+    queryFn: () => getCommentNumber(postId),
+  });
+  if (error) {
+    console.log(error);
+  }
+
   const onDeleteSuccess = () => {
     queryClient.invalidateQueries({
       queryKey: ["post-comments", postId],
@@ -30,18 +35,49 @@ const PostComments = ({ postId, isAuthor, userId }: PostCommentsPropsType) => {
   };
 
   const commentCount = commentAmount?.count ?? 0;
+  const parentComments = comments?.filter(
+    (comment) => comment.parent_id === null,
+  );
 
   return (
     <div className="mt-4">
       <p className="font-semibold text-sm">{commentCount} comments</p>
+
       <SortingButton
         type="dark"
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />
-      {comments && comments.length > 0 ? (
-        comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} isAuthor={isAuthor} userId={userId} onDeleteSuccess={onDeleteSuccess}/>
+      {parentComments && parentComments.length > 0 ? (
+        parentComments.map((parent) => (
+          <ul key={parent.id}>
+            <li className="comment-list">
+              <Comment
+                comment={parent}
+                isAuthor={isAuthor}
+                userId={userId}
+                onDeleteSuccess={onDeleteSuccess}
+                postId={postId}
+                slug={slug}
+              />
+              <ul className="comment-replies">
+                {comments
+                  ?.filter((child) => child.parent_id === parent.id)
+                  .map((child) => (
+                    <li key={child.id} className="comment-reply">
+                      <Comment
+                        comment={child}
+                        isAuthor={isAuthor}
+                        userId={userId}
+                        onDeleteSuccess={onDeleteSuccess}
+                        postId={postId}
+                        slug={slug}
+                      />
+                    </li>
+                  ))}
+              </ul>
+            </li>
+          </ul>
         ))
       ) : (
         <h2>Be the first to comment...</h2>

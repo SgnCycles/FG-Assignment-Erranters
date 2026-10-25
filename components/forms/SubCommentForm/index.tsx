@@ -9,8 +9,9 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
 import AddCommentButton from "@/components/buttons/AddCommentButton";
 import { useRouter } from "next/navigation";
+import { AddSubCommentFormPropsType } from "./types";
 
-const AddSubCommentForm = ({ postId, slug, parentId }: { postId: string; slug: string, parentId: string }) => {
+const AddSubCommentForm = ({ setReplyOpen, postId, parentId, slug }: AddSubCommentFormPropsType) => {
   
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -38,13 +39,13 @@ const AddSubCommentForm = ({ postId, slug, parentId }: { postId: string; slug: s
 
   return (
     <form
-      className="comment-form"
+      className="flex flex-col flex-1 w-full"
       onSubmit={handleSubmit((values) =>
         mutate({ commentData: { content: values.content }, postId, slug, parentId }),
       )}
     >
-      <label htmlFor="content" className="comment-form-heading-h2">
-        Add subcomment:
+      <label htmlFor="content" className="comment-form-heading-h2 hidden">
+        Add comment:
       </label>
       <textarea
         {...register("content")}
@@ -52,7 +53,8 @@ const AddSubCommentForm = ({ postId, slug, parentId }: { postId: string; slug: s
         className="input"
       ></textarea>
       {errors.content && <ErrorMessage error={errors.content.message!} />}
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-4 gap-4">
+        <button type="button" className="button-light-secondary" onClick={() => setReplyOpen(false)}>Cancel</button>
         <AddCommentButton />
       </div>
       {error && <ErrorMessage error={error.message} />}

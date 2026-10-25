@@ -110,6 +110,10 @@
   @apply bg-red-500 hover:bg-ecru-white text-ecru-white hover:text-red-500 h-10 flex gap-4 py-2 px-4 rounded-4xl font-semibold cursor-pointer justify-center;
 }
 
+.reply-button {
+  @apply flex justify-center items-center text-base hover:text-apple cursor-pointer;
+}
+
 /* headings */
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
@@ -334,4 +338,21 @@
 .previousButton,
 .nextLink {
   @apply w-12 border border-ecru-white/70 text-ecru-white py-2 px-4 rounded-4xl cursor-pointer hover:bg-old-gold/50;
+}
+
+/* nested comments */
+.comment-replies {
+  @apply relative ml-6 pl-6;
+}
+
+.comment-replies::before {
+  @apply content-[""] absolute left-0 top-5 bottom-0 border-l border-apple -translate-y-10;
+}
+
+.comment-reply {
+  @apply relative;
+}
+
+.comment-reply::before {
+  @apply content-[""] absolute -left-6 top-0 w-5 h-5 border-l border-b border-green-500 rounded-bl-xl;
 }

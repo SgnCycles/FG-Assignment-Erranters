@@ -89,7 +89,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
           <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
-          <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} />
+          <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} slug={post.slug}/>
         </div>
       </div>
     </div>
