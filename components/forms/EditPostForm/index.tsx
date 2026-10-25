@@ -11,6 +11,10 @@ import { FaXmark } from "react-icons/fa6";
 import DeletePostImagesAction from "@/actions/delete-post-images-action";
 // import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import CancelButton from "@/components/buttons/CancelButton";
+import DeleteButton from "@/components/buttons/DeleteButton";
+import { useRouter } from "next/navigation";
+import { DeletePostAction } from "@/actions/delete-post-action";
 
 const EditPostForm = ({
   initialValues,
@@ -18,13 +22,24 @@ const EditPostForm = ({
 }: {
   initialValues: Pick<
     Tables<"Posts">,
-    "title" | "content" | "category" | "post_type" | "price" | "location"
+    | "title"
+    | "content"
+    | "category"
+    | "post_type"
+    | "price"
+    | "location"
+    | "slug"
   > & {
     PostImages: Pick<Tables<"PostImages">, "id" | "image_url" | "position">[];
   };
   postId: string;
 }) => {
   // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
+
+  const router = useRouter();
+  const onDeleteSuccess = () => {
+    router.push("/feed");
+  };
 
   const {
     register,
@@ -40,6 +55,7 @@ const EditPostForm = ({
       post_type: initialValues.post_type,
       price: initialValues.price || undefined,
       location: initialValues.location || undefined,
+      slug: initialValues.slug,
     },
   });
 
@@ -50,7 +66,6 @@ const EditPostForm = ({
   const { mutate: deletePostImage, error: deletePostImageError } = useMutation({
     mutationFn: DeletePostImagesAction,
   });
-  console.log("Location from database:", initialValues.location);
 
   return (
     <div className="form-background">
@@ -58,10 +73,8 @@ const EditPostForm = ({
         className="form"
         onSubmit={handleSubmit((values) => {
           let imageForm: FormData | undefined = undefined;
-
           if (values.image && values.image.length > 0) {
             imageForm = new FormData();
-
             values.image.forEach((image) => {
               imageForm?.append("image", image);
             });
@@ -75,6 +88,7 @@ const EditPostForm = ({
               post_type: values.post_type,
               price: values.price,
               location: values.location,
+              slug: values.slug,
             },
             postId,
           });
@@ -131,7 +145,6 @@ const EditPostForm = ({
           </label>
           <TextareaAutosize className="input" {...register("content")} />
         </div>
-        {/* add price and location */}
         <div className="grid grid-cols-2 gap-4">
           {initialValues.post_type === "Marketplace" && (
             <div className="label-input">
@@ -161,32 +174,16 @@ const EditPostForm = ({
           </div>
         </div>
         <div className="w-full flex justify-between mt-10">
-          <div className="grid place-items-center">
-            {/* TO DO: replace the button with proper delete */}
-            <button className="cursor-pointer flex ml-2 justify-center items-end text-red-700">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-trash preview-icon stroke-red-700 hover:stroke-outer-space/50"
-              >
-                <path d="M10 11v6" />
-                <path d="M14 11v6" />
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                <path d="M3 6h18" />
-                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-              </svg>{" "}
-              Delete Post
-            </button>
+          <div className="flex justify-center items-end mb-2 group">
+            <DeleteButton
+              id={postId}
+              type={"icon"}
+              onDeleteSuccess={onDeleteSuccess}
+              deleteFunction={DeletePostAction}
+            />
           </div>
           <div className="form-button-layout">
-            <button className="button-light-primary">Cancel</button>
+            <CancelButton link={`/post/${initialValues.slug}`} />
             <button className="button-dark-secondary">
               {isPending ? "Updating the post..." : "Save"}
             </button>

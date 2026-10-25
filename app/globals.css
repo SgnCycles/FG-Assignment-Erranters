@@ -63,15 +63,11 @@
 }
 
 .postReactionButton {
-  @apply flex justify-center items-center rounded-2xl gap-1 cursor-pointer p-2;
+  @apply flex justify-center items-center rounded-2xl gap-1 cursor-pointer p-2 hover:text-apple hover:bg-cauliflower hover:rounded-4xl;
 }
 
-.postReactionButtons:hover {
-  @apply bg-cauliflower rounded-4xl;
-}
-
-.postReactionButtons:active {
-  @apply bg-cauliflower rounded-4xl text-apple;
+.postReactionButton:active {
+  @apply bg-cauliflower rounded-4xl text-outer-space;
 }
 
 .button-dark-primary {
@@ -123,6 +119,11 @@
   @apply font-bebas-neue text-4xl text-start text-ecru-white;
 }
 
+.info-heading {
+  @apply font-bebas-neue text-4xl text-start text-ecru-white p-5;
+}
+
+
 .member-heading {
   @apply font-bebas-neue text-4xl text-left text-outer-space;
 }
@@ -136,7 +137,7 @@
 }
 
 .sidebar-heading-h2 {
-  @apply font-league-spartan gap-4 text-lg text-left text-ecru-white/50 w-full pl-10;
+  @apply font-league-spartan gap-4 text-lg text-left text-ecru-white/50 w-full;
 }
 
 .comment-form-heading-h2 {
@@ -158,7 +159,7 @@
 
 /* sidebar items */
 .sidebar-item {
-  @apply w-full flex font-league-spartan text-base text-left text-ecru-white/50 hover:text-ecru-white cursor-pointer;
+  @apply w-full flex font-league-spartan text-base text-left text-ecru-white/50 hover:text-ecru-white cursor-pointer p-2;
 }
 
 .sidebar-item.active {
@@ -354,5 +355,5 @@
 }
 
 .comment-reply::before {
-  @apply content-[""] absolute -left-6 top-0 w-5 h-5 border-l border-b border-green-500 rounded-bl-xl;
+  @apply content-[""] absolute -left-6 top-0 w-5 h-5 border-l border-b border-apple rounded-bl-xl;
 }

@@ -8,6 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
 import { CreatePostFormPropsType } from "./types";
+import CancelButton from "@/components/buttons/CancelButton";
 
 const CreatePostForm = ({
   handleCreatePost,
@@ -94,7 +95,7 @@ const CreatePostForm = ({
             </div>
           </div>
           <div className="form-button-layout">
-            <button className="button-light-primary">Cancel</button>
+            <CancelButton link="/feed" />
             <button className="button-dark-secondary">
               {isPending ? "Publishing post..." : "Publish"}
             </button>

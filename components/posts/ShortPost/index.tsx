@@ -87,7 +87,7 @@ const ShortPost = ({
         <h3 className="font-bold text-xl hover:text-apple">{post.title}</h3>
       </Link>
       {post.PostImages && post.PostImages.length > 0 && (
-        <ImageGallery postImages={post.PostImages} />
+        <ImageGallery postImages={post.PostImages} post_type="short"/>
       )}
       <div>
         <PostReactionButtons
@@ -97,6 +97,7 @@ const ShortPost = ({
           deleteFunction={DeletePostAction}
           onDeleteSuccess={onDeleteSuccess}
           isAuthor={isAuthor}
+          postTitle={post.title}
         />
       </div>
     </div>

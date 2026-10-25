@@ -17,7 +17,7 @@ const PostPageSidebar = () => {
         aria-label="Sidebar navigation"
         className="w-full flex justify-center"
       >
-        <ul className="flex flex-col gap-4 mt-4 items-center text-ecru-white/50">
+        <ul className="flex flex-col gap-2 mt-4 items-center text-ecru-white/50">
           <li className="w-full">
             <Link
               href="/feed"
@@ -139,7 +139,7 @@ const PostPageSidebar = () => {
       <hr className="w-full border-ecru-white/50 my-10 border-t-[0.5px]"></hr>
       <h2 className="sidebar-heading-h2">Topics</h2>
       <div>
-        <ul className="flex flex-col gap-4 mt-4 items-center text-ecru-white/50">
+        <ul className="flex flex-col gap-2 mt-4 items-center text-ecru-white/50">
           <li className="w-full">
             <button
               className={`sidebar-item ${postCategory === "All" ? "active" : ""}`}

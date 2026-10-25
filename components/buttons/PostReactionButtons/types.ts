@@ -7,4 +7,5 @@ export type PostReactionButtonPropsType = {
   deleteFunction: DeleteButtonPropsType["deleteFunction"];
   onDeleteSuccess: () => void;
   isAuthor: boolean;
+  postTitle: string;
 };

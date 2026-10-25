@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getCommentNumber,
   getPostLikesNumber,
+  getPostSoldStatus,
   getUserFavouriteStatus,
   getUserLikeStatus,
 } from "@/lib/supabase/queries";
@@ -17,6 +18,8 @@ import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 import { PostReactionButtonPropsType } from "./types";
 import DeleteButton from "../DeleteButton";
 import EditButton from "../EditButton";
+import PostSoldButton from "../PostSoldButton";
+import { MarkPostSoldAction } from "@/actions/mark-post-sold-action";
 
 const PostReactionButtons = ({
   postId,
@@ -25,8 +28,8 @@ const PostReactionButtons = ({
   deleteFunction,
   onDeleteSuccess,
   isAuthor,
+  postTitle,
 }: PostReactionButtonPropsType) => {
-  
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
     queryKey: ["post-comments-count", postId],
@@ -69,6 +72,15 @@ const PostReactionButtons = ({
 
   if (postIsFavouriteError) {
     console.log(postIsFavouriteError);
+  }
+
+  const { data: postIsSold, error: postIsSoldError } = useQuery({
+    queryKey: ["post-is-sold", postId],
+    queryFn: () => getPostSoldStatus(postId),
+  });
+
+  if (postIsSoldError) {
+    console.log(postIsSoldError);
   }
 
   const { mutate, error: mutateError } = useMutation({
@@ -129,10 +141,10 @@ const PostReactionButtons = ({
           />
         </li>
         <li>
-          <CommentButton commentCount={commentCount} />
+          <CommentButton commentCount={commentCount} slug={slug} />
         </li>
         <li>
-          <ShareButton />
+          <ShareButton slug={slug} postTitle={postTitle} />
         </li>
         {isAuthor && (
           <li className="grid place-items-center">
@@ -147,6 +159,11 @@ const PostReactionButtons = ({
               deleteFunction={deleteFunction}
               onDeleteSuccess={onDeleteSuccess}
             />
+          </li>
+        )}
+        {isAuthor && (
+          <li className="grid place-items-center">
+            <PostSoldButton postId={postId} sold={!!postIsSold}/>
           </li>
         )}
         <li className="ml-auto">

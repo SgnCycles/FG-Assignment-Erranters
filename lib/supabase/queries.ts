@@ -56,7 +56,7 @@ export const getSinglePost = async (slug: string) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, slug, title, content, created_at, category, price, location, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
+      'id, slug, title, content, created_at, category, price, location, sold, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
     )
     .eq("slug", slug)
     .single();
@@ -308,6 +308,27 @@ export const getLatestPosts = async (
     )
     .order("created_at", { ascending: sortingOrder })
     .limit(10);
+};
+
+export const getPostSoldStatus = async (postId: string) => {
+  const supabase =  createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized access");
+
+  const { data, error } = await supabase
+    .from("Posts")
+    .select("sold")
+    .eq("id", postId)
+    .eq("author", user.id)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  const postIsSold = data?.sold === true;
+  return postIsSold;
 };
 
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;

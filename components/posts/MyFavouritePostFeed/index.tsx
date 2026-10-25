@@ -76,7 +76,7 @@ const MyFavouritePostsFeed = ({ userId }: { userId: string }) => {
       {isError && <p className="heading">Failed Loading Posts...</p>}
       {isPending && <p className="heading">Loading Posts...</p>}
       {filteredPosts?.length === 0 && (
-        <p className="heading">No Favourite posts yet...</p>
+        <h2 className="info-heading">No Favourite posts yet...</h2>
       )}
       {filteredPosts &&
         filteredPosts.length > 0 &&

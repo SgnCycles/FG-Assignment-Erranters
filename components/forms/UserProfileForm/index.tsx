@@ -15,6 +15,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
 import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
+import CancelButton from "@/components/buttons/CancelButton";
 
 const UserProfileForm = ({
   initialValues,
@@ -164,7 +165,6 @@ const UserProfileForm = ({
           });
         })}
       >
-        {/* <div className="flex flex-col border border-ecru-white rounded-4xl"> */}
         <div>
           <div className="flex flex-col">
             <div className="h-50 relative rounded-tl-4xl rounded-tr-4xl">
@@ -383,10 +383,7 @@ const UserProfileForm = ({
             </div>
           </div>
           <div className="form-button-layout pr-8">
-            {/* TO DO: add function to the cancel button */}
-            <button type="button" className="button-light-primary">
-              Cancel
-            </button>
+            <CancelButton link="/feed"/>
             <button type="button" className="button-dark-primary">
               Update Profile
             </button>

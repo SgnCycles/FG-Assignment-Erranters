@@ -66,6 +66,7 @@ export const postSchema = z.object({
   longitude: z.number().optional(),
   post_type: z.string().min(1, "Choose the type of the post"),
   sold: z.boolean().optional(),
+  slug: z.string().optional(),
 });
 
 export const userProfileSchema = z.object({

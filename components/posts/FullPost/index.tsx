@@ -59,7 +59,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         <div className="mb-4">
           {post.PostImages.length === 0 && null}
           {post.PostImages && post.PostImages.length > 0 && (
-            <ImageGallery postImages={post.PostImages} />
+            <ImageGallery postImages={post.PostImages} post_type="long"/>
           )}
         </div>
         {post.content && (
@@ -85,11 +85,16 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
           deleteFunction={DeletePostAction}
           onDeleteSuccess={onDeleteSuccess}
           isAuthor={isAuthor}
+          postTitle={post.title}
         />
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
           <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
           <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} slug={post.slug}/>
+        </div>
+        {/* testing */}
+        <div>
+          {post.category === "Marketplace" && post.sold ? "Post is sold" : "Post is not sold"}
         </div>
       </div>
     </div>

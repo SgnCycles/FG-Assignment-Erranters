@@ -61,9 +61,9 @@ const HomePostsFeed = () => {
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />
-      {isError && <p className="heading">Failed Loading Posts...</p>}
-      {isPending && <p className="heading">Loading Posts...</p>}
-      {filteredPosts?.length === 0 && <p className="heading">No posts yet...</p>}
+      {isError && <p className="info-heading">Failed Loading Posts...</p>}
+      {isPending && <p className="info-heading">Loading Posts...</p>}
+      {filteredPosts?.length === 0 && <p className="info-heading">No posts yet...</p>}
       {filteredPosts &&
         filteredPosts.map((post, index) => (
           <ShortPost key={index} post={post} showUser={true} />
