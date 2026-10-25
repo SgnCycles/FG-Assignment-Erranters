@@ -14,9 +14,22 @@ const PostSoldButton = ({
   const { mutate } = useMutation({
     mutationFn: MarkPostSoldAction,
     onSuccess: () => {
-      toast.success("Item marked");
+      if (sold === true) {
+        toast.warning("Item marked as not sold");
+      } else {
+        toast.success("Item marked as sold");
+      }
       queryClient.invalidateQueries({
         queryKey: ["post-is-sold", postId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["my-posts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["home-posts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["my-favourite-posts"],
       });
     },
     onError: () => toast.error("Something went wrong!"),
@@ -29,6 +42,7 @@ const PostSoldButton = ({
         id={`sold-${postId}`}
         checked={sold}
         onChange={(e) => mutate({ postId, sold: e.target.checked })}
+        className="cursor-pointer accent-old-gold"
       />
       <label htmlFor={`sold-${postId}`}>Sold</label>
     </div>

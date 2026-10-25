@@ -10,7 +10,6 @@ import Link from "next/link";
 import ImageGallery from "@/components/ImageGallery";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
-  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -23,6 +22,12 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
           )}
+        </div>
+        {/* testing */}
+        <div>
+          {post.category === "Marketplace" && post.sold
+            ? "Post is sold"
+            : "Post is not sold"}
         </div>
         <Link
           className="w-full flex justify-between mb-4"
@@ -59,7 +64,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         <div className="mb-4">
           {post.PostImages.length === 0 && null}
           {post.PostImages && post.PostImages.length > 0 && (
-            <ImageGallery postImages={post.PostImages} post_type="long"/>
+            <ImageGallery postImages={post.PostImages} post_type="long" />
           )}
         </div>
         {post.content && (
@@ -90,11 +95,12 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
           <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
-          <PostComments postId={post.id} isAuthor={isAuthor} userId={userId} slug={post.slug}/>
-        </div>
-        {/* testing */}
-        <div>
-          {post.category === "Marketplace" && post.sold ? "Post is sold" : "Post is not sold"}
+          <PostComments
+            postId={post.id}
+            isAuthor={isAuthor}
+            userId={userId}
+            slug={post.slug}
+          />
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const ShortPost = ({
   post,
   showUser,
 }: ShortPostPropsType) => {
-  
+
   const { user } = useUserContext() as userContextType;
   const isAuthor = user?.id === post.author?.id;
   const queryClient = useQueryClient();
@@ -82,12 +82,13 @@ const ShortPost = ({
             <PostCategoryIcons category={post.category} />
           </div>
         )}
+        {post.sold && <div className="sold-label">SOLD</div>}
       </div>
       <Link href={`/post/${post.slug}`} className="cursor-pointer">
         <h3 className="font-bold text-xl hover:text-apple">{post.title}</h3>
       </Link>
       {post.PostImages && post.PostImages.length > 0 && (
-        <ImageGallery postImages={post.PostImages} post_type="short"/>
+        <ImageGallery postImages={post.PostImages} post_type="short" />
       )}
       <div>
         <PostReactionButtons

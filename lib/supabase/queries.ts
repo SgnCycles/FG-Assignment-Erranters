@@ -10,7 +10,7 @@ export const getHomePosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      'id, title, slug, created_at, category, post_type, sold, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder });
@@ -34,7 +34,7 @@ export const getMyPosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      'id, title, slug, created_at, category, post_type, sold, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .eq("author", userId)
     .range(pagesVisited, pagesVisited + postsPerPage - 1)

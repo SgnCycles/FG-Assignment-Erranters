@@ -110,6 +110,11 @@
   @apply flex justify-center items-center text-base hover:text-apple cursor-pointer;
 }
 
+/* labels */
+.sold-label {
+  @apply bg-old-gold text-outer-space w-auto grid place-items-center px-4 h-10 rounded-4xl font-semibold;
+}
+
 /* headings */
 .main-heading {
   @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
