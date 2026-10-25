@@ -112,7 +112,7 @@
 
 /* labels */
 .sold-label {
-  @apply bg-old-gold text-outer-space w-auto grid place-items-center px-4 h-10 rounded-4xl font-semibold;
+  @apply bg-old-gold text-outer-space w-25 grid place-items-center px-4 h-10 rounded-4xl font-semibold;
 }
 
 /* headings */

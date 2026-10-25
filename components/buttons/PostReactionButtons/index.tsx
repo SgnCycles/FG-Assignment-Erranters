@@ -19,7 +19,6 @@ import { PostReactionButtonPropsType } from "./types";
 import DeleteButton from "../DeleteButton";
 import EditButton from "../EditButton";
 import PostSoldButton from "../PostSoldButton";
-import { MarkPostSoldAction } from "@/actions/mark-post-sold-action";
 
 const PostReactionButtons = ({
   postId,

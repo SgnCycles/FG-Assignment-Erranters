@@ -161,7 +161,6 @@ const EditPostForm = ({
               />
             </div>
           )}
-
           <div className="label-input">
             <label htmlFor="location" className="label">
               Add location:

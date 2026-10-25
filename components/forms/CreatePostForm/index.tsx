@@ -15,7 +15,6 @@ const CreatePostForm = ({
   error,
   isPending,
 }: CreatePostFormPropsType) => {
-  
   const {
     register,
     control,
@@ -33,13 +32,16 @@ const CreatePostForm = ({
   const postCategory = watch("category");
   const postType = watch("post_type");
 
-  useEffect(() => {
+
+    useEffect(() => {
     if (postCategory === "Hiking" || postCategory === "Cycling") {
       setValue("post_type", "Post");
     } else if (postCategory === "Marketplace") {
       setValue("post_type", "Sell");
+    } else if (postType === "Sell" || postType === "Buy") {
+      setValue("category", "Marketplace")
     }
-  }, [postCategory, setValue]);
+  }, [postCategory, postType, setValue]);
 
   return (
     <div className="form-background">

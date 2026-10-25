@@ -14,6 +14,7 @@ const EditPost = async ({
   postdata: z.infer<typeof postSchema>;
   postId: string;
 }) => {
+  
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
   const imageFiles = postdata.images?.getAll("image");

@@ -15,6 +15,7 @@ const Comment = ({
   slug,
   onDeleteSuccess,
 }: CommentsPropsType) => {
+  
   const [replyOpen, setReplyOpen] = useState<boolean>(false);
 
   return (

@@ -4,11 +4,14 @@ import { getForYouPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const ForYouPage = async () => {
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   if (!user) throw new Error("Unauthorized access!");
+  
   const { data, error } = await getForYouPosts(supabase, user.id, false);
 
   return (

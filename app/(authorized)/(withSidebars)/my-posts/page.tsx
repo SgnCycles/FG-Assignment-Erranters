@@ -8,6 +8,7 @@ const MyPostsPage = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  
   if (!user) throw new Error("Unauthorized access!");
 
   return (

@@ -21,7 +21,7 @@ const DeleteButton = ({
 
   return (
     <button
-      className="postReactionButton"
+      className="postReactionButton group"
       onClick={() => mutate(id)}
     >
       {type === "icon" ? (
@@ -35,7 +35,7 @@ const DeleteButton = ({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="lucide lucide-trash preview-icon stroke-outer-space/50 hover:stroke-apple"
+          className="lucide lucide-trash preview-icon stroke-outer-space/50 group-hover:stroke-apple"
         >
           <path d="M10 11v6" />
           <path d="M14 11v6" />

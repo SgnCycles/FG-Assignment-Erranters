@@ -12,7 +12,9 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   } = await supabase.auth.getUser();
 
   const { data, error } = await getSinglePost(slug);
+
   if (!data) return;
+  
   if (user && data && user.id !== data.author.id) {
     redirect("/feed");
   }

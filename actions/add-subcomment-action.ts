@@ -15,6 +15,7 @@ export const AddSubcommentAction = async ({
   slug: string;
   parentId: string;
 }) => {
+
   const supabase = await createClient();
   const parsedData = postCommentSchema.parse(commentData);
   const {
@@ -34,5 +35,6 @@ export const AddSubcommentAction = async ({
     .throwOnError();
 
   if (error) console.log(error);
+  
   revalidatePath(`/post/${slug}`);
 };

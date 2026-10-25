@@ -4,11 +4,14 @@ import { getLatestPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/serverClient";
 
 const LatestPostsPage = async () => {
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   if (!user) throw new Error("Unauthorized access!");
+  
   const { data, error } = await getLatestPosts(supabase, false);
 
   return (

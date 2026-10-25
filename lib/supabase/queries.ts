@@ -187,7 +187,7 @@ export const getUserFavourites = async (
   return await supabase
     .from("Favourites")
     .select(
-      'post_id, Posts("id", "title", "slug", "created_at", "category", "post_type", author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
+      'post_id, Posts("id", "title", "slug", "created_at", "category", "sold", "post_type", author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
     )
     .eq("user_id", userId)
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
@@ -289,6 +289,7 @@ export const getForYouPosts = async (
       created_at,
       category,
       post_type,
+      sold,
       author(id, username, profile_image),
       PostImages(id, image_url, position)
     `,
@@ -304,7 +305,7 @@ export const getLatestPosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      'id, title, slug, created_at, category, sold, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .order("created_at", { ascending: sortingOrder })
     .limit(10);

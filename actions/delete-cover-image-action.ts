@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/serverClient";
 import { revalidatePath } from "next/cache";
 
 const DeleteCoverImageAction = async ({image, userId}: {image: string; userId: string}) => {
+  
   const supabase = await createClient();
   const { error: storageError } = await supabase.storage
     .from("Cover-Images")

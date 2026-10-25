@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/serverClient";
 import { revalidatePath } from "next/cache";
 
 const DeletePostImagesAction = async ({image, postId}: {image: string; postId: string}) => {
+  
   const supabase = await createClient();
   const { error: storageError } = await supabase.storage
     .from("Post-Images")

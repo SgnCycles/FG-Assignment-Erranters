@@ -13,6 +13,7 @@ const EditUserProfile = async ({
   userData: z.infer<typeof userProfileSchema>;
   userId: string;
 }) => {
+  
   const parsedData = userProfileSchema.parse(userData);
   const supabase = await createClient();
   const profileImageFile = userData.profile_image?.get("image");

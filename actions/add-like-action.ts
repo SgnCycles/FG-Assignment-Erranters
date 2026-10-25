@@ -2,9 +2,8 @@
 import { createClient } from "@/lib/supabase/serverClient";
 
 export const AddLikeAction = async ({ postId }: { postId: string }) => {
-  const supabase = await createClient();
 
-  //getting logged in user id and checking and using it to insert the like
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -15,6 +14,6 @@ export const AddLikeAction = async ({ postId }: { postId: string }) => {
     post_id: postId,
     user_id: user.id,
   });
-
+  
   if (error) throw new Error(error.message)
 };

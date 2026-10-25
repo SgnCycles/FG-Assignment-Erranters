@@ -10,6 +10,7 @@ import Link from "next/link";
 import ImageGallery from "@/components/ImageGallery";
 
 const Post = ({ post, isAuthor, userId }: PostPropsType) => {
+  
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -22,12 +23,9 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
           )}
-        </div>
-        {/* testing */}
-        <div>
-          {post.category === "Marketplace" && post.sold
-            ? "Post is sold"
-            : "Post is not sold"}
+          {post.sold && (
+            <div className="sold-label">SOLD</div>
+          )}
         </div>
         <Link
           className="w-full flex justify-between mb-4"

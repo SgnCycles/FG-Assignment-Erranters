@@ -2,6 +2,7 @@
 import { createClient } from "@/lib/supabase/serverClient";
 
 export const DeleteFavouritePostAction = async ({ postId }: { postId: string }) => {
+  
   const supabase = await createClient();
 
   const {
