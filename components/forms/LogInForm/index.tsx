@@ -77,15 +77,6 @@ const LogInForm = () => {
               {errors.password && (
                 <ErrorMessage error={errors.password.message!} />
               )}
-              <div className="flex justify-between">
-                <div className="flex justify-center items-center">
-                  <input className="input cursor-pointer accent-apple" type="checkbox" />
-                  <label htmlFor="rememberMe" className="text-sm ml-1">
-                    Remember Me
-                  </label>
-                </div>
-                <button className="text-xs font-semibold cursor-pointer hover:text-red-500">Forgot Password?</button>
-              </div>
             </div>
           </div>
           <div className="flex justify-center mt-6">

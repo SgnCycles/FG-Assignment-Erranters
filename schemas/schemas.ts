@@ -91,3 +91,19 @@ export const postCommentSchema = z.object({
 export const postImageSchema = postSchema.omit({ images: true }).extend({
   image: z.array(z.custom<ImageFile>()).optional(),
 });
+
+export const updateUserPasswordSchema = z
+  .object({
+    currentPassword: z.string().min(5, "Current password is required"),
+    newPassword: z.string().min(5, "Password must be at least 5 characters long"),
+    confirmPassword: z.string().min(5, "Confirm the new password"),
+  })
+  .superRefine((value, ctx) => {
+    if (value.newPassword !== value.confirmPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Passwords do not match",
+        path: ["confirmPassword"],
+      });
+    }
+  });

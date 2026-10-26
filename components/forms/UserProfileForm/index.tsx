@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
 import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
 import CancelButton from "@/components/buttons/CancelButton";
+import UpdatePassword from "../UpdatePassword";
 
 const UserProfileForm = ({
   initialValues,
@@ -305,6 +306,7 @@ const UserProfileForm = ({
                 <ErrorMessage error={errors.profile_image.message!} />
               )}
             </div>
+            <h2 className="post-heading mt-4 ml-4">Profile Settings</h2>
             <div className="profile-row">
               <div className="profile-item-long">
                 <label htmlFor="name" className="label">
@@ -390,6 +392,7 @@ const UserProfileForm = ({
           </div>
         </div>
       </form>
+      < UpdatePassword />
       <DeleteAccountDialogue userId={userId}/>
     </div>
   );
