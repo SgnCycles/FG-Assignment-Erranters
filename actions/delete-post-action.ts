@@ -2,19 +2,24 @@
 import { createClient } from "@/lib/supabase/serverClient";
 import { revalidatePath } from "next/cache";
 
-export const DeletePostAction = async (postId: string) => {
+const DeletePostAction = async (postId: string) => {
   const supabase = await createClient();
-  // await supabase.from("Posts").delete().eq("id", postId).throwOnError();
 
-  const { error } = await supabase
-    .from("Posts")
-    .delete()
-    .eq("id", postId)
-    .throwOnError();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // TO DO: add toast if there is an error with deleting the post
-  if (error) throw new Error(error);
+  if (!user) throw new Error("Unauthorized access");
+
+  const { error } = await supabase.from("Posts").delete().eq("id", postId);
+
+  if (error) {
+    console.error(error);
+    return { error: "Failed to delete the post " };
+  }
 
   revalidatePath("/feed");
   revalidatePath("/my-posts");
 };
+
+export default DeletePostAction;

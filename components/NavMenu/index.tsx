@@ -1,5 +1,5 @@
 "use client";
-import { LogOut } from "@/actions/logout-action";
+import LogOut from "@/actions/logout-action";
 import { useUserContext } from "@/context/userContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

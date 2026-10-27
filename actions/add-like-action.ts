@@ -15,6 +15,8 @@ export const AddLikeAction = async ({ postId }: { postId: string }) => {
     user_id: user.id,
   });
 
-  // TO DO: add toast for the add like error
-  if (error) throw new Error(error.message)
+  if (error) {
+    console.error(error);
+    return { error: "Failed to like the post" };
+  }
 };

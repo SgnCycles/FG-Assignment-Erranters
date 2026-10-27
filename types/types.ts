@@ -7,8 +7,6 @@ import * as z from "zod";
 export type userContextType = {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   userProfile: UserProfileType | null;
   setUserProfile: React.Dispatch<React.SetStateAction<UserProfileType | null>>;
 };

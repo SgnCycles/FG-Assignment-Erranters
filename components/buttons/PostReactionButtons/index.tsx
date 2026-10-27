@@ -1,7 +1,7 @@
 "use client";
 import { AddLikeAction } from "@/actions/add-like-action";
-import { DeleteLikeAction } from "@/actions/delete-like-action";
-import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
+import DeleteLikeAction from "@/actions/delete-like-action";
+import DeleteFavouritePostAction from "@/actions/delete-favourite-post-action";
 import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 import {
   getCommentNumber,
@@ -19,6 +19,7 @@ import ShareButton from "../ShareButton";
 import DeleteButton from "../DeleteButton";
 import EditButton from "../EditButton";
 import PostSoldButton from "../PostSoldButton";
+import { toast } from "react-toastify";
 
 const PostReactionButtons = ({
   postId,
@@ -28,6 +29,7 @@ const PostReactionButtons = ({
   onDeleteSuccess,
   isAuthor,
   postTitle,
+  postCategory,
 }: PostReactionButtonPropsType) => {
   const queryClient = useQueryClient();
   const { data, error } = useQuery({
@@ -82,7 +84,7 @@ const PostReactionButtons = ({
     console.log(postIsSoldError);
   }
 
-  const { mutate, error: mutateError } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: ({ postIsLiked }: { postIsLiked: boolean }) => {
       if (postIsLiked) {
         return DeleteLikeAction({ postId });
@@ -90,7 +92,11 @@ const PostReactionButtons = ({
         return AddLikeAction({ postId });
       }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       queryClient.invalidateQueries({
         queryKey: ["post-likes-count", postId],
       });
@@ -98,11 +104,13 @@ const PostReactionButtons = ({
         queryKey: ["post-is-liked", postId],
       });
     },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
   const {
     mutate: mutatePostFavourite,
-    error: postFavouriteError,
     isPending,
   } = useMutation({
     mutationFn: ({ postIsFavourite }: { postIsFavourite: boolean }) => {
@@ -112,7 +120,11 @@ const PostReactionButtons = ({
         return AddFavouritePostAction({ postId });
       }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       if (postIsFavourite) {
         onFavouriteDeleteSuccess?.();
       }
@@ -122,6 +134,9 @@ const PostReactionButtons = ({
       queryClient.invalidateQueries({
         queryKey: ["user-favourite-count"],
       });
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 
@@ -160,9 +175,9 @@ const PostReactionButtons = ({
             />
           </li>
         )}
-        {isAuthor && (
+        {isAuthor && postCategory === "Marketplace" && (
           <li className="grid place-items-center">
-            <PostSoldButton postId={postId} sold={!!postIsSold}/>
+            <PostSoldButton postId={postId} sold={!!postIsSold} />
           </li>
         )}
         <li className="ml-auto">

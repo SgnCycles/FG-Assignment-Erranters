@@ -1,5 +1,5 @@
 "use client";
-import { DeletePostAction } from "@/actions/delete-post-action";
+import DeletePostAction from "@/actions/delete-post-action";
 import type { ShortPostPropsType } from "./types";
 import type { userContextType } from "@/types/types";
 import { useUserContext } from "@/context/userContext";
@@ -7,14 +7,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import ImageGallery from "@/components/ImageGallery";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
-import PostCategoryIcons from "@/components/PostCategoryIcon";
+import UserAvatar from "@/components/profile/UserAvatar";
+import NoUserAvatar from "@/components/profile/NoUserAvatar";
 
 const ShortPost = ({
   onFavouriteDeleteSuccess,
   post,
   showUser,
 }: ShortPostPropsType) => {
-
   const { user } = useUserContext() as userContextType;
   const isAuthor = user?.id === post.author?.id;
   const queryClient = useQueryClient();
@@ -38,49 +38,9 @@ const ShortPost = ({
     <div className="flex flex-col justify-around gap-4 border-2 border-casual-white bg-casual-white rounded-2xl p-4 m-4 text-outer-space">
       <div className="w-full flex justify-between">
         {showUser ? (
-          <Link
-            href={`/members/${post.author.username}`}
-            className="flex cursor-pointer"
-          >
-            <div>
-              {post.author.profile_image ? (
-                <img
-                  src={post.author.profile_image}
-                  alt="profile user"
-                  className="w-15 h-15 rounded-full"
-                />
-              ) : (
-                <div className="h-10 w-10 relative rounded-full">
-                  <img
-                    src="/images/profileImage_placeholder.png"
-                    alt="user placeholder"
-                    className="h-full w-full object-cover rounded-full"
-                  />
-                </div>
-              )}
-            </div>
-            <div className="flex gap-2 text-right place-self-center ml-2">
-              <span className="font-semibold">{post.author.username}</span>
-              <span className="text-[10px] place-self-center">
-                {new Date(post.created_at).toLocaleString("sv-Se", {
-                  dateStyle: "short",
-                  timeStyle: "short",
-                })}
-              </span>
-              <PostCategoryIcons category={post.category} />
-            </div>
-          </Link>
+          <UserAvatar post={post} />
         ) : (
-          <div className="flex gap-2 text-right place-self-center">
-            <span className="font-semibold">{post.author.username}</span>
-            <span className="text-[10px] place-self-center">
-              {new Date(post.created_at).toLocaleString("sv-Se", {
-                dateStyle: "short",
-                timeStyle: "short",
-              })}
-            </span>
-            <PostCategoryIcons category={post.category} />
-          </div>
+          <NoUserAvatar post={post}/>
         )}
         {post.sold && <div className="sold-label">SOLD</div>}
       </div>
@@ -99,6 +59,7 @@ const ShortPost = ({
           onDeleteSuccess={onDeleteSuccess}
           isAuthor={isAuthor}
           postTitle={post.title}
+          postCategory={post.category}
         />
       </div>
     </div>

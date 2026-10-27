@@ -1,8 +1,11 @@
 "use server";
 import { createClient } from "@/lib/supabase/serverClient";
 
-export const DeleteFavouritePostAction = async ({ postId }: { postId: string }) => {
-  
+const DeleteFavouritePostAction = async ({
+  postId,
+}: {
+  postId: string;
+}) => {
   const supabase = await createClient();
 
   const {
@@ -17,6 +20,10 @@ export const DeleteFavouritePostAction = async ({ postId }: { postId: string }) 
     .eq("post_id", postId)
     .eq("user_id", user.id);
 
-  // TO DO: add toast if there is an error with deleting the favourite post
-  if (error) throw new Error(error.message)
+  if (error) {
+    console.error(error);
+    return { error: "Failed to delete the post from favourites" };
+  }
 };
+
+export default DeleteFavouritePostAction;

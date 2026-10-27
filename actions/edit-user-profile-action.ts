@@ -31,8 +31,10 @@ const EditUserProfile = async ({
     .eq("id", userId)
     .single();
 
-  // TO DO: add toast for error
-  if (error) throw new Error("Error fetching User Profile");
+  if (error) {
+    console.error(error);
+    return { error: "Error fetching User Profile", updatedProfile: null };
+  }
 
   let profileImageUrl;
   let coverImageUrl;
@@ -59,7 +61,7 @@ const EditUserProfile = async ({
     coverImageUrl = profile.cover_image;
   }
 
-  const { data: updatedProfile } = await supabase
+  const { data: updatedProfile, error: updatedProfileError } = await supabase
     .from("Profiles")
     .update({
       ...parsedData,
@@ -69,12 +71,14 @@ const EditUserProfile = async ({
     .eq("id", userId)
     .select()
     .single()
-    .throwOnError();
 
-  // TO DO: add toast for the update profile error
+  if (updatedProfileError) {
+    console.error(updatedProfileError);
+    return { error: "Error Updating User Profile", updatedProfile: null };
+  }
 
   revalidatePath("/profile");
-  return updatedProfile;
+  return {updatedProfile: updatedProfile, error: null};
 };
 
 export default EditUserProfile;

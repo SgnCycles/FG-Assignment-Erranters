@@ -1,5 +1,5 @@
 "use client";
-import { LogIn } from "@/actions/login-action";
+import LogIn from "@/actions/login-action";
 import { logInSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -9,9 +9,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "@/components/ErrorMessage";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const LogInForm = () => {
-  
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const {
@@ -21,11 +21,18 @@ const LogInForm = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(logInSchema) });
 
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: LogIn,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       reset();
       router.push("/feed");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 
@@ -84,14 +91,10 @@ const LogInForm = () => {
               {isPending ? "Logging in..." : "Log in"}
             </button>
           </div>
-          {error && <ErrorMessage error={error.message} />}
         </form>
         <div className="p-8 text-base text-center flex flex-col justify-center">
           <h2 className="mb-2">Don't have any account?</h2>
-          <Link
-            href="/signup"
-            className="signup-button"
-          >
+          <Link href="/signup" className="signup-button">
             Sign up
           </Link>
         </div>

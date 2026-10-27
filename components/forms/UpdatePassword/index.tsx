@@ -1,5 +1,5 @@
 "use client";
-import { UpdatePasswordAction } from "@/actions/update-password-action";
+import UpdatePasswordAction from "@/actions/update-password-action";
 import { updateUserPasswordSchema } from "@/schemas/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,15 +23,22 @@ const UpdatePassword = () => {
     },
   });
 
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (values: {
       currentPassword: string;
       newPassword: string;
       confirmPassword: string;
     }) => UpdatePasswordAction(values.currentPassword, values.newPassword),
-    onSuccess: () => {
-      reset();
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       toast.success("Password Updated");
+      reset();
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 
@@ -97,7 +104,6 @@ const UpdatePassword = () => {
             )}
           </div>
         </div>
-        {error && <ErrorMessage error={error.message} />}
         <div className="form-button-layout">
           <CancelButton link="/profile" />
           <button className="button-dark-secondary" disabled={isPending}>

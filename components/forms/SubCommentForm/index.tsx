@@ -10,8 +10,12 @@ import AddCommentButton from "@/components/buttons/AddCommentButton";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
 
-const AddSubCommentForm = ({ setReplyOpen, postId, parentId, slug }: AddSubCommentFormPropsType) => {
-  
+const AddSubCommentForm = ({
+  setReplyOpen,
+  postId,
+  parentId,
+  slug,
+}: AddSubCommentFormPropsType) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const {
@@ -21,9 +25,14 @@ const AddSubCommentForm = ({ setReplyOpen, postId, parentId, slug }: AddSubComme
     formState: { errors },
   } = useForm({ resolver: zodResolver(postCommentSchema) });
 
-  const { mutate, error } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: AddSubcommentAction,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Comment Added");
       reset();
       queryClient.invalidateQueries({
         queryKey: ["post-comments", postId],
@@ -33,14 +42,21 @@ const AddSubCommentForm = ({ setReplyOpen, postId, parentId, slug }: AddSubComme
       });
       router.refresh();
     },
-    onSettled: () => toast.success("Comment Added"),
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
   return (
     <form
       className="flex flex-col flex-1 w-full"
       onSubmit={handleSubmit((values) =>
-        mutate({ commentData: { content: values.content }, postId, slug, parentId }),
+        mutate({
+          commentData: { content: values.content },
+          postId,
+          slug,
+          parentId,
+        }),
       )}
     >
       <label htmlFor="content" className="comment-form-heading-h2 hidden">
@@ -53,10 +69,15 @@ const AddSubCommentForm = ({ setReplyOpen, postId, parentId, slug }: AddSubComme
       ></textarea>
       {errors.content && <ErrorMessage error={errors.content.message!} />}
       <div className="flex justify-end mt-4 gap-4">
-        <button type="button" className="button-light-secondary" onClick={() => setReplyOpen(false)}>Cancel</button>
+        <button
+          type="button"
+          className="button-light-secondary"
+          onClick={() => setReplyOpen(false)}
+        >
+          Cancel
+        </button>
         <AddCommentButton />
       </div>
-      {error && <ErrorMessage error={error.message} />}
     </form>
   );
 };

@@ -23,18 +23,17 @@ export const AddSubcommentAction = async ({
 
   if (!user) throw new Error("Unauthorized access");
 
-  const { data, error } = await supabase
-    .from("Comments")
-    .insert({
-      post_id: postId,
-      author: user.id,
-      parent_id: parentId,
-      ...parsedData,
-    })
-    .throwOnError();
+  const { data, error } = await supabase.from("Comments").insert({
+    post_id: postId,
+    author: user.id,
+    parent_id: parentId,
+    ...parsedData,
+  });
 
-  // TO DO: add toast if there is an error with adding the comment
-  if (error) console.log("Error", error);
+  if (error) {
+    console.error(error);
+    return { error: "Failed to add the comment" };
+  }
 
   revalidatePath(`/post/${slug}`);
 };

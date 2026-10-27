@@ -1,7 +1,7 @@
 "use server";
 import { createClient } from "@/lib/supabase/serverClient";
 
-export const UpdatePasswordAction = async (
+const UpdatePasswordAction = async (
   currentPassword: string,
   newPassword: string,
 ) => {
@@ -20,10 +20,12 @@ export const UpdatePasswordAction = async (
     current_password: currentPassword,
   });
 
-  // add toast if there is an error with updating the password
   if (passwordError) {
-    throw passwordError;
+    console.error(passwordError);
+    return { error: "Error Updating Password" };
   }
 
   return { success: true };
 };
+
+export default UpdatePasswordAction;

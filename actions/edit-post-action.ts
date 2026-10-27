@@ -1,22 +1,26 @@
 "use server";
-import * as z from "zod";
-import { postSchema } from "@/schemas/schemas";
-import { createClient } from "@/lib/supabase/serverClient";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { createClient } from "@/lib/supabase/serverClient";
 import slugify from "@/lib/supabase/slugify";
 import uploadImage from "@/lib/supabase/uploadPostImage";
+import { postSchema } from "@/schemas/schemas";
+import * as z from "zod";
 
-const EditPost = async ({
+const EditPostAction = async ({
   postdata,
   postId,
 }: {
   postdata: z.infer<typeof postSchema>;
   postId: string;
 }) => {
-  
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized access");
   const imageFiles = postdata.images?.getAll("image");
 
   const { data: post, error } = await supabase
@@ -24,6 +28,11 @@ const EditPost = async ({
     .select("*")
     .eq("id", postId)
     .single();
+
+  if (error) {
+    console.error(error);
+    return { error: "Failed to fetch the post" };
+  }
 
   if (!post) throw new Error("The post does not exist!");
 
@@ -47,7 +56,7 @@ const EditPost = async ({
 
   const { images, ...postData } = parsedData;
 
-  const { data: updatedPost } = await supabase
+  const { data: updatedPost, error: updatePostError } = await supabase
     .from("Posts")
     .update({
       ...postData,
@@ -55,13 +64,15 @@ const EditPost = async ({
     })
     .eq("id", postId)
     .select("slug")
-    .single()
-    .throwOnError();
+    .single();
 
-  // TO DO: add toast for the add like error
-  
+  if (updatePostError) {
+    console.error(updatePostError);
+    return { error: "Failed to update the post" };
+  }
+
   revalidatePath("/");
   redirect(`/post/${updatedPost.slug}`);
 };
 
-export default EditPost;
+export default EditPostAction;

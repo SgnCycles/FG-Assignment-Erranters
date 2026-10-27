@@ -103,28 +103,47 @@ const UserProfileForm = ({
     ? initialValues.cover_image.split("/Cover-Images/")[1]
     : null;
 
-  const { mutate, error } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: EditUserProfile,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       toast.success("Profile updated");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 
-  const { mutate: deleteProfileImage, error: deleteError } = useMutation({
+  const { mutate: deleteProfileImage } = useMutation({
     mutationFn: DeleteProfileImageAction,
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Profile image removed");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
-  if (deleteError) {
-    toast.error("Deleting profile image failed");
-  }
-
-  const { mutate: deleteCoverImage, error: deleteCoverError } = useMutation({
+  const { mutate: deleteCoverImage } = useMutation({
     mutationFn: DeleteCoverImageAction,
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Cover image removed");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
-
-  if (deleteCoverError) {
-    toast.error("Deleting cover image failed");
-  }
 
   return (
     <div className="flex flex-col border border-ecru-white bg-casual-white rounded-4xl">
@@ -180,6 +199,7 @@ const UserProfileForm = ({
                     className="h-full w-full object-cover rounded-tl-4xl rounded-tr-4xl"
                   />
                   <button
+                    type="button"
                     className="w-7 h-7 absolute bottom-2 right-5"
                     onClick={() => {
                       setCoverImagePreview(null);
@@ -194,6 +214,7 @@ const UserProfileForm = ({
               ) : (
                 <div className="h-50 relative bg-gray-600 rounded-tl-4xl rounded-tr-4xl">
                   <button
+                    type="button"
                     className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold"
                     onClick={() => {
                       document.getElementById("add-cover-image")!.click();
@@ -252,6 +273,7 @@ const UserProfileForm = ({
                       className="h-full w-full object-cover rounded-full"
                     />
                     <button
+                      type="button"
                       className="w-7 h-7 absolute bottom-0 right-5"
                       onClick={() => {
                         setProfileImagePreview(null);
@@ -272,6 +294,7 @@ const UserProfileForm = ({
                     className="h-full w-full object-cover rounded-full"
                   />
                   <button
+                    type="button"
                     className="w-7 h-7 absolute bottom-0 right-5"
                     onClick={() => {
                       document.getElementById("add-image")!.click();

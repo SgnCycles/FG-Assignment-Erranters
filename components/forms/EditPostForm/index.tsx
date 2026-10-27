@@ -1,7 +1,7 @@
 "use client";
 import EditPost from "@/actions/edit-post-action";
 import DeletePostImagesAction from "@/actions/delete-post-images-action";
-import { DeletePostAction } from "@/actions/delete-post-action";
+import DeletePostAction from "@/actions/delete-post-action";
 import { postImageSchema } from "@/schemas/schemas";
 import { useForm, Controller } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
@@ -14,10 +14,10 @@ import FileDropZone from "@/components/FileDropZone";
 import ErrorMessage from "@/components/ErrorMessage";
 import { FaXmark } from "react-icons/fa6";
 import type { PostFormProps } from "@/types/types";
+import { toast } from "react-toastify";
 // import { useState } from "react";
 
 const EditPostForm = ({ post }: { post: PostFormProps }) => {
-
   const postId = post.id;
   const initialValues: PostFormProps = {
     id: post.id,
@@ -56,12 +56,32 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
     },
   });
 
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: EditPost,
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Post Updated");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
-  const { mutate: deletePostImage, error: deletePostImageError } = useMutation({
+  const { mutate: deletePostImage } = useMutation({
     mutationFn: DeletePostImagesAction,
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Post Image Deleted");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
   return (
@@ -184,7 +204,6 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
               {isPending ? "Updating the post..." : "Save"}
             </button>
           </div>
-          {error && <ErrorMessage error={error.message} />}
         </div>
       </form>
     </div>

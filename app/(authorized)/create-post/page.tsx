@@ -4,15 +4,23 @@ import { CreatePost } from "@/actions/create-post-action";
 import { useRouter } from "next/navigation";
 import CreatePostForm from "@/components/forms/CreatePostForm";
 import type { FormValues } from "@/types/types";
+import { toast } from "react-toastify";
 
 const CreatePostPage = () => {
   
   const router = useRouter();
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: CreatePost,
     onSuccess: (data) => {
+      if(data.error) {
+        toast.error(data.error);
+        return;
+      }
       router.push(`/post/${data.slug}`);
     },
+    onError: () => {
+      toast.error("Something went wrong. Try again later")
+    }
   });
   const handleCreatePost = (values: FormValues) => {
     const imageForm = new FormData();
@@ -41,7 +49,6 @@ const CreatePostPage = () => {
           <p className="">or find a new home to your item</p>
         </div>
         <CreatePostForm
-          error={error}
           isPending={isPending}
           handleCreatePost={handleCreatePost}
         />

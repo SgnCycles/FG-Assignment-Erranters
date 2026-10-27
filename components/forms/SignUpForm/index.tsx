@@ -1,5 +1,5 @@
 "use client";
-import { SignUp } from "@/actions/signup-action";
+import SignUp from "@/actions/signup-action";
 import { signUpSchema } from "@/schemas/schemas";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import ErrorMessage from "@/components/ErrorMessage";
+import { toast } from "react-toastify";
 
 const SignUpForm = () => {
-  
   const router = useRouter();
   const {
     register,
@@ -18,11 +18,18 @@ const SignUpForm = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(signUpSchema) });
 
-  const { mutate, error, isPending, isSuccess } = useMutation({
+  const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: SignUp,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       reset();
       router.push("/");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 
@@ -88,7 +95,6 @@ const SignUpForm = () => {
             </button>
           </div>
           {isSuccess && <p>Account Created. Please check your email.</p>}
-          {error && <ErrorMessage error={error.message} />}
         </form>
         <div className="flex justify-center text-ecru-white text-base my-2">
           <Link href="/" className="text-outer-space/70 mb-2">

@@ -10,7 +10,7 @@ export const getHomePosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, sold, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
     )
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder });
@@ -34,7 +34,7 @@ export const getMyPosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, post_type, sold, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
     )
     .eq("author", userId)
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
@@ -48,7 +48,7 @@ export const getMyPostsCount = async (
   return await supabase
     .from("Posts")
     .select("*", { count: "exact", head: true })
-    .eq("author", userId)
+    .eq("author", userId);
 };
 
 export const getSinglePost = async (slug: string) => {
@@ -56,7 +56,7 @@ export const getSinglePost = async (slug: string) => {
   return await supabase
     .from("Posts")
     .select(
-      'id, slug, title, content, created_at, category, price, location, sold, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
+      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
     )
     .eq("slug", slug)
     .single();
@@ -109,13 +109,7 @@ export const searchPost = async (searchTerm: string) => {
 
 export const getUserProfile = async (id: string) => {
   const supabase = createClient();
-  return await supabase
-    .from("Profiles")
-    .select(
-      "id, name, surname, username, bio, interests, profile_image, headline, location, country, cover_image",
-    )
-    .eq("id", id)
-    .maybeSingle();
+  return await supabase.from("Profiles").select("*").eq("id", id).maybeSingle();
 };
 
 export const getUserPosts = async (
@@ -146,9 +140,7 @@ export const getPostComments = async (
   const supabase = createClient();
   const { data, error } = await supabase
     .from("Comments")
-    .select(
-      'id, content, created_at, parent_id, author("id", "username", "profile_image")',
-    )
+    .select('*, author("id", "username", "profile_image")')
     .eq("post_id", postId)
     .order("created_at", { ascending: sortingOrder });
 
@@ -187,7 +179,7 @@ export const getUserFavourites = async (
   return await supabase
     .from("Favourites")
     .select(
-      'post_id, Posts("id", "title", "slug", "created_at", "category", "sold", "post_type", author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
+      'post_id, Posts(*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
     )
     .eq("user_id", userId)
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
@@ -196,12 +188,12 @@ export const getUserFavourites = async (
 
 export const getAllUserFavouritePostsCount = async (
   supabase: ReturnType<typeof createClient>,
-  userId: string
+  userId: string,
 ) => {
   return await supabase
     .from("Favourites")
     .select("*", { count: "exact", head: true })
-    .eq("user_id", userId)
+    .eq("user_id", userId);
 };
 
 export const getUserPostNumber = async (
@@ -282,14 +274,7 @@ export const getForYouPosts = async (
   return supabase
     .from("Posts")
     .select(
-      `
-      id,
-      title,
-      slug,
-      created_at,
-      category,
-      post_type,
-      sold,
+      `*,
       author(id, username, profile_image),
       PostImages(id, image_url, position)
     `,
@@ -305,14 +290,14 @@ export const getLatestPosts = async (
   return await supabase
     .from("Posts")
     .select(
-      'id, title, slug, created_at, category, sold, post_type, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments("id", "post_id")',
     )
     .order("created_at", { ascending: sortingOrder })
     .limit(10);
 };
 
 export const getPostSoldStatus = async (postId: string) => {
-  const supabase =  createClient();
+  const supabase = createClient();
   const {
     data: { user },
     error: userError,
@@ -333,24 +318,9 @@ export const getPostSoldStatus = async (postId: string) => {
 };
 
 export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
-export type HomePostsType = QueryData<ReturnType<typeof getHomePosts>>;
-export type MyPostsType = QueryData<ReturnType<typeof getMyPosts>>;
-export type ForYouPostsType = QueryData<ReturnType<typeof getForYouPosts>>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;
 export type PostCommentsType = NonNullable<
   Awaited<ReturnType<typeof getPostComments>>
 >[number];
-export type PostCommentsCountType = NonNullable<
-  Awaited<ReturnType<typeof getCommentNumber>>
->;
-export type GetUserLikeStatusType = QueryData<
-  ReturnType<typeof getUserLikeStatus>
->;
-export type GetPostLikesNumberType = QueryData<
-  ReturnType<typeof getPostLikesNumber>
->;
-export type UserFavouritesType = QueryData<
-  ReturnType<typeof getUserFavourites>
->;

@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 import uploadImage from "@/lib/supabase/uploadPostImage";
 
 export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
-
   const parsedData = postSchema.parse(postdata);
   const supabase = await createClient();
   const {
@@ -38,8 +37,12 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
       author: user.id,
     })
     .select("id")
-    .single()
-    .throwOnError();
+    .single();
+
+  if (error) {
+    console.error(error);
+    return { error: "Failed to create the post", slug: null };
+  }
 
   if (imageUrls.length > 0) {
     const postImages = imageUrls.map((imageUrl, index) => ({
@@ -48,11 +51,15 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
       position: index,
     }));
 
-    await supabase.from("PostImages").insert(postImages).throwOnError();
+    const { error: imagesError } = await supabase
+      .from("PostImages")
+      .insert(postImages);
+    if (imagesError) {
+      console.error(imagesError);
+      return { error: "Failed to create the post with images", slug };
+    }
   }
 
-  // TO DO: add toast if there is an error with creating the post
-  if (error) console.log("Error", error);
   revalidatePath("/");
-  return { success: true, slug };
+  return { success: true, slug};
 };

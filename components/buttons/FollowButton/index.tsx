@@ -1,8 +1,9 @@
-import { AddFollowerAction } from "@/actions/add-follow-action";
-import { DeleteFollowAction } from "@/actions/delete-follow-action";
+import AddFollowerAction from "@/actions/add-follow-action";
+import DeleteFollowAction from "@/actions/delete-follow-action";
 import { getUserFollowStatus } from "@/lib/supabase/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FollowButtonPropsType } from "./types";
+import { toast } from "react-toastify";
 
 const FollowButton = ({
   onFollowSuccess,
@@ -10,7 +11,6 @@ const FollowButton = ({
   memberIsFollowed,
 }: FollowButtonPropsType) => {
   const queryClient = useQueryClient();
-
   const {
     data: userIsFollowed,
     error: userIsFollowedError,
@@ -24,7 +24,7 @@ const FollowButton = ({
     console.log(userIsFollowedError);
   }
 
-  const { mutate: mutateAddFollow, error: AddFollowError } = useMutation({
+  const { mutate: mutateAddFollow } = useMutation({
     mutationFn: ({ userIsFollowed }: { userIsFollowed: boolean }) => {
       if (userIsFollowed) {
         return DeleteFollowAction({ memberId });
@@ -32,11 +32,18 @@ const FollowButton = ({
         return AddFollowerAction({ memberId });
       }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       onFollowSuccess?.();
       queryClient.invalidateQueries({
         queryKey: ["user-is-followed", memberId],
       });
+    },
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
     },
   });
 

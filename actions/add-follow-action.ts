@@ -1,7 +1,7 @@
 "use server";
 import { createClient } from "@/lib/supabase/serverClient";
 
-export const AddFollowerAction = async ({ memberId }: { memberId: string }) => {
+const AddFollowerAction = async ({ memberId }: { memberId: string }) => {
 
   const supabase = await createClient();
   const {
@@ -15,6 +15,10 @@ export const AddFollowerAction = async ({ memberId }: { memberId: string }) => {
     user_id: user.id,
   });
 
-// TO DO: add toast for the add follower error
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error(error);
+    return { error: "Failed to add to following" };
+  }
 };
+
+export default AddFollowerAction;

@@ -1,18 +1,17 @@
 "use client";
-import { DeletePostAction } from "@/actions/delete-post-action";
+import DeletePostAction from "@/actions/delete-post-action";
 import { useUserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import type { userContextType } from "@/types/types";
 import type { PostType } from "@/lib/supabase/queries";
 import AddCommentForm from "@/components/forms/AddCommentForm";
 import ImageGallery from "@/components/ImageGallery";
-import PostCategoryIcons from "@/components/PostCategoryIcon";
 import PostComments from "@/components/comments/PostComments";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
+import UserAvatar from "@/components/profile/UserAvatar";
 
 const Post = ({ post }: { post: PostType }) => {
-
+  
   const router = useRouter();
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
@@ -33,38 +32,7 @@ const Post = ({ post }: { post: PostType }) => {
           )}
           {post.sold && <div className="sold-label">SOLD</div>}
         </div>
-        <Link
-          className="w-full flex justify-between mb-4"
-          href={`/members/${post.author.username}`}
-        >
-          <div className="flex">
-            {post.author.profile_image ? (
-              <img
-                src={post.author.profile_image}
-                alt="profile user"
-                className="w-15 h-15 rounded-full"
-              />
-            ) : (
-              <div className="h-10 w-10 relative rounded-full">
-                <img
-                  src="/images/profileImage_placeholder.png"
-                  alt="user placeholder"
-                  className="h-full w-full object-cover rounded-full"
-                />
-              </div>
-            )}
-            <div className="flex gap-2 text-right italic place-self-center ml-2">
-              <span>{post.author.username}</span>
-              <span>
-                {new Date(post.created_at).toLocaleString("sv-Se", {
-                  dateStyle: "short",
-                  timeStyle: "short",
-                })}
-              </span>
-              <PostCategoryIcons category={post.category} />
-            </div>
-          </div>
-        </Link>
+        <UserAvatar post={post} />
         <div className="mb-4">
           {post.PostImages.length === 0 && null}
           {post.PostImages && post.PostImages.length > 0 && (
@@ -95,6 +63,7 @@ const Post = ({ post }: { post: PostType }) => {
           onDeleteSuccess={onDeleteSuccess}
           isAuthor={isAuthor}
           postTitle={post.title}
+          postCategory={post.category}
         />
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}

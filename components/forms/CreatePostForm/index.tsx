@@ -12,7 +12,6 @@ import FileDropZone from "@/components/FileDropZone";
 
 const CreatePostForm = ({
   handleCreatePost,
-  error,
   isPending,
 }: CreatePostFormPropsType) => {
   const {
@@ -101,7 +100,6 @@ const CreatePostForm = ({
               {isPending ? "Publishing post..." : "Publish"}
             </button>
           </div>
-          {error && <ErrorMessage error={error.message} />}
         </div>
       </form>
     </div>

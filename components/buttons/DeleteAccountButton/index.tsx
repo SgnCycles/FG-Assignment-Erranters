@@ -1,5 +1,5 @@
 "use client";
-import { DeleteUserAccountAction } from "@/actions/delete-user-action";
+import DeleteUserAccountAction from "@/actions/delete-user-action";
 import { useTransition } from "react";
 import { toast } from "react-toastify";
 

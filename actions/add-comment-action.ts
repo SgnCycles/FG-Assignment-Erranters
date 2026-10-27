@@ -13,7 +13,6 @@ export const AddCommentAction = async ({
   postId: string;
   slug: string;
 }) => {
-  
   const supabase = await createClient();
   const parsedData = postCommentSchema.parse(commentData);
   const {
@@ -22,17 +21,17 @@ export const AddCommentAction = async ({
 
   if (!user) throw new Error("Unauthorized access");
 
-  const { data, error } = await supabase
-    .from("Comments")
-    .insert({
-      post_id: postId,
-      author: user.id,
-      parent_id: null,
-      ...parsedData,
-    })
-    .throwOnError();
+  const { error } = await supabase.from("Comments").insert({
+    post_id: postId,
+    author: user.id,
+    parent_id: null,
+    ...parsedData,
+  });
 
-  // TO DO: add toast for the add comment error
-  if (error) console.log(error);
+  if (error) {
+    console.error(error);
+    return { error: "Failed to add the comment" };
+  }
+
   revalidatePath(`/post/${slug}`);
 };

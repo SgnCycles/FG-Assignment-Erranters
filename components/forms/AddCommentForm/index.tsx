@@ -10,7 +10,6 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
 
 const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
-  
   const router = useRouter();
   const queryClient = useQueryClient();
   const {
@@ -22,7 +21,12 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
 
   const { mutate, error } = useMutation({
     mutationFn: AddCommentAction,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+      toast.success("Comment Added"),
       reset();
       queryClient.invalidateQueries({
         queryKey: ["post-comments", postId],
@@ -32,7 +36,9 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
       });
       router.refresh();
     },
-    onSettled: () => toast.success("Comment Added"),
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
   return (

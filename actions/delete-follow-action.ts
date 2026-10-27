@@ -1,7 +1,7 @@
 "use server";
 import { createClient } from "@/lib/supabase/serverClient";
 
-export const DeleteFollowAction = async ({ memberId }: { memberId: string }) => {
+const DeleteFollowAction = async ({ memberId }: { memberId: string }) => {
   
   const supabase = await createClient();
 
@@ -17,6 +17,10 @@ export const DeleteFollowAction = async ({ memberId }: { memberId: string }) => 
     .eq("member_id", memberId)
     .eq("user_id", user.id);
 
-  // TO DO: add toast if there is an error with removing the following
-  if (error) throw new Error(error.message)
+  if (error) {
+    console.error(error);
+    return { error: "Failed to unfollow the member" };
+  }
 };
+
+export default DeleteFollowAction;

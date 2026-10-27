@@ -1,7 +1,7 @@
-import type { MyPostsType } from "@/lib/supabase/queries";
+import type { PostType } from "@/lib/supabase/queries";
 
 export type ShortPostPropsType = {
-  post: MyPostsType[number];
+  post: PostType;
   onFavouriteDeleteSuccess?: () => void; 
   showUser?: boolean;
 };

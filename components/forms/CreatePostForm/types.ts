@@ -6,6 +6,5 @@ export type FormValues = z.infer<typeof postImageSchema>;
 
 export type CreatePostFormPropsType = {
   handleCreatePost: (values: FormValues) => void;
-  error: Error | null;
   isPending: boolean;
 };

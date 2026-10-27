@@ -17,7 +17,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -35,13 +34,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       if (error || !user) {
         setUser(null);
         setUserProfile(null);
-        setIsLoggedIn(false);
         await supabase.auth.signOut({ scope: "local" });
         return;
       }
 
       setUser(user);
-      setIsLoggedIn(true);
       fetchUserProfile(user.id);
     };
 
@@ -52,7 +49,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         if (event === "INITIAL_SESSION" || event === "SIGNED_IN") {
           const currentUser = session?.user ?? null;
           setUser(currentUser);
-          setIsLoggedIn(!!currentUser);
 
           if (currentUser) {
             fetchUserProfile(currentUser.id);
@@ -62,7 +58,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         } else if (event === "SIGNED_OUT") {
           setUser(null);
           setUserProfile(null);
-          setIsLoggedIn(false);
           // } else if (event === "PASSWORD_RECOVERY") {
           // } else if (event === "USER_UPDATED") {
         }
@@ -79,8 +74,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         setUser,
-        isLoggedIn,
-        setIsLoggedIn,
         userProfile,
         setUserProfile,
       }}

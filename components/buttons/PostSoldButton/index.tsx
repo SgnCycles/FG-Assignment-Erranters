@@ -1,4 +1,4 @@
-import { MarkPostSoldAction } from "@/actions/mark-post-sold-action";
+import MarkPostSoldAction from "@/actions/mark-post-sold-action";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -13,7 +13,11 @@ const PostSoldButton = ({
 
   const { mutate } = useMutation({
     mutationFn: MarkPostSoldAction,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
       if (sold === true) {
         toast.warning("Item marked as not sold");
       } else {
@@ -32,7 +36,9 @@ const PostSoldButton = ({
         queryKey: ["my-favourite-posts"],
       });
     },
-    onError: () => toast.error("Something went wrong!"),
+    onError: () => {
+      toast.error("Something went wrong. Try again later");
+    },
   });
 
   return (
