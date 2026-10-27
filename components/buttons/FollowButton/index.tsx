@@ -2,7 +2,7 @@ import { AddFollowerAction } from "@/actions/add-follow-action";
 import { DeleteFollowAction } from "@/actions/delete-follow-action";
 import { getUserFollowStatus } from "@/lib/supabase/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { FollowButtonPropsType } from "./types";
+import type { FollowButtonPropsType } from "./types";
 
 const FollowButton = ({
   onFollowSuccess,

@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { FaXmark } from "react-icons/fa6";
 import { AiFillFileImage } from "react-icons/ai";
-import { FileDropZonePropsType, ImageFile } from "./types";
+import type { FileDropZonePropsType, ImageFile } from "./types";
 
 const baseStyle = {
   border: "2px dashed #d4d4d4",

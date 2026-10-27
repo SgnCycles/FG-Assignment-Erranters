@@ -1,7 +1,7 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
+import type { DeleteButtonPropsType } from "./types";
 import { toast } from "react-toastify";
-import { DeleteButtonPropsType } from "./types";
 
 const DeleteButton = ({
   id,

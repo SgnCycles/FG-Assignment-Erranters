@@ -1,4 +1,4 @@
-import { type UseFormRegister } from "react-hook-form";
+import type { UseFormRegister } from "react-hook-form";
 import type { FormValues } from "@/types/types";
 
 const CategoryButtons = ({

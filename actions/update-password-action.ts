@@ -20,6 +20,7 @@ export const UpdatePasswordAction = async (
     current_password: currentPassword,
   });
 
+  // add toast if there is an error with updating the password
   if (passwordError) {
     throw passwordError;
   }

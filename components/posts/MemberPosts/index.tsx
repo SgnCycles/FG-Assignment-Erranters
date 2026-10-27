@@ -1,5 +1,5 @@
 import ShortPost from "../ShortPost";
-import { MemberPostsPropsType } from "./types";
+import type { MemberPostsPropsType } from "./types";
 
 const MemberPosts = ({ postData }: MemberPostsPropsType) => {
   return (

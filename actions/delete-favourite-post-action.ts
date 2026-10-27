@@ -17,5 +17,6 @@ export const DeleteFavouritePostAction = async ({ postId }: { postId: string }) 
     .eq("post_id", postId)
     .eq("user_id", user.id);
 
+  // TO DO: add toast if there is an error with deleting the favourite post
   if (error) throw new Error(error.message)
 };

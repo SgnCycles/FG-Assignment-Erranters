@@ -16,6 +16,7 @@ const DeletePostImagesAction = async ({image, postId}: {image: string; postId: s
     .delete()
     .eq("id", postId);
 
+  // TO DO: add toast if there is an error with deleting the post images
   if (postError) throw new Error(postError.message);
 
   revalidatePath("/");

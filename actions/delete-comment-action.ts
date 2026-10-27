@@ -11,6 +11,7 @@ const DeleteCommentAction = async (commentId: string) => {
     .eq("id", commentId)
     .single();
 
+  // TO DO: add toast if there is an error with deleting the comment
   if (error) console.log("Error", error);
   
   revalidatePath("/");

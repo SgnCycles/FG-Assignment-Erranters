@@ -1,15 +1,7 @@
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyFavouritePostsFeed from "@/components/posts/MyFavouritePostFeed";
-import { createClient } from "@/lib/supabase/serverClient";
 
-const MyFavouritesPage = async () => {
-  
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  
-  if (!user) throw new Error("Unauthorized access!");
+const MyFavouritesPage = () => {
 
   return (
     <div className="main-layout">
@@ -20,7 +12,7 @@ const MyFavouritesPage = async () => {
         <CreatePostButton />
       </div>
       <div className="main-layout-posts-feed ">
-      <MyFavouritePostsFeed userId={user.id} />
+      <MyFavouritePostsFeed />
       </div>
     </div>
   );

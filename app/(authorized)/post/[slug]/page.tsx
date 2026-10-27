@@ -1,19 +1,12 @@
-import GoBackButton from "@/components/buttons/GoBackButton";
-import ErrorMessage from "@/components/ErrorMessage";
-import Post from "@/components/posts/FullPost";
 import { getSinglePost } from "@/lib/supabase/queries";
-import { createClient } from "@/lib/supabase/serverClient";
+import ErrorMessage from "@/components/ErrorMessage";
+import GoBackButton from "@/components/buttons/GoBackButton";
+import Post from "@/components/posts/FullPost";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
-  
+
   const { slug } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const { data, error } = await getSinglePost(slug);
-  const isAuthor: boolean =
-    user && data && user.id === data.author.id ? true : false;
 
   if (error) {
     return <ErrorMessage error={error.message} />;
@@ -27,13 +20,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
         <GoBackButton />
       </div>
       <div className="flex justify-center items-center w-full">
-        {data && (
-          <Post
-            post={data}
-            isAuthor={isAuthor}
-            userId={user?.id || null}
-          />
-        )}
+        <Post post={data}/>
       </div>
     </main>
   );

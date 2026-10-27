@@ -1,5 +1,5 @@
 import Link from "next/dist/client/link";
-import { EditButtonPropsType } from "./types";
+import type { EditButtonPropsType } from "./types";
 
 const EditButton = ({ slug, type = "text" }: EditButtonPropsType) => {
   return (

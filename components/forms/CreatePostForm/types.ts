@@ -1,4 +1,4 @@
-import { ImageFile } from "@/components/FileDropZone/types";
+import type { ImageFile } from "@/components/FileDropZone/types";
 import { postImageSchema } from "@/schemas/schemas";
 import * as z from "zod";
 

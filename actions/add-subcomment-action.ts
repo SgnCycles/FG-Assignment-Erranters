@@ -8,14 +8,13 @@ export const AddSubcommentAction = async ({
   commentData,
   postId,
   slug,
-  parentId
+  parentId,
 }: {
   commentData: z.infer<typeof postCommentSchema>;
   postId: string;
   slug: string;
   parentId: string;
 }) => {
-
   const supabase = await createClient();
   const parsedData = postCommentSchema.parse(commentData);
   const {
@@ -34,7 +33,8 @@ export const AddSubcommentAction = async ({
     })
     .throwOnError();
 
-  if (error) console.log(error);
-  
+  // TO DO: add toast if there is an error with adding the comment
+  if (error) console.log("Error", error);
+
   revalidatePath(`/post/${slug}`);
 };

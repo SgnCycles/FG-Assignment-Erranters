@@ -1,13 +1,13 @@
 "use client";
+import { DeletePostAction } from "@/actions/delete-post-action";
+import type { ShortPostPropsType } from "./types";
+import type { userContextType } from "@/types/types";
+import { useUserContext } from "@/context/userContext";
+import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import ImageGallery from "@/components/ImageGallery";
 import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import PostCategoryIcons from "@/components/PostCategoryIcon";
-import Link from "next/link";
-import { ShortPostPropsType } from "./types";
-import { useUserContext } from "@/context/userContext";
-import type { userContextType } from "@/types/types";
-import { useQueryClient } from "@tanstack/react-query";
-import { DeletePostAction } from "@/actions/delete-post-action";
-import ImageGallery from "@/components/ImageGallery";
 
 const ShortPost = ({
   onFavouriteDeleteSuccess,

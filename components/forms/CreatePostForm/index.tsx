@@ -1,14 +1,14 @@
 "use client";
-import ErrorMessage from "@/components/ErrorMessage";
-import FileDropZone from "@/components/FileDropZone";
 import { postImageSchema } from "@/schemas/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import CategoryButtons from "@/components/buttons/CategoryButtons";
-import { CreatePostFormPropsType } from "./types";
+import type { CreatePostFormPropsType } from "./types";
 import CancelButton from "@/components/buttons/CancelButton";
+import CategoryButtons from "@/components/buttons/CategoryButtons";
+import ErrorMessage from "@/components/ErrorMessage";
+import FileDropZone from "@/components/FileDropZone";
 
 const CreatePostForm = ({
   handleCreatePost,
@@ -32,14 +32,13 @@ const CreatePostForm = ({
   const postCategory = watch("category");
   const postType = watch("post_type");
 
-
-    useEffect(() => {
+  useEffect(() => {
     if (postCategory === "Hiking" || postCategory === "Cycling") {
       setValue("post_type", "Post");
     } else if (postCategory === "Marketplace") {
       setValue("post_type", "Sell");
     } else if (postType === "Sell" || postType === "Buy") {
-      setValue("category", "Marketplace")
+      setValue("category", "Marketplace");
     }
   }, [postCategory, postType, setValue]);
 

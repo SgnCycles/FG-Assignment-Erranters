@@ -16,6 +16,7 @@ const DeleteProfileImageAction = async ({image, userId}: {image: string; userId:
     .update({ profile_image: null })
     .eq("id", userId);
 
+  // TO DO: add toast if there is an error with deleting the post
   if (profileError) throw new Error(profileError.message);
 
   revalidatePath("/");

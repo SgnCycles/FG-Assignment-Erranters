@@ -1,9 +1,9 @@
+import { createClient } from "@/lib/supabase/serverClient";
+import { getMemberProfile, getUserPosts } from "@/lib/supabase/queries";
 import GoBackButton from "@/components/buttons/GoBackButton";
 import ErrorMessage from "@/components/ErrorMessage";
 import MemberPosts from "@/components/posts/MemberPosts";
 import MemberProfile from "@/components/profile/MemberProfile";
-import { getMemberProfile, getUserPosts } from "@/lib/supabase/queries";
-import { createClient } from "@/lib/supabase/serverClient";
 
 const MemberProfilePage = async ({
   params,

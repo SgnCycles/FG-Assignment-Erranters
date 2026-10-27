@@ -1,4 +1,4 @@
-import { PostCommentsType } from "@/lib/supabase/queries";
+import type { PostCommentsType } from "@/lib/supabase/queries";
 
 export type CommentsPropsType = {
   comment: PostCommentsType;

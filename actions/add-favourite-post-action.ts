@@ -15,5 +15,6 @@ export const AddFavouritePostAction = async ({ postId }: { postId: string }) => 
     user_id: user.id,
   });
 
+// TO DO: add toast for the add favourite post error
   if (error) throw new Error(error.message)
 };

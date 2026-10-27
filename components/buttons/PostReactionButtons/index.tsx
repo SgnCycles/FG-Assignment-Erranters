@@ -1,9 +1,8 @@
 "use client";
-import CommentButton from "../CommentButton";
-import FavouriteButton from "../FavouriteButton";
-import LikeButton from "../LikeButton";
-import ShareButton from "../ShareButton";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AddLikeAction } from "@/actions/add-like-action";
+import { DeleteLikeAction } from "@/actions/delete-like-action";
+import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
+import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
 import {
   getCommentNumber,
   getPostLikesNumber,
@@ -11,11 +10,12 @@ import {
   getUserFavouriteStatus,
   getUserLikeStatus,
 } from "@/lib/supabase/queries";
-import { AddLikeAction } from "@/actions/add-like-action";
-import { DeleteLikeAction } from "@/actions/delete-like-action";
-import { DeleteFavouritePostAction } from "@/actions/delete-favourite-post-action";
-import { AddFavouritePostAction } from "@/actions/add-favourite-post-action";
-import { PostReactionButtonPropsType } from "./types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { PostReactionButtonPropsType } from "./types";
+import CommentButton from "../CommentButton";
+import FavouriteButton from "../FavouriteButton";
+import LikeButton from "../LikeButton";
+import ShareButton from "../ShareButton";
 import DeleteButton from "../DeleteButton";
 import EditButton from "../EditButton";
 import PostSoldButton from "../PostSoldButton";

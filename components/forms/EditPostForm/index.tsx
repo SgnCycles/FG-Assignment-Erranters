@@ -1,41 +1,38 @@
 "use client";
 import EditPost from "@/actions/edit-post-action";
-import { postImageSchema, postSchema } from "@/schemas/schemas";
-import ErrorMessage from "@/components/ErrorMessage";
-import { type Tables } from "@/lib/supabase/database.types";
+import DeletePostImagesAction from "@/actions/delete-post-images-action";
+import { DeletePostAction } from "@/actions/delete-post-action";
+import { postImageSchema } from "@/schemas/schemas";
+import { useForm, Controller } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useForm, Controller } from "react-hook-form";
-import FileDropZone from "@/components/FileDropZone";
-import { FaXmark } from "react-icons/fa6";
-import DeletePostImagesAction from "@/actions/delete-post-images-action";
-// import { useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
+import { useRouter } from "next/navigation";
 import CancelButton from "@/components/buttons/CancelButton";
 import DeleteButton from "@/components/buttons/DeleteButton";
-import { useRouter } from "next/navigation";
-import { DeletePostAction } from "@/actions/delete-post-action";
+import FileDropZone from "@/components/FileDropZone";
+import ErrorMessage from "@/components/ErrorMessage";
+import { FaXmark } from "react-icons/fa6";
+import type { PostFormProps } from "@/types/types";
+// import { useState } from "react";
 
-const EditPostForm = ({
-  initialValues,
-  postId,
-}: {
-  initialValues: Pick<
-    Tables<"Posts">,
-    | "title"
-    | "content"
-    | "category"
-    | "post_type"
-    | "price"
-    | "location"
-    | "slug"
-  > & {
-    PostImages: Pick<Tables<"PostImages">, "id" | "image_url" | "position">[];
+const EditPostForm = ({ post }: { post: PostFormProps }) => {
+
+  const postId = post.id;
+  const initialValues: PostFormProps = {
+    id: post.id,
+    author: post.author,
+    title: post.title,
+    content: post.content,
+    price: post.price,
+    PostImages: post.PostImages,
+    category: post.category,
+    post_type: post.post_type,
+    location: post.location,
+    slug: post.slug,
   };
-  postId: string;
-}) => {
-  // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
 
+  // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");

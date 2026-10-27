@@ -17,5 +17,6 @@ export const DeleteFollowAction = async ({ memberId }: { memberId: string }) => 
     .eq("member_id", memberId)
     .eq("user_id", user.id);
 
+  // TO DO: add toast if there is an error with removing the following
   if (error) throw new Error(error.message)
 };

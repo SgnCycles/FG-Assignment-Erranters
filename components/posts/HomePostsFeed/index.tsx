@@ -1,13 +1,13 @@
 "use client";
-import { getAllPostsCount, getHomePosts } from "@/lib/supabase/queries";
-import { useQuery } from "@tanstack/react-query";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
 import { createClient } from "@/lib/supabase/browserClient";
+import { getAllPostsCount, getHomePosts } from "@/lib/supabase/queries";
+import type { PostCategoryContextType } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import Pagination from "@/components/Pagination";
 import ShortPost from "@/components/posts/ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
-import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { PostCategoryContextType } from "@/types/types";
-import Pagination from "@/components/Pagination";
 
 const HomePostsFeed = () => {
 

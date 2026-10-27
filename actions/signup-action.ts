@@ -16,6 +16,7 @@ export const SignUp = async (userdata: z.infer<typeof signUpSchema>) => {
     },
   });
 
+  // add toast if there is an error with signing up
   if (error) throw new Error(error.message);
   
   return { success: true };

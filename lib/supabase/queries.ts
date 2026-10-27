@@ -1,5 +1,5 @@
 import { createClient } from "./browserClient";
-import { type QueryData } from "@supabase/supabase-js";
+import type { QueryData } from "@supabase/supabase-js";
 
 export const getHomePosts = async (
   supabase: ReturnType<typeof createClient>,

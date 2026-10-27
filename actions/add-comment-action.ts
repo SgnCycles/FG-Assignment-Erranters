@@ -32,6 +32,7 @@ export const AddCommentAction = async ({
     })
     .throwOnError();
 
+  // TO DO: add toast for the add comment error
   if (error) console.log(error);
   revalidatePath(`/post/${slug}`);
 };

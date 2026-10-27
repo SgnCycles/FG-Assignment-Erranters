@@ -58,6 +58,8 @@ const EditPost = async ({
     .single()
     .throwOnError();
 
+  // TO DO: add toast for the add like error
+  
   revalidatePath("/");
   redirect(`/post/${updatedPost.slug}`);
 };

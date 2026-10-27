@@ -1,6 +1,4 @@
 "use client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { MemberProfilePropsType } from "./types";
 import {
   getUserFavouritesNumber,
   getMemberFollowerNumber,
@@ -8,6 +6,8 @@ import {
   getUserFollowStatus,
 } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
+import type { MemberProfilePropsType } from "./types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import FollowButton from "@/components/buttons/FollowButton";
 
 const MemberProfile = ({ profile }: MemberProfilePropsType) => {

@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/browserClient";
 import { getUserProfile, UserProfileType } from "@/lib/supabase/queries";
 import { userContextType } from "@/types/types";
 import type { User } from "@supabase/supabase-js";
-
 import {
   createContext,
   useContext,
@@ -15,6 +14,7 @@ import {
 const UserContext = createContext<userContextType | null>(null);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -36,7 +36,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser(null);
         setUserProfile(null);
         setIsLoggedIn(false);
-
         await supabase.auth.signOut({ scope: "local" });
         return;
       }

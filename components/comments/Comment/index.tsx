@@ -1,11 +1,10 @@
 "use client";
 import DeleteCommentAction from "@/actions/delete-comment-action";
-import DeleteButton from "@/components/buttons/DeleteButton";
-
-import { CommentsPropsType } from "./types";
+import type { CommentsPropsType } from "./types";
 import Link from "next/link";
 import { useState } from "react";
 import AddSubCommentForm from "@/components/forms/SubCommentForm";
+import DeleteButton from "@/components/buttons/DeleteButton";
 
 const Comment = ({
   comment,

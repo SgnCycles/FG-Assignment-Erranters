@@ -1,11 +1,11 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdatePasswordAction } from "@/actions/update-password-action";
 import { updateUserPasswordSchema } from "@/schemas/schemas";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import ErrorMessage from "@/components/ErrorMessage";
 import CancelButton from "@/components/buttons/CancelButton";
+import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
 
 const UpdatePassword = () => {

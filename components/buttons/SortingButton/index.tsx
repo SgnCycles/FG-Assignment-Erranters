@@ -1,4 +1,4 @@
-import { SortingButtonPropsType } from "./types";
+import type { SortingButtonPropsType } from "./types";
 
 const SortingButton = ({
   type,

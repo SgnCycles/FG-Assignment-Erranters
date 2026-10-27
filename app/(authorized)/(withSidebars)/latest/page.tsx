@@ -1,18 +1,7 @@
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import LatestPostsFeed from "@/components/posts/LatestPostsFeed";
-import { getLatestPosts } from "@/lib/supabase/queries";
-import { createClient } from "@/lib/supabase/serverClient";
 
-const LatestPostsPage = async () => {
-
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) throw new Error("Unauthorized access!");
-  
-  const { data, error } = await getLatestPosts(supabase, false);
+const LatestPostsPage = () => {
 
   return (
     <div className="main-layout">
@@ -22,9 +11,8 @@ const LatestPostsPage = async () => {
         </h1>
         <CreatePostButton />
       </div>
-      {error && <p>Failed Loading Posts...</p>}
       <div className="main-layout-posts-feed ">
-        {data && <LatestPostsFeed posts={data} />}
+        <LatestPostsFeed />
       </div>
     </div>
   );

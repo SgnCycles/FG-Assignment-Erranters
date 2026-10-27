@@ -1,26 +1,31 @@
 "use client";
-import { getMyPosts, getMyPostsCount } from "@/lib/supabase/queries";
-import { useQuery } from "@tanstack/react-query";
-import { createClient } from "@/lib/supabase/browserClient";
-import { useState } from "react";
-import SortingButton from "@/components/buttons/SortingButton";
+import { useUserContext } from "@/context/userContext";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import { PostCategoryContextType } from "@/types/types";
-import ShortPost from "../ShortPost";
+import type { PostCategoryContextType, userContextType } from "@/types/types";
+import { getMyPosts, getMyPostsCount } from "@/lib/supabase/queries";
+import { createClient } from "@/lib/supabase/browserClient";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Pagination from "@/components/Pagination";
+import ShortPost from "../ShortPost";
+import SortingButton from "@/components/buttons/SortingButton";
 
-const MyPostsFeed = ({ userId }: { userId: string }) => {
-
+const MyPostsFeed = () => {
+  
+  const { user } = useUserContext() as userContextType;
+  if (!user) return null;
+  const userId = user.id;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
+  const supabase = createClient();
 
   const { data: postCountData } = useQuery({
     queryKey: ["my-posts-count"],
     queryFn: async () => {
-      const supabase = createClient();
+      
       const { count, error } = await getMyPostsCount(supabase, userId);
       if (error) throw error;
       return count ?? 0;
@@ -35,7 +40,6 @@ const MyPostsFeed = ({ userId }: { userId: string }) => {
   const { data, isError, isPending } = useQuery({
     queryKey: ["my-posts", userId, sortingOrder, pageNumber],
     queryFn: async () => {
-      const supabase = createClient();
       const { data, error } = await getMyPosts(
         supabase,
         userId,

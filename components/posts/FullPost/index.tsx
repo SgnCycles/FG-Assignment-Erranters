@@ -1,17 +1,25 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { DeletePostAction } from "@/actions/delete-post-action";
-import PostComments from "@/components/comments/PostComments";
-import AddCommentForm from "@/components/forms/AddCommentForm";
-import PostCategoryIcons from "@/components/PostCategoryIcon";
-import PostReactionButtons from "@/components/buttons/PostReactionButtons";
-import { PostPropsType } from "./types";
+import { useUserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import type { userContextType } from "@/types/types";
+import type { PostType } from "@/lib/supabase/queries";
+import AddCommentForm from "@/components/forms/AddCommentForm";
 import ImageGallery from "@/components/ImageGallery";
+import PostCategoryIcons from "@/components/PostCategoryIcon";
+import PostComments from "@/components/comments/PostComments";
+import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 
-const Post = ({ post, isAuthor, userId }: PostPropsType) => {
-  
+const Post = ({ post }: { post: PostType }) => {
+
   const router = useRouter();
+  const { user } = useUserContext() as userContextType;
+  if (!user) return null;
+  const userId = user.id;
+  const isAuthor: boolean =
+    user && post && user.id === post.author.id ? true : false;
+
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
@@ -23,9 +31,7 @@ const Post = ({ post, isAuthor, userId }: PostPropsType) => {
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
           )}
-          {post.sold && (
-            <div className="sold-label">SOLD</div>
-          )}
+          {post.sold && <div className="sold-label">SOLD</div>}
         </div>
         <Link
           className="w-full flex justify-between mb-4"

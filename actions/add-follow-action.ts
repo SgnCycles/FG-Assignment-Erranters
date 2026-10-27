@@ -15,5 +15,6 @@ export const AddFollowerAction = async ({ memberId }: { memberId: string }) => {
     user_id: user.id,
   });
 
+// TO DO: add toast for the add follower error
   if (error) throw new Error(error.message);
 };

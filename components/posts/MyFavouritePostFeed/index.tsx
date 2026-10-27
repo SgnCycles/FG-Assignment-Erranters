@@ -1,19 +1,23 @@
 "use client";
+import { usePostCategoryContext } from "@/context/postCategoryContext";
+import { useUserContext } from "@/context/userContext";
 import {
   getAllUserFavouritePostsCount,
   getUserFavourites,
 } from "@/lib/supabase/queries";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/browserClient";
+import type { PostCategoryContextType, userContextType } from "@/types/types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import Pagination from "@/components/Pagination";
 import SortingButton from "@/components/buttons/SortingButton";
 import ShortPost from "../ShortPost";
-import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { PostCategoryContextType } from "@/types/types";
-import Pagination from "@/components/Pagination";
 
-const MyFavouritePostsFeed = ({ userId }: { userId: string }) => {
+const MyFavouritePostsFeed = () => {
 
+  const { user } = useUserContext() as userContextType;
+  if (!user) return null;
+  const userId = user.id;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);

@@ -1,35 +1,37 @@
 "use client";
-import { getForYouPosts } from "@/lib/supabase/queries";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { createClient } from "@/lib/supabase/browserClient";
-import { useState } from "react";
-import SortingButton from "@/components/buttons/SortingButton";
-import ShortPost from "../ShortPost";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { PostCategoryContextType } from "@/types/types";
-import { ForYouPostsPropsType } from "./types";
+import { useUserContext } from "@/context/userContext";
+import { createClient } from "@/lib/supabase/browserClient";
+import { getForYouPosts } from "@/lib/supabase/queries";
+import type { PostCategoryContextType, userContextType } from "@/types/types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import ShortPost from "../ShortPost";
+import SortingButton from "@/components/buttons/SortingButton";
 
-const ForYouPostsFeed = ({
-  posts,
-  userId,
-}: ForYouPostsPropsType) => {
-
+const ForYouPostsFeed = () => {
+  
+  const { user } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
+
+  if (!user) throw new Error("Unauthorized access!");
+
+  const userId = user.id;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
-  const supabase = createClient();
   const queryClient = useQueryClient();
-  const { data } = useQuery({
+
+  const { data, isError, isPending } = useQuery({
     queryKey: ["for-you-posts", userId, sortingOrder],
     queryFn: async () => {
+      const supabase = createClient();
       const { data, error } = await getForYouPosts(
         supabase,
         userId,
         sortingOrder,
       );
-      if (error) throw new Error(error.message);
+      if (error) throw error;
       return data;
     },
-    initialData: posts,
   });
 
   const onFavouriteDeleteSuccess = () => {
@@ -50,6 +52,8 @@ const ForYouPostsFeed = ({
         sortingOrder={sortingOrder}
         setSortingOrder={setSortingOrder}
       />
+      {isError && <p>Failed Loading Posts...</p>}
+      {isPending && <p className="heading">Loading Posts...</p>}
       {filteredPosts &&
         filteredPosts.length > 0 &&
         filteredPosts.map((post, index) => (

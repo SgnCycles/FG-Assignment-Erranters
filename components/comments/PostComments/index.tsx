@@ -1,10 +1,10 @@
 "use client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCommentNumber, getPostComments } from "@/lib/supabase/queries";
-import SortingButton from "@/components/buttons/SortingButton";
 import { useState } from "react";
-import { PostCommentsPropsType } from "./types";
+import type { PostCommentsPropsType } from "./types";
 import Comment from "../Comment";
+import SortingButton from "@/components/buttons/SortingButton";
 
 const PostComments = ({
   postId,

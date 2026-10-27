@@ -1,4 +1,4 @@
-import { Tables } from "@/lib/supabase/database.types";
+import type { Tables } from "@/lib/supabase/database.types";
 
 export type ImageFile = File & {
   preview: string;

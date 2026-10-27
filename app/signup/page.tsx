@@ -1,5 +1,5 @@
-import SignUpForm from "@/components/forms/SignUpForm";
 import HomepagePoster from "@/components/HomepagePoster";
+import SignUpForm from "@/components/forms/SignUpForm";
 
 const SignUpPage = () => {
   return (

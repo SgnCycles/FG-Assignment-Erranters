@@ -51,7 +51,8 @@ export const CreatePost = async (postdata: z.infer<typeof postSchema>) => {
     await supabase.from("PostImages").insert(postImages).throwOnError();
   }
 
-  if (error) console.log(error);
+  // TO DO: add toast if there is an error with creating the post
+  if (error) console.log("Error", error);
   revalidatePath("/");
   return { success: true, slug };
 };

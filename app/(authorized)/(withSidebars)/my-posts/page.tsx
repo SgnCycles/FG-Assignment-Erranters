@@ -1,16 +1,8 @@
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
-import { createClient } from "@/lib/supabase/serverClient";
 
-const MyPostsPage = async () => {
+const MyPostsPage = () => {
   
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  
-  if (!user) throw new Error("Unauthorized access!");
-
   return (
     <div className="main-layout">
       <div className="main-layout-heading">
@@ -20,7 +12,7 @@ const MyPostsPage = async () => {
         <CreatePostButton />
       </div>
       <div className="main-layout-posts-feed ">
-       <MyPostsFeed userId={user.id} />
+       <MyPostsFeed />
       </div>
     </div>
   );

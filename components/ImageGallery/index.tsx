@@ -1,8 +1,8 @@
 import { LightGallery, LightGalleryItem } from "@lightgallery/react";
+import { JustifiedGrid } from "@lightgallery/react/plugins/justified";
 import Thumbnail from "@lightgallery/react/plugins/thumbnail";
 import Zoom from "@lightgallery/react/plugins/zoom";
-import { JustifiedGrid } from "@lightgallery/react/plugins/justified";
-import { ImageGalleryType } from "./types";
+import type { ImageGalleryType } from "./types";
 
 const ImageGallery = ({
   postImages,

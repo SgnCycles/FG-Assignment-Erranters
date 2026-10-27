@@ -1,41 +1,43 @@
 "use client";
-import { type Tables } from "@/lib/supabase/database.types";
-import { userProfileSchema } from "@/schemas/schemas";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { useMutation } from "@tanstack/react-query";
 import EditUserProfile from "@/actions/edit-user-profile-action";
-import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@/components/ErrorMessage";
-import { FaXmark } from "react-icons/fa6";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import DeleteProfileImageAction from "@/actions/delete-profile-image-action";
 import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
+import { userProfileSchema } from "@/schemas/schemas";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
-import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
+import { useMutation } from "@tanstack/react-query";
+import { FaXmark } from "react-icons/fa6";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import CancelButton from "@/components/buttons/CancelButton";
+import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
+import ErrorMessage from "@/components/ErrorMessage";
 import UpdatePassword from "../UpdatePassword";
+import type { userProfileProps } from "@/types/types";
 
 const UserProfileForm = ({
-  initialValues,
-  userId,
+  userProfile,
 }: {
-  initialValues: Pick<
-    Tables<"Profiles">,
-    | "name"
-    | "surname"
-    | "username"
-    | "bio"
-    | "profile_image"
-    | "interests"
-    | "headline"
-    | "location"
-    | "cover_image"
-  >;
-  userId: string;
+  userProfile: userProfileProps;
 }) => {
+  const initialValues: userProfileProps = {
+    id: userProfile.id,
+    name: userProfile.name,
+    surname: userProfile.surname,
+    username: userProfile.username,
+    bio: userProfile.bio,
+    interests: userProfile.interests,
+    profile_image: userProfile.profile_image,
+    headline: userProfile.headline,
+    location: userProfile.location,
+    cover_image: userProfile.cover_image,
+  };
+
+  const userId = userProfile.id;
+
   const [profileImagePreview, setProfileImagePreview] = useState<string | null>(
     initialValues.profile_image,
   );
@@ -178,7 +180,6 @@ const UserProfileForm = ({
                     className="h-full w-full object-cover rounded-tl-4xl rounded-tr-4xl"
                   />
                   <button
-                    type="button"
                     className="w-7 h-7 absolute bottom-2 right-5"
                     onClick={() => {
                       setCoverImagePreview(null);
@@ -193,7 +194,6 @@ const UserProfileForm = ({
               ) : (
                 <div className="h-50 relative bg-gray-600 rounded-tl-4xl rounded-tr-4xl">
                   <button
-                    type="button"
                     className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold"
                     onClick={() => {
                       document.getElementById("add-cover-image")!.click();
@@ -252,7 +252,6 @@ const UserProfileForm = ({
                       className="h-full w-full object-cover rounded-full"
                     />
                     <button
-                      type="button"
                       className="w-7 h-7 absolute bottom-0 right-5"
                       onClick={() => {
                         setProfileImagePreview(null);
@@ -273,7 +272,6 @@ const UserProfileForm = ({
                     className="h-full w-full object-cover rounded-full"
                   />
                   <button
-                    type="button"
                     className="w-7 h-7 absolute bottom-0 right-5"
                     onClick={() => {
                       document.getElementById("add-image")!.click();
@@ -385,15 +383,13 @@ const UserProfileForm = ({
             </div>
           </div>
           <div className="form-button-layout pr-8">
-            <CancelButton link="/feed"/>
-            <button type="button" className="button-dark-primary">
-              Update Profile
-            </button>
+            <CancelButton link="/feed" />
+            <button className="button-dark-primary">Update Profile</button>
           </div>
         </div>
       </form>
-      < UpdatePassword />
-      <DeleteAccountDialogue userId={userId}/>
+      <UpdatePassword />
+      <DeleteAccountDialogue userId={userId} />
     </div>
   );
 };

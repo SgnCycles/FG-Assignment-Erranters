@@ -12,5 +12,6 @@ export const MarkPostSoldAction = async ({ postId, sold }: { postId: string, sol
 
   const { error } = await supabase.from("Posts").update({sold}).eq("id", postId).eq("author", user.id);
   
+  // TO DO: add toast for the add post sold error
   if (error) throw new Error(error.message)
 };

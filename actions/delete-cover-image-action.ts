@@ -16,6 +16,7 @@ const DeleteCoverImageAction = async ({image, userId}: {image: string; userId: s
     .update({ cover_image: null })
     .eq("id", userId);
 
+  // TO DO: add toast if there is an error with deleting the cover image
   if (profileError) throw new Error(profileError.message);
 
   revalidatePath("/");

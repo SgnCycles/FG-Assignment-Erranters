@@ -31,6 +31,7 @@ const EditUserProfile = async ({
     .eq("id", userId)
     .single();
 
+  // TO DO: add toast for error
   if (error) throw new Error("Error fetching User Profile");
 
   let profileImageUrl;
@@ -69,6 +70,8 @@ const EditUserProfile = async ({
     .select()
     .single()
     .throwOnError();
+
+  // TO DO: add toast for the update profile error
 
   revalidatePath("/profile");
   return updatedProfile;

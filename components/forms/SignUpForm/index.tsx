@@ -1,12 +1,12 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUp } from "@/actions/signup-action";
 import { signUpSchema } from "@/schemas/schemas";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "@/components/ErrorMessage";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import ErrorMessage from "@/components/ErrorMessage";
 
 const SignUpForm = () => {
   
