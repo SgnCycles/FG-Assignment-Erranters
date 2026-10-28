@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.17"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       Attachments: {
@@ -318,12 +343,14 @@ export type Database = {
           category: string
           content: string
           created_at: string
+          currency: string | null
           id: string
           latitude: number | null
           location: string | null
           longitude: number | null
           post_type: string
           price: number | null
+          search_vector: unknown
           slug: string
           sold: boolean | null
           title: string
@@ -333,12 +360,14 @@ export type Database = {
           category: string
           content: string
           created_at?: string
+          currency?: string | null
           id?: string
           latitude?: number | null
           location?: string | null
           longitude?: number | null
           post_type: string
           price?: number | null
+          search_vector?: unknown
           slug: string
           sold?: boolean | null
           title: string
@@ -348,12 +377,14 @@ export type Database = {
           category?: string
           content?: string
           created_at?: string
+          currency?: string | null
           id?: string
           latitude?: number | null
           location?: string | null
           longitude?: number | null
           post_type?: string
           price?: number | null
+          search_vector?: unknown
           slug?: string
           sold?: boolean | null
           title?: string
@@ -381,6 +412,7 @@ export type Database = {
           location: string | null
           name: string | null
           profile_image: string | null
+          search_vector: unknown
           surname: string | null
           username: string
         }
@@ -396,6 +428,7 @@ export type Database = {
           location?: string | null
           name?: string | null
           profile_image?: string | null
+          search_vector?: unknown
           surname?: string | null
           username: string
         }
@@ -411,6 +444,7 @@ export type Database = {
           location?: string | null
           name?: string | null
           profile_image?: string | null
+          search_vector?: unknown
           surname?: string | null
           username?: string
         }
@@ -550,6 +584,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

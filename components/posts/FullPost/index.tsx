@@ -11,7 +11,6 @@ import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import UserAvatar from "@/components/profile/UserAvatar";
 
 const Post = ({ post }: { post: PostType }) => {
-  
   const router = useRouter();
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
@@ -47,12 +46,19 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="mt-10">
           {post.price && (
             <div className="text-base">
-              <p>Price: {post.price}</p>
+              <p className="font-semibold">
+                Price:{" "}
+                <span className="font-normal">
+                  {post.price} {post.currency}
+                </span>
+              </p>
             </div>
           )}
           {post.location && (
             <div className="text-base">
-              <p>Location: {post.location}</p>
+              <p className="font-semibold">
+                Location: <span className="font-normal">{post.location}</span>
+              </p>
             </div>
           )}
         </div>

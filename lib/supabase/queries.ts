@@ -104,7 +104,21 @@ export const searchPost = async (searchTerm: string) => {
   return await supabase
     .from("Posts")
     .select("title, slug")
-    .textSearch("title", searchTerm);
+    .textSearch("search_vector", searchTerm, {
+      type: "websearch",
+      config: "english",
+    });
+};
+
+export const searchProfile = async (searchTerm: string) => {
+  const supabase = createClient();
+  return await supabase
+    .from("Profiles")
+    .select("username, name, surname, profile_image")
+    .textSearch("search_vector", searchTerm, {
+      type: "websearch",
+      config: "english",
+    });
 };
 
 export const getUserProfile = async (id: string) => {
@@ -317,7 +331,8 @@ export const getPostSoldStatus = async (postId: string) => {
   return postIsSold;
 };
 
-export type SearchResultType = QueryData<ReturnType<typeof searchPost>>;
+export type SearchResultPostsType = NonNullable<Awaited<ReturnType<typeof searchPost>>["data"]>;
+export type SearchResultProfilesType = NonNullable<Awaited<ReturnType<typeof searchProfile>>["data"]>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;
