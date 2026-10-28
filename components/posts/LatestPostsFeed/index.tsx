@@ -10,9 +10,7 @@ import ShortPost from "@/components/posts/ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
 
 const LatestPostsFeed = () => {
-
   const { user } = useUserContext() as userContextType;
-  if (!user) throw new Error("Unauthorized access!");
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
 
@@ -31,6 +29,8 @@ const LatestPostsFeed = () => {
       ? data
       : data?.filter((post) => post.category === postCategory);
 
+  if (!user) return null;
+  
   return (
     <div className="grow">
       <SortingButton
