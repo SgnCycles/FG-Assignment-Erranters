@@ -35,7 +35,7 @@ const ShortPost = ({
   };
 
   return (
-    <div className="flex flex-col justify-around gap-4 border-2 border-casual-white bg-casual-white rounded-2xl p-4 m-4 text-outer-space">
+    <div className="flex flex-col justify-around gap-4 border-2 border-casual-white bg-casual-white rounded-2xl p-4 my-4 text-outer-space">
       <div className="w-full flex justify-between">
         {showUser ? (
           <UserAvatar post={post} />

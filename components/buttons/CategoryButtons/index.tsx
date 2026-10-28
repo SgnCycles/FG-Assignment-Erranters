@@ -7,7 +7,7 @@ const CategoryButtons = ({
   register: UseFormRegister<FormValues>;
 }) => {
   return (
-    <div className="flex gap-4 py-4 text-outer-space">
+    <div className="flex justify-center lg:justify-start gap-4 py-4 text-outer-space">
       <div className="relative group">
         <select
           id="category"

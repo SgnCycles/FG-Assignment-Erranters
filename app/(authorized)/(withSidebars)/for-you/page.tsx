@@ -8,7 +8,9 @@ const ForYouPage = () => {
         <h1 className="heading">
           People you <span className="text-old-gold">follow</span>
         </h1>
-        <CreatePostButton />
+        <div className="hidden lg:flex">
+          <CreatePostButton />
+        </div>
       </div>
       <div className="main-layout-posts-feed ">
         <ForYouPostsFeed />

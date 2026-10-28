@@ -4,7 +4,7 @@ const ProfilePage = () => {
   return (
     <main className="grow bg-mineral-green flex justify-center">
       <div className="w-[90%]">
-        <div className="flex flex-col mb-10">
+        <div className="flex flex-col mb-4 lg:mb-10">
           <h1 className="subtitle">Profile Settings</h1>
           <h2 className="heading">Be Yourself</h2>
           <p className="subtitle-secondary">

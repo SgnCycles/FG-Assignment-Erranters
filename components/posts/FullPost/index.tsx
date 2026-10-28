@@ -23,8 +23,8 @@ const Post = ({ post }: { post: PostType }) => {
   };
 
   return (
-    <div className="w-full flex h-full justify-center items-center p-8 text-ecru-white font-cantarell">
-      <div className="bg-casual-white text-outer-space rounded-4xl p-10 w-[80%]">
+    <div className="w-full flex h-full justify-center items-center lg:p-8 text-ecru-white font-cantarell">
+      <div className="bg-casual-white text-outer-space rounded-4xl p-5 mt-5 lg:p-10 mx-5 lg:mx-0 lg:w-[80%]">
         <div className="flex justify-between mb-4">
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>

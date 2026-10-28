@@ -8,7 +8,7 @@ const UserAvatar = ({ post }: { post: PostType }) => {
       className="w-full flex justify-between mb-4"
       href={`/members/${post.author.username}`}
     >
-      <div className="flex">
+      <div className="flex flex-row">
         {post.author.profile_image ? (
           <div className="w-15 h-15">
             <img
@@ -26,15 +26,17 @@ const UserAvatar = ({ post }: { post: PostType }) => {
             />
           </div>
         )}
-        <div className="flex gap-2 text-right italic place-self-center ml-2">
+        <div className="flex flex-col lg:flex-row gap-2 items-start text-right italic place-self-center ml-4 lg:ml-2 mt-2">
           <span>{post.author.username}</span>
-          <span>
-            {new Date(post.created_at).toLocaleString("sv-Se", {
-              dateStyle: "short",
-              timeStyle: "short",
-            })}
-          </span>
-          <PostCategoryIcons category={post.category} />
+          <div className="flex">
+            <span className="pr-2">
+              {new Date(post.created_at).toLocaleString("sv-Se", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}
+            </span>
+            <PostCategoryIcons category={post.category} />
+          </div>
         </div>
       </div>
     </Link>

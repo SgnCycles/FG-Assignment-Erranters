@@ -144,8 +144,8 @@ const PostReactionButtons = ({
   const likeCount = likesCount?.count ?? 0;
 
   return (
-    <div className="mt-5">
-      <ul className="flex gap-2 text-outer-space/50 text-sm">
+    <div className="lg:mt-5">
+      <ul className="flex lg:gap-2 text-outer-space/50 text-sm justify-evenly flex-wrap">
         <li>
           <LikeButton
             likeCount={likeCount}

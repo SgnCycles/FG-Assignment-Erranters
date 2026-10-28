@@ -7,7 +7,11 @@ const ProfileCard = () => {
   const { user, userProfile } = useUserContext() as userContextType;
   if (!user) return;
 
-  return <ProfileCardContent user={user} userProfile={userProfile} />;
+  return (
+    <div className="w-full">
+      <ProfileCardContent user={user} userProfile={userProfile} />
+    </div>
+  );
 };
 
 export default ProfileCard;

@@ -37,9 +37,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} min-h-full antialiased bg-pink-500`}
     >
-      <body className="h-full flex flex-col font-cantarell text-outer-space bg-mineral-green">
+      <body className="min-h-screen flex flex-col font-cantarell text-outer-space bg-mineral-green">
         <ToastContainer
           position="top-right"
           autoClose={2000}

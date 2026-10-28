@@ -55,7 +55,7 @@ const HomePostsFeed = () => {
       : data?.filter((post) => post.category === postCategory);
 
   return (
-    <div className="grow">
+    <div className="grow w-full">
       <SortingButton
         type="light"
         sortingOrder={sortingOrder}

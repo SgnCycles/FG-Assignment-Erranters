@@ -4,11 +4,13 @@ import SearchBox from "@/components/SearchBox";
 
 const Header = () => {
   return (
-    <header className="flex flex-col p-6 bg-mineral-green">
-      <div className="w-full grid grid-cols-3 gap-2">
+    <header className="flex flex-col p-2 lg:p-6 bg-mineral-green">
+      <div className="w-full flex flex-col lg:grid lg:grid-cols-3 lg:gap-2">
         <div className="flex justify-start">
           <Link className="logo-button group" href="/feed">
-            <span className="group-hover:text-apple grid items-center text-3xl">Errant</span>
+            <span className="group-hover:text-apple grid items-center text-3xl">
+              Errant
+            </span>
             <span className="grid items-center text-apple">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,13 +28,20 @@ const Header = () => {
                 <circle cx="6" cy="12" r="3" />
               </svg>
             </span>
-            <span className="text-apple group-hover:text-ecru-white grid items-center text-3xl">ers</span>
+            <span className="text-apple group-hover:text-ecru-white grid items-center text-3xl">
+              ers
+            </span>
           </Link>
         </div>
-        <div className="">
+        <div className="py-2">
           <SearchBox />
         </div>
-        <div className="">
+        {/* Desktop */}
+        <div className="hidden lg:flex">
+          <NavMenu />
+        </div>
+        {/* Desktop */}
+        <div className="w-full flex lg:hidden">
           <NavMenu />
         </div>
       </div>

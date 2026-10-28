@@ -189,7 +189,7 @@ const UserProfileForm = ({
       >
         <div>
           <div className="flex flex-col">
-            <div className="h-50 relative rounded-tl-4xl rounded-tr-4xl">
+            <div className="h-30 lg:h-50 relative rounded-tl-4xl rounded-tr-4xl">
               {/* TO DO: add in the UI the max size of the images */}
               {coverImagePreview ? (
                 <div className="h-full w-full relative place-items-center rounded-tl-4xl rounded-tr-4xl">
@@ -212,7 +212,7 @@ const UserProfileForm = ({
                   </button>
                 </div>
               ) : (
-                <div className="h-50 relative bg-gray-600 rounded-tl-4xl rounded-tr-4xl">
+                <div className="h-30 lg:h-50 relative bg-gray-600 rounded-tl-4xl rounded-tr-4xl">
                   <button
                     type="button"
                     className="flex py-2 px-4 bg-ecru-white text-outer-space  text-sm rounded-4xl gap-2 absolute z-10 bottom-4 right-4 cursor-pointer hover:bg-old-gold"
@@ -265,7 +265,7 @@ const UserProfileForm = ({
             <div className="flex flex-col h-20">
               {/* TO DO: add in the UI the max size of the images */}
               {profileImagePreview ? (
-                <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
+                <div className="h-30 w-30 lg:h-40 lg:w-40 flex items-center justify-center -translate-y-15 translate-x-4 lg:-translate-y-20 lg:translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
                   <div className="h-full w-full relative place-items-center">
                     <img
                       src={profileImagePreview}

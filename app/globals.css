@@ -121,7 +121,7 @@
 }
 
 .heading {
-  @apply font-bebas-neue text-4xl text-start text-ecru-white;
+  @apply font-bebas-neue text-6xl text-start text-ecru-white;
 }
 
 .info-heading {
@@ -189,7 +189,7 @@
 }
 
 .tooltipText {
-  @apply invisible w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1;
+  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1;
 }
 
 .tooltip:hover .tooltipText {
@@ -201,7 +201,7 @@
 }
 
 .action-tooltipText {
-  @apply invisible w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1 right-0;
+  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1 right-0;
 }
 
 .action-tooltip:hover .action-tooltipText {
@@ -210,12 +210,12 @@
 
 /* footer */
 .footer {
-  @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2 mt-10;
+  @apply bg-mineral-green flex justify-center font-bebas-neue text-ecru-white text-lg p-2 lg:pt-10;
 }
 
 /* inputs */
 .input {
-  @apply bg-slate-50 text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold;
+  @apply w-full bg-slate-50 text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold;
 }
 
 .login-input {
@@ -254,7 +254,7 @@
 /* profile form */
 .profile-row {
   /* @apply w-full grid grid-cols-2 gap-2 place-items-center bg-amber-400; */
-  @apply w-full flex gap-8 place-items-center px-8;
+  @apply w-full flex flex-col lg:flex-row gap-2 lg:gap-8 place-items-center lg:px-8;
 }
 
 .profile-item-short {
@@ -266,7 +266,7 @@
 }
 
 .profile-item-full {
-  @apply flex flex-col w-full px-8;
+  @apply flex flex-col w-full lg:px-8;
 }
 
 /* login / signup form */
@@ -284,11 +284,11 @@
 
 /* layouts*/
 .main-layout {
-  @apply grow flex flex-col justify-center items-center bg-mineral-green;
+  @apply flex-1 flex flex-col justify-center items-center bg-mineral-green w-full;
 }
 
 .main-layout-heading {
-  @apply flex justify-between items-center p-4 w-[90%];
+  @apply flex justify-between items-center pt-4 lg:p-4 w-[90%];
 }
 
 .main-layout-posts-feed {
@@ -296,15 +296,15 @@
 }
 
 .sidebar-layout {
-  @apply flex grow grid-cols-3 mt-10;
+   @apply w-full flex flex-1 grid-cols-3 lg:mt-10;
 }
 
 .create-post-layout {
-  @apply bg-mineral-green text-ecru-white w-full flex flex-1 justify-center;
+  @apply bg-mineral-green text-ecru-white w-full flex grow justify-center;
 }
 
 .create-edit-post-layout {
-  @apply w-2/3 h-full;
+  @apply w-[90%] lg:w-2/3 h-auto lg:h-full mb-10 lg:mb-0;
 }
 
 .form-button-layout {
@@ -321,7 +321,7 @@
 }
 
 .form {
-  @apply bg-casual-white text-outer-space rounded-4xl p-10 w-full;
+  @apply bg-casual-white text-outer-space rounded-4xl p-2 lg:p-10 w-full;
 }
 
 .comment-form {

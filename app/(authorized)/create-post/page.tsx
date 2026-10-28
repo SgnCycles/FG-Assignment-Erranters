@@ -43,7 +43,7 @@ const CreatePostPage = () => {
   return (
     <main className="create-post-layout">
       <div className="create-edit-post-layout">
-        <div className="mb-10">
+        <div className="flex flex-col mb-4 lg:mb-10">
           <p className="subtitle">Create a Post</p>
           <h1 className="heading">Share your Adventure</h1>
           <p className="">or find a new home to your item</p>

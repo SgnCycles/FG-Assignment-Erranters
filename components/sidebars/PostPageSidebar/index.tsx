@@ -5,13 +5,12 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const PostPageSidebar = () => {
-  
   const pathname = usePathname();
   const { postCategory, setPostCategory } =
     usePostCategoryContext() as PostCategoryContextType;
 
   return (
-    <aside className="w-[15%] flex flex-col items-center bg-mineral-green pl-6">
+    <aside className="hidden lg:flex flex-col">
       <h2 className="sidebar-heading-h2">Discover</h2>
       <nav
         aria-label="Sidebar navigation"

@@ -44,7 +44,7 @@ const UpdatePassword = () => {
 
   return (
     <div>
-      <h2 className="post-heading mt-4 ml-4 pl-10">User Settings</h2>
+      <h2 className="post-heading mt-4 ml-4">User Settings</h2>
       <form
         className="form"
         onSubmit={handleSubmit((values) => mutate(values))}

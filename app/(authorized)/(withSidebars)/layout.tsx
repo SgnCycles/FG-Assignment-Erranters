@@ -3,11 +3,15 @@ import UserSidebar from "@/components/sidebars/UserSidebar";
 
 const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-      <main className="sidebar-layout">
+    <main className="sidebar-layout">
+      <div className="hidden lg:flex justify-center w-[15%] px-10">
         <PostPageSidebar />
-        {children}
+      </div>
+      <div className="grow">{children}</div>
+      <div className="hidden lg:flex w-[20%] pr-10 lg:items-start">
         <UserSidebar />
-      </main>
+      </div>
+    </main>
   );
 };
 

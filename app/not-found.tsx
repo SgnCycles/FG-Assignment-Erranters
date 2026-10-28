@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFoundPage() {
   return (
-    <main id="main-content" className="h-full">
+    <main id="main-content" className="grow flex justify-center items-center">
       <section className="h-full flex flex-col justify-between items-center">
         <div className="grow flex flex-col justify-center items-center">
           <div className="flex flex-col heading items-center">

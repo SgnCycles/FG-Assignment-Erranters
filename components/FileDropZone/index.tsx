@@ -57,7 +57,7 @@ const FileDropZone = ({
   };
 
   return (
-    <div className="p-10 rounded-2xl bg-ecru-white">
+    <div className="p-4 lg:p-10 rounded-2xl bg-ecru-white">
       <div className="file-dropzone-area" {...getRootProps({ style })}>
         <label htmlFor="image">Add an image (optional)</label>
         <AiFillFileImage

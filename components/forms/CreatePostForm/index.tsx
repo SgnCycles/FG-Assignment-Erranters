@@ -34,10 +34,12 @@ const CreatePostForm = ({
   useEffect(() => {
     if (postCategory === "Hiking" || postCategory === "Cycling") {
       setValue("post_type", "Post");
-    } else if (postCategory === "Marketplace") {
+    } else if (postCategory === "Marketplace" && postType !== "Sell" && postType !== "Buy") {
       setValue("post_type", "Sell");
     } else if (postType === "Sell" || postType === "Buy") {
       setValue("category", "Marketplace");
+    } else if (postCategory === "Marketplace" && postType === "Post") {
+      setValue("category", "Hiking")
     }
   }, [postCategory, postType, setValue]);
 
@@ -69,7 +71,7 @@ const CreatePostForm = ({
             </label>
             <TextareaAutosize {...register("content")} className="input" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-4">
             {postCategory === "Marketplace" &&
             (postType === "Sell" || postType === "Buy") ? (
               <div className="flex flex-col">
@@ -94,7 +96,7 @@ const CreatePostForm = ({
               ></input>
             </div>
           </div>
-          <div className="form-button-layout">
+          <div className="form-button-layout pb-4 pr-2">
             <CancelButton link="/feed" />
             <button className="button-dark-secondary">
               {isPending ? "Publishing post..." : "Publish"}
