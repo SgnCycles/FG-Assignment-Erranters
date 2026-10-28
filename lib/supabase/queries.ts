@@ -10,7 +10,7 @@ export const getHomePosts = async (
   return await supabase
     .from("Posts")
     .select(
-      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position")',
+      '*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments(*)',
     )
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
     .order("created_at", { ascending: sortingOrder });
@@ -193,7 +193,7 @@ export const getUserFavourites = async (
   return await supabase
     .from("Favourites")
     .select(
-      'post_id, Posts(*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"))',
+      'post_id, Posts(*, author("id", "username", "profile_image"), PostImages("id", "image_url", "position"), Comments(*))',
     )
     .eq("user_id", userId)
     .range(pagesVisited, pagesVisited + postsPerPage - 1)
@@ -290,7 +290,8 @@ export const getForYouPosts = async (
     .select(
       `*,
       author(id, username, profile_image),
-      PostImages(id, image_url, position)
+      PostImages(id, image_url, position),
+      Comments(*)
     `,
     )
     .in("author", followingIds)
