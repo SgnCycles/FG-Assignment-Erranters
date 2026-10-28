@@ -10,13 +10,10 @@ import ShortPost from "../ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
 
 const ForYouPostsFeed = () => {
-  
   const { user } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
 
-  if (!user) throw new Error("Unauthorized access!");
-
-  const userId = user.id;
+  const userId = user?.id;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
@@ -26,7 +23,7 @@ const ForYouPostsFeed = () => {
       const supabase = createClient();
       const { data, error } = await getForYouPosts(
         supabase,
-        userId,
+        userId!,
         sortingOrder,
       );
       if (error) throw error;
@@ -44,6 +41,8 @@ const ForYouPostsFeed = () => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
+
+  if (!user) return null;
 
   return (
     <div className="grow">
