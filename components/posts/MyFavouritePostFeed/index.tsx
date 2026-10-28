@@ -15,6 +15,7 @@ import ShortPost from "../ShortPost";
 import MobileSideMenu from "@/components/SideMenu";
 
 const MyFavouritePostsFeed = () => {
+
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
   const userId = user.id;

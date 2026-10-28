@@ -16,6 +16,7 @@ const ProfileCardContent = ({
   user: userContextType["user"];
   userProfile: userContextType["userProfile"];
 }) => {
+
   const supabase = createClient();
   const { data: postAmount, error } = useQuery({
     queryKey: ["user-post-count", user!.id],

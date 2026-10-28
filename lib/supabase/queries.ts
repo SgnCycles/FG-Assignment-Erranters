@@ -136,18 +136,6 @@ export const getUserProfile = async (id: string) => {
   return await supabase.from("Profiles").select("*").eq("id", id).maybeSingle();
 };
 
-// export const getUserPosts = async (
-//   supabase: ReturnType<typeof createClient>,
-//   userId: string,
-//   // sortingOrder: boolean,
-// ) => {
-//   return await supabase
-//     .from("Posts")
-//     .select("*,  PostImages(*), author:Profiles(*), Comments(*)")
-//     .eq("author", userId)
-//     .order("created_at", { ascending: false });
-// };
-
 export const getUserPosts = async (
   supabase: ReturnType<typeof createClient>,
   userId: string,

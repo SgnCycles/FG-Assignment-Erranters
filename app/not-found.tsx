@@ -1,5 +1,5 @@
-import GoBackButton from "@/components/buttons/GoBackButton";
 import Link from "next/link";
+import GoBackButton from "@/components/buttons/GoBackButton";
 
 export default function NotFoundPage() {
   return (

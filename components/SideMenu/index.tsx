@@ -4,6 +4,7 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const MobileSideMenu = () => {
+
   const pathname = usePathname();
   const router = useRouter();
   const { postCategory, setPostCategory } =

@@ -4,6 +4,7 @@ import type { userContextType } from "@/types/types";
 import ProfileCardContent from "./profileCardContent";
 
 const ProfileCard = () => {
+
   const { user, userProfile } = useUserContext() as userContextType;
   if (!user) return;
 

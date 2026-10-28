@@ -121,7 +121,7 @@
 
 /* headings */
 .main-heading {
-  @apply text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
+  @apply text-8xl lg:text-9xl text-center mb-4 font-bebas-neue text-ecru-white;
 }
 
 .heading {
@@ -274,7 +274,7 @@
 
 /* login / signup form */
 .login-signup-element {
-  @apply h-150 max-h-150 shrink font-cantarell;
+  @apply h-auto w-90 lg:h-150 lg:max-h-150 shrink font-cantarell;
 }
 
 .login-signup-layout {
@@ -316,7 +316,7 @@
 
 /* forms */
 .login-signup-form {
-  @apply h-full flex flex-col justify-evenly w-lg px-8;
+  @apply h-full flex flex-col justify-evenly w-full px-8;
 }
 
 .form-background {

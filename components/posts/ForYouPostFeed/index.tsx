@@ -11,9 +11,9 @@ import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
 const ForYouPostsFeed = () => {
+
   const { user } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
-
   const userId = user?.id;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const queryClient = useQueryClient();

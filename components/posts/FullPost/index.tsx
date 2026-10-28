@@ -11,6 +11,7 @@ import PostReactionButtons from "@/components/buttons/PostReactionButtons";
 import UserAvatar from "@/components/profile/UserAvatar";
 
 const Post = ({ post }: { post: PostType }) => {
+
   const router = useRouter();
   const { user } = useUserContext() as userContextType;
   if (!user) return null;

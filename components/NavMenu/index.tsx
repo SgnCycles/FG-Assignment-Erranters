@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import type { userContextType } from "@/types/types";
 
 const NavMenu = () => {
-  
+
   const pathname = usePathname();
   const { user } = useUserContext() as userContextType;
 

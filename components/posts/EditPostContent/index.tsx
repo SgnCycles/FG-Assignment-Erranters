@@ -5,6 +5,7 @@ import EditPostForm from "@/components/forms/EditPostForm";
 import { redirect } from "next/navigation";
 
 const EditPostContent = ({ post }: { post: PostFormProps }) => {
+  
   const { user, userProfile } = useUserContext() as userContextType;
   if (!user || !userProfile) return null;
 

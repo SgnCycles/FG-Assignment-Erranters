@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, League_Spartan, Cantarell, Geist } from "next/font/google";
+import { Bebas_Neue, League_Spartan, Cantarell } from "next/font/google";
 import { QueryClientProvider } from "@/providers/queryProvider";
-import Footer from "@/components/Footer";
-import { ToastContainer } from "react-toastify";
-import "./globals.css";
 import { UserProvider } from "@/context/userContext";
 import { PostCategoryProvider } from "@/context/postCategoryContext";
+import { ToastContainer } from "react-toastify";
+import Footer from "@/components/Footer";
+import "./globals.css";
+
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bebasNeue.variable} ${leagueSpartan.variable} ${gecantarellistMono.variable} min-h-full antialiased bg-mineral-green`}
     >
-      <body className="min-h-screen flex flex-col font-cantarell text-outer-space bg-mineral-green">
+      <body className="min-h-screen h-full flex flex-col font-cantarell text-outer-space bg-mineral-green">
         <ToastContainer
           position="top-right"
           autoClose={2000}

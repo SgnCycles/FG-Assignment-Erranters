@@ -11,6 +11,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
 const HomePostsFeed = () => {
+
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);

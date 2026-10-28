@@ -3,6 +3,7 @@ import EditUserProfile from "@/actions/edit-user-profile-action";
 import DeleteProfileImageAction from "@/actions/delete-profile-image-action";
 import DeleteCoverImageAction from "@/actions/delete-cover-image-action";
 import { userProfileSchema } from "@/schemas/schemas";
+import type { userProfileProps } from "@/types/types";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +17,6 @@ import CancelButton from "@/components/buttons/CancelButton";
 import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
 import ErrorMessage from "@/components/ErrorMessage";
 import UpdatePassword from "../UpdatePassword";
-import type { userProfileProps } from "@/types/types";
 
 const UserProfileForm = ({
   userProfile,

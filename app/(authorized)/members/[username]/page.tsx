@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/supabase/serverClient";
-import { getMemberProfile, getUserPosts } from "@/lib/supabase/queries";
+
+import { getMemberProfile } from "@/lib/supabase/queries";
 import GoBackButton from "@/components/buttons/GoBackButton";
 import ErrorMessage from "@/components/ErrorMessage";
 import MemberPosts from "@/components/posts/MemberPosts";
@@ -12,7 +12,6 @@ const MemberProfilePage = async ({
 }) => {
   
   const { username } = await params;
-  const supabase = await createClient();
   const { data, error } = await getMemberProfile(username);
 
   if (error) {
@@ -23,22 +22,12 @@ const MemberProfilePage = async ({
 
   const userId = data.id;
 
-  // const { data: postData, error: postError } = await getUserPosts(
-  //   supabase,
-  //   userId,
-  // );
-
-  // if (postError) {
-  //   return <ErrorMessage error={postError.message} />;
-  // }
-
   return (
     <main className="flex flex-col grow bg-mineral-green text-ecru-white w-full font-cantarell">
       <div className="w-full pl-4">
         <GoBackButton />
       </div>
       <MemberProfile profile={data} />
-      {/* <MemberPosts postData={postData}/> */}
       <MemberPosts userId={userId}/>
     </main>
   );

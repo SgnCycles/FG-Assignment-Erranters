@@ -11,6 +11,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
 const LatestPostsFeed = () => {
+  
   const { user } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);

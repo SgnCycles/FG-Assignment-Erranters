@@ -1,9 +1,9 @@
 "use client";
-import { useMutation } from "@tanstack/react-query";
 import { CreatePost } from "@/actions/create-post-action";
+import type { FormValues } from "@/types/types";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import CreatePostForm from "@/components/forms/CreatePostForm";
-import type { FormValues } from "@/types/types";
 import { toast } from "react-toastify";
 
 const CreatePostPage = () => {
@@ -12,15 +12,15 @@ const CreatePostPage = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: CreatePost,
     onSuccess: (data) => {
-      if(data.error) {
+      if (data.error) {
         toast.error(data.error);
         return;
       }
       router.push(`/post/${data.slug}`);
     },
     onError: () => {
-      toast.error("Something went wrong. Try again later")
-    }
+      toast.error("Something went wrong. Try again later");
+    },
   });
   const handleCreatePost = (values: FormValues) => {
     const imageForm = new FormData();

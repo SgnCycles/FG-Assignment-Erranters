@@ -12,6 +12,7 @@ import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
 const MyPostsFeed = () => {
+  
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
   const userId = user.id;

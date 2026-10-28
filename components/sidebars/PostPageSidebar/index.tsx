@@ -5,6 +5,7 @@ import { usePostCategoryContext } from "@/context/postCategoryContext";
 import type { PostCategoryContextType } from "@/types/types";
 
 const PostPageSidebar = () => {
+
   const pathname = usePathname();
   const { postCategory, setPostCategory } =
     usePostCategoryContext() as PostCategoryContextType;
