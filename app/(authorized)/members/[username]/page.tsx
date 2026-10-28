@@ -23,14 +23,14 @@ const MemberProfilePage = async ({
 
   const userId = data.id;
 
-  const { data: postData, error: postError } = await getUserPosts(
-    supabase,
-    userId,
-  );
+  // const { data: postData, error: postError } = await getUserPosts(
+  //   supabase,
+  //   userId,
+  // );
 
-  if (postError) {
-    return <ErrorMessage error={postError.message} />;
-  }
+  // if (postError) {
+  //   return <ErrorMessage error={postError.message} />;
+  // }
 
   return (
     <main className="flex flex-col grow bg-mineral-green text-ecru-white w-full font-cantarell">
@@ -38,7 +38,8 @@ const MemberProfilePage = async ({
         <GoBackButton />
       </div>
       <MemberProfile profile={data} />
-      <MemberPosts postData={postData}/>
+      {/* <MemberPosts postData={postData}/> */}
+      <MemberPosts userId={userId}/>
     </main>
   );
 };

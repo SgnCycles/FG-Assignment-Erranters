@@ -26,10 +26,10 @@ const UserAvatar = ({ post }: { post: PostType }) => {
             />
           </div>
         )}
-        <div className="flex flex-col lg:flex-row gap-2 items-start text-right italic place-self-center ml-4 lg:ml-2 mt-2">
+        <div className="flex flex-col lg:flex-row gap-2 items-start text-right italic ml-4 lg:ml-2 mt-2">
           <span>{post.author.username}</span>
-          <div className="flex">
-            <span className="pr-2">
+          <div className="flex items-start">
+            <span className="pr-2 text-nowrap">
               {new Date(post.created_at).toLocaleString("sv-Se", {
                 dateStyle: "short",
                 timeStyle: "short",

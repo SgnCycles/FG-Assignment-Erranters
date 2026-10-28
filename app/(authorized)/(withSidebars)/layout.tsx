@@ -8,7 +8,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         <PostPageSidebar />
       </div>
       <div className="grow">{children}</div>
-      <div className="hidden lg:flex w-[20%] pr-10 lg:items-start">
+      <div className="hidden lg:flex w-[25%] pr-10 lg:items-start">
         <UserSidebar />
       </div>
     </main>

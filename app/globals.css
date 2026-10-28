@@ -116,7 +116,7 @@
 
 /* labels */
 .sold-label {
-  @apply bg-old-gold text-outer-space w-25 grid place-items-center px-4 h-10 rounded-4xl font-semibold;
+  @apply bg-old-gold text-outer-space w-25 grid place-items-center px-2 md:px-4 h-10 rounded-4xl font-semibold;
 }
 
 /* headings */
@@ -260,12 +260,12 @@
   @apply w-full flex flex-col lg:flex-row gap-2 lg:gap-8 place-items-center lg:px-8;
 }
 
-.profile-item-short {
-  @apply flex flex-col w-[80%];
+.profile-row-bio {
+  @apply w-full flex flex-col gap-2 lg:gap-8 place-items-center lg:px-8;
 }
 
-.profile-item-long {
-  @apply flex flex-col w-[90%];
+.profile-item {
+  @apply flex flex-col w-full;
 }
 
 .profile-item-full {

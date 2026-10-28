@@ -200,7 +200,7 @@ const UserProfileForm = ({
                   />
                   <button
                     type="button"
-                    className="w-7 h-7 absolute bottom-2 right-5"
+                    className="w-7 h-7 absolute bottom-2 right-2 md:right-5"
                     onClick={() => {
                       setCoverImagePreview(null);
                       if (coverImageUrl) {
@@ -274,7 +274,7 @@ const UserProfileForm = ({
                     />
                     <button
                       type="button"
-                      className="w-7 h-7 absolute bottom-0 right-5"
+                      className="w-7 h-7 absolute bottom-0 right-2 md:right-5"
                       onClick={() => {
                         setProfileImagePreview(null);
                         if (imageUrl) {
@@ -329,14 +329,14 @@ const UserProfileForm = ({
             </div>
             <h2 className="post-heading mt-4 ml-4">Profile Settings</h2>
             <div className="profile-row">
-              <div className="profile-item-long">
+              <div className="profile-item">
                 <label htmlFor="name" className="label">
                   Name
                 </label>
                 <input className="input" {...register("name")}></input>
                 {errors.name && <ErrorMessage error={errors.name.message!} />}
               </div>
-              <div className="profile-item-long">
+              <div className="profile-item">
                 <label htmlFor="surname" className="label">
                   Surname
                 </label>
@@ -347,7 +347,7 @@ const UserProfileForm = ({
               </div>
             </div>
             <div className="profile-row">
-              <div className="profile-item-long">
+              <div className="profile-item">
                 <label htmlFor="username" className="label">
                   Username
                 </label>
@@ -356,7 +356,7 @@ const UserProfileForm = ({
                   <ErrorMessage error={errors.username.message!} />
                 )}
               </div>
-              <div className="profile-item-long">
+              <div className="profile-item">
                 <label htmlFor="location" className="label">
                   Location
                 </label>
@@ -367,8 +367,8 @@ const UserProfileForm = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full items-center">
-            <div className="profile-item-full">
+          <div className="profile-row-bio">
+            <div className="profile-item">
               <label htmlFor="headline" className="label">
                 Headline
               </label>
@@ -385,7 +385,7 @@ const UserProfileForm = ({
                 </span>
               </div>
             </div>
-            <div className="profile-item-full">
+            <div className="profile-item">
               <label htmlFor="bio" className="label">
                 Bio
               </label>
@@ -394,7 +394,7 @@ const UserProfileForm = ({
                 {...register("bio")}
               />
             </div>
-            <div className="profile-item-full">
+            <div className="profile-item">
               <label htmlFor="interests" className="label">
                 Interests
               </label>

@@ -51,6 +51,16 @@ export const getMyPostsCount = async (
     .eq("author", userId);
 };
 
+export const getMemberPostsCount = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+) => {
+  return await supabase
+    .from("Posts")
+    .select("*", { count: "exact", head: true })
+    .eq("author", userId);
+};
+
 export const getSinglePost = async (slug: string) => {
   const supabase = createClient();
   return await supabase
@@ -126,16 +136,31 @@ export const getUserProfile = async (id: string) => {
   return await supabase.from("Profiles").select("*").eq("id", id).maybeSingle();
 };
 
+// export const getUserPosts = async (
+//   supabase: ReturnType<typeof createClient>,
+//   userId: string,
+//   // sortingOrder: boolean,
+// ) => {
+//   return await supabase
+//     .from("Posts")
+//     .select("*,  PostImages(*), author:Profiles(*), Comments(*)")
+//     .eq("author", userId)
+//     .order("created_at", { ascending: false });
+// };
+
 export const getUserPosts = async (
   supabase: ReturnType<typeof createClient>,
   userId: string,
-  // sortingOrder: boolean,
+  sortingOrder: boolean,
+  pagesVisited: number,
+  postsPerPage: number,
 ) => {
   return await supabase
     .from("Posts")
     .select("*,  PostImages(*), author:Profiles(*), Comments(*)")
     .eq("author", userId)
-    .order("created_at", { ascending: false });
+    .range(pagesVisited, pagesVisited + postsPerPage - 1)
+    .order("created_at", { ascending: sortingOrder });
 };
 
 export const getMemberProfile = async (username: string) => {
@@ -332,8 +357,12 @@ export const getPostSoldStatus = async (postId: string) => {
   return postIsSold;
 };
 
-export type SearchResultPostsType = NonNullable<Awaited<ReturnType<typeof searchPost>>["data"]>;
-export type SearchResultProfilesType = NonNullable<Awaited<ReturnType<typeof searchProfile>>["data"]>;
+export type SearchResultPostsType = NonNullable<
+  Awaited<ReturnType<typeof searchPost>>["data"]
+>;
+export type SearchResultProfilesType = NonNullable<
+  Awaited<ReturnType<typeof searchProfile>>["data"]
+>;
 export type PostType = QueryData<ReturnType<typeof getSinglePost>>;
 export type UserProfileType = QueryData<ReturnType<typeof getUserProfile>>;
 export type MemberProfileType = QueryData<ReturnType<typeof getMemberProfile>>;
