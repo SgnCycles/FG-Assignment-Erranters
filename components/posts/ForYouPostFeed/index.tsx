@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import ShortPost from "../ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
+import MobileSideMenu from "@/components/SideMenu";
 
 const ForYouPostsFeed = () => {
   const { user } = useUserContext() as userContextType;
@@ -46,11 +47,14 @@ const ForYouPostsFeed = () => {
 
   return (
     <div className="grow">
-      <SortingButton
-        type="light"
-        sortingOrder={sortingOrder}
-        setSortingOrder={setSortingOrder}
-      />
+      <div className="flex flex-col justify-between">
+        <MobileSideMenu />
+        <SortingButton
+          type="light"
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+      </div>
       {isError && <p>Failed Loading Posts...</p>}
       {isPending && <p className="heading">Loading Posts...</p>}
       {filteredPosts &&

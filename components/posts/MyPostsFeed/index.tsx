@@ -9,9 +9,9 @@ import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import ShortPost from "../ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
+import MobileSideMenu from "@/components/SideMenu";
 
 const MyPostsFeed = () => {
-  
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
   const userId = user.id;
@@ -25,7 +25,6 @@ const MyPostsFeed = () => {
   const { data: postCountData } = useQuery({
     queryKey: ["my-posts-count"],
     queryFn: async () => {
-      
       const { count, error } = await getMyPostsCount(supabase, userId);
       if (error) throw error;
       return count ?? 0;
@@ -59,14 +58,19 @@ const MyPostsFeed = () => {
 
   return (
     <div className="grow">
-      <SortingButton
-        type="light"
-        sortingOrder={sortingOrder}
-        setSortingOrder={setSortingOrder}
-      />
+      <div className="flex flex-col justify-between">
+        <MobileSideMenu />
+        <SortingButton
+          type="light"
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+      </div>
       {isError && <p className="info-heading">Failed Loading Posts...</p>}
       {isPending && <p className="info-heading">Loading Posts...</p>}
-      {filteredPosts?.length === 0 && <p className="info-heading">No posts yet...</p>}
+      {filteredPosts?.length === 0 && (
+        <p className="info-heading">No posts yet...</p>
+      )}
       {filteredPosts &&
         filteredPosts.map((post, index) => (
           <ShortPost key={index} post={post} showUser={true} />

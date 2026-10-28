@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ShortPost from "@/components/posts/ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
+import MobileSideMenu from "@/components/SideMenu";
 
 const LatestPostsFeed = () => {
   const { user } = useUserContext() as userContextType;
@@ -30,14 +31,18 @@ const LatestPostsFeed = () => {
       : data?.filter((post) => post.category === postCategory);
 
   if (!user) return null;
-  
+
   return (
     <div className="grow">
-      <SortingButton
-        type="light"
-        sortingOrder={sortingOrder}
-        setSortingOrder={setSortingOrder}
-      />
+      <div className="flex flex-col justify-between">
+        <MobileSideMenu />
+        <SortingButton
+          type="light"
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+      </div>
+
       {isError && <p>Failed Loading Posts...</p>}
       {isPending && <p className="heading">Loading Posts...</p>}
       {filteredPosts?.map((post, index) => (

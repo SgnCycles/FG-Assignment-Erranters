@@ -8,18 +8,16 @@ import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import ShortPost from "@/components/posts/ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
+import MobileSideMenu from "@/components/SideMenu";
 
 const HomePostsFeed = () => {
-
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
 
-  const {
-    data: postCountData,
-  } = useQuery({
+  const { data: postCountData } = useQuery({
     queryKey: ["home-posts-count"],
     queryFn: async () => {
       const supabase = createClient();
@@ -56,14 +54,19 @@ const HomePostsFeed = () => {
 
   return (
     <div className="grow w-full">
-      <SortingButton
-        type="light"
-        sortingOrder={sortingOrder}
-        setSortingOrder={setSortingOrder}
-      />
+      <div className="flex flex-col justify-between">
+        <MobileSideMenu />
+        <SortingButton
+          type="light"
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+      </div>
       {isError && <p className="info-heading">Failed Loading Posts...</p>}
       {isPending && <p className="info-heading">Loading Posts...</p>}
-      {filteredPosts?.length === 0 && <p className="info-heading">No posts yet...</p>}
+      {filteredPosts?.length === 0 && (
+        <p className="info-heading">No posts yet...</p>
+      )}
       {filteredPosts &&
         filteredPosts.map((post, index) => (
           <ShortPost key={index} post={post} showUser={true} />

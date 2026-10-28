@@ -12,9 +12,9 @@ import { useState } from "react";
 import Pagination from "@/components/Pagination";
 import SortingButton from "@/components/buttons/SortingButton";
 import ShortPost from "../ShortPost";
+import MobileSideMenu from "@/components/SideMenu";
 
 const MyFavouritePostsFeed = () => {
-
   const { user } = useUserContext() as userContextType;
   if (!user) return null;
   const userId = user.id;
@@ -72,11 +72,15 @@ const MyFavouritePostsFeed = () => {
 
   return (
     <div className="grow">
-      <SortingButton
-        type="light"
-        sortingOrder={sortingOrder}
-        setSortingOrder={setSortingOrder}
-      />
+     <div className="flex flex-col justify-between">
+        <MobileSideMenu />
+        <SortingButton
+          type="light"
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+      </div>
+
       {isError && <p className="heading">Failed Loading Posts...</p>}
       {isPending && <p className="heading">Loading Posts...</p>}
       {filteredPosts?.length === 0 && (
