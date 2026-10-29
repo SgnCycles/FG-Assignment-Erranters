@@ -7,7 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import type { CreatePostFormPropsType } from "./types";
 import CancelButton from "@/components/buttons/CancelButton";
 import CategoryButtons from "@/components/buttons/CategoryButtons";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import FileDropZone from "@/components/FileDropZone";
 
 const CreatePostForm = ({
@@ -56,7 +56,7 @@ const CreatePostForm = ({
               <FileDropZone value={field.value} onChange={field.onChange} />
             )}
           />
-          {errors.image && <ErrorMessage error={errors.image.message!} />}
+          {errors.image && <ErrorInputMessage error={errors.image.message!} />}
         </div>
         <div className="flex flex-col justify-between flex-1">
           <div className="flex flex-col">
@@ -64,7 +64,7 @@ const CreatePostForm = ({
               Add a title:
             </label>
             <input {...register("title")} className="input"></input>
-            {errors.title && <ErrorMessage error={errors.title.message!} />}
+            {errors.title && <ErrorInputMessage error={errors.title.message!} />}
           </div>
           <div className="flex flex-col">
             <label htmlFor="content" className="label">

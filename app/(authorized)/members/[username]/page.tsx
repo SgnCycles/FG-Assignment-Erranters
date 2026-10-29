@@ -1,6 +1,6 @@
 import { getMemberProfile } from "@/lib/supabase/queries";
 import GoBackButton from "@/components/buttons/GoBackButton";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/components/errors/ErrorMessage";
 import MemberPosts from "@/components/posts/MemberPosts";
 import MemberProfile from "@/components/profile/MemberProfile";
 

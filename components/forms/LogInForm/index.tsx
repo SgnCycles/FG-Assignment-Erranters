@@ -56,7 +56,7 @@ const LogInForm = () => {
               })}
               placeholder="Email:"
             />
-            {errors.email && <ErrorMessage error={errors.email.message!} />}
+            {errors.email && <ErrorInputMessage error={errors.email.message!} />}
           </div>
           <div>
             <label htmlFor="password" className="label">
@@ -83,7 +83,7 @@ const LogInForm = () => {
                 />
               )}
               {errors.password && (
-                <ErrorMessage error={errors.password.message!} />
+                <ErrorInputMessage error={errors.password.message!} />
               )}
             </div>
           </div>

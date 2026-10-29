@@ -15,7 +15,7 @@ import { FaXmark } from "react-icons/fa6";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import CancelButton from "@/components/buttons/CancelButton";
 import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import UpdatePassword from "../UpdatePassword";
 import UpdateButton from "@/components/buttons/UpdateButton";
 
@@ -260,7 +260,7 @@ const UserProfileForm = ({
                 </div>
               )}
               {errors.cover_image && (
-                <ErrorMessage error={errors.cover_image.message!} />
+                <ErrorInputMessage error={errors.cover_image.message!} />
               )}
             </div>
             <div className="flex flex-col h-20">
@@ -325,7 +325,7 @@ const UserProfileForm = ({
                 </div>
               )}
               {errors.profile_image && (
-                <ErrorMessage error={errors.profile_image.message!} />
+                <ErrorInputMessage error={errors.profile_image.message!} />
               )}
             </div>
             <h2 className="post-heading mt-4 ml-4">Profile Settings</h2>
@@ -335,7 +335,7 @@ const UserProfileForm = ({
                   Name
                 </label>
                 <input className="input" {...register("name")}></input>
-                {errors.name && <ErrorMessage error={errors.name.message!} />}
+                {errors.name && <ErrorInputMessage error={errors.name.message!} />}
               </div>
               <div className="profile-item">
                 <label htmlFor="surname" className="label">
@@ -343,7 +343,7 @@ const UserProfileForm = ({
                 </label>
                 <input className="input" {...register("surname")}></input>
                 {errors.surname && (
-                  <ErrorMessage error={errors.surname.message!} />
+                  <ErrorInputMessage error={errors.surname.message!} />
                 )}
               </div>
             </div>
@@ -354,7 +354,7 @@ const UserProfileForm = ({
                 </label>
                 <input className="input" {...register("username")}></input>
                 {errors.username && (
-                  <ErrorMessage error={errors.username.message!} />
+                  <ErrorInputMessage error={errors.username.message!} />
                 )}
               </div>
               <div className="profile-item">
@@ -363,7 +363,7 @@ const UserProfileForm = ({
                 </label>
                 <input className="input" {...register("location")}></input>
                 {errors.location && (
-                  <ErrorMessage error={errors.location.message!} />
+                  <ErrorInputMessage error={errors.location.message!} />
                 )}
               </div>
             </div>
@@ -403,7 +403,7 @@ const UserProfileForm = ({
                 className="input grow w-full"
                 {...register("interests")}
               />
-              {errors.bio && <ErrorMessage error={errors.bio.message!} />}
+              {errors.bio && <ErrorInputMessage error={errors.bio.message!} />}
             </div>
           </div>
           <div className="form-button-layout">

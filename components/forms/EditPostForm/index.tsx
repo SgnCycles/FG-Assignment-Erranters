@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import CancelButton from "@/components/buttons/CancelButton";
 import DeleteButton from "@/components/buttons/DeleteButton";
 import FileDropZone from "@/components/FileDropZone";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { FaXmark } from "react-icons/fa6";
 import type { PostFormProps } from "@/types/types";
 import { toast } from "react-toastify";
@@ -116,7 +116,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
             Add a title
           </label>
           <input className="input" {...register("title")}></input>
-          {errors.title && <ErrorMessage error={errors.title.message!} />}
+          {errors.title && <ErrorInputMessage error={errors.title.message!} />}
         </div>
         <div className="flex flex-col">
           <Controller
@@ -127,7 +127,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
               // <FileDropZone value={field.value} onChange={field.onChange} initialImages={initialValues.PostImages}/>
             )}
           />
-          {errors.image && <ErrorMessage error={errors.image.message!} />}
+          {errors.image && <ErrorInputMessage error={errors.image.message!} />}
         </div>
         <ul className="flex flex-wrap gap-2">
           {initialValues.PostImages &&

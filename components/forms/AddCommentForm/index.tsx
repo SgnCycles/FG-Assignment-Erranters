@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postCommentSchema } from "@/schemas/schemas";
 import AddCommentButton from "@/components/buttons/AddCommentButton";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { toast } from "react-toastify";
 
 const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
@@ -57,11 +57,11 @@ const AddCommentForm = ({ postId, slug }: { postId: string; slug: string }) => {
         placeholder="Comment..."
         className="input"
       ></textarea>
-      {errors.content && <ErrorMessage error={errors.content.message!} />}
+      {errors.content && <ErrorInputMessage error={errors.content.message!} />}
       <div className="flex justify-end mt-4">
         <AddCommentButton />
       </div>
-      {error && <ErrorMessage error={error.message} />}
+      {error && <ErrorInputMessage error={error.message} />}
     </form>
   );
 };

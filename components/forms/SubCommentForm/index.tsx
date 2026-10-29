@@ -67,7 +67,7 @@ const AddSubCommentForm = ({
         placeholder="Comment..."
         className="input"
       ></textarea>
-      {errors.content && <ErrorMessage error={errors.content.message!} />}
+      {errors.content && <ErrorInputMessage error={errors.content.message!} />}
       <div className="flex justify-end mt-4 gap-4">
         <button
           type="button"

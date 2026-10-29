@@ -1,6 +1,6 @@
 import { getSinglePost } from "@/lib/supabase/queries";
 import EditPostContent from "@/components/posts/EditPostContent";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/components/errors/ErrorMessage";
 
 const EditPostPage = async ({ params }: { params: { slug: string } }) => {
 

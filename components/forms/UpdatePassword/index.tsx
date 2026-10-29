@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import CancelButton from "@/components/buttons/CancelButton";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { toast } from "react-toastify";
 import UpdateButton from "@/components/buttons/UpdateButton";
 
@@ -61,7 +61,7 @@ const UpdatePassword = () => {
             placeholder="Current Password:"
           />
           {errors.currentPassword && (
-            <ErrorMessage error={errors.currentPassword.message!} />
+            <ErrorInputMessage error={errors.currentPassword.message!} />
           )}
         </div>
       </div>
@@ -79,7 +79,7 @@ const UpdatePassword = () => {
             placeholder="New Password:"
           />
           {errors.newPassword && (
-            <ErrorMessage error={errors.newPassword.message!} />
+            <ErrorInputMessage error={errors.newPassword.message!} />
           )}
         </div>
       </div>
@@ -97,7 +97,7 @@ const UpdatePassword = () => {
             placeholder="Confirm Password:"
           />
           {errors.confirmPassword && (
-            <ErrorMessage error={errors.confirmPassword.message!} />
+            <ErrorInputMessage error={errors.confirmPassword.message!} />
           )}
         </div>
       </div>

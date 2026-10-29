@@ -51,7 +51,7 @@ const SignUpForm = () => {
             })}
             placeholder="Username:"
           />
-          {errors.username && <ErrorMessage error={errors.username.message!} />}
+          {errors.username && <ErrorInputMessage error={errors.username.message!} />}
           <label className="label" htmlFor="email">
             Enter your Email:
           </label>
@@ -62,7 +62,7 @@ const SignUpForm = () => {
             })}
             placeholder="Email:"
           />
-          {errors.email && <ErrorMessage error={errors.email.message!} />}
+          {errors.email && <ErrorInputMessage error={errors.email.message!} />}
           <label className="label" htmlFor="password">
             Enter your Password:
           </label>
@@ -74,7 +74,7 @@ const SignUpForm = () => {
             placeholder="Password:"
             type="password"
           />
-          {errors.password && <ErrorMessage error={errors.password.message!} />}
+          {errors.password && <ErrorInputMessage error={errors.password.message!} />}
           <label className="label" htmlFor="confirmPassword">
             Confirm Your Password:
           </label>
@@ -87,7 +87,7 @@ const SignUpForm = () => {
             type="password"
           />
           {errors.confirmPassword && (
-            <ErrorMessage error={errors.confirmPassword.message!} />
+            <ErrorInputMessage error={errors.confirmPassword.message!} />
           )}
           <div className="flex justify-end mt-6">
             <button className="login-button">
