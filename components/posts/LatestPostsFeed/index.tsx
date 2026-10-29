@@ -2,7 +2,7 @@
 import { getLatestPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { userContextType } from "@/types/types";
+import type { PostCategoryContextType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ShortPost from "@/components/posts/ShortPost";
