@@ -76,7 +76,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser,
         userProfile,
         setUserProfile,
-        isLoading
+        isLoading,
       }}
     >
       {children}

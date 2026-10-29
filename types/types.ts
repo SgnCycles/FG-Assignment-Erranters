@@ -9,6 +9,7 @@ export type userContextType = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   userProfile: UserProfileType | null;
   setUserProfile: React.Dispatch<React.SetStateAction<UserProfileType | null>>;
+  isLoading: boolean;
 };
 
 export type PostCategoryContextType = {
