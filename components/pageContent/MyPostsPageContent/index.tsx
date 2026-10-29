@@ -30,7 +30,6 @@ const MyPostsPageContent = () => {
     },
     {
       scope: myPostsPageContentRef,
-      // dependencies: [favouriteCategories],
       revertOnUpdate: true,
     },
   );

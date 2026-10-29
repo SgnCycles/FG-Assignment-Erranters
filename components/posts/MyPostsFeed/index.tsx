@@ -13,9 +13,8 @@ import MobileSideMenu from "@/components/SideMenu";
 
 const MyPostsFeed = () => {
   
-  const { user } = useUserContext() as userContextType;
-  if (!user) return null;
-  const userId = user.id;
+  const { user, isLoading } = useUserContext() as userContextType;
+  const userId = user?.id;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
@@ -26,7 +25,7 @@ const MyPostsFeed = () => {
   const { data: postCountData } = useQuery({
     queryKey: ["my-posts-count"],
     queryFn: async () => {
-      const { count, error } = await getMyPostsCount(supabase, userId);
+      const { count, error } = await getMyPostsCount(supabase, userId!);
       if (error) throw error;
       return count ?? 0;
     },
@@ -42,7 +41,7 @@ const MyPostsFeed = () => {
     queryFn: async () => {
       const { data, error } = await getMyPosts(
         supabase,
-        userId,
+        userId!,
         sortingOrder,
         pagesVisited,
         postsPerPage,
@@ -56,6 +55,9 @@ const MyPostsFeed = () => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
+
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="grow">

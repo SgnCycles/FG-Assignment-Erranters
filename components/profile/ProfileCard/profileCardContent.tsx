@@ -96,7 +96,7 @@ const ProfileCardContent = ({
             <p>{userProfile?.headline}</p>
           </div>
           <div className="mt-auto">
-            <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4"></hr>
+            <hr className="horizontal-rule px-4 mb-4"></hr>
           </div>
           <div className="flex justify-around h-1/3">
             <div className="profile-statistics">

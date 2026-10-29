@@ -11,8 +11,8 @@ import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
 const ForYouPostsFeed = () => {
-
-  const { user } = useUserContext() as userContextType;
+  
+  const { user, isLoading } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const userId = user?.id;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
@@ -43,7 +43,9 @@ const ForYouPostsFeed = () => {
       ? data
       : data?.filter((post) => post.category === postCategory);
 
-  if (!user) return null;
+  
+   if (isLoading) return <p className="info-heading">Loading...</p>;
+   if (!user) return <p className="info-heading">Unauthorized Access!</p>
 
   return (
     <div className="grow">

@@ -105,7 +105,7 @@ const SearchBox = () => {
               >
                 {result.title}
               </Link>
-              <hr className="w-full border-outer-space/50 border-t-[0.5px]"></hr>
+              <hr className="horizontal-rule"></hr>
             </>
           ))}
           {searchResultsProfiles.map((result, index) => (

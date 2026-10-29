@@ -41,8 +41,7 @@ const PostComments = ({
 
   return (
     <div className="mt-4">
-      <p className="font-semibold text-sm">{commentCount} comments</p>
-
+      <p className="comment-form-heading-h2">{commentCount} comments</p>
       <SortingButton
         type="dark"
         sortingOrder={sortingOrder}

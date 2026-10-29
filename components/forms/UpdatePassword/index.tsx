@@ -49,8 +49,8 @@ const UpdatePassword = () => {
         className="form"
         onSubmit={handleSubmit((values) => mutate(values))}
       >
-        <div className="profile-row">
-          <div className="profile-item-long">
+        <div className="profile-row-password">
+          <div className="profile-item-half">
             <label htmlFor="password" className="label">
               Enter your current password:
             </label>
@@ -67,9 +67,8 @@ const UpdatePassword = () => {
             )}
           </div>
         </div>
-
-        <div className="profile-row">
-          <div className="profile-item-long">
+        <div className="profile-row-password">
+          <div className="profile-item-half">
             <label htmlFor="newPassword" className="label">
               Enter your new password:
             </label>
@@ -86,8 +85,8 @@ const UpdatePassword = () => {
             )}
           </div>
         </div>
-        <div className="profile-row">
-          <div className="profile-item-long">
+        <div className="profile-row-password">
+          <div className="profile-item-half">
             <label htmlFor="confirmPassword" className="label">
               Confirm your new password:
             </label>

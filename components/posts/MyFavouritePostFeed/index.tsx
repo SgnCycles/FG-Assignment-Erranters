@@ -15,8 +15,8 @@ import ShortPost from "../ShortPost";
 import MobileSideMenu from "@/components/SideMenu";
 
 const MyFavouritePostsFeed = () => {
-
-  const { user } = useUserContext() as userContextType;
+  
+  const { user, isLoading } = useUserContext() as userContextType;
   const userId = user?.id;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
@@ -70,7 +70,8 @@ const MyFavouritePostsFeed = () => {
       ? data
       : data?.filter((post) => post.Posts.category === postCategory);
 
-  if (!user) return null;
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="grow">

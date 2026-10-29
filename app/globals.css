@@ -129,7 +129,7 @@
 }
 
 .info-heading {
-  @apply font-bebas-neue text-4xl text-start text-ecru-white p-5;
+  @apply font-bebas-neue text-4xl text-start text-ecru-white py-5;
 }
 
 .member-heading {
@@ -192,11 +192,11 @@
 }
 
 .tooltipText {
-  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1;
+  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1 mr-2;
 }
 
 .tooltip:hover .tooltipText {
-  @apply visible;
+  @apply block;
 }
 
 .action-tooltip {
@@ -218,7 +218,7 @@
 
 /* inputs */
 .input {
-  @apply w-full bg-slate-50 text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold;
+  @apply w-full bg-slate-50 text-base border-paper-blue border p-2 my-2 text-outer-space focus:outline-none focus:border-old-gold box-border;
 }
 
 .login-input {
@@ -264,12 +264,20 @@
   @apply w-full flex flex-col gap-2 lg:gap-8 place-items-center lg:px-8;
 }
 
+.profile-row-password {
+  @apply w-full flex flex-col gap-2 lg:gap-8 justify-start;
+}
+
 .profile-item {
   @apply flex flex-col w-full;
 }
 
 .profile-item-full {
   @apply flex flex-col w-full lg:px-8;
+}
+
+.profile-item-half {
+  @apply flex flex-col w-full lg:w-[50%] lg:px-8;
 }
 
 /* login / signup form */
@@ -291,7 +299,7 @@
 }
 
 .main-layout-heading {
-  @apply flex justify-center lg:justify-between items-center pt-4 lg:p-4 w-[90%];
+  @apply flex justify-center lg:justify-between items-center pt-4 lg:py-4 w-[90%];
 }
 
 .main-layout-posts-feed {
@@ -324,7 +332,7 @@
 }
 
 .form {
-  @apply bg-casual-white text-outer-space rounded-4xl p-2 lg:p-10 w-full;
+  @apply bg-casual-white text-outer-space p-2 lg:p-10 w-full rounded-4xl;
 }
 
 .comment-form {
@@ -364,4 +372,18 @@
 
 .comment-reply::before {
   @apply content-[""] absolute -left-6 top-0 w-5 h-5 border-l border-b border-apple rounded-bl-xl;
+}
+
+/* testing */
+
+.post-main-layout {
+  @apply w-full flex h-full justify-center items-center lg:p-8 text-ecru-white font-cantarell;
+}
+
+.post-content-layout {
+  @apply bg-casual-white text-outer-space rounded-4xl p-5 mt-5 lg:p-10 mx-5 lg:mx-0 lg:w-[80%];
+}
+
+.horizontal-rule {
+  @apply w-full border-ecru-white/50 border-t-[0.5px]; 
 }

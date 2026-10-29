@@ -19,7 +19,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
     queryFn: () => getUserPostNumber(supabase, profile.id),
   });
   if (error) {
-    console.log(error);
+    console.error(error);
   }
 
   const { data: favouriteAmount, error: favouriteError } = useQuery({
@@ -27,7 +27,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
     queryFn: () => getUserFavouritesNumber(supabase, profile.id),
   });
   if (favouriteError) {
-    console.log(favouriteError);
+    console.error(favouriteError);
   }
 
   const { data: followerAmount, error: followerError } = useQuery({
@@ -35,7 +35,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
     queryFn: () => getMemberFollowerNumber(supabase, profile.id),
   });
   if (followerError) {
-    console.log(followerError);
+    console.error(followerError);
   }
 
   const {
@@ -48,7 +48,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
   });
 
   if (memberIsFollowedError) {
-    console.log(memberIsFollowedError);
+    console.error(memberIsFollowedError);
   }
 
   const onFollowSuccess = () => {

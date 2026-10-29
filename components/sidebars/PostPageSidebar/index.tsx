@@ -136,7 +136,7 @@ const PostPageSidebar = () => {
           </li>
         </ul>
       </nav>
-      <hr className="w-full border-ecru-white/50 my-10 border-t-[0.5px]"></hr>
+      <hr className="horizontal-rule"></hr>
       <h2 className="sidebar-heading-h2">Topics</h2>
       <div>
         <ul className="flex flex-col gap-2 mt-4 items-center text-ecru-white/50">

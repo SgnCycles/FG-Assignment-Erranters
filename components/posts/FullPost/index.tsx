@@ -13,19 +13,21 @@ import UserAvatar from "@/components/profile/UserAvatar";
 const Post = ({ post }: { post: PostType }) => {
 
   const router = useRouter();
-  const { user } = useUserContext() as userContextType;
-  if (!user) return null;
-  const userId = user.id;
+  const { user, isLoading } = useUserContext() as userContextType;
+  const userId = user?.id;
   const isAuthor: boolean =
-    user && post && user.id === post.author.id ? true : false;
+    user && post && userId! === post.author.id ? true : false;
 
   const onDeleteSuccess = () => {
     router.push("/feed");
   };
 
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
+
   return (
-    <div className="w-full flex h-full justify-center items-center lg:p-8 text-ecru-white font-cantarell">
-      <div className="bg-casual-white text-outer-space rounded-4xl p-5 mt-5 lg:p-10 mx-5 lg:mx-0 lg:w-[80%]">
+    <div className="post-main-layout">
+      <div className="post-content-layout">
         <div className="flex justify-between mb-4">
           {post.title && (
             <h1 className="post-heading text-outer-space">{post.title}</h1>
@@ -74,7 +76,7 @@ const Post = ({ post }: { post: PostType }) => {
         />
         <div className="my-4">
           {userId && <AddCommentForm postId={post.id} slug={post.slug} />}
-          <hr className="w-full border-outer-space/50 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
+          <hr className="w-full border-outer-space/20 border-t-[0.5px] px-4 mb-4 mt-10"></hr>
           <PostComments
             postId={post.id}
             isAuthor={isAuthor}

@@ -30,7 +30,6 @@ const FavouritesPageContent = () => {
     },
     {
       scope: favouritePageContentRef,
-      // dependencies: [favouriteCategories],
       revertOnUpdate: true,
     },
   );

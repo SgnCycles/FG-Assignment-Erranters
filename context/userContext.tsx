@@ -17,12 +17,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const supabase = createClient();
     const fetchUserProfile = async (id: string) => {
       const { data: userProfileData } = await getUserProfile(id);
       setUserProfile(userProfileData);
+      setIsLoading(false);
     };
 
     const getUser = async () => {
@@ -76,6 +78,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser,
         userProfile,
         setUserProfile,
+        isLoading
       }}
     >
       {children}

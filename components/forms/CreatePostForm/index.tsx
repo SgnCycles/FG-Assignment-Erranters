@@ -14,6 +14,7 @@ const CreatePostForm = ({
   handleCreatePost,
   isPending,
 }: CreatePostFormPropsType) => {
+  
   const {
     register,
     control,

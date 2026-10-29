@@ -30,7 +30,6 @@ const ProfileHomepageContent = () => {
     },
     {
       scope: homepageContentRef,
-      // dependencies: [favouriteCategories],
       revertOnUpdate: true,
     },
   );

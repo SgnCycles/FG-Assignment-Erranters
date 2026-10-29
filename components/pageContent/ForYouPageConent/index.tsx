@@ -30,7 +30,6 @@ const ForYouPageContent = () => {
     },
     {
       scope: forYouPageContentRef,
-      // dependencies: [favouriteCategories],
       revertOnUpdate: true,
     },
   );

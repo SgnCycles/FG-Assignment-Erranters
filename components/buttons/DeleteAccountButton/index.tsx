@@ -9,18 +9,9 @@ const DeleteAccountButton = ({ userId }: { userId: string }) => {
 
   const handleDeleteAccountButtonClick = () => {
     startTransition(async () => {
-      try {
-        await DeleteUserAccountAction(userId);
-      } catch (error) {
-        if (
-          error instanceof Error &&
-          error.message.includes("NEXT_REDIRECT")
-        ) {
-          throw error;
-        }
-        toast.error(
-          error instanceof Error ? error.message : "Unable to delete user",
-        );
+      const deleteResult = await DeleteUserAccountAction(userId);
+      if (deleteResult && !deleteResult.success) {
+        toast.error(deleteResult.error)
       }
     });
   };

@@ -15,6 +15,7 @@ const ShortPost = ({
   post,
   showUser,
 }: ShortPostPropsType) => {
+  
   const { user } = useUserContext() as userContextType;
   const isAuthor = user?.id === post.author?.id;
   const queryClient = useQueryClient();

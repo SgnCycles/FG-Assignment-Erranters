@@ -30,7 +30,6 @@ const LatestPageContent = () => {
     },
     {
       scope: latestPageContentRef,
-      // dependencies: [favouriteCategories],
       revertOnUpdate: true,
     },
   );
