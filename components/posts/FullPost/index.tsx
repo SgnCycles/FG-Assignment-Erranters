@@ -30,7 +30,7 @@ const Post = ({ post }: { post: PostType }) => {
       <div className="post-content-layout">
         <div className="flex justify-between mb-4">
           {post.title && (
-            <h1 className="post-heading text-outer-space">{post.title}</h1>
+            <h1 className="post-heading text-outer-space pr-4">{post.title}</h1>
           )}
           {post.sold && <div className="sold-label">SOLD</div>}
         </div>

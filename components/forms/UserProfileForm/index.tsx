@@ -17,13 +17,13 @@ import CancelButton from "@/components/buttons/CancelButton";
 import DeleteAccountDialogue from "@/components/DeleteAccountDialogue";
 import ErrorMessage from "@/components/ErrorMessage";
 import UpdatePassword from "../UpdatePassword";
+import UpdateButton from "@/components/buttons/UpdateButton";
 
 const UserProfileForm = ({
   userProfile,
 }: {
   userProfile: userProfileProps;
 }) => {
-  
   const initialValues: userProfileProps = {
     id: userProfile.id,
     name: userProfile.name,
@@ -104,7 +104,7 @@ const UserProfileForm = ({
     ? initialValues.cover_image.split("/Cover-Images/")[1]
     : null;
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: EditUserProfile,
     onSuccess: (data) => {
       if (data?.error) {
@@ -147,7 +147,7 @@ const UserProfileForm = ({
   });
 
   return (
-    <div className="flex flex-col border border-ecru-white bg-casual-white rounded-4xl">
+    <div className="form-background">
       <form
         className="form"
         onSubmit={handleSubmit((values) => {
@@ -406,14 +406,16 @@ const UserProfileForm = ({
               {errors.bio && <ErrorMessage error={errors.bio.message!} />}
             </div>
           </div>
-          <div className="form-button-layout pr-8">
+          <div className="form-button-layout">
             <CancelButton link="/feed" />
-            <button className="button-dark-primary">Update Profile</button>
+            <UpdateButton isPending={isPending}/>
           </div>
         </div>
       </form>
       <UpdatePassword />
-      <DeleteAccountDialogue userId={userId} />
+      <div className="form">
+        <DeleteAccountDialogue userId={userId} />
+      </div>
     </div>
   );
 };

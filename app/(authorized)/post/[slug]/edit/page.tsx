@@ -16,7 +16,7 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
     <main className="bg-mineral-green text-ecru-white w-full flex flex-1 justify-center">
       <div className="create-edit-post-layout">
         <p className="subtitle">Edit Your Post</p>
-        <h1 className="heading font-bebas-neu">{data.title}</h1>
+        <h1 className="heading">{data.title}</h1>
         <EditPostContent post={data} />
       </div>
     </main>

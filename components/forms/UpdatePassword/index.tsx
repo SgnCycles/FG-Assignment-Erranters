@@ -7,8 +7,10 @@ import { useMutation } from "@tanstack/react-query";
 import CancelButton from "@/components/buttons/CancelButton";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "react-toastify";
+import UpdateButton from "@/components/buttons/UpdateButton";
 
 const UpdatePassword = () => {
+  
   const {
     register,
     handleSubmit,
@@ -43,74 +45,67 @@ const UpdatePassword = () => {
   });
 
   return (
-    <div>
-      <h2 className="post-heading mt-4 ml-4 md:px-10">User Settings</h2>
-      <form
-        className="form"
-        onSubmit={handleSubmit((values) => mutate(values))}
-      >
-        <div className="profile-row-password">
-          <div className="profile-item-half">
-            <label htmlFor="password" className="label">
-              Enter your current password:
-            </label>
-            <input
-              type="password"
-              className="input"
-              {...register("currentPassword", {
-                required: true,
-              })}
-              placeholder="Current Password:"
-            />
-            {errors.currentPassword && (
-              <ErrorMessage error={errors.currentPassword.message!} />
-            )}
-          </div>
+    <form className="form" onSubmit={handleSubmit((values) => mutate(values))}>
+      <h2 className="post-heading mt-4">User Settings</h2>
+      <div className="profile-row-password">
+        <div className="profile-item-half">
+          <label htmlFor="password" className="label">
+            Enter your current password:
+          </label>
+          <input
+            type="password"
+            className="input"
+            {...register("currentPassword", {
+              required: true,
+            })}
+            placeholder="Current Password:"
+          />
+          {errors.currentPassword && (
+            <ErrorMessage error={errors.currentPassword.message!} />
+          )}
         </div>
-        <div className="profile-row-password">
-          <div className="profile-item-half">
-            <label htmlFor="newPassword" className="label">
-              Enter your new password:
-            </label>
-            <input
-              className="input"
-              type="password"
-              {...register("newPassword", {
-                required: true,
-              })}
-              placeholder="New Password:"
-            />
-            {errors.newPassword && (
-              <ErrorMessage error={errors.newPassword.message!} />
-            )}
-          </div>
+      </div>
+      <div className="profile-row-password">
+        <div className="profile-item-half">
+          <label htmlFor="newPassword" className="label">
+            Enter your new password:
+          </label>
+          <input
+            className="input"
+            type="password"
+            {...register("newPassword", {
+              required: true,
+            })}
+            placeholder="New Password:"
+          />
+          {errors.newPassword && (
+            <ErrorMessage error={errors.newPassword.message!} />
+          )}
         </div>
-        <div className="profile-row-password">
-          <div className="profile-item-half">
-            <label htmlFor="confirmPassword" className="label">
-              Confirm your new password:
-            </label>
-            <input
-              className="input"
-              type="password"
-              {...register("confirmPassword", {
-                required: true,
-              })}
-              placeholder="Confirm Password:"
-            />
-            {errors.confirmPassword && (
-              <ErrorMessage error={errors.confirmPassword.message!} />
-            )}
-          </div>
+      </div>
+      <div className="profile-row-password">
+        <div className="profile-item-half">
+          <label htmlFor="confirmPassword" className="label">
+            Confirm your new password:
+          </label>
+          <input
+            className="input"
+            type="password"
+            {...register("confirmPassword", {
+              required: true,
+            })}
+            placeholder="Confirm Password:"
+          />
+          {errors.confirmPassword && (
+            <ErrorMessage error={errors.confirmPassword.message!} />
+          )}
         </div>
-        <div className="form-button-layout">
-          <CancelButton link="/profile" />
-          <button className="button-dark-secondary" disabled={isPending}>
-            {isPending ? "Updating password..." : "Update"}
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div className="form-button-layout">
+        <CancelButton link="/feed" />
+        <UpdateButton isPending={isPending} />
+      </div>
+    </form>
   );
 };
 

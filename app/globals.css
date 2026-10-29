@@ -125,7 +125,7 @@
 }
 
 .heading {
-  @apply text-nowrap font-bebas-neue text-6xl text-start text-ecru-white;
+  @apply text-nowrap font-bebas-neue text-6xl text-start text-ecru-white text-wrap;
 }
 
 .info-heading {
@@ -319,7 +319,7 @@
 }
 
 .form-button-layout {
-  @apply flex justify-end mt-10;
+  @apply flex justify-end mt-5 lg:mt-10;
 }
 
 /* forms */
@@ -328,11 +328,11 @@
 }
 
 .form-background {
-  @apply flex flex-col items-center bg-mineral-green font-cantarell;
+  @apply flex flex-col items-center bg-mineral-green font-cantarell mt-5 lg:mt-10;
 }
 
 .form {
-  @apply bg-casual-white text-outer-space p-2 lg:p-10 w-full rounded-4xl;
+  @apply bg-casual-white text-outer-space p-5 lg:p-10 w-full rounded-4xl mt-5 lg:mt-10;
 }
 
 .comment-form {

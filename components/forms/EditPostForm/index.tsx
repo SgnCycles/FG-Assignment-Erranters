@@ -189,8 +189,8 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
             ></input>
           </div>
         </div>
-        <div className="w-full flex justify-between mt-10">
-          <div className="flex justify-center items-end mb-2 group">
+        <div className="w-full flex justify-between flex-wrap mt-5 lg:mt-10">
+          <div className="flex justify-center items-end lg:mb-2 group">
             <DeleteButton
               id={postId}
               type={"icon"}

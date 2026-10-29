@@ -60,8 +60,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         } else if (event === "SIGNED_OUT") {
           setUser(null);
           setUserProfile(null);
-          // } else if (event === "PASSWORD_RECOVERY") {
-          // } else if (event === "USER_UPDATED") {
         }
       },
     );
