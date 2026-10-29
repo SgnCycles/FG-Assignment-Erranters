@@ -1,15 +1,18 @@
 "use client";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import ForYouPostsFeed from "@/components/posts/ForYouPostFeed";
+import { useUserContext } from "@/context/userContext";
+import type { userContextType } from "@/types/types";
 import { gsap } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const ForYouPageContent = () => {
 
-  const forYouPageContentRef = useRef<HTMLDivElement | null>( null)
+  const { user, isLoading } = useUserContext() as userContextType;
+  const forYouPageContentRef = useRef<HTMLDivElement | null>(null);
 
-    useGSAP(
+  useGSAP(
     () => {
       if (!forYouPageContentRef.current) return;
       gsap.fromTo(
@@ -30,9 +33,13 @@ const ForYouPageContent = () => {
     },
     {
       scope: forYouPageContentRef,
+      dependencies: [user, isLoading],
       revertOnUpdate: true,
     },
   );
+
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="forYou main-layout" ref={forYouPageContentRef}>
@@ -45,7 +52,7 @@ const ForYouPageContent = () => {
         </div>
       </div>
       <div className="main-layout-posts-feed forYou">
-        <ForYouPostsFeed />
+        <ForYouPostsFeed userId={user.id} />
       </div>
     </div>
   );

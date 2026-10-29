@@ -125,7 +125,7 @@
 }
 
 .heading {
-  @apply text-nowrap font-bebas-neue text-6xl text-start text-ecru-white text-wrap;
+  @apply font-bebas-neue text-6xl text-start text-ecru-white text-wrap;
 }
 
 .info-heading {
@@ -154,6 +154,10 @@
 
 .post-heading {
   @apply font-bebas-neue text-4xl text-start text-outer-space;
+}
+
+.error-heading {
+  @apply font-bebas-neue text-6xl text-center text-ecru-white text-wrap;
 }
 
 /* subtitles */

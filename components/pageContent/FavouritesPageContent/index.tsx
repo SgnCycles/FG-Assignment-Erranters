@@ -1,15 +1,18 @@
 "use client";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyFavouritePostsFeed from "@/components/posts/MyFavouritePostFeed";
+import { useUserContext } from "@/context/userContext";
+import type { userContextType } from "@/types/types";
 import { gsap } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const FavouritesPageContent = () => {
+  
+  const { user, isLoading } = useUserContext() as userContextType;
+  const favouritePageContentRef = useRef<HTMLDivElement | null>(null);
 
-  const favouritePageContentRef = useRef<HTMLDivElement | null>( null)
-
-    useGSAP(
+  useGSAP(
     () => {
       if (!favouritePageContentRef.current) return;
       gsap.fromTo(
@@ -30,9 +33,13 @@ const FavouritesPageContent = () => {
     },
     {
       scope: favouritePageContentRef,
+      dependencies: [user, isLoading],
       revertOnUpdate: true,
     },
   );
+
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="favourites main-layout" ref={favouritePageContentRef}>
@@ -45,7 +52,7 @@ const FavouritesPageContent = () => {
         </div>
       </div>
       <div className="main-layout-posts-feed favourites">
-        <MyFavouritePostsFeed />
+        <MyFavouritePostsFeed userId={user.id}/>
       </div>
     </div>
   );

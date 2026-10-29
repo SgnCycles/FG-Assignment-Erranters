@@ -157,7 +157,7 @@ export const getMemberProfile = async (username: string) => {
     .from("Profiles")
     .select("*, Posts(*, PostImages(*))")
     .eq("username", username)
-    .single();
+    .maybeSingle();
 };
 
 export const getPostComments = async (

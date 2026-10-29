@@ -5,29 +5,31 @@ import MemberPosts from "@/components/posts/MemberPosts";
 import MemberProfile from "@/components/profile/MemberProfile";
 
 const MemberProfilePage = async ({
+  
   params,
 }: {
   params: { username: string };
 }) => {
-  
   const { username } = await params;
   const { data, error } = await getMemberProfile(username);
-
-  if (error) {
-    return <ErrorMessage error={error.message} />;
-  }
-
-  if (!data) return <ErrorMessage error="User Not Found" />;
-
-  const userId = data.id;
 
   return (
     <main className="flex flex-col grow bg-mineral-green text-ecru-white w-full font-cantarell">
       <div className="w-full pl-4">
         <GoBackButton />
       </div>
-      <MemberProfile profile={data} />
-      <MemberPosts userId={userId}/>
+      <div>
+        {error ? (
+          <ErrorMessage error="Something Went Wrong" />
+        ) : !data ? (
+          <ErrorMessage error="User Not Found" />
+        ) : (
+          <>
+            <MemberProfile profile={data} />
+            <MemberPosts userId={data.id} />
+          </>
+        )}
+      </div>
     </main>
   );
 };

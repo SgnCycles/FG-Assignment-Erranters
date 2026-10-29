@@ -40,7 +40,7 @@ const ProfileCardContent = ({
   });
 
   if (followerError) {
-    console.log(followerError);
+    console.error(followerError);
   }
 
   const postCount = postAmount?.count ?? 0;

@@ -21,7 +21,7 @@ const FollowButton = ({
   });
 
   if (userIsFollowedError) {
-    console.log(userIsFollowedError);
+    console.error(userIsFollowedError);
   }
 
   const { mutate: mutateAddFollow } = useMutation({

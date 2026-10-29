@@ -1,7 +1,6 @@
 "use client";
-import { useUserContext } from "@/context/userContext";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { PostCategoryContextType, userContextType } from "@/types/types";
+import type { PostCategoryContextType } from "@/types/types";
 import { getMyPosts, getMyPostsCount } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
 import { useQuery } from "@tanstack/react-query";
@@ -11,10 +10,8 @@ import ShortPost from "../ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
-const MyPostsFeed = () => {
-  
-  const { user, isLoading } = useUserContext() as userContextType;
-  const userId = user?.id;
+const MyPostsFeed = ({ userId }: { userId: string }) => {
+
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
@@ -25,7 +22,7 @@ const MyPostsFeed = () => {
   const { data: postCountData } = useQuery({
     queryKey: ["my-posts-count"],
     queryFn: async () => {
-      const { count, error } = await getMyPostsCount(supabase, userId!);
+      const { count, error } = await getMyPostsCount(supabase, userId);
       if (error) throw error;
       return count ?? 0;
     },
@@ -41,7 +38,7 @@ const MyPostsFeed = () => {
     queryFn: async () => {
       const { data, error } = await getMyPosts(
         supabase,
-        userId!,
+        userId,
         sortingOrder,
         pagesVisited,
         postsPerPage,
@@ -55,9 +52,6 @@ const MyPostsFeed = () => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
-
-  if (isLoading) return <p className="info-heading">Loading...</p>;
-  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="grow">

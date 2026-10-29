@@ -7,9 +7,9 @@ import { redirect } from "next/navigation";
 const EditPostContent = ({ post }: { post: PostFormProps }) => {
 
   const { user, userProfile, isLoading } = useUserContext() as userContextType;
-  if (isLoading) return <p className="info-heading">Loading...</p>;
-  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
-  if (!userProfile) return <p className="info-heading">Loading Profile...</p>;
+  if (isLoading) return <div className="info-heading">Loading...</div>;
+  if (!user) return <div className="info-heading">Unauthorized Access!</div>;
+  if (!userProfile) return <div className="info-heading">Loading Profile...</div>;
 
   if (user && post && user.id !== post.author.id) {
     redirect("/feed");

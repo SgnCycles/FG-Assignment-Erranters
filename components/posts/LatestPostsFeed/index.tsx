@@ -1,9 +1,8 @@
 "use client";
-import { useUserContext } from "@/context/userContext";
 import { getLatestPosts } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/browserClient";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import type { PostCategoryContextType, userContextType } from "@/types/types";
+import type { userContextType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ShortPost from "@/components/posts/ShortPost";
@@ -12,7 +11,6 @@ import MobileSideMenu from "@/components/SideMenu";
 
 const LatestPostsFeed = () => {
 
-  const { user, isLoading } = useUserContext() as userContextType;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
 
@@ -30,9 +28,6 @@ const LatestPostsFeed = () => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
-
-  if (isLoading) return <p className="info-heading">Loading...</p>;
-  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="grow">

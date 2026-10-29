@@ -1,4 +1,4 @@
-import ForYouPageContent from "@/components/pageContent/ForYouPageConent";
+import ForYouPageContent from "@/components/pageContent/ForYouPageContent";
 
 const ForYouPage = () => {
   return <ForYouPageContent />;

@@ -1,15 +1,16 @@
 "use client";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import MyPostsFeed from "@/components/posts/MyPostsFeed";
+import { useUserContext } from "@/context/userContext";
+import type { userContextType } from "@/types/types";
 import { gsap } from "@/utils/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const MyPostsPageContent = () => {
-
-  const myPostsPageContentRef = useRef<HTMLDivElement | null>( null)
-
-    useGSAP(
+  const { user, isLoading } = useUserContext() as userContextType;
+  const myPostsPageContentRef = useRef<HTMLDivElement | null>(null);
+  useGSAP(
     () => {
       if (!myPostsPageContentRef.current) return;
       gsap.fromTo(
@@ -30,9 +31,12 @@ const MyPostsPageContent = () => {
     },
     {
       scope: myPostsPageContentRef,
+      dependencies: [user, isLoading],
       revertOnUpdate: true,
     },
   );
+  if (isLoading) return <p className="info-heading">Loading...</p>;
+  if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 
   return (
     <div className="myPosts main-layout" ref={myPostsPageContentRef}>
@@ -45,7 +49,7 @@ const MyPostsPageContent = () => {
         </div>
       </div>
       <div className="myPosts main-layout-posts-feed ">
-        <MyPostsFeed />
+        <MyPostsFeed userId={user.id} />
       </div>
     </div>
   );

@@ -7,9 +7,9 @@ import { useRef } from "react";
 
 const LatestPageContent = () => {
 
-  const latestPageContentRef = useRef<HTMLDivElement | null>( null)
+  const latestPageContentRef = useRef<HTMLDivElement | null>(null);
 
-    useGSAP(
+  useGSAP(
     () => {
       if (!latestPageContentRef.current) return;
       gsap.fromTo(

@@ -1,20 +1,17 @@
 "use client";
 import { usePostCategoryContext } from "@/context/postCategoryContext";
-import { useUserContext } from "@/context/userContext";
 import { createClient } from "@/lib/supabase/browserClient";
 import { getForYouPosts } from "@/lib/supabase/queries";
-import type { PostCategoryContextType, userContextType } from "@/types/types";
+import type { PostCategoryContextType } from "@/types/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import ShortPost from "../ShortPost";
 import SortingButton from "@/components/buttons/SortingButton";
 import MobileSideMenu from "@/components/SideMenu";
 
-const ForYouPostsFeed = () => {
-  
-  const { user, isLoading } = useUserContext() as userContextType;
+const ForYouPostsFeed = ({ userId }: { userId: string }) => {
+
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
-  const userId = user?.id;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
@@ -24,7 +21,7 @@ const ForYouPostsFeed = () => {
       const supabase = createClient();
       const { data, error } = await getForYouPosts(
         supabase,
-        userId!,
+        userId,
         sortingOrder,
       );
       if (error) throw error;
@@ -42,10 +39,6 @@ const ForYouPostsFeed = () => {
     postCategory === "All"
       ? data
       : data?.filter((post) => post.category === postCategory);
-
-  
-   if (isLoading) return <p className="info-heading">Loading...</p>;
-   if (!user) return <p className="info-heading">Unauthorized Access!</p>
 
   return (
     <div className="grow">
