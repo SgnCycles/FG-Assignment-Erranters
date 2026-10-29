@@ -80,7 +80,7 @@ const Post = ({ post }: { post: PostType }) => {
           <PostComments
             postId={post.id}
             isAuthor={isAuthor}
-            userId={userId}
+            userId={user.id}
             slug={post.slug}
           />
         </div>
