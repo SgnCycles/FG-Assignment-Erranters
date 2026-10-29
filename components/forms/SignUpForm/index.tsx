@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { toast } from "react-toastify";
 
 const SignUpForm = () => {

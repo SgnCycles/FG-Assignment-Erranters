@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import type { AddSubCommentFormPropsType } from "./types";
 import AddCommentButton from "@/components/buttons/AddCommentButton";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { toast } from "react-toastify";
 
 const AddSubCommentForm = ({
