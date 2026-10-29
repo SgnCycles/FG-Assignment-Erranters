@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.9.1",
     "@lightgallery/react": "^3.0.0",
     "@supabase/ssr": "^0.12.7",
@@ -17,6 +18,7 @@
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
     "dialkit": "^2.0.2",
+    "gsap": "^3.15.0",
     "lightgallery": "^3.0.0",
     "lucide-react": "^1.49.0",
     "next": "16.4.0",

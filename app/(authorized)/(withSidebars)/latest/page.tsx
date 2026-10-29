@@ -1,22 +1,7 @@
-import CreatePostButton from "@/components/buttons/CreatePostButton";
-import LatestPostsFeed from "@/components/posts/LatestPostsFeed";
+import LatestPageContent from "@/components/pageContent/LatestPageContent";
 
 const LatestPostsPage = () => {
-  return (
-    <div className="main-layout">
-      <div className="main-layout-heading">
-        <h1 className="heading">
-          Latest <span className="text-old-gold">Posts</span>
-        </h1>
-        <div className="hidden lg:flex">
-          <CreatePostButton />
-        </div>
-      </div>
-      <div className="main-layout-posts-feed ">
-        <LatestPostsFeed />
-      </div>
-    </div>
-  );
+  return <LatestPageContent />;
 };
 
 export default LatestPostsPage;

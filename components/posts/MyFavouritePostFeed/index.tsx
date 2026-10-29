@@ -17,8 +17,7 @@ import MobileSideMenu from "@/components/SideMenu";
 const MyFavouritePostsFeed = () => {
 
   const { user } = useUserContext() as userContextType;
-  if (!user) return null;
-  const userId = user.id;
+  const userId = user?.id;
   const { postCategory } = usePostCategoryContext() as PostCategoryContextType;
   const [sortingOrder, setSortingOrder] = useState<boolean>(false);
   const [pageNumber, setPageNumber] = useState<number>(0);
@@ -31,7 +30,7 @@ const MyFavouritePostsFeed = () => {
       const supabase = createClient();
       const { count, error } = await getAllUserFavouritePostsCount(
         supabase,
-        userId,
+        userId!,
       );
       if (error) throw error;
       return count ?? 0;
@@ -50,7 +49,7 @@ const MyFavouritePostsFeed = () => {
       const supabase = createClient();
       const { data, error } = await getUserFavourites(
         supabase,
-        userId,
+        userId!,
         sortingOrder,
         pagesVisited,
         postsPerPage,
@@ -62,7 +61,7 @@ const MyFavouritePostsFeed = () => {
 
   const onFavouriteDeleteSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: ["my-favourite-posts", userId],
+      queryKey: ["my-favourite-posts", userId!],
     });
   };
 
@@ -71,9 +70,11 @@ const MyFavouritePostsFeed = () => {
       ? data
       : data?.filter((post) => post.Posts.category === postCategory);
 
+  if (!user) return null;
+
   return (
     <div className="grow">
-     <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between">
         <MobileSideMenu />
         <SortingButton
           type="light"

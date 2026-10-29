@@ -1,22 +1,7 @@
-import CreatePostButton from "@/components/buttons/CreatePostButton";
-import HomePostsFeed from "@/components/posts/HomePostsFeed";
+import ProfileHomepageContent from "@/components/pageContent/ProfileHomepageContent";
 
 const ProfileHomepage = () => {
-  return (
-    <div className="main-layout">
-      <div className="main-layout-heading">
-        <h1 className="heading">
-          Posts from <span className="text-old-gold">Erranters</span>
-        </h1>
-        <div className="hidden lg:flex">
-          <CreatePostButton />
-        </div>
-      </div>
-      <div className="main-layout-posts-feed ">
-        <HomePostsFeed />
-      </div>
-    </div>
-  );
+  return <ProfileHomepageContent />
 };
 
 export default ProfileHomepage;

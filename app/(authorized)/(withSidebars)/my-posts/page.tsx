@@ -1,22 +1,7 @@
-import CreatePostButton from "@/components/buttons/CreatePostButton";
-import MyPostsFeed from "@/components/posts/MyPostsFeed";
+import MyPostsPageContent from "@/components/pageContent/MyPostsPageContent";
 
 const MyPostsPage = () => {
-  return (
-    <div className="main-layout">
-      <div className="main-layout-heading">
-        <h1 className="heading">
-          My <span className="text-old-gold">Posts</span>
-        </h1>
-        <div className="hidden lg:flex">
-          <CreatePostButton />
-        </div>
-      </div>
-      <div className="main-layout-posts-feed ">
-        <MyPostsFeed />
-      </div>
-    </div>
-  );
+  return <MyPostsPageContent />;
 };
 
 export default MyPostsPage;
