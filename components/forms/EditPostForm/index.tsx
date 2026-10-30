@@ -15,9 +15,9 @@ import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { FaXmark } from "react-icons/fa6";
 import type { PostFormProps } from "@/types/types";
 import { toast } from "react-toastify";
-// import { useState } from "react";
 
 const EditPostForm = ({ post }: { post: PostFormProps }) => {
+  
   const postId = post.id;
   const initialValues: PostFormProps = {
     id: post.id,
@@ -32,7 +32,6 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
     slug: post.slug,
   };
 
-  // const [postImagePreview, setPostImagePreview] = useState(initialValues.PostImages);
   const router = useRouter();
   const onDeleteSuccess = () => {
     router.push("/feed");
@@ -124,7 +123,6 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
             control={control}
             render={({ field }) => (
               <FileDropZone value={field.value} onChange={field.onChange} />
-              // <FileDropZone value={field.value} onChange={field.onChange} initialImages={initialValues.PostImages}/>
             )}
           />
           {errors.image && <ErrorInputMessage error={errors.image.message!} />}

@@ -15,8 +15,6 @@ const rejectStyle = { borderColor: "#ff1744" };
 const FileDropZone = ({
   value = [],
   onChange,
-  // initialImages,
-  // removePostImage,
 }: FileDropZonePropsType) => {
   const onDrop = useCallback(
     (acceptedImageFiles: File[]) => {
@@ -77,24 +75,6 @@ const FileDropZone = ({
         )}
       </div>
       <ul className="flex flex-wrap gap-2">
-        {/* {initialImages && initialImages.map((image, index) => (
-          <li key={index} className="flex h-30 w-30 relative rounded-md">
-            <div className="h-full w-full">
-              <img
-                className="h-full w-full object-cover rounded-md"
-                src={image.image_url ?? ""}
-                alt=""
-              />
-            </div>
-            <button
-              type="button"
-              className="w-5 h-5 bg-red-400 absolute right-0"
-              // onClick={() => removePostImage?.(image.id)}
-            >
-              <FaXmark className="w-full h-full fill-ecru-white hover:fill-red-400 hover:bg-ecru-white cursor-pointer" />
-            </button>
-          </li>
-        ))} */}
         {value &&
           value.map((file, index) => (
             <li key={index} className="flex h-30 w-30 relative rounded-md">

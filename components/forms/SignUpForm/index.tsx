@@ -10,6 +10,7 @@ import ErrorInputMessage from "@/components/errors/ErrorInputMessage";
 import { toast } from "react-toastify";
 
 const SignUpForm = () => {
+  
   const router = useRouter();
   const {
     register,

@@ -10,6 +10,7 @@ const FollowButton = ({
   memberId,
   memberIsFollowed,
 }: FollowButtonPropsType) => {
+  
   const queryClient = useQueryClient();
   const {
     data: userIsFollowed,

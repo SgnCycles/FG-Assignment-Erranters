@@ -11,7 +11,7 @@ const MobileSideMenu = () => {
     usePostCategoryContext() as PostCategoryContextType;
 
   return (
-    <div className="flex lg:hidden w-full justify-evenly md:justify-start my-4">
+    <div className="flex lg:hidden w-full justify-evenly md:justify-start gap-2 my-4">
       <div className="relative">
         <select
           value={pathname}

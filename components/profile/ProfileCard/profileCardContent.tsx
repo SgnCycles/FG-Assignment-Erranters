@@ -10,38 +10,40 @@ import Link from "next/link";
 import type { userContextType } from "@/types/types";
 
 const ProfileCardContent = ({
-  user,
   userProfile,
 }: {
-  user: userContextType["user"];
-  userProfile: userContextType["userProfile"];
+  userProfile: userContextType;
 }) => {
 
   const supabase = createClient();
   const { data: postAmount, error } = useQuery({
-    queryKey: ["user-post-count", user!.id],
-    queryFn: () => getUserPostNumber(supabase, user!.id),
+    queryKey: ["user-post-count", userProfile.id],
+    queryFn: () => getUserPostNumber(supabase, userProfile.id),
   });
   if (error) {
     console.log(error);
   }
 
   const { data: favouriteAmount, error: favouriteError } = useQuery({
-    queryKey: ["user-favourite-count", user!.id],
-    queryFn: () => getUserFavouritesNumber(supabase, user!.id),
+    queryKey: ["user-favourite-count", userProfile.id],
+    queryFn: () => getUserFavouritesNumber(supabase, userProfile.id),
   });
+
   if (favouriteError) {
     console.log(favouriteError);
   }
 
   const { data: followerAmount, error: followerError } = useQuery({
-    queryKey: ["user-follower-count", user!.id],
-    queryFn: () => getUserFollowerNumber(supabase, user!.id),
+    queryKey: ["user-follower-count", userProfile.id],
+    queryFn: () => getUserFollowerNumber(supabase, userProfile.id),
   });
 
   if (followerError) {
     console.error(followerError);
+    return;
   }
+
+   if(!userProfile) return null;
 
   const postCount = postAmount?.count ?? 0;
   const favouriteCount = favouriteAmount?.count ?? 0;

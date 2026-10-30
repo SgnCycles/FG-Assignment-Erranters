@@ -8,8 +8,10 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const MyPostsPageContent = () => {
+
   const { user, isLoading } = useUserContext() as userContextType;
   const myPostsPageContentRef = useRef<HTMLDivElement | null>(null);
+
   useGSAP(
     () => {
       if (!myPostsPageContentRef.current) return;
@@ -35,6 +37,7 @@ const MyPostsPageContent = () => {
       revertOnUpdate: true,
     },
   );
+  
   if (isLoading) return <p className="info-heading">Loading...</p>;
   if (!user) return <p className="info-heading">Unauthorized Access!</p>;
 

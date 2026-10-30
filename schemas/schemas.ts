@@ -3,47 +3,24 @@ import * as z from "zod";
 
 export const logInSchema = z.object({
   email: z.email(),
-  // password: z.string().min(8),
-  password: z.string().min(5),
+  password: z.string().min(8),
 });
 
-// export const signUpSchema = z
-//   .object({
-//     username: z.string(),
-//     email: z.email(),
-//     password: z
-//       .string()
-//       .min(8, { message: "Password must be at least 8 characters" })
-//       .regex(/[A-Z]/, { message: "Contain at least one uppercase letter" })
-//       .regex(/[0-9]/, { message: "Contain at least one number" })
-//       .regex(/[^A-Za-z0-9]/, {
-//         message: "Contain at least one special character",
-//       }),
-//     confirmPassword: z
-//       .string()
-//       .min(8, { message: "Please confirm your password" }),
-//   })
-//   .superRefine((val, ctx) => {
-//     if (val.password !== val.confirmPassword) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: "Passwords do not match",
-//         path: ["confirmPassword"],
-//       });
-//     }
-//   });
-
-//temp replacement for smoother testing
 export const signUpSchema = z
   .object({
     username: z.string(),
     email: z.email(),
     password: z
       .string()
-      .min(5, { message: "Password must be at least 8 characters" }),
+      .min(8, { message: "Password must have at least 8 characters" })
+      .regex(/[A-Z]/, { message: "Must contain an uppercase letter" })
+      .regex(/[0-9]/, { message: "Must contain least one number" })
+      .regex(/[^A-Za-z0-9]/, {
+        message: "Must containt at least one special character",
+      }),
     confirmPassword: z
       .string()
-      .min(5, { message: "Please confirm your password" }),
+      .min(8, { message: "Please confirm your password" }),
   })
   .superRefine((val, ctx) => {
     if (val.password !== val.confirmPassword) {
@@ -95,7 +72,9 @@ export const postImageSchema = postSchema.omit({ images: true }).extend({
 export const updateUserPasswordSchema = z
   .object({
     currentPassword: z.string().min(5, "Current password is required"),
-    newPassword: z.string().min(5, "Password must be at least 5 characters long"),
+    newPassword: z
+      .string()
+      .min(5, "Password must be at least 5 characters long"),
     confirmPassword: z.string().min(5, "Confirm the new password"),
   })
   .superRefine((value, ctx) => {

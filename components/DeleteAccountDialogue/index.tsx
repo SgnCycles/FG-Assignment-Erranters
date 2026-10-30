@@ -7,7 +7,7 @@ const DeleteAccountDialogue = ({ userId }: { userId: string }) => {
   const [dialogueBoxOpen, setDialogueBoxOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col justify-center items-center lg:items-end">
+    <div className="flex flex-col justify-center items-center md:items-end">
       <div className="mb-5">
         <button
           className="delete-account-button w-auto"

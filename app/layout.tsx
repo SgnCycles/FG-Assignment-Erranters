@@ -27,8 +27,8 @@ const gecantarellistMono = Cantarell({
 });
 
 export const metadata: Metadata = {
-  title: "Erranters",
-  description: "Get out!",
+  title: "Erranters - Discover New Trails",
+  description: "Join a community of outdoor enthusiasts. Share your hiking and cycling routes, discover new ones, and sell or buy they outdoor equipment.",
   icons: {
     icon: "/favicon.png",
   },

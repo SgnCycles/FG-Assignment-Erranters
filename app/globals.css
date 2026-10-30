@@ -75,7 +75,7 @@
 }
 
 .button-dark-primary {
-  @apply flex justify-center items-center min-w-37 font-cantarell text-sm text-white bg-outer-space hover:bg-old-gold hover:text-outer-space rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
+  @apply flex justify-center items-center min-w-37 font-cantarell text-base text-white bg-outer-space hover:bg-old-gold hover:text-outer-space rounded-4xl cursor-pointer place-items-center tracking-widest font-bold px-4 py-2;
 }
 
 .button-dark-secondary {
@@ -107,7 +107,7 @@
 }
 
 .delete-account-button {
-  @apply bg-red-500 hover:bg-ecru-white text-ecru-white hover:text-red-500 h-10 flex gap-4 py-2 px-4 rounded-4xl font-semibold cursor-pointer justify-center;
+  @apply bg-red-500/50 text-base hover:bg-red-500 text-ecru-white h-10 flex gap-2 py-2 px-4 rounded-4xl font-semibold cursor-pointer justify-center;
 }
 
 .reply-button {
@@ -171,11 +171,11 @@
 
 /* sidebar items */
 .sidebar-item {
-  @apply w-full flex font-league-spartan text-base text-left text-ecru-white/50 hover:text-ecru-white cursor-pointer p-2;
+  @apply w-full flex font-league-spartan text-base text-left text-ecru-white/50 hover:text-ecru-white cursor-pointer py-2 pl-6;
 }
 
 .sidebar-item.active {
-  @apply text-outer-space hover:text-apple bg-ecru-white p-2 rounded-4xl w-40;
+  @apply text-outer-space hover:text-apple bg-ecru-white p-2 pl-6 rounded-4xl w-40;
 }
 
 .eye-icon {
@@ -260,7 +260,6 @@
 
 /* profile form */
 .profile-row {
-  /* @apply w-full grid grid-cols-2 gap-2 place-items-center bg-amber-400; */
   @apply w-full flex flex-col lg:flex-row gap-2 lg:gap-8 place-items-center lg:px-8;
 }
 
@@ -311,7 +310,7 @@
 }
 
 .sidebar-layout {
-   @apply w-full flex flex-1 grid-cols-3 lg:mt-10;
+  @apply w-full flex flex-1 grid-cols-3 lg:mt-10;
 }
 
 .create-post-layout {
@@ -320,6 +319,14 @@
 
 .create-edit-post-layout {
   @apply w-[90%] lg:w-2/3 h-auto lg:h-full mb-10 lg:mb-0;
+}
+
+.post-main-layout {
+  @apply w-full flex h-full justify-center items-center lg:p-8 text-ecru-white font-cantarell;
+}
+
+.post-content-layout {
+  @apply bg-casual-white text-outer-space rounded-4xl p-5 mt-5 lg:p-10 mx-5 lg:mx-0 lg:w-[80%];
 }
 
 .form-button-layout {
@@ -332,11 +339,11 @@
 }
 
 .form-background {
-  @apply flex flex-col items-center bg-mineral-green font-cantarell mt-5 lg:mt-10;
+  @apply flex flex-col items-center bg-mineral-green font-cantarell gap-5;
 }
 
 .form {
-  @apply bg-casual-white text-outer-space p-5 lg:p-10 w-full rounded-4xl mt-5 lg:mt-10;
+  @apply bg-casual-white text-outer-space p-5 lg:p-10 w-full rounded-4xl mt-5 lg:mt-0;
 }
 
 .comment-form {
@@ -378,16 +385,6 @@
   @apply content-[""] absolute -left-6 top-0 w-5 h-5 border-l border-b border-apple rounded-bl-xl;
 }
 
-/* testing */
-
-.post-main-layout {
-  @apply w-full flex h-full justify-center items-center lg:p-8 text-ecru-white font-cantarell;
-}
-
-.post-content-layout {
-  @apply bg-casual-white text-outer-space rounded-4xl p-5 mt-5 lg:p-10 mx-5 lg:mx-0 lg:w-[80%];
-}
-
 .horizontal-rule {
-  @apply w-full border-ecru-white/50 border-t-[0.5px]; 
+  @apply w-full border-ecru-white/50 border-t-[0.5px];
 }
