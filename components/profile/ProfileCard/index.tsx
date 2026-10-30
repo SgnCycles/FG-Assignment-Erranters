@@ -14,7 +14,7 @@ const ProfileCard = () => {
 
   return (
     <div className="w-full">
-      <ProfileCardContent userProfile={userProfile} />
+      <ProfileCardContent user={user} userProfile={userProfile} />
     </div>
   );
 };
