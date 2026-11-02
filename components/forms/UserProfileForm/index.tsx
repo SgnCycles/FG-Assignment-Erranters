@@ -329,7 +329,7 @@ const UserProfileForm = ({
               )}
             </div>
              <p className="text-outer-space/50 text-xs text-right">Max 5mb for profile and cover image</p>
-            <h2 className="post-heading mt-4 ml-4">Profile Settings</h2>
+            <h2 className="post-heading mt-4">Profile Settings</h2>
             <div className="profile-row">
               <div className="profile-item">
                 <label htmlFor="name" className="label">
