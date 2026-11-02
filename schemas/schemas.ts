@@ -38,6 +38,7 @@ export const postSchema = z.object({
   images: z.instanceof(FormData).optional(),
   category: z.string().min(1, "Choose a category"),
   price: z.number().optional(),
+  currency: z.string().optional(),
   location: z.string().optional(),
   latitude: z.number().optional(),
   longitude: z.number().optional(),
