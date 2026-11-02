@@ -57,7 +57,7 @@ const FileDropZone = ({
   return (
     <div className="p-4 lg:p-10 rounded-2xl bg-ecru-white">
       <div className="file-dropzone-area" {...getRootProps({ style })}>
-        <label htmlFor="image">Add an image (optional)</label>
+        <label htmlFor="image">Add an image (optional / max size 10mb)</label>
         <AiFillFileImage
           size={70}
           className={`${isDragActive ? "text-apple" : "text-old-gold"} hover:text-apple cursor-pointer`}

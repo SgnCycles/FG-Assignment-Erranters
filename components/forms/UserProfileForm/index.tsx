@@ -266,7 +266,7 @@ const UserProfileForm = ({
             <div className="flex flex-col h-20">
               {profileImagePreview ? (
                 <div className="h-30 w-30 lg:h-40 lg:w-40 flex items-center justify-center -translate-y-15 translate-x-4 lg:-translate-y-20 lg:translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
-                  <div className="h-full w-full relative place-items-center">
+                  <div className="h-full w-full relative place-items-center rounded-full">
                     <img
                       src={profileImagePreview}
                       alt={initialValues.username}
@@ -282,9 +282,10 @@ const UserProfileForm = ({
                         }
                       }}
                     >
-                      <FaXmark className="w-full h-full cursor-pointer fill-outer-space bg-old-gold hover:bg-red-400 hover:fill-ecru-white rounded-full" />
+                      <FaXmark className="w-full h-full cursor-pointer fill-outer-space bg-old-gold hover:bg-red-400 hover:fill-ecru-white rounded-full z-50" />
                     </button>
                   </div>
+                  
                 </div>
               ) : (
                 <div className="h-40 w-40 flex items-center justify-center -translate-y-20 translate-x-15 z-10 rounded-full border-4 border-ecru-white bg-ecru-white">
@@ -327,6 +328,7 @@ const UserProfileForm = ({
                 <ErrorInputMessage error={errors.profile_image.message!} />
               )}
             </div>
+             <p className="text-outer-space/50 text-xs text-right">Max 5mb for profile and cover image</p>
             <h2 className="post-heading mt-4 ml-4">Profile Settings</h2>
             <div className="profile-row">
               <div className="profile-item">

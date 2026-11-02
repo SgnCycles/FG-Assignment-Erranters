@@ -10,11 +10,11 @@ const UserAvatar = ({ post }: { post: PostType }) => {
     >
       <div className="flex flex-row">
         {post.author.profile_image ? (
-          <div className="w-15 h-15">
+          <div className="w-15 h-15 overflow-hidden">
             <img
               src={post.author.profile_image}
               alt="profile user"
-              className="w-full h-full rounded-full"
+              className="w-full h-full rounded-full object-cover"
             />
           </div>
         ) : (
@@ -26,7 +26,7 @@ const UserAvatar = ({ post }: { post: PostType }) => {
             />
           </div>
         )}
-        <div className="flex flex-col lg:flex-row gap-2 items-start text-right ml-4 lg:ml-2 mt-2 font-bold">
+        <div className="flex flex-col lg:flex-row gap-2 items-center text-right ml-4 lg:ml-2 mt-2 font-bold">
           <span>{post.author.username}</span>
           <div className="flex items-end">
             <span className="pr-2 text-nowrap font-normal text-xs">

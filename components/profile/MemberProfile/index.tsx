@@ -72,7 +72,7 @@ const MemberProfile = ({ profile }: MemberProfilePropsType) => {
       <div className="flex flex-col w-[90%] lg:w-[80%] bg-casual-white rounded-4xl border-2">
         <div className="rounded-tl-4xl rounded-tr-4xl">
           {profile.cover_image ? (
-            <div className="h-30 lg:h-50 relative rounded-tl-4xl rounded-tr-4xl">
+            <div className="h-30 lg:h-50 relative rounded-tl-4xl rounded-tr-4xl overflow-hidden">
               <img
                 src={profile.cover_image}
                 alt="profile user"

@@ -17,7 +17,6 @@ import type { PostFormProps } from "@/types/types";
 import { toast } from "react-toastify";
 
 const EditPostForm = ({ post }: { post: PostFormProps }) => {
-  
   const postId = post.id;
   const initialValues: PostFormProps = {
     id: post.id,
@@ -25,6 +24,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
     title: post.title,
     content: post.content,
     price: post.price,
+    currency: post.currency,
     PostImages: post.PostImages,
     category: post.category,
     post_type: post.post_type,
@@ -50,6 +50,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
       category: initialValues.category,
       post_type: initialValues.post_type,
       price: initialValues.price || undefined,
+      currency: initialValues.currency || undefined,
       location: initialValues.location || undefined,
       slug: initialValues.slug,
     },
@@ -63,9 +64,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
         return;
       }
       toast.success("Post Updated");
-    },
-    onError: () => {
-      toast.error("Something went wrong. Try again later");
+      router.push(`/post/${data.slug}`)
     },
   });
 
@@ -103,6 +102,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
               category: values.category,
               post_type: values.post_type,
               price: values.price,
+              currency: values.currency,
               location: values.location,
               slug: values.slug,
             },
@@ -161,7 +161,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
           <TextareaAutosize className="input" {...register("content")} />
         </div>
         <div className="grid grid-cols-2 gap-4">
-          {initialValues.post_type === "Marketplace" && (
+          {initialValues.category === "Marketplace" && (
             <div className="label-input">
               <label htmlFor="price" className="label">
                 Add price:
@@ -173,6 +173,17 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
                   setValueAs: (value) =>
                     value === "" ? undefined : Number(value),
                 })}
+              />
+            </div>
+          )}
+          {initialValues.category === "Marketplace" && (
+            <div className="label-input">
+              <label htmlFor="currency" className="label">
+                Add Currency:
+              </label>
+              <input
+                className="input text-outer-space cursor-pointer"
+                {...register("currency")}
               />
             </div>
           )}
@@ -199,7 +210,7 @@ const EditPostForm = ({ post }: { post: PostFormProps }) => {
           <div className="form-button-layout">
             <CancelButton link={`/post/${initialValues.slug}`} />
             <button className="button-dark-secondary">
-              {isPending ? "Updating the post..." : "Save"}
+              {isPending ? "Updating..." : "Save"}
             </button>
           </div>
         </div>

@@ -50,6 +50,7 @@ const EditPostAction = async ({
         image_url: imageUrl,
         position: index,
       }));
+      console.log("Post images:", postImages);
       await supabase.from("PostImages").insert(postImages).throwOnError();
     }
   }
@@ -72,7 +73,7 @@ const EditPostAction = async ({
   }
 
   revalidatePath("/");
-  redirect(`/post/${updatedPost.slug}`);
+  return { success: true, slug: updatedPost.slug };
 };
 
 export default EditPostAction;
