@@ -41,6 +41,7 @@ export type PostFormProps = Pick<
   | "category"
   | "post_type"
   | "price"
+  | "currency"
   | "location"
   | "slug"
 > & { author: { id: string } } & {
