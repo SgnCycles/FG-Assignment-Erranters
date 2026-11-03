@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import type { userContextType } from "@/types/types";
 
 const NavMenu = () => {
-
+  
   const pathname = usePathname();
   const { user } = useUserContext() as userContextType;
 
@@ -83,7 +83,13 @@ const NavMenu = () => {
             </svg>
             <span className="tooltipText">Profile</span>
           </Link>
-          <button onClick={LogOut} className="tooltip group">
+          <button
+            onClick={async () => {
+              const result = await LogOut();
+              if (result.success) window.location.href = "/";
+            }}
+            className="tooltip group"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

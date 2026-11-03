@@ -7,10 +7,9 @@ const ProfileCard = () => {
   
   const { user, userProfile, isLoading } = useUserContext() as userContextType;
 
-  if (isLoading) return <div className="info-heading">Loading...</div>;
-  if (!user) return <div className="info-heading">Unauthorized Access!</div>;
-  if (!userProfile)
-    return <div className="info-heading">Loading Profile...</div>;
+  if (isLoading || !user || !userProfile) {
+    return <div className="info-heading">Loading...</div>;
+  }
 
   return (
     <div className="w-full">

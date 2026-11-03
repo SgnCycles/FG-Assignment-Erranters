@@ -36,6 +36,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       if (error || !user) {
         setUser(null);
         setUserProfile(null);
+        setIsLoading(false);
         await supabase.auth.signOut({ scope: "local" });
         return;
       }
@@ -56,10 +57,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             fetchUserProfile(currentUser.id);
           } else {
             setUserProfile(null);
+            setIsLoading(false);
           }
         } else if (event === "SIGNED_OUT") {
           setUser(null);
           setUserProfile(null);
+          setIsLoading(false);
         }
       },
     );

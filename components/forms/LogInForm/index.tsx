@@ -2,7 +2,6 @@
 import LogIn from "@/actions/login-action";
 import { logInSchema } from "@/schemas/schemas";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +13,6 @@ import { toast } from "react-toastify";
 const LogInForm = () => {
   
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,7 +28,7 @@ const LogInForm = () => {
         return;
       }
       reset();
-      router.push("/feed");
+      window.location.href = "/feed";
     },
     onError: () => {
       toast.error("Something went wrong. Try again later");
@@ -56,7 +54,9 @@ const LogInForm = () => {
               })}
               placeholder="Email:"
             />
-            {errors.email && <ErrorInputMessage error={errors.email.message!} />}
+            {errors.email && (
+              <ErrorInputMessage error={errors.email.message!} />
+            )}
           </div>
           <div>
             <label htmlFor="password" className="label">
