@@ -196,7 +196,7 @@
 }
 
 .tooltipText {
-  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-1 mr-2;
+  @apply hidden w-auto bg-apple text-ecru-white text-center rounded-2xl p-2 absolute z-10 text-nowrap mt-3 mr-2;
 }
 
 .tooltip:hover .tooltipText {
@@ -242,7 +242,7 @@
 }
 
 .file-dropzone-area {
-  @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4;
+  @apply p-2 text-outer-space flex flex-col justify-center items-center gap-4 mb-4;
 }
 
 /* profile card */

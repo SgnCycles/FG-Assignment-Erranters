@@ -12,7 +12,7 @@ const MobileSideMenu = () => {
 
   return (
     <div className="flex lg:hidden w-full justify-evenly md:justify-start gap-2 my-4">
-      <div className="relative">
+      <div className="relative group">
         <select
           value={pathname}
           onChange={(e) => router.push(e.target.value)}
@@ -45,7 +45,7 @@ const MobileSideMenu = () => {
           </svg>
         </span>
       </div>
-      <div className="relative">
+      <div className="relative group">
         <select
           value={postCategory}
           onChange={(e) => setPostCategory(e.target.value)}

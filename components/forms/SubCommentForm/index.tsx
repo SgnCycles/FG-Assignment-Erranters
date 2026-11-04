@@ -34,6 +34,7 @@ const AddSubCommentForm = ({
         return;
       }
       toast.success("Comment Added");
+      setReplyOpen(false);
       reset();
       queryClient.invalidateQueries({
         queryKey: ["post-comments", postId],

@@ -14,7 +14,6 @@ const CreatePostForm = ({
   handleCreatePost,
   isPending,
 }: CreatePostFormPropsType) => {
-  
   const {
     register,
     control,
@@ -35,14 +34,20 @@ const CreatePostForm = ({
   useEffect(() => {
     if (postCategory === "Hiking" || postCategory === "Cycling") {
       setValue("post_type", "Post");
-    } else if (postCategory === "Marketplace" && postType !== "Sell" && postType !== "Buy") {
+    } else if (postCategory === "Marketplace") {
       setValue("post_type", "Sell");
-    } else if (postType === "Sell" || postType === "Buy") {
+    }
+  }, [postCategory, setValue]);
+
+  useEffect(() => {
+    if (postType === "Sell") {
       setValue("category", "Marketplace");
-    } else if (postCategory === "Marketplace" && postType === "Post") {
+    } else if (postType === "Buy") {
+      setValue("category", "Marketplace");
+    }  else {
       setValue("category", "Hiking")
     }
-  }, [postCategory, postType, setValue]);
+  }, [postType, setValue]);
 
   return (
     <div className="form-background">
@@ -64,7 +69,9 @@ const CreatePostForm = ({
               Add a title:
             </label>
             <input {...register("title")} className="input"></input>
-            {errors.title && <ErrorInputMessage error={errors.title.message!} />}
+            {errors.title && (
+              <ErrorInputMessage error={errors.title.message!} />
+            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="content" className="label">

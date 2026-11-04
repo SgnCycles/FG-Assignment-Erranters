@@ -110,7 +110,7 @@ const Comment = ({
         </div>
       </div>
       {(isAuthor || userId === comment.author.id) && (
-        <div className="flex justify-center">
+        <div className="flex justify-center items-end">
           <DeleteButton
             id={comment.id}
             type="icon"
